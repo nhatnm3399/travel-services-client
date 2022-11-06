@@ -21,7 +21,7 @@ const Home = (props) => {
   )
 }
 
-const BannerHome = () => {
+export const BannerHome = () => {
   return (
     <div className={"banner-site-home"} style={{width: "100%", height :100, display: "flex", alignItems: 'center', padding: "0 40px"}}>
       <div className={"wrap-banner-component-items-home"} style={{fontSize: 40, fontWeight: 700}}>
@@ -33,8 +33,8 @@ const BannerHome = () => {
 
 const FeaturePhoto= ()=> {
   return (
-    <div className={"feature-photo-site-home"} style={{width: "100%", height: 628, background: "#D9D9D9", }}>
-      <div style={{position: "relative", top: 100, left: 45, width: 580, fontSize: 64, color: "#8E8282", fontWeight: 700}}>Du lịch Việt Nam hơn bao giờ hết</div>
+    <div className={"feature-photo-site-home"} style={{width: "100%", height: 628, background: "#D9D9D9", backgroundImage: "url(https://globalgrasshopper.com/wp-content/uploads/2011/11/Top-10-of-the-most-beautiful-places-to-visit-in-Vietnam.jpg)", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
+      <div style={{position: "relative", top: 100, left: 45, width: 580, fontSize: 64, color: "#fff", fontWeight: 700, textShadow: "1px 1px 1px #000  "}}>Du lịch Việt Nam hơn bao giờ hết</div>
     </div>
   )
 }
@@ -46,7 +46,7 @@ const BookingHome= (props)=> {
   
   return (
     <div className={"booking-home"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: "center", position: "relative"}}>
-      <div className={"c-booking-home"} style={{width: "100%", maxWidth: 1200, position: "absolute", height: 250, borderRadius: 10, background: "#fff", display: "flex", flexDirection: "column", justifyContent: 'space-between', padding: "10px 20px", zIndex: 100}}>
+      <div className={"c-booking-home"} style={{width: "100%", maxWidth: 1200, position: "absolute", height: 250, borderRadius: 10, background: "#fff", display: "flex", flexDirection: "column", justifyContent: 'space-between', padding: "10px 20px", zIndex: 100, boxShadow: " rgba(0, 0, 0, 0.35) 0px 5px 15px"}}>
         {/* S1 */}
         <div className={"title-c-booking-home"}>
           <div className={"title-c-booking-home-c-1"} style={{fontSize: 32, fontWeight: 700}}>
@@ -256,10 +256,13 @@ const SuggestHotel= (props)=> {
           </Swiper>
         </div>
       </div>
-      <div className={"navigation-s-nearly-hotel"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: "center"}}>
-          <div className={"prev-navigation-s-nearly-hotel"}>
-
-          </div>
+      <div className={"navigation-s-nearly-hotel"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: "center", gap: 30, marginBottom: 30}}>
+        <div ref={navigationPrevRef} className={"prev-navigation-s-nearly-hotel"} style={{width: 32, height: 32, borderRadius: "50%", background: "#d9d9d9", cursor: 'pointer', display: "flex", justifyContent: 'center', alignItems: "center"}}>
+          <AiOutlineArrowLeft color={"#fff"} />
+        </div>
+        <div ref={navigationNextRef} className={"next-navigation-s-nearly-hotel"} style={{width: 32, height: 32, borderRadius: "50%", background: "#d9d9d9", cursor: 'pointer', display: "flex", justifyContent: 'center', alignItems: "center"}}>
+          <AiOutlineArrowRight color={"#fff"} />
+        </div>
       </div>
     </div>
   )
