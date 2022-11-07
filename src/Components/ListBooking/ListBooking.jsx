@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { TbReportSearch } from "react-icons/tb"
 import {RiDeleteBin5Fill } from "react-icons/ri"
+import "./ListBooking.sass"
 
 const ListBooking = (props) => {
   return (
@@ -16,8 +17,8 @@ const ListBooking = (props) => {
         </div>
         <Routes>
             <Route path={"/"} element={<IndexComponent />} />
-            <Route path={"/pending"} />
-            <Route path={"/success"} />
+            <Route path={"/pending"} element={<PendingBooking />} />
+            <Route path={"/success"} element={<SuccessBooking />} />
         </Routes>
     </div>
   )
@@ -29,6 +30,51 @@ const IndexComponent= (props)=> {
             <Title title={"Danh sách phòng"} />
             <br />
             <div className={"skljdaklsjklasa"} style={{width: "100%"}}>
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+            </div>
+        </div>
+    )
+}
+
+const PendingBooking= (props)=> {
+    return (
+        <div className={"sjkdklasjklaska"} style={{padding: "0 40px"}}>
+            <Title title={"Danh sách phòng chờ duyệt"} />
+            <br />
+            <div className={"skljdaklsjklasa"} style={{width: "100%"}}>
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+            </div>
+        </div>
+    )
+}
+
+const SuccessBooking= (props)=> {
+    return (
+        <div className={"sjkdklasjklaska"} style={{padding: "0 40px"}}>
+            <Title title={"Danh sách phòng đã đặt"} />
+            <br />
+            <div className={"skljdaklsjklasa"} style={{width: "100%"}}>
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
+                <ElementDetail />
                 <ElementDetail />
             </div>
         </div>
