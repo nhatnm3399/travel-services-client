@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ChangePassword from './Components/ChangePassword/ChangePassword';
 import DetailHotel from './Components/DetailHotel/DetailHotel';
+import DetailRoom from './Components/DetailRoom/DetailRoom';
+import DetailSubRoom from './Components/DetailSubRoom/DetailSubRoom';
 import Footer from './Components/Footer/Footer';
 import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
+import ListBooking from './Components/ListBooking/ListBooking';
 import Login from './Components/Login/Login';
 import Payment from './Components/Payment/Payment';
 import Profile from './Components/Profile/Profile';
@@ -25,6 +28,9 @@ function App() {
         <Route path={"/booking/search"} element={<Search />} />
         <Route path={"/hotel/detail"} element={<DetailHotel />} />
         <Route path={"/booking/payment"} element={<Payment />} />
+        <Route path={"/room/detail"} element={<DetailRoom />} />
+        <Route path={"/sub/room/detail"} element={<DetailSubRoom />} />
+        <Route path={"/booking/order/*"} element={<ListBooking />} />
       </Routes>
       <Footer />
     </Router>
