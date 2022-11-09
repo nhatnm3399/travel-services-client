@@ -1,10 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
 import InputTemplate from '../Common/InputTemplate'
 import "./Home.sass"
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
+import OutsideClickHandler from 'react-outside-click-handler';
+import DatePickerPlugin from '../Plugin/DatePicker'
+import {BsCalendar3 } from "react-icons/bs"
+import {FaUserAlt } from "react-icons/fa"
+import moment from "moment"
+import ChooseGuest from '../Plugin/ChooseGuest'
 
 const Home = (props) => {
   useEffect(()=> {
@@ -41,8 +47,15 @@ const FeaturePhoto= ()=> {
 
 const BookingHome= (props)=> {
   const [destination, setDestination]= useState(()=> "")
-  const [timeRange, setTimeRange]= useState(()=> "")
-  const [guest, setGuest]= useState(()=> "")
+  const [openTime, setOpenTime]= useState(()=> false)
+  const [openGuest, setOpenGuest]= useState(()=> false)
+  const [startDate, setStartDate]= useState(new Date())
+  const [endDate, setEndDate]= useState(null)
+  const [guest, setGuest]= useState(()=> ({
+    adult: 1, 
+    children: 0, 
+    room: 1
+  }))
   
   return (
     <div className={"booking-home"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: "center", position: "relative"}}>
@@ -66,15 +79,39 @@ const BookingHome= (props)=> {
           </div>
           <div className={"choose-option-to-booking-home-time-range"} style={{width: "30%"}}>
             <Label title={"Ngày nhận - Ngày trả"} />
-            <div className={"wrap-inp-choose-booking-op"}>
-              <InputTemplate className={"inp-choose-booking-op-ii"} />
-            </div>
+            <OutsideClickHandler onOutsideClick={()=> setOpenTime(()=> false)}>
+              <div className={"wrap-inp-choose-booking-op"} style={{position: "relative"}}>
+                <InputTemplate value={`${startDate && moment(startDate).format("ddd[, ]MMM[ ]D")} - ${endDate ? moment(endDate).format("ddd[, ]MMM[ ]D") : "Check out"}`} readOnly={true} style={{padding: "0 32px", fontSize: 18}} onClick={()=> setOpenTime((prev)=> !prev)} className={"inp-choose-booking-op-ii"} />
+                <div className={"dkskalkasass"} style={{position: "absolute", top: 0, left: 0}}>
+                  <BsCalendar3 style={{width: 22, height: 22, color: "#333  "}} />
+                </div>
+                <div className={"dsklasklasksasa"} style={{position: "absolute", top: "100%", left: 0, width: "max-content", display: openTime=== true ? "block" : "none"}}>
+                  {
+                    <DatePickerPlugin setOpen={setOpenTime} startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
+                  }
+                </div>
+              </div>
+            </OutsideClickHandler>
           </div>
           <div className={"choose-option-to-booking-home-guest"} style={{width: "30%"}}>
             <Label title={"Khách"} />
-            <div className={"wrap-inp-choose-booking-op"}>
-              <InputTemplate className={"inp-choose-booking-op-ii"} />  
-            </div>
+            <OutsideClickHandler onOutsideClick={()=> setOpenGuest(()=> false)}>
+              <div className={"wrap-inp-choose-booking-op"} style={{position: "relative"}}>
+                <InputTemplate className={"inp-choose-booking-op-ii"} readOnly={true} style={{padding: "0 32px", fontSize: 18}} onClick={()=> setOpenGuest((prev)=> !prev)} /> 
+                <div className={"dkskalkasass"} style={{position: "absolute", top: 0, left: 0}}>
+                  <FaUserAlt style={{width: 22, height: 22, color: "#333  "}} />
+                </div> 
+                <div className={"dsklasklasksasa"} style={{position: "absolute", top: "100%", left: 0, width: "100%", display: openGuest=== true ? "block" : "none"}}>
+                  {
+                    <div className={"dsjkdjkajskasasad"} style={{width: "100%", background: "#fff"}}>
+                      <ChooseGuest title={"Người lớn"} amount={guest.adult} />
+                      <ChooseGuest title={"Trẻ em"} amount={guest.children} />
+                      <ChooseGuest title={"Phòng"} amount={guest.room} />
+                    </div>
+                  }
+                </div>
+              </div>
+            </OutsideClickHandler>
           </div>
           <div className={"choose-option-to-booking-home-search"} style={{width: "15%", height: 40}}>
             <ButtonTemplate className={"btn-choose-option-to-booking-home-search"}><span style={{color: "#fff"}}>Tìm</span><AiOutlineArrowRight /></ButtonTemplate>
@@ -205,8 +242,18 @@ const NearlyPlace= (props)=> {
 
 const SuggestHotel= (props)=> {
 
-  const navigationPrevRef= useRef(null)
-  const navigationNextRef= useRef(null)
+  
+  const sliderRef = useRef(null);
+
+  const handlePrev = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
 
   return (
     <div className={"suggest-hotel-booking-home"} style={{marginTop: 100}}>
@@ -214,17 +261,10 @@ const SuggestHotel= (props)=> {
       <div className={"container-suggest-outstanding"} style={{width: "100%", display:" flex", justifyContent: 'center', marginTop: 30}}>
         <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: "100%", height: 530, padding: "50px 20px", background: "#fff"}}>
           <Swiper
+            ref={sliderRef}
             modules={[Navigation]}
             className="list-nearly-place-suggest"
             style={{width: "100%", height: "100%"}}
-            navigation={{
-              prevEl: navigationPrevRef.current,
-              nextEl: navigationNextRef.current
-            }}
-            onBeforeInit={(swiper)=> {
-              swiper.params.navigation.prevEl= navigationPrevRef.current
-              swiper.params.navigation.nextEl= navigationNextRef.current
-            }}
             breakpoints={{
               1024: {
                 slidesPerView: 4,
@@ -257,10 +297,10 @@ const SuggestHotel= (props)=> {
         </div>
       </div>
       <div className={"navigation-s-nearly-hotel"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: "center", gap: 30, marginBottom: 30}}>
-        <div ref={navigationPrevRef} className={"prev-navigation-s-nearly-hotel"} style={{width: 32, height: 32, borderRadius: "50%", background: "#d9d9d9", cursor: 'pointer', display: "flex", justifyContent: 'center', alignItems: "center"}}>
+        <div onClick={handlePrev} className={"prev-navigation-s-nearly-hotel"} style={{width: 32, height: 32, borderRadius: "50%", background: "#d9d9d9", cursor: 'pointer', display: "flex", justifyContent: 'center', alignItems: "center"}}>
           <AiOutlineArrowLeft color={"#fff"} />
         </div>
-        <div ref={navigationNextRef} className={"next-navigation-s-nearly-hotel"} style={{width: 32, height: 32, borderRadius: "50%", background: "#d9d9d9", cursor: 'pointer', display: "flex", justifyContent: 'center', alignItems: "center"}}>
+        <div onClick={handleNext} className={"next-navigation-s-nearly-hotel"} style={{width: 32, height: 32, borderRadius: "50%", background: "#d9d9d9", cursor: 'pointer', display: "flex", justifyContent: 'center', alignItems: "center"}}>
           <AiOutlineArrowRight color={"#fff"} />
         </div>
       </div>

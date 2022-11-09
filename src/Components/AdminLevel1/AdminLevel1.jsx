@@ -41,7 +41,7 @@ const Navigation= ()=> {
                     label: 'Đã bị vô hiệu hóa',
                     faIcon: 'fab fa-accessible-icon',
                     onSelected: function() {
-                        navigate("/manager/hotel/list/events")
+                        navigate("/manager/hotel/list/disabled")
                     }
                 }
             ]
@@ -88,9 +88,10 @@ const Main= (props)=> {
             <Routes>
                 <Route path={"/hotel/list/verified/*"} element={<Verified />} />
                 <Route path={"/hotel/list/pending/*"} element={<Pending />} />
-                <Route path={"/hotel/list/events/*"} element={<Disable />} />
+                <Route path={"/hotel/list/disabled/*"} element={<Disable />} />
                 <Route path={"/comment/reports/*"} element={<CommentsReport />} />
-                <Route path={"/events/*"} element={<ListEvents />} />
+                <Route path={"/events"} element={<ListEvents />} />
+                <Route path={"/events/add/new"} element={<AddNewEvent />} />
             </Routes>
         </div>
     )
@@ -135,17 +136,31 @@ const CommentsReport= (props)=> {
 const ListEvents= (props)=> {
     return (
         <>
-            <Title title={"List sự kiện"} />
+            <Title title={"List sự kiện"} is_add_event={true} />
             <MainElementEvent />
         </>
     )
 }
 
-const Title= (props)=> {
+const AddNewEvent= (props)=> {
     return (
-        <div className={"dslksjaklsjklsdjas"} style={{ marginBottom: 16, padding: "0 10px"}}>
-            <div className={"jlsjkasjasjksaask"} style={{fontSize: 20, fontWeight: 600,width: "100%", paddingBottom: 10, marginBottom: 8, borderBottom: "1px solid #000"}}>
-                {props.title}
+        <>
+            <Title title={"Thêm sự kiện"} />
+            <MainAddEvent />
+        </>
+    )
+}
+
+
+const Title= (props)=> {
+    const navigate= useNavigate()
+    return (
+        <div className={"dslksjaklsjklsdjas"} style={{ marginBottom: 16, padding: "0 10px", width: "100%"}}>
+            <div className={"jlsjkasjasjksaask"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: 10, marginBottom: 8, borderBottom: "1px solid #000", paddingTop: 10}}>
+                <div className={"djkasjaksjasaas"} style={{fontSize: 20, fontWeight: 600}}>{props.title}</div>
+                {
+                    props.is_add_event=== true && <button style={{width: 200, height: 50, background: "#2DB83B", color: "#fff", cursor: "pointer", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", fontSize: 18, fontWeight: 600}} onClick={()=> navigate("/manager/events/add/new")}>Thêm</button>
+                }
             </div>
         </div>
     )
@@ -153,7 +168,7 @@ const Title= (props)=> {
 
 const MainElementEvent= (props)=> {
     return (
-        <table className={"jskldjakdjskdalks"} style={{width: "100%", padding: "0 30px"}}>
+        <table className={"jskldjakdjskdalks"} style={{width: "100%", padding: "0 30px", borderSpacing: 10, borderCollapse: "separate"}}>
             <thead className={"jskldjklajsakslas"} style={{width: "100%",paddingBottom: 10, borderBottom: "1px solid #000", paddingLeft: 20, paddingRight: 20}}>
                 <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Địa điểm</th>
                 <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Tên sự kiện</th>
@@ -161,7 +176,7 @@ const MainElementEvent= (props)=> {
                 <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Hình ảnh</th>
                 <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Hành động</th>
             </thead>
-            <tbody style={{width: "100%"}}>
+            <tbody style={{width: "100%"}}> 
                 <tr className={"djskldjaksjakass"} style={{width: "100%", padding: "10px 20px", marginBottom: 16}}>
                     <td className={"djsjaksjaksjska"} style={{fontSize: 16, textAlign: "center"}}>Đà Nẵng</td>
                     <td className={"djsjaksjaksjska"} style={{fontSize: 16, textAlign: "center"}}>Cầu Rồng Phun Lửa</td>
@@ -548,6 +563,55 @@ const MainListCommentReport= (props)=> {
                 </div> 
             </div>
         </div> 
+    )
+}
+
+const MainAddEvent= (props)=> {
+    return (
+        <div className={"fsjkdjksdjsdkaas"} style={{width: "100%", padding: "30px"}}>
+            <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
+                <div className={"dskjdaksjaskasjksa"} style={{fontSize: 24, fontWeight: 600}}>
+                    Địa điểm
+                </div>
+                <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
+                    <input type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none"}} />
+                </div>
+            </div>
+            <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
+                <div className={"dskjdaksjaskasjksa"} style={{fontSize: 24, fontWeight: 600}}>
+                    Tên sự kiện
+                </div>
+                <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
+                    <input type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none"}} />
+                </div>
+            </div>
+            <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
+                <div className={"dskjdaksjaskasjksa"} style={{fontSize: 24, fontWeight: 600}}>
+                    Nội dung
+                </div>
+                <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
+                    <input type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none"}} />
+                </div>
+            </div>
+            <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
+                <div className={"dskjdaksjaskasjksa"} style={{fontSize: 24, fontWeight: 600}}>
+                    Hình ảnh
+                </div>
+                <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
+                    <div className={"fioeujioasujsd"} style={{width: 400, height: 250, background: "#d9d9d9", display: "flex", justifyContent: 'center', alignItems :"center"}}>
+                        <button style={{width: 150, height: 50, padding: 10, background: "#C311E0", border: "none", color: "#000", fontWeight: 600, display: "flex", justifyContent: 'center', alignItems:"center", cursor: "pointer"}}>Thêm ảnh</button>
+                    </div>
+                </div>
+            </div>
+            {/*  */}
+            <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginTop: 20, flexDirection: "row-reverse"}}>
+                <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
+                    <div className={"fioeujioasujsd"} style={{width: 400, display: "flex", justifyContent: 'center', alignItems :"center"}}>
+                        <button style={{width: 200, height: 60, padding: 10, background: "#2DB83B", border: "none", color: "#000", fontWeight: 600, display: "flex", justifyContent: 'center', alignItems:"center", cursor: "pointer", fontSize: 18}}>Lưu </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 
