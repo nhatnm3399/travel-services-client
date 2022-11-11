@@ -11,6 +11,9 @@ import {BsCalendar3 } from "react-icons/bs"
 import {FaUserAlt } from "react-icons/fa"
 import moment from "moment"
 import ChooseGuest from '../Plugin/ChooseGuest'
+import {BiBed} from "react-icons/bi"
+import {GoLocation }from "react-icons/go"
+import SuggestSearch from '../SuggestSearch/SuggestSearch'
 
 const Home = (props) => {
   useEffect(()=> {
@@ -46,16 +49,16 @@ const FeaturePhoto= ()=> {
 }
 
 const BookingHome= (props)=> {
-  const [destination, setDestination]= useState(()=> "")
+  const [destination, setDestination]= useState(()=> undefined)
+  const [openDestination, setOpenDestination]= useState(()=> false)
   const [openTime, setOpenTime]= useState(()=> false)
   const [openGuest, setOpenGuest]= useState(()=> false)
   const [startDate, setStartDate]= useState(new Date())
   const [endDate, setEndDate]= useState(null)
-  const [guest, setGuest]= useState(()=> ({
-    adult: 1, 
-    children: 0, 
-    room: 1
-  }))
+  
+  const [adult, setAdult]= useState(()=> 1)
+  const [children,setChildren]= useState(()=> 0)
+  const [room, setRoom]= useState(()=> 1)
   
   return (
     <div className={"booking-home"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: "center", position: "relative"}}>
@@ -73,9 +76,19 @@ const BookingHome= (props)=> {
         <div className={"choose-option-to-booking-home"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 20}}>
           <div className={"choose-option-to-booking-home-destination"} style={{width: "25%"}}>
             <Label title={"Điểm đến"} />
-            <div className={"wrap-inp-choose-booking-op"}>
-              <InputTemplate className={"inp-choose-booking-op-ii"} />
-            </div>
+            <OutsideClickHandler onOutsideClick={()=> setOpenDestination(()=> false)}>
+              <div className={"wrap-inp-choose-booking-op"} style={{position: "relative"}}>
+                <InputTemplate value={destination && destination} placeholder={"Bạn muốn đặt phòng ?"} onChange={e=> setDestination(e.target.value)} style={{padding: "0 32px", fontSize: 18}} className={"inp-choose-booking-op-ii"} onClick={()=> setOpenDestination(prev=> !prev)} />
+                <div className={"dkskalkasass"} style={{position: "absolute", top: 0, left: 0}}>
+                  <BiBed style={{width: 22, height: 22, color: "#333"}} />
+                </div>
+                <div className={"dsklasklasksasa"} style={{position: "absolute", top: "100%", left: 0, width: "100%", display: openDestination=== true ? "block" : "none"}}>
+                  {
+                    <SuggestSearch setOpen={setOpenDestination} setValue={setDestination} />
+                  }
+                </div>
+              </div>
+            </OutsideClickHandler>
           </div>
           <div className={"choose-option-to-booking-home-time-range"} style={{width: "30%"}}>
             <Label title={"Ngày nhận - Ngày trả"} />
@@ -97,16 +110,22 @@ const BookingHome= (props)=> {
             <Label title={"Khách"} />
             <OutsideClickHandler onOutsideClick={()=> setOpenGuest(()=> false)}>
               <div className={"wrap-inp-choose-booking-op"} style={{position: "relative"}}>
-                <InputTemplate className={"inp-choose-booking-op-ii"} readOnly={true} style={{padding: "0 32px", fontSize: 18}} onClick={()=> setOpenGuest((prev)=> !prev)} /> 
+                <InputTemplate value={`${adult} người lớn - ${children} trẻ em - ${room} phòng`} className={"inp-choose-booking-op-ii"} readOnly={true} style={{padding: "0 32px", fontSize: 18}} onClick={()=> setOpenGuest((prev)=> !prev)} /> 
                 <div className={"dkskalkasass"} style={{position: "absolute", top: 0, left: 0}}>
                   <FaUserAlt style={{width: 22, height: 22, color: "#333  "}} />
                 </div> 
                 <div className={"dsklasklasksasa"} style={{position: "absolute", top: "100%", left: 0, width: "100%", display: openGuest=== true ? "block" : "none"}}>
                   {
-                    <div className={"dsjkdjkajskasasad"} style={{width: "100%", background: "#fff"}}>
-                      <ChooseGuest title={"Người lớn"} amount={guest.adult} />
-                      <ChooseGuest title={"Trẻ em"} amount={guest.children} />
-                      <ChooseGuest title={"Phòng"} amount={guest.room} />
+                    <div className={"dsjkdjkajskasasad"} style={{width: "100%", background: "#fff", borderRadius: 5}}>
+                      <ChooseGuest title={"Người lớn"} amount={adult} setAmount={setAdult} />
+                      <ChooseGuest title={"Trẻ em"} amount={children} setAmount={setChildren} />
+                      <ChooseGuest title={"Phòng"} amount={room} setAmount={setRoom} />
+                      <div className={"ksajksjdkasasasa"} style={{width: "100%", marginTop: 16, flexDirection: "row", justifyContent: "space-between", padding: 20, display: "flex"}}>
+                        <div></div>
+                        <button onClick={()=> setOpenGuest(()=> false)} className={"djkasajkkjssdaas"} style={{display: "flex", justifyContent: 'center', alignItems: "center", color: "#fff", background: "#2e89ff", border: "none", outline: "none", padding: "10px 30px", cursor: 'pointer'}}>
+                          Xong
+                        </button>
+                      </div>
                     </div>
                   }
                 </div>
