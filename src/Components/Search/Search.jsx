@@ -7,8 +7,8 @@ import "./Search.sass"
 const Search = (props) => {
   return (
     <div className={"search-result"}>
-        <BannerHome />
-        <MainSearch />
+      <BannerHome />
+      <MainSearch />
     </div>
   )
 }

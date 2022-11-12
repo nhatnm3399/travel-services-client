@@ -12,8 +12,9 @@ import {FaUserAlt } from "react-icons/fa"
 import moment from "moment"
 import ChooseGuest from '../Plugin/ChooseGuest'
 import {BiBed} from "react-icons/bi"
-import {GoLocation }from "react-icons/go"
+// import {GoLocation }from "react-icons/go"
 import SuggestSearch from '../SuggestSearch/SuggestSearch'
+import { useNavigate } from 'react-router-dom'
 
 const Home = (props) => {
   useEffect(()=> {
@@ -59,6 +60,10 @@ const BookingHome= (props)=> {
   const [adult, setAdult]= useState(()=> 1)
   const [children,setChildren]= useState(()=> 0)
   const [room, setRoom]= useState(()=> 1)
+  const navigate= useNavigate()
+  const execSearch= ()=> {
+    navigate(`/booking/search?spec=${destination}&ci=${moment(startDate).format("DD-MM-YYYY")}&co=${endDate ? moment(endDate).format("DD-MM-YYYY") : "unset"}&gs=${adult}.${children}&r=${room}`)
+  }
   
   return (
     <div className={"booking-home"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: "center", position: "relative"}}>
@@ -133,7 +138,7 @@ const BookingHome= (props)=> {
             </OutsideClickHandler>
           </div>
           <div className={"choose-option-to-booking-home-search"} style={{width: "15%", height: 40}}>
-            <ButtonTemplate className={"btn-choose-option-to-booking-home-search"}><span style={{color: "#fff"}}>Tìm</span><AiOutlineArrowRight /></ButtonTemplate>
+            <ButtonTemplate onClick={execSearch} className={"btn-choose-option-to-booking-home-search"}><span style={{color: "#fff"}}>Tìm</span><AiOutlineArrowRight /></ButtonTemplate>
           </div>
         </div>
       </div>

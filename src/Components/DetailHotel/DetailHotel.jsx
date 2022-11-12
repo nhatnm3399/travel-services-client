@@ -6,6 +6,10 @@ import GoogleMapPlugin from '../Plugin/GoogleMap'
 import { Title } from '../Profile/Profile'
 import "./DetailHotel.sass"
 import { GoLocation } from "react-icons/go"
+import RoomOfHotel from './RoomOfHotel'
+import Feedback from './Feedback'
+import AroundHotel from './AroundHotel'
+import ConvenientAndInfracstructure from './ConvenientAndInfracstructure'
 
 const DetailHotel = (props) => {
   return (
@@ -13,7 +17,15 @@ const DetailHotel = (props) => {
         <BannerHome />
         <MainHotel />
         <Tab2 />
-
+        <br />
+        <div className={"daskalsklafass"} style={{width: "100%", padding: "0 40px"}}>
+            <RoomOfHotel />
+            <RoomOfHotel />
+            <RoomOfHotel />
+        </div>
+        <Feedback />
+        <AroundHotel /> 
+        <ConvenientAndInfracstructure />
     </div>
   )
 }

@@ -56,15 +56,15 @@ const RightHeaderLoggedIn= (props)=> {
                     </Link>
                 } 
                 {
-                        // Logout
-                        <div className={"dljksjakjskladjassasas"} style={{display: "flex", justifyContent: 'center',alignItems: "center", gap: 5}}>
-                            <div className={"sjdklasjksjadfsas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center',}}>
-                                <BsPower style={{width: 26,height: 26,color :"#333"}} />
-                            </div>
-                            <div className={"djksdjalksdjkfsads"}>
-                                Logout
-                            </div>
+                    // Logout
+                    <div className={"dljksjakjskladjassasas"} style={{display: "flex", justifyContent: 'center',alignItems: "center", gap: 5, cursor: "pointer"}}>
+                        <div className={"sjdklasjksjadfsas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center',}}>
+                            <BsPower style={{width: 26,height: 26,color :"#333"}} />
                         </div>
+                        <div className={"djksdjalksdjkfsads"}>
+                            Logout
+                        </div>
+                    </div>
                 }
             </div>
         </div>
