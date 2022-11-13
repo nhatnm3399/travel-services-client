@@ -29,7 +29,7 @@ const MainLeftSide= (props)=> {
     const [destination, setDestination]= useState(()=> searchParams.get("spec"))
     const [openDestination, setOpenDestination]= useState(()=> false)
     const [openTime, setOpenTime]= useState(()=> false)
-    const [startDate, setStartDate]= useState(()=> moment(searchParams.get("ci")).toDate())
+    const [startDate, setStartDate]= useState(()=> moment(searchParams.get("ci"), "DD-MM-YYYY").toDate())
     const [endDate, setEndDate]= useState(()=> moment(searchParams.get("co"), "DD-MM-YYYY").toDate())
     const [guest, setGuest]= useState(()=> ({
         adult: searchParams.get("gs").split(".")[0],

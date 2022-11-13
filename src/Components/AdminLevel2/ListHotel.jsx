@@ -8,7 +8,7 @@ const ListHotel = (props) => {
   )
 }
 
-const Title= (props)=> {
+export const Title= (props)=> {
     return (
         <div className={"aksdkjasksalasas"} style={{width: "100%", padding: "20px", borderBottom: "1px solid #000", marginBottom: 16}}>
             <div className={"djkdjksjasksjasa"} style={{fontSize: 20, fontWeight: 600}}>

@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import DetailPopupRoom from './DetailPopupRoom'
+import OutsideClickHandler from 'react-outside-click-handler';
+
 
 const RoomOfHotel = (props) => {
+  const [openDetail, setOpenDetail]= useState(()=> false)
   return (
-    <div className={"dkslklsaklasa"} style={{width: "100%", marginBottom: 20, display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 20}}>
+    <div onClick={()=> setOpenDetail(()=> true)} className={"dkslklsaklasa"} style={{width: "100%", marginBottom: 20, display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 20}}>
         <Image />
         <ParametersRoom />
+        {
+            openDetail=== true &&
+            <DetailRoom openDetail={openDetail} setOpenDetail={setOpenDetail} />
+        }
     </div>
   )
 }
@@ -52,6 +60,23 @@ const ParametersRoom= (props)=> {
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    )
+}
+
+const DetailRoom= (props)=> {
+    const [transition, setTransition]= useState(()=> false)
+    useEffect(()=> {
+        const trigger= setTimeout(()=> setTransition(()=> true))
+        return ()=> clearTimeout(()=> trigger)
+    }, [])
+    return (
+        <div className={"djasjakljakejaklwwa"} style={{position: "fixed", width: "100%", height: "100%", top: 0, left: 0, background: "rgba(0,0,0,0.3)", display: "flex", justifyContent: "center", zIndex: 9999, overflow: "auto"}}>
+            <div className={"dkakawjkajwrwweaw"} style={{opacity: transition=== false ? 0 : 1, transition: "all .25s linear", width: "98%", maxWidth: 1200, background: "#fff", borderRadius: 5, padding: 10}}>
+                <OutsideClickHandler onOutsideClick={()=> props.setOpenDetail(()=> false)}>
+                    <DetailPopupRoom />
+                </OutsideClickHandler>
             </div>
         </div>
     )

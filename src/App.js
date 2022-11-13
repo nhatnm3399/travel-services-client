@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AdminLevel1 from './Components/AdminLevel1/AdminLevel1';
+import AdminLevel2 from './Components/AdminLevel2/AdminLevel2';
 import ChangePassword from './Components/ChangePassword/ChangePassword';
 import DetailHotel from './Components/DetailHotel/DetailHotel';
 import DetailRoom from './Components/DetailRoom/DetailRoom';
@@ -33,6 +34,7 @@ function App() {
         <Route path={"/sub/room/detail"} element={<DetailSubRoom />} />
         <Route path={"/booking/order/*"} element={<ListBooking />} />
         <Route path={"/manager/*"} element={<AdminLevel1 />} />
+        <Route path={"/admin/*"} element={<AdminLevel2 />} />
       </Routes>
       <Footer />
     </Router>

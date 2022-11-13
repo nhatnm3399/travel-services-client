@@ -10,6 +10,7 @@ import RoomOfHotel from './RoomOfHotel'
 import Feedback from './Feedback'
 import AroundHotel from './AroundHotel'
 import ConvenientAndInfracstructure from './ConvenientAndInfracstructure'
+import GeneralRules from './GeneralRules'
 
 const DetailHotel = (props) => {
   return (
@@ -26,6 +27,8 @@ const DetailHotel = (props) => {
         <Feedback />
         <AroundHotel /> 
         <ConvenientAndInfracstructure />
+        <br />
+        <GeneralRules />
     </div>
   )
 }
