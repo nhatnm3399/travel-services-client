@@ -1,6 +1,10 @@
 import React from 'react'
 import { NavLink, Route, Routes } from 'react-router-dom'
+import AddRoomForHotel from './AddRoomForHotel'
 import "./AdminLevel2.sass"
+import ListHotel from './ListHotel'
+import ManageRoom from './ManageRoom'
+import RegisterHotel from './RegisterHotel'
 import RequestBookingRoom from './RequestBookingRoom'
 
 const AdminLevel2 = (props) => {
@@ -44,6 +48,10 @@ const MainAdminLevel2= (props)=> {
             <Routes>
                 {/* <Route path={"/admin/"} /> */}
                 <Route path={"/manage/booking/request"} element={<RequestBookingRoom />} />
+                <Route path={"/manage/hotel/list"} element={<ListHotel />} />
+                <Route path={"/manage/hotel/register"} element={<RegisterHotel />} />
+                <Route path={"/manage/hotel/:hotelId/new/room"} element={<AddRoomForHotel />} />
+                <Route path={"/manage/room/detail"} element={<ManageRoom />} />
             </Routes>
         </div>
     )
