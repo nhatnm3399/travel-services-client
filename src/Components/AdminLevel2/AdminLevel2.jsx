@@ -47,7 +47,7 @@ const MainAdminLevel2= (props)=> {
         <div className={"alksjklrjwkeawsa"} style={{flex: "1 1 0"}}>
             <Routes>
                 {/* <Route path={"/admin/"} /> */}
-                <Route path={"/manage/booking/request"} element={<RequestBookingRoom />} />
+                <Route path={"  "} element={<RequestBookingRoom />} />
                 <Route path={"/manage/hotel/list"} element={<ListHotel />} />
                 <Route path={"/manage/hotel/register"} element={<RegisterHotel />} />
                 <Route path={"/manage/hotel/:hotelId/new/room"} element={<AddRoomForHotel />} />

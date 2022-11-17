@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
-import BannerLoginSignup from '../Common/BannerLoginSignup'
-import BannerNameSite from '../Common/BannerNameSite'
+//import BannerLoginSignup from '../Common/BannerLoginSignup'
+//import BannerNameSite from '../Common/BannerNameSite'
 import InputTemplate from '../Common/InputTemplate'
 import "./Login.sass"
 import { Link } from 'react-router-dom'
@@ -10,8 +10,6 @@ import { GoogleLogin } from 'react-google-login';
 const Login = () => {
   return (
     <div className={"login-main-page"}>
-      <BannerNameSite />
-      <BannerLoginSignup type={"Đăng nhập"} />
       <MainLogin />
     </div>
   )
