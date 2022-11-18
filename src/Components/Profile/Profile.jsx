@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Background from '../Background/Background';
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate';
 import InputTemplate from '../Common/InputTemplate';
 import "./Profile.sass"
@@ -14,30 +15,30 @@ const Profile = (props) => {
             <div className={"list-info-user"} style={{maxWidth: 900, width: "100%", display: 'flex', alignItems: "center", flexWrap: "wrap", justifyContent: "space-between"}}>
                 <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
                     <Title title={"Tên đầy đủ"} />
-                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, background: "#d9d9d9"}}>
+                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
                         <InputTemplate className={"wrap-inp-info-user-i"} />
                     </div>
                 </div>
                 <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
                     <Title title={"Giới tính"} />
-                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, background: "#d9d9d9"}}>
+                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
                         <InputTemplate className={"wrap-inp-info-user-i"} />
                     </div>
                 </div>
                 <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
                     <Title title={"Số điện thoại"} />
-                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, background: "#d9d9d9"}}>
+                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
                         <InputTemplate className={"wrap-inp-info-user-i"} />
                     </div>
                 </div>
                 <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
                     <Title title={"Ngày sinh"} />
-                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, background: "#d9d9d9"}}>
+                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
                         <InputTemplate className={"wrap-inp-info-user-i"} />
                     </div>
                 </div>
                 <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
-                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, background: "#d9d9d9"}}>
+                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
                         <ButtonTemplate disable={false} onClick={()=> {}} className={"wrap-btn-info-user-i"}>
                             <Link to={"/change/password"} style={{textDecoration: "none", color: "#000", fontSize: 20}}>
                                 Đổi mật khẩu
@@ -52,6 +53,7 @@ const Profile = (props) => {
                 </div>
             </div>
         </div>
+        <Background />
     </div>
   )
 }

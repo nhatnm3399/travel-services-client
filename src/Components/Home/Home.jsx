@@ -6,11 +6,11 @@ import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import OutsideClickHandler from 'react-outside-click-handler';
-import DatePickerPlugin from '../Plugin/DatePicker'
-import {BsCalendar3 } from "react-icons/bs"
-import {FaUserAlt } from "react-icons/fa"
-import moment from "moment"
-import ChooseGuest from '../Plugin/ChooseGuest'
+// import DatePickerPlugin from '../Plugin/DatePicker'
+// import {BsCalendar3 } from "react-icons/bs"
+// import {FaUserAlt } from "react-icons/fa"
+// import moment from "moment"
+// import ChooseGuest from '../Plugin/ChooseGuest'
 import {BiBed} from "react-icons/bi"
 // import {GoLocation }from "react-icons/go"
 import SuggestSearch from '../SuggestSearch/SuggestSearch'
@@ -22,7 +22,7 @@ const Home = (props) => {
   }, [])
   return (
     <div className={"home-page-site"}>
-      <BannerHome />
+      {/* <BannerHome /> */}
       <FeaturePhoto />
       <BookingHome />
       <OutstandingDestination />
@@ -53,17 +53,17 @@ const FeaturePhoto= ()=> {
 const BookingHome= (props)=> {
   const [destination, setDestination]= useState(()=> undefined)
   const [openDestination, setOpenDestination]= useState(()=> false)
-  const [openTime, setOpenTime]= useState(()=> false)
-  const [openGuest, setOpenGuest]= useState(()=> false)
-  const [startDate, setStartDate]= useState(new Date())
-  const [endDate, setEndDate]= useState(null)
+  // const [openTime, setOpenTime]= useState(()=> false)
+  // const [openGuest, setOpenGuest]= useState(()=> false)
+  // const [startDate, setStartDate]= useState(new Date())
+  // const [endDate, setEndDate]= useState(null)
   
-  const [adult, setAdult]= useState(()=> 1)
-  const [children,setChildren]= useState(()=> 0)
-  const [room, setRoom]= useState(()=> 1)
+  // const [adult, setAdult]= useState(()=> 1)
+  // const [children,setChildren]= useState(()=> 0)
+  // const [room, setRoom]= useState(()=> 1)
   const navigate= useNavigate()
   const execSearch= ()=> {
-    navigate(`/booking/search?spec=${destination}&ci=${moment(startDate).format("DD-MM-YYYY")}&co=${endDate ? moment(endDate).format("DD-MM-YYYY") : "unset"}&gs=${adult}.${children}&r=${room}`)
+    navigate(`/booking/search?spec=${destination}`)
   }
   
   return (
@@ -80,7 +80,7 @@ const BookingHome= (props)=> {
         </div>
         {/* S2 */}
         <div className={"choose-option-to-booking-home"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 20}}>
-          <div className={"choose-option-to-booking-home-destination"} style={{width: "40%"}}>
+          <div className={"choose-option-to-booking-home-destination"} style={{width: "85%"}}>
             <Label title={"Điểm đến"} />
             <OutsideClickHandler onOutsideClick={()=> setOpenDestination(()=> false)}>
               <div className={"wrap-inp-choose-booking-op"} style={{position: "relative"}}>
@@ -97,7 +97,7 @@ const BookingHome= (props)=> {
             </OutsideClickHandler>
           </div>
           
-          <div className={"choose-option-to-booking-home-guest"} style={{width: "40%"}}>
+          {/* <div className={"choose-option-to-booking-home-guest"} style={{width: "40%"}}>
             <Label title={"Khách"} />
             <OutsideClickHandler onOutsideClick={()=> setOpenGuest(()=> false)}>
               <div className={"wrap-inp-choose-booking-op"} style={{position: "relative"}}>
@@ -122,7 +122,7 @@ const BookingHome= (props)=> {
                 </div>
               </div>
             </OutsideClickHandler>
-          </div>
+          </div> */}
           <div className={"choose-option-to-booking-home-search"} style={{width: "15%", height: 40}}>
             <ButtonTemplate onClick={execSearch} className={"btn-choose-option-to-booking-home-search"}><span style={{color: "#fff"}}>Tìm</span><AiOutlineArrowRight /></ButtonTemplate>
           </div>
@@ -152,7 +152,7 @@ const OutstandingDestination= ()=> {
 const Title= (props)=> {
   return (
     <div className={"title-place-booking-home"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: "center", marginBottom: 10}}>
-      <p className={"title-place-booking-home-p"} style={{fontWeight: 700, fontSize: 36}}>
+      <p className={"title-place-booking-home-p"} style={{fontWeight: 700, fontSize: 36, padding: 20}}>
         {props.title}
       </p>
     </div>
@@ -164,40 +164,49 @@ const ContainerSuggestOutstanding= (props)=> {
     <div className={"container-suggest-outstanding"} style={{width: "100%", display:" flex", justifyContent: 'center'}}>
       <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: 1200, display: "flex", justifyContent: 'center', alignItems: 'center', flexWrap: "wrap", gap: 30, marginTop: 30}}>
         {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#D9D9D9"}}>
-          Đà Nẵng
+        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
+          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Đà Nẵng</div>
+          <img src="https://i.pinimg.com/736x/8d/4b/8e/8d4b8e64ad231b3904fd232a18fbc4ab.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
         </div>
         {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#D9D9D9"}}>
-          Đà Nẵng
+        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
+          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Thành phố Hồ Chí Minh</div>
+          <img src="https://i.pinimg.com/564x/9f/a2/9d/9fa29d971d0e2d59e9f4b61e7281e98e.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
         </div>
         {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#D9D9D9"}}>
-          Đà Nẵng
+        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
+          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Hà Nội</div>
+          <img src="https://i.pinimg.com/564x/31/cd/20/31cd208a13e78d68d8835e8435f0b005.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
         </div>
         {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#D9D9D9"}}>
-          Đà Nẵng
+        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
+          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Đà Lạt</div>
+          <img src="https://i.pinimg.com/564x/49/61/c4/4961c45f5411a2dc19a9e57918742e48.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
         </div>
         {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#D9D9D9"}}>
-          Đà Nẵng
+        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
+          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Cần Thơ</div>
+          <img src="https://i.pinimg.com/564x/b0/b3/c6/b0b3c6f97c80edc863b64ca57b3c9475.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
         </div>
         {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#D9D9D9"}}>
-          Đà Nẵng
+        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
+          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Quảng Ninh</div>
+          <img src="https://i.pinimg.com/736x/e5/c8/53/e5c853b71f925d20a2b15525d98ceaff.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
         </div>
         {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#D9D9D9"}}>
-          Đà Nẵng
+        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
+          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Bangkok - Thailand</div>
+          <img src="https://i.pinimg.com/564x/a8/a5/61/a8a5619a67d3502ff7eb1057137a784f.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
         </div>
         {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#D9D9D9"}}>
-          Đà Nẵng
+        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
+          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Nha Trang</div>
+          <img src="https://i.pinimg.com/564x/0f/94/20/0f9420e868c7fdd8eb920a94305d7e8b.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
         </div>
         {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#D9D9D9"}}>
-          Đà Nẵng
+        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
+          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Phú Quốc</div>
+          <img src="https://i.pinimg.com/564x/8d/50/58/8d5058f5c26275ffb27308417abc3b7c.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
         </div>
       </div>
     </div>
@@ -294,15 +303,12 @@ const SuggestHotel= (props)=> {
               }
             }}
           >
-            <SwiperSlide style={{background: "#d9d9d9"}}>Slide 1</SwiperSlide>
-            <SwiperSlide style={{background: "#d9d9d9"}}>Slide 2</SwiperSlide>
-            <SwiperSlide style={{background: "#d9d9d9"}}>Slide 3</SwiperSlide>
-            <SwiperSlide style={{background: "#d9d9d9"}}>Slide 4</SwiperSlide>
-            <SwiperSlide style={{background: "#d9d9d9"}}>Slide 5</SwiperSlide>
-            <SwiperSlide style={{background: "#d9d9d9"}}>Slide 6</SwiperSlide>
-            <SwiperSlide style={{background: "#d9d9d9"}}>Slide 7</SwiperSlide>
-            <SwiperSlide style={{background: "#d9d9d9"}}>Slide 8</SwiperSlide>
-            <SwiperSlide style={{background: "#d9d9d9"}}>Slide 9</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/a0/fb/38/a0fb38a030da2a14a39767bfd21d48d2.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 1</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/fb/a5/e4/fba5e4299475e36bd03eeefc73f980d1.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 2</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/18/ea/f0/18eaf0653a05e534a40243b16e38118a.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 3</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/d6/a3/d0/d6a3d059a0bd7b9c159609a4fb94226d.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 4</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/564x/ba/f7/40/baf740ffac1f3d942f9ec51a3488c531.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 5</SwiperSlide>
+            <SwiperSlide className={"fsjdjkslfjksjass"} style={{background: "url(https://i.pinimg.com/736x/62/50/7d/62507ddd26f7d22c736eee0f30543fbb.jpg)", padding: 16, fontSize: 24, fontWeight: 600, color: "#fff", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>Slide 6</SwiperSlide>
           </Swiper>
         </div>
       </div>

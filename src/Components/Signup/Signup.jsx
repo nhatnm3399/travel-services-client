@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import GoogleLogin from 'react-google-login'
+import Background from '../Background/Background'
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
-import BannerLoginSignup from '../Common/BannerLoginSignup'
-import BannerNameSite from '../Common/BannerNameSite'
 import InputTemplate from '../Common/InputTemplate'
 import "./Signup.sass"
 
 const Signup = () => {
   return (
     <div className={"signup-main-page"}>
-        <BannerNameSite />
-        <BannerLoginSignup type={"Đăng ký"} />
         <MainSignup />
     </div>
   )
@@ -55,10 +52,12 @@ const MainSignup= (props)=> {
                         clientId="795778883777-ui60ejuabu59dq1hg7pnk32lplccs1g6.apps.googleusercontent.com"
                         buttonText="Tiếp tục với google"
                         onSuccess={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
                     />
                     </div>
                 </div>
             </div>
+            <Background />
         </div>
     )
 }

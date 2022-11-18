@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
 import InputTemplate from '../Common/InputTemplate'
 import { BannerHome } from '../Home/Home'
@@ -11,20 +11,27 @@ import Feedback from './Feedback'
 import AroundHotel from './AroundHotel'
 import ConvenientAndInfracstructure from './ConvenientAndInfracstructure'
 import GeneralRules from './GeneralRules'
+import { useParams } from 'react-router-dom'
+import detail_hotel from '../../api/hotel/detail_hotel'
+import { useState } from 'react'
 
 const DetailHotel = (props) => {
+  const {idHotel}= useParams()
+  const [data, setData]= useState()
+  useEffect(()=> {
+    detail_hotel(idHotel, setData)
+  }, [idHotel])
   return (
     <div className={"detail-hotel"} style={{width: "100%"}}>
-        <BannerHome />
-        <MainHotel />
-        <Tab2 />
+        <MainHotel data={data} />
+        <Tab2 data={data} />
         <br />
         <div className={"daskalsklafass"} style={{width: "100%", padding: "0 40px"}}>
-            <RoomOfHotel />
-            <RoomOfHotel />
-            <RoomOfHotel />
+            {
+                data?.room_types?.map((item, key)=> <RoomOfHotel key={key} {...item} />)
+            }
         </div>
-        <Feedback />
+        <Feedback feed_back={data?.feed_back} />
         <AroundHotel /> 
         <ConvenientAndInfracstructure />
         <br />
@@ -35,9 +42,9 @@ const DetailHotel = (props) => {
 
 const MainHotel= (props)=> {
     return (
-        <div className={"main-hotel"} style={{width: "100%", display: "flex", gap: 10, marginTop: 50, padding: "0 40px", minHeight: 640, alignItems: "end", marginBottom: 20}}>
-            <MainDetailHotel1 />
-            <MainHotel2 />
+        <div className={"main-hotel"} style={{width: "100%", display: "flex", gap: 10, marginTop: 20, padding: "0 40px", minHeight: 640, alignItems: "end", marginBottom: 20}}>
+            <MainDetailHotel1 data={props.data} />
+            <MainHotel2 data={props.data} />
         </div>
     )
 }
@@ -48,8 +55,8 @@ const MainDetailHotel1= (props)=> {
         <div className={"wrap-main-left"} style={{width: 300, height: "100%", display: "flex", justifyContent: 'center', alignItems: "center"}}>
             <div className={"main-left"} style={{width: "100%"}}>
                 <div style={{fontSize: 20, fontWeight: 600}}>Tìm</div>
-                <div className="wrap-x--w" style={{width: "100%", height: 620, display: "flex", justifyContent: "space-between", flexDirection: "column"}}>
-                    <div className={"main-left-side-search-result"} style={{padding: 10, background: "#d9d9d9", width: "100%", marginBottom: 6}}>
+                <div className="wrap-x--w" style={{width: "100%", height: 620, display: "flex", flexDirection: "column"}}>
+                    <div className={"main-left-side-search-result"} style={{padding: 10, background: "#febb02", borderRadius: 5, width: "100%", marginBottom: 6, color: "#fff"}}>
                         <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                             <Title title={"Điểm đến"} />
                             <div className={"wrap-option-main-left-side-search-result"} style={{width: "100%", height: 40, background: "#fff"}}>
@@ -57,39 +64,39 @@ const MainDetailHotel1= (props)=> {
                             </div>
                         </div>
                         {/*  */}
-                        <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
+                        {/* <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                             <Title title={"Ngày nhận - trả phòng"} />
                             <div className={"wrap-option-main-left-side-search-result"} style={{width: "100%", height: 40, background: "#fff"}}>
                                 <InputTemplate onChange={()=> {}} className={"inp-wrap-option-main-left-side-search-result"} />
                             </div>
-                        </div>
+                        </div> */}
                         {/*  */}
-                        <div className={"guest-adult-c"} style={{marginBottom: 16}}>
+                        {/* <div className={"guest-adult-c"} style={{marginBottom: 16}}>
                             <div className={"w-guest-left-side"} style={{width:" 100%", display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>
                                 <span className={"w-guest-left-side-sp"}>Trẻ em</span>
                                 <div className={"w-guest-l-inp"} style={{width: 50, height: 18, background: "#fff"}}>
                                     <InputTemplate type={"number"} onChange={()=> {}} className={"inp-wrap-guest-option-left-side-search-result"} />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         {/*  */}
-                        <div className={"guest-adult-c"} style={{marginBottom: 16}}>
+                        {/* <div className={"guest-adult-c"} style={{marginBottom: 16}}>
                             <div className={"w-guest-left-side"} style={{width:" 100%", display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>
                                 <span className={"w-guest-left-side-sp"}>Phòng</span>
                                 <div className={"w-guest-l-inp"} style={{width: 50, height: 18, background: "#fff"}}>
                                     <InputTemplate type={"number"} onChange={()=> {}} className={"inp-wrap-guest-option-left-side-search-result"} />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         {/*  */}
-                        <div className={"guest-adult-c"} style={{marginBottom: 16}}>
+                        {/* <div className={"guest-adult-c"} style={{marginBottom: 16}}>
                             <div className={"w-guest-left-side"} style={{width:" 100%", display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>
                                 <span className={"w-guest-left-side-sp"}>Người lớn</span>
                                 <div className={"w-guest-l-inp"} style={{width: 50, height: 18, background: "#fff"}}>
                                     <InputTemplate type={"number"} onChange={()=> {}} className={"inp-wrap-guest-option-left-side-search-result"} />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className={"wrap-btn-search-booking-again"} style={{width: "100%", height: 40, marginTop: 20}}>
                             <ButtonTemplate disable={false} className={"c-wrap-btn-search-booking-again"}>Tìm kiếm</ButtonTemplate>
                         </div>
@@ -109,10 +116,10 @@ const MainHotel2= (props)=> {
             <div className={"main-hotel-2-1"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                 <div className={"main-hotel-2-1-1"}>
                     <div className={"main-hotel-2-1-1-1"}style={{fontSize: 24, fontWeight: 700, marginBottom: 16}}>
-                        Queen's Finger Hotel Da Nang
+                       {props?.data?.hotel_name}
                     </div>
                     <div className={"main-hotel-2-1-1-2"} style={{fontSize: 18}}>
-                        155-157 Le Quang Dao, Ngu Hanh Son, Da Nang, Viet Nam
+                        {props?.data?.address}
                     </div>
                 </div>
                 <div className={"main-hotel-2-1-2"} style={{width: 200, height: 60}}>
@@ -138,7 +145,7 @@ const Tab2= (props)=> {
             <div className={"tab-2-1"} style={{width: "calc(100% - 300px)", background: "#d9d9d9"}}>
                 
                 </div>
-                <div className={"tab-2-2"} style={{width: 300, background: "#d9d9d9", padding: 20, display: "flex", flexDirection: "column", justifyContent: 'space-between', gap: 60 }}>
+                <div className={"tab-2-2"} style={{width: 300, background: "#f2f0f5", padding: 20, display: "flex", flexDirection: "column", justifyContent: 'space-between', gap: 60, boxShadow: "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px", overflow: "hidden", borderRadius: 5}}>
                     <div className={"tab-2-2-w-1"}>
                         <div className={"tab-2-2-1"} style={{textAlign: "center", fontSize: 20, fontWeight: 600, marginBottom: 20}}>
                             Địa điểm lý tưởng

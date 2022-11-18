@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import {AiFillStar} from "react-icons/ai"
@@ -34,27 +34,12 @@ const Feedback = (props) => {
                 }
                 }}
             >
-                <SwiperSlide>
-                    <FeedbackComponent />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <FeedbackComponent />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <FeedbackComponent />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <FeedbackComponent />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <FeedbackComponent />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <FeedbackComponent />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <FeedbackComponent />
-                </SwiperSlide>
+                {
+                    props?.feed_back?.map((item, key)=> 
+                    <SwiperSlide key={key}>
+                        <FeedbackComponent {...item} />
+                    </SwiperSlide>)
+                }
             </Swiper>
         </div>
     </div>
@@ -64,6 +49,8 @@ const Feedback = (props) => {
 export default Feedback
 
 const FeedbackComponent= (props)=> {
+    const [seeMore, setSeeMore]= useState(()=> false)
+    
     return (
         <div className={"jksjkalsjdasaw"} style={{width: "100%", marginBottom: 50}}>
             <div className={"fjkajskasjasjkas"} style={{display: "flex", alignItems: "center", gap: 10}}>
@@ -72,13 +59,12 @@ const FeedbackComponent= (props)=> {
                 </div>
                 <div className={"djsasksjkawkwia"}>
                     <div className={"dksasljkjawklajwlakwwa"} style={{marginBottom: 8}}>
-                        Nguyễn Văn A
+                        {props.user_name}
                     </div>
                     <div className={"dkaskaljasjskassa"} style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 4}}>
-                        <AiFillStar style={{color: "orange"}} />
-                        <AiFillStar style={{color: "orange"}} />
-                        <AiFillStar style={{color: "orange"}} />
-                        <AiFillStar style={{color: "orange"}} />
+                        {
+                            props?.star_point && Array.from(Array(parseInt(props?.star_point) - 1).keys()).map((item, key)=> <AiFillStar key={key} item={item} style={{color: "orange"}} />)
+                        }
                         <AiFillStar style={{color: "orange"}} />
                     </div>
                 </div>
@@ -94,9 +80,11 @@ const FeedbackComponent= (props)=> {
                         Khách sạn phục vụ tốt, phòng sạch sẽ, lần sau sẽ quay lại
                     </div>
                     <div className={"djkasjskjakaiwiawwa"} style={{marginTop: 40}}>
-                        <div className={"dkaskaljskassasa"} style={{fontWeight: 600, fontSize: 14, cursor: "pointer"}}>
+                        {
+                            seeMore=== false && <div onClick={()=> setSeeMore(true)} className={"dkaskaljskassasa"} style={{fontWeight: 600, fontSize: 14, cursor: "pointer"}}>
                             Xem thêm
                         </div>
+                        }
                     </div>
                 </div>
             </div>
