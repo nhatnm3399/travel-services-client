@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
 import InputTemplate from '../Common/InputTemplate'
-import { BannerHome } from '../Home/Home'
 import GoogleMapPlugin from '../Plugin/GoogleMap'
 import { Title } from '../Profile/Profile'
 import "./DetailHotel.sass"
@@ -14,6 +13,7 @@ import GeneralRules from './GeneralRules'
 import { useParams } from 'react-router-dom'
 import detail_hotel from '../../api/hotel/detail_hotel'
 import { useState } from 'react'
+import AddFeedback from './AddFeedback'
 
 const DetailHotel = (props) => {
   const {idHotel}= useParams()
@@ -32,17 +32,18 @@ const DetailHotel = (props) => {
             }
         </div>
         <Feedback feed_back={data?.feed_back} />
+        <AddFeedback />
         <AroundHotel /> 
         <ConvenientAndInfracstructure />
         <br />
-        <GeneralRules />
+        <GeneralRules {...data} />
     </div>
   )
 }
 
 const MainHotel= (props)=> {
     return (
-        <div className={"main-hotel"} style={{width: "100%", display: "flex", gap: 10, marginTop: 20, padding: "0 40px", minHeight: 640, alignItems: "end", marginBottom: 20}}>
+        <div className={"main-hotel"} style={{width: "100%", display: "flex", gap: 10, marginTop: 20, padding: "0 40px", minHeight: 640, marginBottom: 20}}>
             <MainDetailHotel1 data={props.data} />
             <MainHotel2 data={props.data} />
         </div>
@@ -127,11 +128,19 @@ const MainHotel2= (props)=> {
                 </div>
             </div>
             <div className={"main-hotel-2-2"} style={{width: "100%", marginTop: 16}}>
-                <div className={"main-hotel-2-2-1"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 20, flexWrap: "wrap"}}>
-                    <div className={"main-hotel-2-2-1-1"} style={{width: "49%", height: 300, background: "#d9d9d9"}}></div>
-                    <div className={"main-hotel-2-2-1-1"} style={{width: "49%", height: 300, background: "#d9d9d9"}}></div>
-                    <div className={"main-hotel-2-2-1-1"} style={{width: "49%", height: 300, background: "#d9d9d9"}}></div>
-                    <div className={"main-hotel-2-2-1-1"} style={{width: "49%", height: 300, background: "#d9d9d9"}}></div>
+                <div className={"main-hotel-2-2-1"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap"}}>
+                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 16 / 9, background: "#fff", padding: 5}}>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}></div>
+                    </div>
+                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 16 / 9, background: "#fff", padding: 5}}>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}></div>
+                    </div>
+                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 16 / 9, background: "#fff", padding: 5}}>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}></div>
+                    </div>
+                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 16 / 9, background: "#fff", padding: 5}}>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,9 +150,10 @@ const MainHotel2= (props)=> {
 const Tab2= (props)=> {
     return (
         <div className={"tab-2"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center", marginTop: 20, gap: 20, padding: "0 40px", marginBottom: 20}}>
-            <div className="tab-2-ss" style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: 20, borderBottom: "1px solid #d7d7d7"}}>
-            <div className={"tab-2-1"} style={{width: "calc(100% - 300px)", background: "#d9d9d9"}}>
-                
+            <div className="tab-2-ss" style={{width: "100%", display: "flex", justifyContent: "space-between", paddingBottom: 20, borderBottom: "1px solid #d7d7d7"}}>
+                <div className={"tab-2-1"} style={{width: "calc(100% - 300px)"}}>
+                    <div style={{fontSize: 18, fontWeight: 600, marginBottom: 12}}>Mô tả khách sạn</div>
+                    <div>{props?.data?.description}</div>
                 </div>
                 <div className={"tab-2-2"} style={{width: 300, background: "#f2f0f5", padding: 20, display: "flex", flexDirection: "column", justifyContent: 'space-between', gap: 60, boxShadow: "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px", overflow: "hidden", borderRadius: 5}}>
                     <div className={"tab-2-2-w-1"}>

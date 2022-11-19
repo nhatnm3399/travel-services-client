@@ -43,22 +43,22 @@ const ParametersRoom= (props)=> {
                 <div className={"dksakjsaksjkeawwaw"}>Diện tích: <strong>{props?.room_area}</strong></div>
             </div>
             <div className={"djksjkjdkasjieawwaw"} style={{width: "100%", display: "flex", justifyContent: 'space-between', alignItems: "center"}}>
-                <div className={"sdksaskasklasas"}>
-                    <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Miễn phí bữa sáng</div>
+                <div className={"sdksaskasklasas fryeauiwyuifdaAS"}>
+                    <div className={"jrjawjalwlkeawa fchjshdjksdsdsd"} style={{height: 30, margin: "8px 0"}}>Miễn phí bữa sáng</div>
                     <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Wifi miễn phí</div>
                     <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Không hút thuốc</div>
                 </div>
                 {/*  */}
-                <div className={"sdksaskasklasas"}>
+                <div className={"sdksaskasklasas fahajkdhsjkdhjfd"}>
                     <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Không hoàn tiền</div>
                     <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Không áp dụng đổi lịch</div>
                     <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Xem chính sách hủy phòng</div>
                 </div>
                 {/*  */}
                 <div className={"sdksaskasklasas"}>
-                    <div className={"jrjawjalwlkeawa"} style={{direction: "rtl",height: 30, margin: "8px 0"}}><strong>{props?.price}</strong> VND</div>
-                    <div className={"jrjawjalwlkeawa"} style={{direction: "rtl", height: 30, margin: "8px 0"}}>1 / phòng 1 / đêm</div>
-                    <div className={"jrjawjalwlkeawa"} style={{direction: "rtl", height: 30, margin: "8px 0"}}>
+                    <div className={"jrjawjalwlkeawa chkhsjfhjkdfhfsd"} style={{direction: "rtl",height: 30, margin: "8px 0"}}><strong>{props?.price}</strong> VND</div>
+                    <div className={"jrjawjalwlkeawa gfyjetyuiaehgksajdas"} style={{direction: "rtl", height: 30, margin: "8px 0"}}>1 / phòng 1 / đêm</div>
+                    <div className={"jrjawjalwlkeawa fsyjetyasdjgashjkas"} style={{direction: "rtl", height: 30, margin: "8px 0"}}>
                         <button className={"cksdsjkasjakeaw"} style={{padding:  "10px 25px", background: "#2e89ff", color: "#fff", borderRadius: 80, fontWeight: 600, fontSize: 20, border: "none", outline: "none", cursor: "pointer"}}>
                             Đặt ngay
                         </button>
@@ -79,6 +79,12 @@ const DetailRoom= (props)=> {
     useEffect(()=> {
         detail_room(props?.room_type_id, setData)
     }, [props?.room_type_id])
+    useEffect(()=> {
+        document.body.style.overflow= "hidden"
+        return ()=> {
+            document.body.style.overflow= "auto"
+        }
+    }, [])
 
     return (
         <div className={"djasjakljakejaklwwa"} style={{position: "fixed", width: "100%", height: "100%", top: 0, left: 0, background: "rgba(0,0,0,0.3)", display: "flex", justifyContent: "center", zIndex: 9999, overflow: "auto"}}>

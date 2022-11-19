@@ -1,14 +1,17 @@
 import React from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
 import "./RightSide.sass"
+import validUrl from "valid-url"
 
 const RightSide = (props) => {
   return (
     <div className={"right-side-search"} style={{width: "calc(100% - 300px)"}}>
-        <CountResultSearch />
-        <SortResult />
-        <ListResultSearch />
+        <CountResultSearch {...props} />
+        <SortResult {...props} />
+        {
+            props?.result?.map((item, key)=> <ListResultSearch key={key} {...item} />)
+        }
     </div>
   )
 }
@@ -32,15 +35,17 @@ const SortResult= (props)=> {
 }
 
 const ListResultSearch= (props)=> {
+    const navigate= useNavigate()
+
     return (
-        <div className={"list-result-search"} style={{width: "100%",}}>
+        <div className={"list-result-search"} style={{width: "100%", cursor :"pointer"}} onClick={()=> navigate("/hotel/detail/"+ props?.id)}>
             <div className={"list-result-search-element"} style={{width: "100%", padding: 20, display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fff", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", borderRadius: 5, overflow: "hidden", marginBottom: 24}}>
                 {/*  */}
                 <div className={"list-result-search-element-l"} style={{display: "flex", justifyContent: 'center', gap: 16}}>
                     {/*  */}
                     <div className={"list-result-search-element-l-wrap-img"} style={{display: "flex", justifyContent: 'center', alignItems: "center"}}>
-                        <div role={"img"} style={{width: 350, aspectRatio: 1 / 1, objectFit: "cover", background: "#d9d9d9", borderRadius: 5, overflow: "hidden"}}>
-                            <img src="https://images.trvl-media.com/hotels/19000000/18470000/18468600/18468569/ac482033.jpg?impolicy=fcrop&w=670&h=385&p=1&q=medium" alt="" style={{width: "100%", height: "100%", objectFit: "cover"}} />
+                        <div className={"dosjkalkjfslkjdakds"} role={"img"} style={{width: 350, aspectRatio: 1 / 1, objectFit: "cover", background: "#d9d9d9", borderRadius: 5, overflow: "hidden"}}>
+                            <img src={validUrl.isUri(props.image) ? props.image : "https://images.trvl-media.com/hotels/19000000/18470000/18468600/18468569/ac482033.jpg?impolicy=fcrop&w=670&h=385&p=1&q=medium"} alt="" style={{width: "100%", height: "100%", objectFit: "cover"}} />
                         </div>
                     </div>
                     {/*  */}
@@ -48,10 +53,10 @@ const ListResultSearch= (props)=> {
                         {/*  */}
                         <div className={"list-result-search-element-l-wrap-i-1"}>
                             <div className={"list-result-search-element-l-wrap-i-1-name-hotel"} style={{fontSize: 21, fontWeight: 700, marginBottom: 30}}>
-                                Meery Land Hotel Đà Nẵng
+                                {props.title}
                             </div>
                             <div className={"list-result-search-element-l-wrap-i-1-desc-hotel"} style={{marginBottom: 8, maxWidth: 400}}>
-                                Meery Land Hotel Đà Nẵng cung cấp các phòng nghỉ tại thành phố Đà Nẵng. Khách sạn có hồ bơi ngoài trời mở cửa quanh năm,  sân hiên tắm nắng và quầy bar tại chỗ
+                                {props.description}
                             </div>
                         </div>
                         {/*  */}
@@ -81,13 +86,13 @@ const ListResultSearch= (props)=> {
                         </div>
                         {/*  */}
                         <div className={"list-result-search-element-r-1-2"} style={{width: 50, height: 50, display: "flex",justifyContent: 'center', alignItems: "center", background: "#2e89ff", color: "#fff", fontSize: 18, fontWeight: 700}}>
-                            8,6 
+                            {parseFloat(props?.start_point)?.toFixed(2) || "Unset"}
                         </div>
                     </div>
                     {/*  */}
                     <div className={"list-result-search-element-r-2"}>
                         <div className={"list-result-search-element-r-2-1"} style={{fontSize: 14, marginBottom: 20, direction: "rtl"}}>
-                            VND 850,000
+                            VND {props?.price}
                         </div>
                         <div className={"list-result-search-element-r-2-2"}>
                             <div className={"wrap-button-list-reuslt-search-element-r-2-1"} style={{width: 200, height: 60, background: "#fff", color: "#fff"}}>

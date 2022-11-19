@@ -21,19 +21,20 @@ const AdminLevel2 = (props) => {
 const Navigation= (props)=> {
     return (
         <div className={"jaksjakdslkdass"} style={{ background: "#d9d9d9", minHeight: "100%", width: 300, padding: 20}}>
-            <NavigationHeritage textLv1={"Quản lí khách sạn"} textLv2={"Thông tin chung"}
+            <NavigationHeritage textLv1={"Danh sách khách sạn"} textLv2={"Thông tin chung"}
+            array_link={[{link: "/admin/hotel/manage/verified", text: "Đã xác thực"}, {link: "/admin/hotel/manage/pending", text: "Chờ xác thực"}, {link: "/admin/hotel/manage/disabled", text: "Đã bị vô hiệu hóa"}]}
                 linkLv1={"/admin/hotel/manage"}
                 linkLv2={"/admin/hotel/manage/general"}
             />
-             <NavigationHeritage textLv1={"Đăng ký mới khách sạn"} textLv2={"Thông tin chung"}
+             <NavigationHeritage textLv1={"List comment bị report"} textLv2={"Thông tin chung"}
                 linkLv1={"/admin/hotel/new"}
                 linkLv2={"/admin/hotel/new/general"}
             />
-             <NavigationHeritage textLv1={"Quản lí khách sạn"} textLv2={"Thông tin chung"}
+             <NavigationHeritage textLv1={"Quản lý sự kiện"} textLv2={"Thông tin chung"}
                 linkLv1={"/admin/hotel/manage"}
                 linkLv2={"/admin/hotel/new/manage/room"}
             />
-             <NavigationHeritage textLv1={"Quản lí khách sạn"} textLv2={"Thông tin chung"}
+             <NavigationHeritage textLv1={"Thống kê"} textLv2={"Thông tin chung"}
                 linkLv1={"/admin/hotel/manage"}
                 linkLv2={"/admin/hotel/manage/general"}
             />
@@ -67,11 +68,15 @@ const NavigationHeritage= (props)=> {
                     {props.textLv1}
                 </NavLink>
             </div>
-            <div className={"dkskalkflkeseseaw"} style={{marginTop: 16}}>
-                <NavLink to={props.linkLv2} className={({isActive})=> isActive ? "jdahjahwuiheuwawawa" : "dskljakjakjeakwjawa"} style={{color: "#000", textDecoration: "none", marginLeft: 12, marginTop: 8}}>
-                    {props.textLv2}
-                </NavLink>
-            </div>
+            
+                {
+                    props?.array_link?.map((item, key)=> <div key={key} className={"dkskalkflkeseseaw"} style={{marginTop: 16, marginLeft: 12}}>
+                        <NavLink to={item.link} className={({isActive})=> isActive ? "jdahjahwuiheuwawawa" : "dskljakjakjeakwjawa"} style={{color: "#000", textDecoration: "none", fontWeight: 600}}>
+                        {item.text}
+                    </NavLink>
+                    </div>)
+                }
+                
         </div>
     )
 }

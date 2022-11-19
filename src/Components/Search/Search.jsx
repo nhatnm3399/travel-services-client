@@ -18,12 +18,12 @@ const MainSearch= (props)=> {
   const [result, setResult]= useState(()=> [])
   const [searchParams] = useSearchParams()
    useEffect(()=> {
-      search_hotel(searchParams.get("spec"))
+      search_hotel(searchParams.get("spec"), setResult)
    }, [searchParams])
     return (
       <div className={"main-search-result"} style={{width: "100%", display: "flex", justifyContent: "space-between", padding: 20, gap: 30}}>
         <LeftSide />
-        <RightSide />
+        <RightSide result={result} />
       </div>
     )
 }

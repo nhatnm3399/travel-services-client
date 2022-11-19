@@ -9,8 +9,8 @@ const search_hotel= async(search_query, setData)=> {
         headers: {
             "authorization": "Bearer "+ Cookies.get("accessToken")
         },
-        body: {
-            params: search_query
+        params: {
+            param: search_query?.replaceAll(" ", "-")
         }
     })
     const result= await res.data

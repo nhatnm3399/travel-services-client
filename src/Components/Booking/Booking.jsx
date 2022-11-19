@@ -1,8 +1,13 @@
 import React from 'react'
+import { useState } from 'react'
 import { BannerHome } from '../Home/Home'
-import "./DetailRoom.sass"
+import "./Booking.sass"
+import {BsFillCalendarDateFill} from "react-icons/bs"
+import DatePickerPlugin from '../Plugin/DatePicker'
+import moment from 'moment'
+import OutsideClickHandler from 'react-outside-click-handler'
 
-const DetailRoom = (props) => {
+const Booking = (props) => {
   return (
     <div className={"detail-room-booking-hotel"} style={{width: "100%"}}>
       <BannerHome />
@@ -36,6 +41,18 @@ export const Tab1= (props)=> {
 }
 
 const Tab2= (props)=> {
+  const [checkin, setCheckin]= useState(new Date())
+  const [checkout, setCheckout]= useState(new Date())
+  const [stay, setStay]= useState(0)
+  const [openCalendar, setOpenCalendar]= useState(()=> false)
+
+
+  const [info, setInfo]= useState(()=> ({
+    userName: "",
+    phoneNumber: "",
+    email: "",
+    other: ""
+  }))
   return (
     <div className={"tab-2-detail-room-booking-hotel"} style={{width: "100%", display: "flex", justifyContent: 'center', gap: 40, padding: '0 40px'}}>
       <div className={"sldjhlksdjasas"} style={{width: 400, padding: 20, border: "1px solid #000", height: "max-content"}}>
@@ -43,11 +60,18 @@ const Tab2= (props)=> {
           Thông tin chi tiết đặt phòng
         </div>
         <div className={"jdsijhiorjuhseas"} style={{width: "100%", padding: 10}}>
-          <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16}}>
-            Ngày vào: 30/10/2022
+          <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16, position: "relative"}}>
+            Ngày vào: {moment(checkin).format("DD/MM/YYYY")} <span title={"Chọn ngày"}><BsFillCalendarDateFill onClick={()=> setOpenCalendar(prev=> !prev)} /></span>
+            {
+              openCalendar=== true && <div style={{position: "absolute", top: "100%", left: 0}}>
+                <OutsideClickHandler onOutsideClick={()=> setOpenCalendar(()=> false)}>
+                  <DatePickerPlugin setOpen={setOpenCalendar} startDate={checkin} endDate={checkout} setStartDate={setCheckin} setEndDate={setCheckin} />
+                </OutsideClickHandler>
+              </div>
+            }
           </div>
           <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16, paddingBottom: 10, borderBottom: "1px solid #000"}}>
-            Ngày ra: 31/10/2022
+            Ngày ra: {moment(checkout).format("DD/MM/YYYY")}
           </div>
           <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16, paddingBottom: 10, borderBottom: "1px solid #000"}}>
             Tổng thời gian lưu trữ: <span className={"dfjhkdjskljdasas "} style={{fontSize: 18}}>1 đêm</span>
@@ -90,4 +114,4 @@ const Tab2= (props)=> {
   )
 }
 
-export default DetailRoom
+export default Booking

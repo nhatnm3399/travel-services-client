@@ -5,6 +5,8 @@ import "./Header.sass"
 import { useContext } from 'react'
 import { AppContext } from '../../App'
 import logout from '../../api/auth/user/logout'
+import Cookies from 'js-cookie'
+import OutsideClickHandler from 'react-outside-click-handler'
 
 const Header = (prosp) => {
   const {auth}= useContext(AppContext)
@@ -38,26 +40,45 @@ const LeftHeader= (props)=> {
 
 const RightHeaderLoggedIn= (props)=> {
     const {user }= useContext(AppContext)
-
+    const [open, setOpen]= useState(()=> false)
     return (
         <div className={"right-header-fixed-logged"}>
             <div className={"dljsjaklsjkldfasa"} style={{display :"flex", justifyContent: 'center', alignItems: 'center', gap: 20}}>
                 {   
-                    <Link to={"/user/profile"} className={"jklasjkalsjadas"} style={{textDecoration: "none", color: "#000", fontSize: 16}}>
                         <div className={"shdkhajksdhjasassa"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 10}}>
                             <div className={"jklsdjaklsjkalsasf"} style={{display: "flex", justifyContent: 'center', alignItems: "center", width :40, height: 40, borderRadius: "50%", overflow: "hidden"}}>
                                 {
                                     user?.avatar?.length > 0 &&<img src={user?.avatar} alt="" style={{width: "100%", height: "100%", objectFit: "cover"}} />
                                 }
                                 {
-                                    user?.avatar=== null && <img src="https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png" alt="" style={{width: "100%", height: "100%", objectFit: "cover"}} />
+                                    user?.avatar=== null && <div className={"flexCenterItem"}>
+                                        <img src="https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png" alt="" style={{width: "100%", height: "100%", objectFit: "cover"}} />
+                                    </div>
                                 }
                             </div>
-                            <div className={"njkshajksjlkasasas"} style={{fontWeight: 600}}>
-                                {user?.full_name ? user?.full_name : "Unset"}
+                            <div className={"njkshajksjlkasasas"} style={{fontWeight: 600, position: 'relative'}}>
+                                <div onClick={()=> setOpen(prev=> !prev)} className={"fjdfjkdgjkdsdass"} style={{fontWeight: 600, cursor: "pointer"}}>
+                                    {user?.full_name ? user?.full_name : "Unset"}
+                                </div>
+                                {
+                                    open=== true &&
+                                    <OutsideClickHandler onOutsideClick={()=> setOpen(false)}>
+                                        <div className={"fjdkfjkdjgfkdsasasas boxShadowHightlight"} style={{position: "absolute", top: "100%", right: 0, borderRadius: 5, background: "#fff", zIndex: 32, padding: 10, marginTop: 20}}>
+                                            <Link onClick={()=> setOpen(false)} to={"/booking/order"} className={"jklasjkalsjadas"} style={{textDecoration: "none", color: "#000", fontSize: 16}}>
+                                                <div className={"fkfjkjkdasasasdsas"} style={{width: "max-content", height: 36, display: "flex", alignItems: "center", cursor: "pointer"}}>Lịch sử đặt phòng</div>
+                                            </Link>   
+                                            <Link onClick={()=> setOpen(false)} to={"/booking/payment"} className={"jklasjkalsjadas"} style={{textDecoration: "none", color: "#000", fontSize: 16}}>
+                                                <div className={"fkfjkjkdasasasdsas"} style={{width: "max-content", height: 36, display: "flex", alignItems: "center", cursor: "pointer"}}>Lịch sử thanh toán</div>
+                                            </Link>
+                                            <Link onClick={()=> setOpen(false)} to={"/user/profile/"+Cookies.get("uid")} className={"jklasjkalsjadas"} style={{textDecoration: "none", color: "#000", fontSize: 16}}>
+                                                <div className={"fkfjkjkdasasasdsas"} style={{width: "max-content", height: 36, display: "flex", alignItems: "center", cursor: "pointer"}}>Hồ sơ</div>
+                                            </Link>
+                                            <div onClick={logout} className={"fkfjkjkdasasasdsas"} style={{width: "max-content", height: 36, display: "flex", alignItems: "center", cursor: "pointer"}}>Đăng xuất</div>
+                                        </div>
+                                    </OutsideClickHandler>
+                                }
                             </div>
                         </div>
-                    </Link>
                 } 
                 {
                     // Logout

@@ -69,7 +69,7 @@ const FeedbackComponent= (props)=> {
                     </div>
                 </div>
             </div>
-            <div className={"dsksakslajkassa"} style={{display: "flex", justifyContent: 'space-between'}}>
+            <div className={"dsksakslajkassa"} style={{display: "flex", padding: 10}}>
                 <div className={"djksjaksjaksasasa"}>
                     <div className={"dkskalkrleawias"} style={{display: "flex", justifyContent: 'center', alignItems:" center"}}>
                         <div role={"img"} className={"dkaskalskalwsawwaw"} style={{width: 40, height: 40}}></div>
@@ -77,7 +77,7 @@ const FeedbackComponent= (props)=> {
                 </div>
                 <div className={"ksjaksjkasjrawa"}>
                     <div className={"dsjjaksjaklsjkalrsawa"} style={{marginTop: 30}}>
-                        Khách sạn phục vụ tốt, phòng sạch sẽ, lần sau sẽ quay lại
+                        {props?.comment}
                     </div>
                     <div className={"djkasjskjakaiwiawwa"} style={{marginTop: 40}}>
                         {

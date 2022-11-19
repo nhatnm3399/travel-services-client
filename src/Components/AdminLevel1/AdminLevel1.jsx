@@ -124,7 +124,7 @@ const Disable= (props)=> {
     )
 }
 
-const CommentsReport= (props)=> {
+export const CommentsReport= (props)=> {
     return (
         <>
             <Title title={"List comment bị report"} />

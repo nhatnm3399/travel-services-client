@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Route, Routes } from 'react-router-dom'
+import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
 import { TbReportSearch } from "react-icons/tb"
 import {RiDeleteBin5Fill } from "react-icons/ri"
 import "./ListBooking.sass"
@@ -16,7 +16,7 @@ const ListBooking = (props) => {
             </NavLink>
         </div>
         <Routes>
-            <Route path={"/"} element={<IndexComponent />} />
+            <Route path={"/"} element={<Navigate replace={true} to={"/booking/order/pending"} />} />
             <Route path={"/pending"} element={<PendingBooking />} />
             <Route path={"/success"} element={<SuccessBooking />} />
         </Routes>
@@ -24,7 +24,7 @@ const ListBooking = (props) => {
   )
 }
 
-const IndexComponent= (props)=> {
+export const IndexComponent= (props)=> {
     return (
         <div className={"sjkdklasjklaska"} style={{padding: "0 40px"}}>
             <Title title={"Danh sách phòng"} />
