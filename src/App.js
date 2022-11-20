@@ -97,11 +97,12 @@ function App() {
               {/* doing */}
               <Route path={"/bill/payment/booking"} element={<ListBill />} />
               {/* doing */}
-              <Route path={"/manager/*"} element={<AdminLevel1 />} />
+              <Route path={"/manage/*"} element={<AdminLevel1 />} />
               {/* doing */}
               <Route path={"/admin/*"} element={<AdminLevel2 />} />
             </>
           )}
+          
           {auth === false && (
             <>
               <Route path={"/login"} element={<Login />} />

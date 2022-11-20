@@ -1,10 +1,9 @@
 import React from 'react'
+import { Verified } from '../AdminLevel1/AdminLevel1'
 
 const VerfiedHotel = (props) => {
   return (
-    <div>
-      
-    </div>
+    <Verified data={props?.data} />
   )
 }
 

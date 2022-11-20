@@ -1,10 +1,9 @@
 import React from 'react'
+import { Disable } from '../AdminLevel1/AdminLevel1'
 
-const DisabledHotel = () => {
+const DisabledHotel = (props) => {
   return (
-    <div>
-      
-    </div>
+    <Disable data={props?.data} />
   )
 }
 

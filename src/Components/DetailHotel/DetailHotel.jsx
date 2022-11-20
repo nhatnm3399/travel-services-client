@@ -10,7 +10,7 @@ import Feedback from './Feedback'
 import AroundHotel from './AroundHotel'
 import ConvenientAndInfracstructure from './ConvenientAndInfracstructure'
 import GeneralRules from './GeneralRules'
-import { useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import detail_hotel from '../../api/hotel/detail_hotel'
 import { useState } from 'react'
 import AddFeedback from './AddFeedback'
@@ -52,6 +52,9 @@ const MainHotel= (props)=> {
 
 
 const MainDetailHotel1= (props)=> {
+    const [search, setSearch]= useState("")
+    const navigate= useNavigate()
+
     return (
         <div className={"wrap-main-left"} style={{width: 300, height: "100%", display: "flex", justifyContent: 'center', alignItems: "center"}}>
             <div className={"main-left"} style={{width: "100%"}}>
@@ -61,7 +64,7 @@ const MainDetailHotel1= (props)=> {
                         <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                             <Title title={"Điểm đến"} />
                             <div className={"wrap-option-main-left-side-search-result"} style={{width: "100%", height: 40, background: "#fff"}}>
-                                <InputTemplate onChange={()=> {}} className={"inp-wrap-option-main-left-side-search-result"} />
+                                <InputTemplate onChange={(e)=> setSearch(e.target.value)} className={"inp-wrap-option-main-left-side-search-result"} />
                             </div>
                         </div>
                         {/*  */}
@@ -99,7 +102,7 @@ const MainDetailHotel1= (props)=> {
                             </div>
                         </div> */}
                         <div className={"wrap-btn-search-booking-again"} style={{width: "100%", height: 40, marginTop: 20}}>
-                            <ButtonTemplate disable={false} className={"c-wrap-btn-search-booking-again"}>Tìm kiếm</ButtonTemplate>
+                            <ButtonTemplate onClick={()=> navigate("/booking/search?spec="+ search)} disable={false} className={"c-wrap-btn-search-booking-again"}>Tìm kiếm</ButtonTemplate>
                         </div>
                     </div>
                     <div className={"wrap-detail-map-location"} style={{width: "100%", height: 250}}>
@@ -127,19 +130,32 @@ const MainHotel2= (props)=> {
                     <ButtonTemplate className={"main-hotel-2-1-2-btn"} onClick={()=> {}}>Đặt ngay</ButtonTemplate>
                 </div>
             </div>
-            <div className={"main-hotel-2-2"} style={{width: "100%", marginTop: 16}}>
-                <div className={"main-hotel-2-2-1"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap"}}>
+            <div className={"main-hotel-2-2"} style={{width: "100%", marginTop: 16, display: "flex"}}>
+                <div className={"fjdkldsfjdklfjskldjsa"} style={{padding: 5}}>
+                    <div className={"fjkjfkljdjkjbkdssas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
+                        <img src={props?.image} alt="" style={{objectFit: "cover",width: 400, height: "100%"}} />
+                    </div>
+                </div>
+                <div className={"main-hotel-2-2-1"} style={{flex: "1 1 0", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap"}}>
                     <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 16 / 9, background: "#fff", padding: 5}}>
-                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}></div>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
+                            <img src={props?.image2} alt="" style={{objectFit: "cover",width: "100%", height: "100%"}} />
+                        </div>
                     </div>
                     <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 16 / 9, background: "#fff", padding: 5}}>
-                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}></div>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
+                            <img src={props?.image3} alt="" style={{objectFit: "cover",width: "100%", height: "100%"}} />
+                        </div>
                     </div>
                     <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 16 / 9, background: "#fff", padding: 5}}>
-                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}></div>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
+                            <img src={props?.image3} alt="" style={{objectFit: "cover",width: "100%", height: "100%"}} />
+                        </div>
                     </div>
                     <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 16 / 9, background: "#fff", padding: 5}}>
-                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}></div>
+                        <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
+                            <img src={props?.image4} alt="" style={{objectFit: "cover",width: "100%", height: "100%"}} />
+                        </div>
                     </div>
                 </div>
             </div>
