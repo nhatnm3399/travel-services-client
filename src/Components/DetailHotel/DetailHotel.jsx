@@ -24,7 +24,7 @@ const DetailHotel = (props) => {
   }, [idHotel, change])
   return (
     <div className={"fjsdhjkshfjkdhajksas"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-        <div className={"detail-hotel"} style={{width: "100%", maxWidth: 1200}}>
+        <div className={"detail-hotel"} style={{width: "100%", maxWidth: 1116}}>
             <MainHotel data={data} />
             <Tab2 data={data} />
             <br />
@@ -136,26 +136,26 @@ const MainHotel2= (props)=> {
             <div className={"main-hotel-2-2"} style={{width: "100%", marginTop: 16, display: "flex"}}>
                 <div className={"fjdkldsfjdklfjskldjsa"} style={{padding: 5}}>
                     <div className={"fjkjfkljdjkjbkdssas"} style={{ height: "100%", background: "#d9d9d9", width: 400}}>
-                        <img src={props?.data?.image} alt="Can't open" style={{objectFit: "cover",width: 400, height: "100%", aspectRatio: 7 / 6}} />
+                        <img src={props?.data?.image} alt="Can't open" style={{objectFit: "cover",width: 400, height: "100%", aspectRatio: 7 / 7.6}} />
                     </div>
                 </div>
                 <div className={"main-hotel-2-2-1"} style={{flex: "1 1 0", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap"}}>
-                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 7 / 6, background: "#fff", padding: 5}}>
+                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 7 / 7.6, background: "#fff", padding: 5}}>
                         <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
                             <img src={props?.data?.image1} alt="Can't open" style={{objectFit: "cover",width: "100%", height: "100%"}} />
                         </div>
                     </div>
-                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 7 / 6, background: "#fff", padding: 5}}>
+                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 7 / 7.6, background: "#fff", padding: 5}}>
                         <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
                             <img src={props?.data?.image2} alt="Can't open" style={{objectFit: "cover",width: "100%", height: "100%"}} />
                         </div>
                     </div>
-                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 7 / 6, background: "#fff", padding: 5}}>
+                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 7 / 7.6, background: "#fff", padding: 5}}>
                         <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
                             <img src={props?.data?.image3} alt="Can't open" style={{objectFit: "cover",width: "100%", height: "100%"}} />
                         </div>
                     </div>
-                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 7 / 6, background: "#fff", padding: 5}}>
+                    <div className={"main-hotel-2-2-1-1"} style={{width: "50%", height: "auto", aspectRatio: 7 / 7.6, background: "#fff", padding: 5}}>
                         <div className={"dsjdhfjjdkldasas"} style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
                             <img src={props?.data?.image4} alt="Can't open" style={{objectFit: "cover",width: "100%", height: "100%"}} />
                         </div>
