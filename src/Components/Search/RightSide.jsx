@@ -21,7 +21,7 @@ const CountResultSearch= (props)=> {
 
     return (
         <div className={"count-result-search-booking"} style={{marginBottom: 30}}>
-           {searchParams?.get("spec")}: tìm thấy <strong>929</strong> chỗ nghỉ
+           {searchParams?.get("spec")}: tìm thấy <strong>{props?.result?.length}</strong> chỗ nghỉ
         </div>
     )
 }
