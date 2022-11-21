@@ -13,7 +13,7 @@ const RoomOfHotel = (props) => {
         <ParametersRoom {...props} />
         {
             openDetail=== true &&
-            <DetailRoom room_type_id={props?.room_type_id} openDetail={openDetail} setOpenDetail={setOpenDetail} />
+            <DetailRoom {...props} room_type_id={props?.room_type_id} openDetail={openDetail} setOpenDetail={setOpenDetail} />
         }
     </div>
   )

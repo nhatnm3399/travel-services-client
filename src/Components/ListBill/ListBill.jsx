@@ -4,23 +4,25 @@ import { useNavigate } from 'react-router-dom'
 
 const ListBill = (props) => {
   return (
-    <div className={"fdjkdjkfjkdass flexCenterItem"} style={{width: "100%", padding: 10}}>
-        <div className={"fkklsdklgkklaskdas"} style={{width: '100%', maxWidth: 1200}}>
-            <table className={"dfjksfjkdjgfkkdas"} style={{width: "100%"}} cellSpacing={28} cellPadding={20}>
-                <thead className={"dfdmksdjkgjdsas"} style={{width: "100%"}}>
-                    <tr className={"fjkldjkgjdksldssd"}>
-                        <th className={"fkdldkfdjskdljksa"} style={{fontWeight: 600, textAlign: "center", paddingBottom: 10}}>Hóa đơn</th>
-                        <th className={"fjkdjfdkjdskjsaksa"} style={{fontWeight: 600, textAlign: "center", paddingBottom: 10}}>Trạng thái hóa đơn</th>
-                        <th className={"fsklfjdkdjskjkaeaw"} style={{fontWeight: 600, textAlign: "center", paddingBottom: 10}}>Hình thức thanh toán</th>
-                        <th className={"djdsjkkjfkjaskasjsa"} style={{fontWeight: 600, textAlign: "center", paddingBottom: 10}}>Tổng tiền</th>
-                        <th className={"fjkdjksdjskdsjkasjsa"} style={{fontWeight: 600, textAlign: "center", paddingBottom: 10}}>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody className={"fkdjsdjkshfjdhajlsas"} style={{width: "100%"}}>
-                    <ItemListBill x1={"819237"} x2={"Đã thanh toán"} x3={"VN Pay"} x4={"1.500.000"} x5={"Xem hóa đơn"} />
-                    <ItemListBill x1={"819237"} x2={"Đã thanh toán"} x3={"VN Pay"} x4={"1.500.000"} x5={"Xem hóa đơn"} />
-                </tbody>
-            </table>
+    <div className={"fjsahjdksdjkldadsa"} style={{width: "100%", minHeight: "100vh"}}>
+        <div className={"fdjkdjkfjkdass flexCenterItem"} style={{width: "100%", padding: 10}}>
+            <div className={"fkklsdklgkklaskdas"} style={{width: '100%', maxWidth: 1200}}>
+                <table className={"dfjksfjkdjgfkkdas"} style={{width: "100%"}} cellSpacing={28} cellPadding={20}>
+                    <thead className={"dfdmksdjkgjdsas"} style={{width: "100%"}}>
+                        <tr className={"fjkldjkgjdksldssd"}>
+                            <th className={"fkdldkfdjskdljksa"} style={{fontWeight: 600, textAlign: "center", paddingBottom: 10}}>Hóa đơn</th>
+                            <th className={"fjkdjfdkjdskjsaksa"} style={{fontWeight: 600, textAlign: "center", paddingBottom: 10}}>Trạng thái hóa đơn</th>
+                            <th className={"fsklfjdkdjskjkaeaw"} style={{fontWeight: 600, textAlign: "center", paddingBottom: 10}}>Hình thức thanh toán</th>
+                            <th className={"djdsjkkjfkjaskasjsa"} style={{fontWeight: 600, textAlign: "center", paddingBottom: 10}}>Tổng tiền</th>
+                            <th className={"fjkdjksdjskdsjkasjsa"} style={{fontWeight: 600, textAlign: "center", paddingBottom: 10}}>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody className={"fkdjsdjkshfjdhajlsas"} style={{width: "100%"}}>
+                        <ItemListBill x1={"819237"} x2={"Đã thanh toán"} x3={"VN Pay"} x4={"1.500.000"} x5={"Xem hóa đơn"} />
+                        <ItemListBill x1={"819237"} x2={"Đã thanh toán"} x3={"VN Pay"} x4={"1.500.000"} x5={"Xem hóa đơn"} />
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
   )

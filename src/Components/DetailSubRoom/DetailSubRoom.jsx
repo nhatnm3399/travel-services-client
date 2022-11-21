@@ -201,6 +201,15 @@ export const Tab2 = (props) => {
       </div>
       {/*  */}
       <div className={"fjkdsjisadkljasdlas"} style={{ width: "50%" }}>
+        <div className={"klsadkjsaskdlas"}
+          style={{ fontSize: 18, fontWeight: 600, marginBottom: 16 }}>
+          Số người ở: {props?.number_people}
+        </div>
+        <div className={"klsadkjsaskdlas"}
+          style={{ fontSize: 18, fontWeight: 600, marginBottom: 16 }}>
+          Giá phòng: {props?.price}
+        </div>
+        <br />
         <div
           className={"klsadkjsaskdlas"}
           style={{ fontSize: 18, fontWeight: 600, marginBottom: 16 }}
