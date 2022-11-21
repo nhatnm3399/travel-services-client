@@ -54,42 +54,42 @@ export const Tab2 = (props) => {
             <img
               alt={""}
               style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src="https://swiperjs.com/demos/images/nature-1.jpg"
+              src={props?.image}
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               alt={""}
               style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src="https://swiperjs.com/demos/images/nature-2.jpg"
+              src={props?.image}
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               alt={""}
               style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src="https://swiperjs.com/demos/images/nature-2.jpg"
+              src={props?.image}
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               alt={""}
               style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src="https://swiperjs.com/demos/images/nature-2.jpg"
+              src={props?.image}
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               alt={""}
               style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src="https://swiperjs.com/demos/images/nature-2.jpg"
+              src={props?.image}
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               alt={""}
               style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src="https://swiperjs.com/demos/images/nature-2.jpg"
+              src={props?.image}
             />
           </SwiperSlide>
           <SwiperSlide>
