@@ -69,7 +69,7 @@ const RightHeaderLoggedIn= (props)=> {
                                             <Link onClick={()=> setOpen(false)} to={"/booking/order"} className={"jklasjkalsjadas"} style={{textDecoration: "none", color: "#000", fontSize: 16}}>
                                                 <div className={"fkfjkjkdasasasdsas"} style={{width: "max-content", height: 36, display: "flex", alignItems: "center", cursor: "pointer"}}>Lịch sử đặt phòng</div>
                                             </Link>   
-                                            <Link onClick={()=> setOpen(false)} to={"/booking/payment"} className={"jklasjkalsjadas"} style={{textDecoration: "none", color: "#000", fontSize: 16}}>
+                                            <Link onClick={()=> setOpen(false)} to={"/bill/payment/booking"} className={"jklasjkalsjadas"} style={{textDecoration: "none", color: "#000", fontSize: 16}}>
                                                 <div className={"fkfjkjkdasasasdsas"} style={{width: "max-content", height: 36, display: "flex", alignItems: "center", cursor: "pointer"}}>Lịch sử thanh toán</div>
                                             </Link>
                                             <Link onClick={()=> setOpen(false)} to={"/user/profile/"+Cookies.get("uid")} className={"jklasjkalsjadas"} style={{textDecoration: "none", color: "#000", fontSize: 16}}>

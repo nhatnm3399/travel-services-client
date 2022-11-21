@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 const ListBill = (props) => {
   return (
@@ -28,6 +29,8 @@ const ListBill = (props) => {
 export default ListBill
 
 const ItemListBill= (props)=> {
+    const navigate= useNavigate()
+
     return (
         <tr className={"fdjsdjkskjsdkdgjsdas"}>
             <td className={"fjsklgjkfjkjakasjaks"} style={{textAlign: "center", fontWeight: 600, paddingBottom: 10}}>{props.x1}</td>
@@ -35,7 +38,7 @@ const ItemListBill= (props)=> {
             <td className={"fileuyehskjskhajkssa"} style={{textAlign: "center", fontWeight: 600, paddingBottom: 10}}>{props.x3}</td>
             <td className={"bvncjknbjaksbagawawa"} style={{textAlign: "center", fontWeight: 600, paddingBottom: 10}}>{props.x4}</td>
             <td className={"tjioeuyuhrsjksahdjka"} style={{textAlign: "center", fontWeight: 600, paddingBottom: 10}}>
-                <Button variant={"primary"}>{props.x5}</Button>
+                <Button onClick={()=> navigate("/booking/payment?id_payment=1")} variant={"primary"}>{props.x5}</Button>
             </td>
         </tr>
     )
