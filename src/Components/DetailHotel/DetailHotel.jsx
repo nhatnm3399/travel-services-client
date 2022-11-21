@@ -43,7 +43,7 @@ const DetailHotel = (props) => {
             <br />
             <GeneralRules {...data} />
             {
-                bookingRoom?.length > 0 && <StatsRoomBooking data={bookingRoom} setData={setBookingRoom} />
+                bookingRoom?.length > 0 && <StatsRoomBooking data1={data} data={bookingRoom} setData={setBookingRoom} />
             }
         </div>
     </div>
@@ -204,14 +204,18 @@ const Tab2= (props)=> {
 }
 
 const StatsRoomBooking= (props)=> {
-    
+    const navigate= useNavigate()
+    const toBookingPage= ()=> {
+        navigate("/booking/detail", {state: {data: props?.data, data1: props?.data1, state: true}})
+    }
+
     return (
         <div className={"fkdjkfjhdkdjaskdsfdsa"} style={{width: "100%", padding: 10, position: "fixed", bottom: 0, left: 0, display: "flex", justifyContent: "center", alignItems: "center", zIndex: 999}}>
             <div className={"fjdksjkljfgiujreesawss"} style={{width: "100%", borderRadius: 5, background: "#fff", padding: 5, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"}}>
-                <div style={{fontWeight: 600, fontSize: 18, marginBottom: 8}}>Danh sách phòng đã chọn</div>
+                <div style={{fontWeight: 600, fontSize: 18, marginBottom: 8, padding: 10}}>Danh sách phòng đã chọn</div>
                 <div style={{width: '100%', maxHeight: 200, overflow: "auto"}}>
                     {
-                        props?.data?.map((item, key)=> <div key={key} className={"dsksdjkljdskljkfddasa"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: 10}}>
+                        props?.data?.map((item, key)=> <div key={key} className={"dsksdjkljdskljkfddasa"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: 20}}>
                             <div>
                                 <div style={{fontWeight: 600, marginBottom: 8}}>Tên phòng: {item?.name_hotel}</div>
                                 <div style={{fontWeight: 600, marginBottom: 8}}>Số lượng: {item?.count}</div>
@@ -222,11 +226,11 @@ const StatsRoomBooking= (props)=> {
                             </div>
                         </div>)
                     }
-                    <div style={{width: "100%", direction: "rtl"}}>
+                    <div className={"dksjklfjkdsas"} style={{width: "100%", direction: "rtl", padding: 20}}>
                         <div>Tổng: <strong>{_.sumBy(props?.data, function(o) {return o.amount})}</strong></div>
                         <br />
                         <div>
-                            <Button>Đặt</Button>
+                            <Button onClick={toBookingPage}>Đặt</Button>
                         </div>
                     </div>
                 </div>

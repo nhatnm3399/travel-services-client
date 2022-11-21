@@ -6,6 +6,7 @@ import TimePicker from "react-time-picker";
 import { GrAdd } from "react-icons/gr";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { uploadImageClient } from "../../firebase/config";
+import { Button } from "react-bootstrap";
 
 const RegisterHotel = (props) => {
   return (
@@ -20,6 +21,17 @@ const RegisterHotel = (props) => {
 };
 
 const MainRegister = (props) => {
+  const [payload, setPayload]= useState()
+  // 
+  const [hotelName, setHotelName]= useState()
+  const [phoneNumber, setPhoneNumber]= useState()
+  const [address, setAddress]= useState()
+  const [description, setDescription]= useState()
+  const [convenient, setConvenient]= useState()
+  const [checkIn, setCheckIn]= useState()
+  const [checkOut, setCheckOut]= useState()
+  const [isPaymentCard, setIsPaymentCard]= useState()
+  const [image, setImage]= useState()
   return (
     <div
       className={"djksjajerkjawwawa"}
@@ -134,6 +146,8 @@ const MainRegister = (props) => {
           }}
         />
       </div>
+      <Convenient />
+      <br />
       <SetRule />
       <br />
       <ImageIllustation />
@@ -166,14 +180,82 @@ const SetRule = (props) => {
           label={"Hủy đặt phòng / Trả trước"}
           component={<YesNoOptions />}
         />
-        <Label label={"Trẻ em và giường"} />
+        {/* <Label label={"Trẻ em và giường"} />
         <Label label={"Độ tuổi đặt phòng"} />
         <Label label={"Vật nuôi"} />
-        <Label label={"Hình thức thanh toán"} />
+        <Label label={"Hình thức thanh toán"} /> */}
       </div>
     </div>
   );
 };
+
+const Convenient= (props)=> {
+  return (
+    <div className={"fdjklfjkdgjhklsdas"} style={{width: '100%'}}>
+      <div className={"fkljdfdklsjdkfsdsas"} style={{width: "100%", padding: 10, background: "#fff"}}>
+        <div className={"dskdjskfjkdjsaksas"} style={{fontSize: 18, fontWeight: 600, marginBottom: 16}}>
+          Tiện nghi và nội quy
+        </div>
+        <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
+          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+            <span className={"fdjslkadjfksdsjfkdsa"}>Wifi</span>
+            <input type="checkbox" style={{width: 18, height: 18}} />
+          </div>
+          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+            <span className={"fdjslkadjfksdsjfkdsa"}>Máy lạnh</span>
+            <input type="checkbox" style={{width: 18, height: 18}} />
+          </div>
+          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+            <span className={"fdjslkadjfksdsjfkdsa"}>Wc</span>
+            <input type="checkbox" style={{width: 18, height: 18}} />
+          </div>
+          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+            <span className={"fdjslkadjfksdsjfkdsa"}>Chỗ để xe</span>
+            <input type="checkbox" style={{width: 18, height: 18}} />
+          </div>
+        </div>
+        <br />
+        <br />
+        {/*  */}
+        <div className={"dskdjskfjkdjsaksas"} style={{fontSize: 18, fontWeight: 600, marginBottom: 16}}>
+          Hướng nhìn
+        </div>
+        <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
+          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+            <span className={"fdjslkadjfksdsjfkdsa"}>Núi</span>
+            <input type="checkbox" style={{width: 18, height: 18}} />
+          </div>
+          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+            <span className={"fdjslkadjfksdsjfkdsa"}>Biển</span>
+            <input type="checkbox" style={{width: 18, height: 18}} />
+          </div>
+          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+            <span className={"fdjslkadjfksdsjfkdsa"}>Sông</span>
+            <input type="checkbox" style={{width: 18, height: 18}} />
+          </div>
+        </div>
+        <br />
+        <br />
+        {/*  */}
+        <div className={"dskdjskfjkdjsaksas"} style={{fontSize: 18, fontWeight: 600, marginBottom: 16}}>
+          Phòng tắm
+        </div>
+        <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
+          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+            <span className={"fdjslkadjfksdsjfkdsa"}>Đồ vệ sinh cá nhân</span>
+            <input type="checkbox" style={{width: 18, height: 18}} />
+          </div>
+          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+            <span className={"fdjslkadjfksdsjfkdsa"}>Dép</span>
+            <input type="checkbox" style={{width: 18, height: 18}} />
+          </div>
+        </div>
+        <br />
+        <br />
+      </div>
+    </div>
+  )
+}
 
 const Label = (props) => {
   return (
@@ -268,6 +350,10 @@ const ImageIllustation = (props) => {
       ])
     );
   };
+
+  const a= (e)=> {
+    setListImage(prev=> ([...prev, {img: e.target.files[0], imgPreview: URL.createObjectURL(e.target.files[0]), key: e.target.files[0].lastModified}]))
+  }
   const testUpload = async () => {
     // listImage.map(item=> )
     const a = await uploadImageClient(listImage[0].img, setResult);
@@ -290,49 +376,76 @@ const ImageIllustation = (props) => {
         }}
       >
         {isChooseImage === true &&
-          listImage.map((item, key) => (
-            <div
-              key={key}
-              className={"dlakjklajwaasas"}
-              style={{
-                width: 150,
-                height: 150,
-                padding: 10,
-                position: "relative",
-              }}
-            >
-              <img
-                src={item.imgPreview}
-                alt="open"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  border: "1px solid #e7e7e7",
-                }}
-              />
+          
+          <>
+            <>
+              {listImage.map((item, key) => (
               <div
-                title={"Xóa"}
+                key={key}
+                className={"dlakjklajwaasas"}
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "absolute",
-                  right: 0,
-                  top: 0,
+                  width: 150,
+                  height: 150,
+                  padding: 10,
+                  position: "relative",
                 }}
-                onClick={() =>
-                  setListImage(
-                    listImage.filter(
-                      (img) => parseInt(img.key) !== parseInt(item.key)
-                    )
-                  )
-                }
               >
-                <AiFillCloseCircle style={{ color: "#3a3b3c" }} />
+                <img
+                  src={item.imgPreview}
+                  alt="open"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    border: "1px solid #e7e7e7",
+                  }}
+                />
+                <div
+                  title={"Xóa"}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                  }}
+                  onClick={() =>
+                    setListImage(
+                      listImage.filter(
+                        (img) => parseInt(img.key) !== parseInt(item.key)
+                      )
+                    )
+                  }
+                >
+                  <AiFillCloseCircle style={{ color: "#3a3b3c" }} />
+                </div>
               </div>
-            </div>
-          ))}
+              ))}
+              </>
+              <>
+              {
+                listImage?.length < 5 && <div style={{padding: 10}}><Button color={"primary"} style={{height: 130, width: 130, position: "relative"}}>Thêm
+                  <input
+                    onChange={a}
+                    type="file"
+                    multiple
+                    style={{
+                      position: "absolute",
+                      opacity: 0,
+                      width: "100%",
+                      height: "100%",
+                      zIndex: 9,
+                      cursor: "pointer",
+                      top: 0,
+                      left: 0,
+                    }}
+                  />
+                </Button></div>
+              }
+              </>
+          </>
+          }
 
         {isChooseImage === false && (
           <div

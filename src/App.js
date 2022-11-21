@@ -28,6 +28,7 @@ import Signup from "./Components/Signup/Signup";
 import LoadingSpinner from "./Loading/LoadingSpinner";
 import ListBill from "./Components/ListBill/ListBill";
 import EventDetail from "./Components/Event/EventDetail";
+import Booking from "./Components/Booking/Booking";
 
 export const AppContext = createContext();
 function App() {
@@ -100,6 +101,7 @@ function App() {
               <Route path={"/manage/*"} element={<AdminLevel1 />} />
               {/* doing */}
               <Route path={"/admin/*"} element={<AdminLevel2 />} />
+              <Route path={"/booking/detail"} element={<Booking />} />
             </>
           )}
           
