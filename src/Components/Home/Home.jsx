@@ -211,50 +211,6 @@ const ContainerSuggestOutstanding= (props)=> {
           <img src={item?.city_image} alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
         </div>)
         }
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
-          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Đà Nẵng</div>
-          <img src="https://i.pinimg.com/736x/8d/4b/8e/8d4b8e64ad231b3904fd232a18fbc4ab.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
-        </div>
-        {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
-          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Thành phố Hồ Chí Minh</div>
-          <img src="https://i.pinimg.com/564x/9f/a2/9d/9fa29d971d0e2d59e9f4b61e7281e98e.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
-        </div>
-        {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
-          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Hà Nội</div>
-          <img src="https://i.pinimg.com/564x/31/cd/20/31cd208a13e78d68d8835e8435f0b005.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
-        </div>
-        {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
-          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Đà Lạt</div>
-          <img src="https://i.pinimg.com/564x/49/61/c4/4961c45f5411a2dc19a9e57918742e48.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
-        </div>
-        {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
-          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Cần Thơ</div>
-          <img src="https://i.pinimg.com/564x/b0/b3/c6/b0b3c6f97c80edc863b64ca57b3c9475.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
-        </div>
-        {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
-          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Quảng Ninh</div>
-          <img src="https://i.pinimg.com/736x/e5/c8/53/e5c853b71f925d20a2b15525d98ceaff.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
-        </div>
-        {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
-          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Bangkok - Thailand</div>
-          <img src="https://i.pinimg.com/564x/a8/a5/61/a8a5619a67d3502ff7eb1057137a784f.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
-        </div>
-        {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
-          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Nha Trang</div>
-          <img src="https://i.pinimg.com/564x/0f/94/20/0f9420e868c7fdd8eb920a94305d7e8b.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
-        </div>
-        {/*  */}
-        <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
-          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Phú Quốc</div>
-          <img src="https://i.pinimg.com/564x/8d/50/58/8d5058f5c26275ffb27308417abc3b7c.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
-        </div>
       </div>
     </div>
   )
