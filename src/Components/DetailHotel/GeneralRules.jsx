@@ -6,7 +6,7 @@ const GeneralRules = (props) => {
         <div className={"dkaslskalkreaww"} style={{fontSize: 20, fontWeight: 600, marginBottom: 20}}>
             Quy tắc chung
         </div>
-        <div className={"dklajwakljkaeaewa"} style={{width: "100%", padding: 20, background: "#d9d9d9", marginBottom: 30}}>
+        <div className={"dklajwakljkaeaewa"} style={{width: "100%", padding: 20, background: "#fff", marginBottom: 30}}>
             <ItemPerRules title={"Check in: "} value={props?.check_in_time} />
             <ItemPerRules title={"Check out: "} value={props?.check_out_time} />
         </div>

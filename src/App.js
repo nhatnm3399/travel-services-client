@@ -28,6 +28,7 @@ import Signup from "./Components/Signup/Signup";
 import LoadingSpinner from "./Loading/LoadingSpinner";
 import ListBill from "./Components/ListBill/ListBill";
 import EventDetail from "./Components/Event/EventDetail";
+import Background from "./Components/Background/Background";
 
 export const AppContext = createContext();
 function App() {
@@ -138,6 +139,7 @@ function App() {
           )}
         </Routes>
         <Footer />
+        <Background />
       </Router>
     </AppContext.Provider>
   );

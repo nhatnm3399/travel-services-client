@@ -27,7 +27,12 @@ const AddFeedback = (props) => {
             <RatingStart setStar={setStar} star={star} />
         </div>
         <br />
-        <Button disabled={comment.length <= 0 ? true : false} onClick={()=> submit_feedback(idHotel, Cookies.get("uid"),star, comment, setResult)} variant={"primary"}>Gửi đánh giá</Button>
+        <Button disabled={(comment.length <= 0 ? true : false)} onClick={async ()=> {
+            await submit_feedback(idHotel, Cookies.get("uid"),star, comment, setResult)
+            props?.setChange(prev=> !prev)
+            setComment(()=> "")
+            setStar(()=> 0)
+        }} variant={"primary"}>{result ? "Đã gửi đánh giá" : "Đánh giá"}</Button>
     </div>
   )
 }

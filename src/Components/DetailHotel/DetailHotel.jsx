@@ -10,17 +10,18 @@ import Feedback from './Feedback'
 import AroundHotel from './AroundHotel'
 import ConvenientAndInfracstructure from './ConvenientAndInfracstructure'
 import GeneralRules from './GeneralRules'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import {  useNavigate, useParams } from 'react-router-dom'
 import detail_hotel from '../../api/hotel/detail_hotel'
 import { useState } from 'react'
 import AddFeedback from './AddFeedback'
 
 const DetailHotel = (props) => {
+  const [change, setChange]= useState(false)
   const {idHotel}= useParams()
   const [data, setData]= useState()
   useEffect(()=> {
     detail_hotel(idHotel, setData)
-  }, [idHotel])
+  }, [idHotel, change])
   return (
     <div className={"detail-hotel"} style={{width: "100%"}}>
         <MainHotel data={data} />
@@ -32,9 +33,9 @@ const DetailHotel = (props) => {
             }
         </div>
         <Feedback feed_back={data?.feed_back} />
-        <AddFeedback />
+        <AddFeedback setChange={setChange} />
         <AroundHotel /> 
-        <ConvenientAndInfracstructure />
+        <ConvenientAndInfracstructure data={data?.hotel_properties} />
         <br />
         <GeneralRules {...data} />
     </div>
@@ -60,7 +61,7 @@ const MainDetailHotel1= (props)=> {
             <div className={"main-left"} style={{width: "100%"}}>
                 <div style={{fontSize: 20, fontWeight: 600}}>Tìm</div>
                 <div className="wrap-x--w" style={{width: "100%", height: 620, display: "flex", flexDirection: "column"}}>
-                    <div className={"main-left-side-search-result"} style={{padding: 10, background: "#febb02", borderRadius: 5, width: "100%", marginBottom: 6, color: "#fff"}}>
+                    <div className={"main-left-side-search-result"} style={{padding: 10, background: "#0233fe", borderRadius: 5, width: "100%", marginBottom: 6, color: "#fff"}}>
                         <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                             <Title title={"Điểm đến"} />
                             <div className={"wrap-option-main-left-side-search-result"} style={{width: "100%", height: 40, background: "#fff"}}>
@@ -169,7 +170,7 @@ const Tab2= (props)=> {
             <div className="tab-2-ss" style={{width: "100%", display: "flex", justifyContent: "space-between", paddingBottom: 20, borderBottom: "1px solid #d7d7d7"}}>
                 <div className={"tab-2-1"} style={{width: "calc(100% - 300px)"}}>
                     <div style={{fontSize: 18, fontWeight: 600, marginBottom: 12}}>Mô tả khách sạn</div>
-                    <div>{props?.data?.description}</div>
+                    <div className={"fjkldjdkljkdjkasjas"} style={{marginRight: 10}}>{props?.data?.description}</div>
                 </div>
                 <div className={"tab-2-2"} style={{width: 300, background: "#f2f0f5", padding: 20, display: "flex", flexDirection: "column", justifyContent: 'space-between', gap: 60, boxShadow: "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px", overflow: "hidden", borderRadius: 5}}>
                     <div className={"tab-2-2-w-1"}>
