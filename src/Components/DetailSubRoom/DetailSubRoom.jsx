@@ -53,50 +53,36 @@ export const Tab2 = (props) => {
           <SwiperSlide>
             <img
               alt={""}
-              style={{ width: "100%", aspectRatio: 8 / 5 }}
+              style={{ width: "100%", aspectRatio: 8 / 5, background: "#d9d9d9" }}
               src={props?.image}
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               alt={""}
-              style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src={props?.image}
+              style={{ width: "100%", aspectRatio: 8 / 5, background: "#d9d9d9" }}
+              src={props?.image1}
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               alt={""}
-              style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src={props?.image}
+              style={{ width: "100%", aspectRatio: 8 / 5, background: "#d9d9d9" }}
+              src={props?.image2}
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               alt={""}
-              style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src={props?.image}
+              style={{ width: "100%", aspectRatio: 8 / 5, background: "#d9d9d9" }}
+              src={props?.image3}
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               alt={""}
-              style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src={props?.image}
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              alt={""}
-              style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src={props?.image}
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              alt={""}
-              style={{ width: "100%", aspectRatio: 8 / 5 }}
-              src="https://swiperjs.com/demos/images/nature-2.jpg"
+              style={{ width: "100%", aspectRatio: 8 / 5, background: "#d9d9d9" }}
+              src={props?.image4}
             />
           </SwiperSlide>
         </Swiper>
@@ -118,7 +104,7 @@ export const Tab2 = (props) => {
               <img
                 alt={""}
                 style={{ width: "100%", aspectRatio: 1 / 1 }}
-                src="https://swiperjs.com/demos/images/nature-1.jpg"
+                src={props?.image}
               />
             </SwiperSlide>
             <SwiperSlide style={{ width: "20%" }}>
@@ -130,7 +116,7 @@ export const Tab2 = (props) => {
                   aspectRatio: 1 / 1,
                   background: "#d9d9d9",
                 }}
-                src="https://swiperjs.com/demos/images/nature-2.jpg"
+                src={props?.image1}
               />
             </SwiperSlide>
             <SwiperSlide style={{ width: "20%" }}>
@@ -142,7 +128,7 @@ export const Tab2 = (props) => {
                   aspectRatio: 1 / 1,
                   background: "#d9d9d9",
                 }}
-                src="https://swiperjs.com/demos/images/nature-2.jpg"
+                src={props?.image2}
               />
             </SwiperSlide>
             <SwiperSlide style={{ width: "20%" }}>
@@ -154,7 +140,7 @@ export const Tab2 = (props) => {
                   aspectRatio: 1 / 1,
                   background: "#d9d9d9",
                 }}
-                src="https://swiperjs.com/demos/images/nature-2.jpg"
+                src={props?.image3}
               />
             </SwiperSlide>
             <SwiperSlide style={{ width: "20%" }}>
@@ -166,31 +152,7 @@ export const Tab2 = (props) => {
                   aspectRatio: 1 / 1,
                   background: "#d9d9d9",
                 }}
-                src="https://swiperjs.com/demos/images/nature-2.jpg"
-              />
-            </SwiperSlide>
-            <SwiperSlide style={{ width: "20%" }}>
-              <img
-                alt={""}
-                className={"hjksdshkljfddasks"}
-                style={{
-                  width: "100%",
-                  aspectRatio: 1 / 1,
-                  background: "#d9d9d9",
-                }}
-                src="https://swiperjs.com/demos/images/nature-2.jpg"
-              />
-            </SwiperSlide>
-            <SwiperSlide style={{ width: "20%" }}>
-              <img
-                alt={""}
-                className={"hjksdshkljfddasks"}
-                style={{
-                  width: "100%",
-                  aspectRatio: 1 / 1,
-                  background: "#d9d9d9",
-                }}
-                src="https://swiperjs.com/demos/images/nature-2.jpg"
+                src={props?.image4}
               />
             </SwiperSlide>
           </Swiper>
@@ -209,6 +171,10 @@ export const Tab2 = (props) => {
           style={{ fontSize: 18, fontWeight: 600, marginBottom: 16 }}>
           Giá phòng: {props?.price}
         </div>
+        <div className={"klsadkjsaskdlas"}
+          style={{ fontSize: 18, fontWeight: 600, marginBottom: 16 }}>
+         Diện tích: {props?.room_area}
+        </div>
         <br />
         <div
           className={"klsadkjsaskdlas"}
@@ -226,32 +192,11 @@ export const Tab2 = (props) => {
             flexWrap: "wrap",
           }}
         >
-          <div className={"jskdsjskljkasas"}>Máy lạnh</div>
-          <div className={"jskdsjskljkasas"}>Hồ bơi</div>
-          <div className={"jskdsjskljkasas"}>Khăn tắm</div>
-          <div className={"jskdsjskljkasas"}>Đồ vệ sinh cá nhân</div>
+          {
+            props?.room_type_properties?.map((item, key)=> <div key={key} className={"jskdsjskljkasas"}>{item}</div>)
+          }
         </div>
         <br />
-        <br />
-        <div
-          className={"klsadkjsaskdlas"}
-          style={{ fontSize: 18, fontWeight: 600, marginBottom: 16 }}
-        >
-          View
-        </div>
-        <div
-          className={"dnksajksaklskals"}
-          style={{
-            width: "100%",
-            justifyContent: "space-between",
-            display: "flex",
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <div className={"jskdsjskljkasas"}>Núi</div>
-          <div className={"jskdsjskljkasas"}>Biển</div>
-        </div>
       </div>
     </div>
   );

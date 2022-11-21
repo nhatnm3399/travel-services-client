@@ -4,8 +4,12 @@ import { Tab2 } from '../DetailSubRoom/DetailSubRoom'
 
 const DetailPopupRoom = (props) => {
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+  const [numberRoom, setNumberRoom]= useState()
+  const handleClose = () => {
+    props?.setBookingRoom(prev=> [...prev, {id: props?.room_type_id, count: numberRoom, amount: parseInt(numberRoom) * parseInt(props?.price), name_hotel: props?.type_room_name}])
+    setShow(false)
+    props?.setOpenDetail(false)
+  };
   const handleShow = () => setShow(true);
 
   return (
@@ -25,7 +29,7 @@ const DetailPopupRoom = (props) => {
                 <Modal.Body>Nhập số lượng phòng cần đặt</Modal.Body>
                 <br />
                 <div>
-                  <input type="text" placeholder={"Nhập số lượng phòng cần đặt"} />
+                  <input onChange={(e)=> setNumberRoom(parseInt(e.target.value))} type="text" placeholder={"Nhập số lượng phòng cần đặt"} />
                 </div>
                 <br />
                 <Modal.Footer className={"flexCenterItem"} style={{gap: 10}}>

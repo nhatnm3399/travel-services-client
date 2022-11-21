@@ -14,8 +14,11 @@ import {  useNavigate, useParams } from 'react-router-dom'
 import detail_hotel from '../../api/hotel/detail_hotel'
 import { useState } from 'react'
 import AddFeedback from './AddFeedback'
+import { Button } from 'react-bootstrap'
+import _ from 'lodash'
 
 const DetailHotel = (props) => {
+  const [bookingRoom, setBookingRoom]= useState([])
   const [change, setChange]= useState(false)
   const {idHotel}= useParams()
   const [data, setData]= useState()
@@ -30,7 +33,7 @@ const DetailHotel = (props) => {
             <br />
             <div className={"daskalsklafass"} style={{width: "100%", padding: "0 40px"}}>
                 {
-                    data?.room_types?.map((item, key)=> <RoomOfHotel key={key} {...item} />)
+                    data?.room_types?.map((item, key)=> <RoomOfHotel setBookingRoom={setBookingRoom} bookingRoom={bookingRoom} key={key} {...item} />)
                 }
             </div>
             <Feedback feed_back={data?.feed_back} />
@@ -39,6 +42,9 @@ const DetailHotel = (props) => {
             <ConvenientAndInfracstructure data={data?.hotel_properties} />
             <br />
             <GeneralRules {...data} />
+            {
+                bookingRoom?.length > 0 && <StatsRoomBooking data={bookingRoom} setData={setBookingRoom} />
+            }
         </div>
     </div>
   )
@@ -189,6 +195,38 @@ const Tab2= (props)=> {
                         </div>
                         <div className={"tab-2-2-w-2-2"} style={{width: "100%", height: 50, }}>
                             <ButtonTemplate className={"tab-2-2-w-2-2-btn"} onClick={()=> {}} disable={false}>Đặt ngay</ButtonTemplate>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const StatsRoomBooking= (props)=> {
+    
+    return (
+        <div className={"fkdjkfjhdkdjaskdsfdsa"} style={{width: "100%", padding: 10, position: "fixed", bottom: 0, left: 0, display: "flex", justifyContent: "center", alignItems: "center", zIndex: 999}}>
+            <div className={"fjdksjkljfgiujreesawss"} style={{width: "100%", borderRadius: 5, background: "#fff", padding: 5, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"}}>
+                <div style={{fontWeight: 600, fontSize: 18, marginBottom: 8}}>Danh sách phòng đã chọn</div>
+                <div style={{width: '100%', maxHeight: 200, overflow: "auto"}}>
+                    {
+                        props?.data?.map((item, key)=> <div key={key} className={"dsksdjkljdskljkfddasa"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: 10}}>
+                            <div>
+                                <div style={{fontWeight: 600, marginBottom: 8}}>Tên phòng: {item?.name_hotel}</div>
+                                <div style={{fontWeight: 600, marginBottom: 8}}>Số lượng: {item?.count}</div>
+                                <div style={{fontWeight: 600, marginBottom: 8}}>Tổng tiền: {item?.amount}</div>
+                            </div>
+                            <div>
+                                <Button onClick={()=> props?.setData(props?.data?.filter(item1=> item1?.id?.toString() !== item?.id?.toString()))} color={"secondary"}>Xóa</Button>
+                            </div>
+                        </div>)
+                    }
+                    <div style={{width: "100%", direction: "rtl"}}>
+                        <div>Tổng: <strong>{_.sumBy(props?.data, function(o) {return o.amount})}</strong></div>
+                        <br />
+                        <div>
+                            <Button>Đặt</Button>
                         </div>
                     </div>
                 </div>

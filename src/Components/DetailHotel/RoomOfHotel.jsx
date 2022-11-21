@@ -90,7 +90,7 @@ const DetailRoom= (props)=> {
         <div className={"djasjakljakejaklwwa"} style={{position: "fixed", width: "100%", height: "100%", top: 0, left: 0, background: "rgba(0,0,0,0.3)", display: "flex", justifyContent: "center", zIndex: 9999, overflow: "auto"}}>
             <div className={"dkakawjkajwrwweaw"} style={{opacity: transition=== false ? 0 : 1, transition: "all .25s linear", width: "98%", maxWidth: 1200, background: "#fff", borderRadius: 5, padding: 10}}>
                 <OutsideClickHandler onOutsideClick={()=> props.setOpenDetail(()=> false)}>
-                    <DetailPopupRoom {...data} />
+                    <DetailPopupRoom {...props} {...data} />
                 </OutsideClickHandler>
             </div>
         </div>

@@ -15,6 +15,9 @@ import {BiBed} from "react-icons/bi"
 // import {GoLocation }from "react-icons/go"
 import SuggestSearch from '../SuggestSearch/SuggestSearch'
 import { useNavigate } from 'react-router-dom'
+import outstanding_place from '../../api/suggest/outstanding_place'
+import suggest_search from '../../api/search/suggest_search'
+import Fuse from "fuse.js"
 
 const Home = (props) => {
   useEffect(()=> {
@@ -53,6 +56,11 @@ const FeaturePhoto= ()=> {
 const BookingHome= (props)=> {
   const [destination, setDestination]= useState(()=> undefined)
   const [openDestination, setOpenDestination]= useState(()=> false)
+  const [data, setData]= useState()
+  const [dataSuggest, setDataSuggest]= useState([])
+  useEffect(()=> {
+    suggest_search(setData, setDataSuggest)
+  }, [])
   // const [openTime, setOpenTime]= useState(()=> false)
   // const [openGuest, setOpenGuest]= useState(()=> false)
   // const [startDate, setStartDate]= useState(new Date())
@@ -61,9 +69,35 @@ const BookingHome= (props)=> {
   // const [adult, setAdult]= useState(()=> 1)
   // const [children,setChildren]= useState(()=> 0)
   // const [room, setRoom]= useState(()=> 1)
+  const options = {
+    isCaseSensitive: false,
+    // includeScore: false,
+    shouldSort: true,
+    includeMatches: false,
+    // findAllMatches: false,
+    // minMatchCharLength: 1,
+    // location: 0,
+    // threshold: 0.6,
+    // distance: 100,
+    // useExtendedSearch: false,
+    // ignoreLocation: false,
+    // ignoreFieldNorm: false,
+    // fieldNormWeight: 1,
+    keys: [
+      "city_name",
+      "province"
+    ]
+  };
+  
+  const fuse = new Fuse(data, options);
+  
   const navigate= useNavigate()
   const execSearch= ()=> {
     navigate(`/booking/search?spec=${destination}`)
+  }
+  const search_by_place= (e)=> {
+    setDestination(e.target.value)
+    setDataSuggest(fuse.search(e.target.value))
   }
   
   return (
@@ -84,13 +118,13 @@ const BookingHome= (props)=> {
             <Label title={"Điểm đến"} />
             <OutsideClickHandler onOutsideClick={()=> setOpenDestination(()=> false)}>
               <div className={"wrap-inp-choose-booking-op"} style={{position: "relative"}}>
-                <InputTemplate value={destination && destination} placeholder={"Bạn muốn đặt phòng ?"} onChange={e=> setDestination(e.target.value)} style={{padding: "0 32px", fontSize: 18}} className={"inp-choose-booking-op-ii"} onClick={()=> setOpenDestination(prev=> !prev)} />
+                <InputTemplate value={destination && destination} placeholder={"Bạn muốn đặt phòng ?"} onChange={search_by_place} style={{padding: "0 32px", fontSize: 18}} className={"inp-choose-booking-op-ii"} onClick={()=> setOpenDestination(prev=> !prev)} />
                 <div className={"dkskalkasass"} style={{position: "absolute", top: 0, left: 0}}>
                   <BiBed style={{width: 22, height: 22, color: "#333"}} />
                 </div>
                 <div className={"dsklasklasksasa"} style={{position: "absolute", top: "100%", left: 0, width: "100%", display: openDestination=== true ? "block" : "none"}}>
                   {
-                    <SuggestSearch setOpen={setOpenDestination} setValue={setDestination} />
+                    <SuggestSearch dataSuggest={dataSuggest} setOpen={setOpenDestination} setValue={setDestination} data={data} />
                   }
                 </div>
               </div>
@@ -141,6 +175,7 @@ const Label= (props)=> {
 }
 
 const OutstandingDestination= ()=> {
+
   return (
     <div className={"outstanding-destination-v"} style={{width: "100%", marginTop: 200}}>
       <Title title={"Các địa điểm nổi bật Việt Nam"} />
@@ -160,10 +195,22 @@ const Title= (props)=> {
 }
 
 const ContainerSuggestOutstanding= (props)=> {
+  const navigate= useNavigate()
+  const [data, setData]= useState([])
+  useEffect(()=> {
+    outstanding_place(setData)
+  }, [])
+
   return (
     <div className={"container-suggest-outstanding"} style={{width: "100%", display:" flex", justifyContent: 'center'}}>
       <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: 1200, display: "flex", justifyContent: 'center', alignItems: 'center', flexWrap: "wrap", gap: 30, marginTop: 30}}>
         {/*  */}
+        {
+          data?.map((item, key)=> <div key={key} onClick={()=> navigate("/booking/search?spec="+ item?.city_name)} className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
+          <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24,}}>{item?.city_name}</div>
+          <img src={item?.city_image} alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
+        </div>)
+        }
         <div className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
           <div style={{position: "relative", zIndex: 2, color: "#fff", fontWeight: 600, fontSize: 24}}>Đà Nẵng</div>
           <img src="https://i.pinimg.com/736x/8d/4b/8e/8d4b8e64ad231b3904fd232a18fbc4ab.jpg" alt="Can't open" style={{width: '100%', height: "100%", objectFit: 'cover', position: "absolute", top: 0, left: 0}} />
