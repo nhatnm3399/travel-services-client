@@ -42,12 +42,15 @@ export const Title= (props)=> {
             }
             {
                 props.is_search_by_id_hotel=== true && 
-                <div className={"fjsdkjkjdksassa"} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <select onChange={(e)=> props?.setIdHotel(e.target.value)} value={props?.idHotel || ""} name="" id="">
-                        {
-                            props?.data?.map((item, key)=> <option key={key} value={item.id}>{item?.id}</option>)
-                        }
-                    </select>
+                <div className={"fjsdkjkjdksassa"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 10}}>
+                    <div>Tìm theo id khách sạn</div>
+                    <div>
+                        <select onChange={(e)=> props?.setIdHotel(e.target.value)} value={props?.idHotel || ""} name="" id="">
+                            {
+                                props?.data?.map((item, key)=> <option key={key} value={item.id}>{item?.id}</option>)
+                            }
+                        </select>
+                    </div>
                 </div>
             }
         </div>
