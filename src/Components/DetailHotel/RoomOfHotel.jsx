@@ -40,7 +40,7 @@ const ParametersRoom= (props)=> {
                     <div className={"skafaksdskkasa"}>2 Giường</div>
                     <div className={"fksjkdjskdjskew"}>2 Khách</div>
                 </div>
-                <div className={"dksakjsaksjkeawwaw"}>Diện tích: <strong>{props?.room_area}</strong></div>
+                <div className={"dksakjsaksjkeawwaw"}>Diện tích: <strong>{props?.room_area} m<sup>2</sup></strong></div>
             </div>
             <div className={"djksjkjdkasjieawwaw"} style={{width: "100%", display: "flex", justifyContent: 'space-between', alignItems: "center"}}>
                 <div className={"sdksaskasklasas fryeauiwyuifdaAS"}>

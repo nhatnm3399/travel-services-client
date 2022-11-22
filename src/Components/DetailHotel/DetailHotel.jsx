@@ -52,7 +52,7 @@ const DetailHotel = (props) => {
 
 const MainHotel= (props)=> {
     return (
-        <div className={"main-hotel"} style={{width: "100%", display: "flex", gap: 10, marginTop: 20, padding: "0 40px", minHeight: 640, marginBottom: 20}}>
+        <div className={"main-hotel"} style={{width: "100%", display: "flex", gap: 10, marginTop: 20, padding: "0 40px", marginBottom: 20}}>
             <MainDetailHotel1 data={props.data} />
             <MainHotel2 data={props.data} />
         </div>
@@ -68,7 +68,7 @@ const MainDetailHotel1= (props)=> {
         <div className={"wrap-main-left"} style={{width: 300, height: "100%", display: "flex", justifyContent: 'center', alignItems: "center"}}>
             <div className={"main-left"} style={{width: "100%"}}>
                 <div style={{fontSize: 20, fontWeight: 600}}>Tìm</div>
-                <div className="wrap-x--w" style={{width: "100%", height: 620, display: "flex", flexDirection: "column"}}>
+                <div className="wrap-x--w" style={{width: "100%", display: "flex", flexDirection: "column"}}>
                     <div className={"main-left-side-search-result"} style={{padding: 10, background: "#0233fe", borderRadius: 5, width: "100%", marginBottom: 6, color: "#fff"}}>
                         <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                             <Title title={"Điểm đến"} />

@@ -12,14 +12,17 @@ import booking_room_hotel from '../../api/booking/booking_room_hotel'
 import Cookies from 'js-cookie'
 import { useContext } from 'react'
 import { AppContext } from '../../App'
+import { Button } from 'react-bootstrap'
 
 const Booking = (props) => {
   const location= useLocation()
   if(location?.state?.state=== true) {
     return (
-      <div className={"detail-room-booking-hotel"} style={{width: "100%"}}>
-        <Tab1 {...location.state} />
-        <Tab2 {...location.state} />
+      <div className={"fjlkssdsjklasjdas"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <div className={"detail-room-booking-hotel"} style={{width: "100%", maxWidth: 1116}}>
+          <Tab1 {...location.state} />
+          <Tab2 {...location.state} />
+        </div>
       </div>
     )
   }
@@ -128,9 +131,9 @@ const Tab2= (props)=> {
             <textarea onChange={(e)=> setInfo(prev=> ({...prev, other : e.target.value}))} type="text" className={"sdjskldjakjask"} rows={40} style={{width: 300, height: 200, background: "#d9d9d9", padding: 10, fontSize: 16, resize: "none"}} />
           </div>
           <div className={"fjklsajklsjasas"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems :'center', marginBottom: 40}}>
-            <button onClick={booking} className={"fjksajsdkass"} style={{width: 200, height: 60, border: "none", outline: "none",cursor: "pointer", display: "flex", justifyContent: 'center', alignItems: "center", color: "#000", background: "#2e89ff", fontSize: 20, fontWeight: 700}}>
+            <Button onClick={booking} color={"primary"} className={"fjksajsdkass"} style={{width: 200, height: 60,}}>
               Đặt ngay
-            </button>
+            </Button>
           </div>
         </div>
       </div>

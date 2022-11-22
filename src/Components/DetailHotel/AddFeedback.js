@@ -14,7 +14,7 @@ const AddFeedback = (props) => {
   return (
     <div style={{padding: "10px 40px", width: '100%'}} className={"fjkdjkjkdjgkjdsdas"}>
         <div className={"fjkdjfkjsdkass"} style={{width: "100%", display: "flex", alignItems: "center", gap: 10}}>
-            <div className={"jfksjdkjaksjdsd"} style={{maxWidth: 400, width: 400}}>
+            <div className={"jfksjdkjaksjdsd"} style={{width: "100%"}}>
                 <input value={comment} onChange={e=> setComment(e.target.value)} type="text" className={"fjkdjskdjsass"} style={{width: "100%", height: 40, borderRadius: 5, border: "none", outline: "none", padding: 10, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"}} placeholder={"Mời bạn để lại bình luận"} />
                 <div style={{fontSize: 12}} className={"fjskdjkjdfdadsdsa"}>*Nhập tối đa 200 ký tự</div>
             </div>

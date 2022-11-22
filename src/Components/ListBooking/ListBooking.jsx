@@ -91,9 +91,9 @@ const Title= (props)=> {
 
 const ElementDetail= (props)=> {
     return (
-        <div className={"fjklsajklsjkalskja"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "end", gap: 40, marginBottom: 30}}>
+        <div className={"fjklsajklsjkalskja"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 40, marginBottom: 30, background: "#d9d9d9", borderRadius: 5, padding: 10}}>
             <div className="skjlajaksjkasaasas" style={{display: "flex", justifyContent: 'center', alignItems: "center"}}> 
-                <div className={"aklsjaklsjskldas"} style={{width: 400, height: 250, background: "#d9d9d9"}}>
+                <div className={"aklsjaklsjskldas"} style={{width: 400, height: 250, background: "#fff"}}>
 
                 </div>
             </div>
