@@ -57,7 +57,9 @@ const FeedbackComponent= (props)=> {
         <div className={"jksjkalsjdasaw"} style={{width: "100%", marginBottom: 50}}>
             <div className={"fjkajskasjasjkas"} style={{display: "flex", alignItems: "center", gap: 10}}>
                 <div className={"dkskalkrleawias"} style={{display: "flex", justifyContent: 'center', alignItems:" center"}}>
-                    <div role={"img"} className={"dkaskalskalwsawwaw"} style={{width: 40, height: 40, borderRadius: "50%", background: "#d9d9d9"}}></div>
+                    <div role={"img"} className={"dkaskalskalwsawwaw"} style={{width: 40, height: 40, borderRadius: "50%", background: "#d9d9d9"}}>
+                        <img src={props?.avatar} alt="" style={{width: "100%", height: "100%", objectFit: "cover", borderRadius :"50%"}} />
+                    </div>
                 </div>
                 <div className={"djsasksjkawkwia"}>
                     <div className={"dksasljkjawklajwlakwwa"} style={{marginBottom: 8}}>

@@ -58,6 +58,7 @@ const BookingHome= (props)=> {
   const [openDestination, setOpenDestination]= useState(()=> false)
   const [data, setData]= useState()
   const [dataSuggest, setDataSuggest]= useState([])
+  const [idCity, setIdCity]= useState()
   useEffect(()=> {
     suggest_search(setData, setDataSuggest)
   }, [])
@@ -116,19 +117,17 @@ const BookingHome= (props)=> {
         <div className={"choose-option-to-booking-home"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 20}}>
           <div className={"choose-option-to-booking-home-destination"} style={{width: "85%"}}>
             <Label title={"Điểm đến"} />
-            <OutsideClickHandler onOutsideClick={()=> setOpenDestination(()=> false)}>
-              <div className={"wrap-inp-choose-booking-op"} style={{position: "relative"}}>
-                <InputTemplate value={destination && destination} placeholder={"Bạn muốn đặt phòng ?"} onChange={search_by_place} style={{padding: "0 32px", fontSize: 18}} className={"inp-choose-booking-op-ii"} onClick={()=> setOpenDestination(prev=> !prev)} />
-                <div className={"dkskalkasass"} style={{position: "absolute", top: 0, left: 0}}>
-                  <BiBed style={{width: 22, height: 22, color: "#333"}} />
-                </div>
-                <div className={"dsklasklasksasa"} style={{position: "absolute", top: "100%", left: 0, width: "100%", display: openDestination=== true ? "block" : "none"}}>
-                  {
-                    <SuggestSearch dataSuggest={dataSuggest} setOpen={setOpenDestination} setValue={setDestination} data={data} />
-                  }
-                </div>
-              </div>
-            </OutsideClickHandler>
+            <SearchSuggest 
+              setOpenDestination={setOpenDestination}
+              destination={destination}
+              search_by_place={search_by_place}
+              dataSuggest={dataSuggest}
+              setValue={setDestination}
+              openDestination={openDestination}
+              data={data}
+              placeholder={"Bạn muốn đặt phòng ?"}
+              setIdCity={setIdCity}
+            />
           </div>
           
           {/* <div className={"choose-option-to-booking-home-guest"} style={{width: "40%"}}>
@@ -163,6 +162,32 @@ const BookingHome= (props)=> {
         </div>
       </div>
     </div>
+  )
+}
+
+export const SearchSuggest= (props)=> {
+  return (
+    <>
+      <OutsideClickHandler onOutsideClick={()=> props?.setOpenDestination(()=> false)}>
+        <div className={"wrap-inp-choose-booking-op"} style={{position: "relative"}}>
+          <InputTemplate value={props?.destination && props?.destination} placeholder={props?.placeholder} onChange={props?.search_by_place} style={{padding: "0 32px", fontSize: 18}} className={"inp-choose-booking-op-ii"} onClick={()=> props?.setOpenDestination(prev=> !prev)} />
+          <div className={"dkskalkasass"} style={{position: "absolute", top: 0, left: 0}}>
+            <BiBed style={{width: 22, height: 22, color: "#333"}} />
+          </div>
+          <div className={"dsklasklasksasa"} style={{position: "absolute", top: "100%", left: 0, width: "100%", display: props?.openDestination=== true ? "block" : "none"}}>
+            {
+              <SuggestSearch
+                dataSuggest={props?.dataSuggest}
+                setOpen={props?.setOpenDestination}
+                setValue={props?.setValue}
+                data={props?.data}
+                setIdCity={props?.setIdCity}
+              />
+              }
+          </div>
+        </div>
+      </OutsideClickHandler>
+    </>
   )
 }
 

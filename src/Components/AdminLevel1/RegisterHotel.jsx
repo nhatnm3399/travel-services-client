@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import InputTemplate from "../Common/InputTemplate";
 import GoogleMapPlugin from "../Plugin/GoogleMap";
 import { Title } from "./ListHotel";
@@ -7,6 +7,11 @@ import { GrAdd } from "react-icons/gr";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { uploadImageClient } from "../../firebase/config";
 import { Button } from "react-bootstrap";
+import add_hotel from "../../api/auth/manage_hotel/add_hotel";
+import { SearchSuggest } from "../Home/Home";
+import suggest_search from "../../api/search/suggest_search";
+import Fuse from "fuse.js"
+import Cookies from "js-cookie";
 
 const RegisterHotel = (props) => {
   return (
@@ -27,11 +32,24 @@ const MainRegister = (props) => {
   const [phoneNumber, setPhoneNumber]= useState()
   const [address, setAddress]= useState()
   const [description, setDescription]= useState()
-  const [convenient, setConvenient]= useState()
+  const [convenient, setConvenient]= useState([])
   const [checkIn, setCheckIn]= useState()
   const [checkOut, setCheckOut]= useState()
   const [isPaymentCard, setIsPaymentCard]= useState()
-  const [image, setImage]= useState()
+  const [listImageFinal, setListImageFinal]= useState([])
+
+  // 
+  const [listImage, setListImage] = useState([]);
+  const [result, setResult] = useState([]);
+  const isChooseImage = listImage.length > 0 ? true : false;
+  const [openListCity, setOpenListCity]= useState(false)
+  const [idCity, setIdCity]= useState()
+
+  const add_hotel_func= async ()=> {
+    const list_img_final_unresolve= listImage?.map(item=> uploadImageClient(item.img, setListImageFinal))
+    const result= await Promise.all(list_img_final_unresolve)
+    add_hotel(hotelName, description, address, phoneNumber, result[0], result[1], result[2], result[3], result[4], idCity, "100", "100", checkIn, checkOut, isPaymentCard, Cookies.get("uid"), convenient, setPayload)
+  }
   return (
     <div
       className={"djksjajerkjawwawa"}
@@ -72,7 +90,7 @@ const MainRegister = (props) => {
             <div className={"dsjaajwjalkwawwa"} style={{ flex: "1 1 0" }}>
               <TitleItem title={"Tên khách sạn *"} />
               <InputTemplate
-                onChange={() => {}}
+                onChange={(e) => setHotelName(e.target.value)}
                 style={{
                   width: "100%",
                   height: 40,
@@ -86,7 +104,7 @@ const MainRegister = (props) => {
             <div className={"dsjaajwjalkwawwa"} style={{ flex: "1 1 0" }}>
               <TitleItem title={"Số điện thoại *"} />
               <InputTemplate
-                onChange={() => {}}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 style={{
                   width: "100%",
                   height: 40,
@@ -101,7 +119,7 @@ const MainRegister = (props) => {
           <div className={"dsjaajwjalkwawwa"} style={{ width: "100%" }}>
             <TitleItem title={"Địa chỉ *"} />
             <InputTemplate
-              onChange={() => {}}
+              onChange={(e) => setAddress(e.target.value)}
               style={{
                 width: "100%",
                 height: 40,
@@ -111,6 +129,11 @@ const MainRegister = (props) => {
                 border: "none",
               }}
             />
+          </div>
+          <div className={"dsjaajwjalkwawwa"} style={{ width: "100%", position: "relative"}}>
+            <TitleItem title={"Chọn thành phố *"} />
+        
+           {<ChooseCity setIdCity={setIdCity} />}
           </div>
         </div>
         {/* intergrate map */}
@@ -133,7 +156,7 @@ const MainRegister = (props) => {
       >
         <TitleItem title={"Mô tả *"} />
         <textarea
-          onChange={() => {}}
+          onChange={(e) => setDescription(e.target.value)}
           style={{
             width: "100%",
             height: 200,
@@ -146,14 +169,69 @@ const MainRegister = (props) => {
           }}
         />
       </div>
-      <Convenient />
+      <Convenient setConvenient={setConvenient} convenient={convenient} />
       <br />
-      <SetRule />
+      <SetRule checkIn={checkIn} setCheckIn={setCheckIn} checkOut={checkOut} setCheckOut={setCheckOut} isPaymentCard={isPaymentCard} setIsPaymentCard={setIsPaymentCard} />
       <br />
-      <ImageIllustation />
+      <ImageIllustation listImage={listImage}
+        setListImage={setListImage}
+        result={result}
+        setResult={setResult}
+        isChooseImage={isChooseImage}
+        add_hotel_func={add_hotel_func}
+      />
     </div>
   );
 };
+
+const ChooseCity= (props)=> {
+  const [destination, setDestination]= useState(()=> undefined)
+  const [openDestination, setOpenDestination]= useState(()=> false)
+  const [data, setData]= useState()
+  const [dataSuggest, setDataSuggest]= useState([])
+
+  const options = {
+    isCaseSensitive: false,
+    // includeScore: false,
+    shouldSort: true,
+    includeMatches: false,
+    // findAllMatches: false,
+    // minMatchCharLength: 1,
+    // location: 0,
+    // threshold: 0.6,
+    // distance: 100,
+    // useExtendedSearch: false,
+    // ignoreLocation: false,
+    // ignoreFieldNorm: false,
+    // fieldNormWeight: 1,
+    keys: [
+      "city_name",
+      "province"
+    ]
+  };
+  const fuse = new Fuse(data, options);
+  useEffect(()=> {
+    suggest_search(setData, setDataSuggest)
+  }, [])
+  const search_by_place= (e)=> {
+    setDestination(e.target.value)
+    setDataSuggest(fuse.search(e.target.value))
+  }
+  return (
+    <SearchSuggest
+
+      setOpenDestination={setOpenDestination}
+      destination={destination}
+      search_by_place={search_by_place}
+      dataSuggest={dataSuggest}
+      setValue={setDestination}
+      openDestination={openDestination}
+      data={data}
+      placeholder={"Chọn thành phố hoặc tìm kiếm thành phố"}
+      setIdCity={props?.setIdCity}
+    />
+  )
+}
 
 const TitleItem = (props) => {
   return (
@@ -174,11 +252,11 @@ const SetRule = (props) => {
         className={"fkajkawakwawaew"}
         style={{ width: "100%", padding: 20, background: "#fff" }}
       >
-        <Label label={"Thời gian nhận phòng: "} component={<TimePicker />} />
-        <Label label={"Thời gian trả phòng: "} component={<TimePicker />} />
+        <Label label={"Thời gian nhận phòng: "} component={<TimePicker onChange={props?.setCheckIn} value={props?.checkIn} />} />
+        <Label label={"Thời gian trả phòng: "} component={<TimePicker onChange={props?.setCheckOut} value={props?.checkOut} />} />
         <Label
           label={"Hủy đặt phòng / Trả trước"}
-          component={<YesNoOptions />}
+          component={<YesNoOptions setIsPaymentCard={props?.setIsPaymentCard} />}
         />
         {/* <Label label={"Trẻ em và giường"} />
         <Label label={"Độ tuổi đặt phòng"} />
@@ -197,22 +275,10 @@ const Convenient= (props)=> {
           Tiện nghi và nội quy
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
-            <span className={"fdjslkadjfksdsjfkdsa"}>Wifi</span>
-            <input type="checkbox" style={{width: 18, height: 18}} />
-          </div>
-          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
-            <span className={"fdjslkadjfksdsjfkdsa"}>Máy lạnh</span>
-            <input type="checkbox" style={{width: 18, height: 18}} />
-          </div>
-          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
-            <span className={"fdjslkadjfksdsjfkdsa"}>Wc</span>
-            <input type="checkbox" style={{width: 18, height: 18}} />
-          </div>
-          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
-            <span className={"fdjslkadjfksdsjfkdsa"}>Chỗ để xe</span>
-            <input type="checkbox" style={{width: 18, height: 18}} />
-          </div>
+          <ComponentConvenient name={"Wifi"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Máy lạnh"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Wc"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Chỗ để xe"} type_id={4} convenient={props?.convenient} setConvenient={props?.setConvenient} />
         </div>
         <br />
         <br />
@@ -221,18 +287,11 @@ const Convenient= (props)=> {
           Hướng nhìn
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
-            <span className={"fdjslkadjfksdsjfkdsa"}>Núi</span>
-            <input type="checkbox" style={{width: 18, height: 18}} />
-          </div>
-          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
-            <span className={"fdjslkadjfksdsjfkdsa"}>Biển</span>
-            <input type="checkbox" style={{width: 18, height: 18}} />
-          </div>
-          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
-            <span className={"fdjslkadjfksdsjfkdsa"}>Sông</span>
-            <input type="checkbox" style={{width: 18, height: 18}} />
-          </div>
+          <ComponentConvenient name={"Núi"} type_id={4} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Biển"} type_id={5} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+
+          <ComponentConvenient name={"Sông"} type_id={6} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+
         </div>
         <br />
         <br />
@@ -241,18 +300,31 @@ const Convenient= (props)=> {
           Phòng tắm
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
-            <span className={"fdjslkadjfksdsjfkdsa"}>Đồ vệ sinh cá nhân</span>
-            <input type="checkbox" style={{width: 18, height: 18}} />
-          </div>
-          <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
-            <span className={"fdjslkadjfksdsjfkdsa"}>Dép</span>
-            <input type="checkbox" style={{width: 18, height: 18}} />
-          </div>
+          <ComponentConvenient name={"Đồ vệ sinh cá nhân"} type_id={7} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Dép"} type_id={8} convenient={props?.convenient} setConvenient={props?.setConvenient} />
         </div>
         <br />
         <br />
       </div>
+    </div>
+  )
+}
+
+const ComponentConvenient= (props)=> {
+  const ref= useRef()
+  const setValue= ()=> {
+    if(ref.current.checked) {
+      props?.setConvenient(prev=> ([...prev, {properties_type_id: props?.type_id, properties_type: props?.name}]))
+    }
+    else {
+      console.log(123)
+      props?.setConvenient(props?.convenient?.filter(item=> parseInt(item.properties_type_id) !== parseInt(props?.type_id)))
+    }
+  }
+  return (
+    <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+      <span className={"fdjslkadjfksdsjfkdsa"}>{props?.name}</span>
+      <input ref={ref} onChange={setValue} type="checkbox" style={{width: 18, height: 18}} />
     </div>
   )
 }
@@ -296,8 +368,8 @@ const YesNoOptions = (props) => {
         gap: 30,
       }}
     >
-      <ComponentYesNo text={"Có"} name={"deposit"} />
-      <ComponentYesNo text={"Không"} name={"deposit"} />
+      <ComponentYesNo setIsPaymentCard={props?.setIsPaymentCard} value={true} text={"Có"} name={"deposit"} />
+      <ComponentYesNo setIsPaymentCard={props?.setIsPaymentCard} value={false} text={"Không"} name={"deposit"} />
     </div>
   );
 };
@@ -324,6 +396,7 @@ const ComponentYesNo = (props) => {
         }}
       >
         <InputTemplate
+          onClick={()=> props?.setIsPaymentCard(props?.value)}
           type={"radio"}
           name={props.name}
           value={props.value}
@@ -335,12 +408,10 @@ const ComponentYesNo = (props) => {
 };
 
 const ImageIllustation = (props) => {
-  const [listImage, setListImage] = useState([]);
-  const [result, setResult] = useState([]);
-  const isChooseImage = listImage.length > 0 ? true : false;
+  
   const f = (e) => {
     Object.values(e.target.files).map((item) =>
-      setListImage((prev) => [
+      props?.setListImage((prev) => [
         ...prev,
         {
           img: item,
@@ -352,11 +423,11 @@ const ImageIllustation = (props) => {
   };
 
   const a= (e)=> {
-    setListImage(prev=> ([...prev, {img: e.target.files[0], imgPreview: URL.createObjectURL(e.target.files[0]), key: e.target.files[0].lastModified}]))
+    props?.setListImage(prev=> ([...prev, {img: e.target.files[0], imgPreview: URL.createObjectURL(e.target.files[0]), key: e.target.files[0].lastModified}]))
   }
   const testUpload = async () => {
     // listImage.map(item=> )
-    const a = await uploadImageClient(listImage[0].img, setResult);
+    const a = await uploadImageClient(props?.listImage[0].img, props?.setResult);
     console.log(a);
   };
 
@@ -375,11 +446,11 @@ const ImageIllustation = (props) => {
           flexWrap: "wrap",
         }}
       >
-        {isChooseImage === true &&
+        {props?.isChooseImage === true &&
           
           <>
             <>
-              {listImage.map((item, key) => (
+              {props?.listImage.map((item, key) => (
               <div
                 key={key}
                 className={"dlakjklajwaasas"}
@@ -411,8 +482,8 @@ const ImageIllustation = (props) => {
                     top: 0,
                   }}
                   onClick={() =>
-                    setListImage(
-                      listImage.filter(
+                    props?.setListImage(
+                      props?.listImage.filter(
                         (img) => parseInt(img.key) !== parseInt(item.key)
                       )
                     )
@@ -425,7 +496,7 @@ const ImageIllustation = (props) => {
               </>
               <>
               {
-                listImage?.length < 5 && <div style={{padding: 10}}><Button color={"primary"} style={{height: 130, width: 130, position: "relative"}}>Thêm
+                props?.listImage?.length < 5 && <div style={{padding: 10}}><Button color={"primary"} style={{height: 130, width: 130, position: "relative"}}>Thêm
                   <input
                     onChange={a}
                     type="file"
@@ -447,7 +518,7 @@ const ImageIllustation = (props) => {
           </>
           }
 
-        {isChooseImage === false && (
+        {props?.isChooseImage === false && (
           <div
             className={"fkdjksjakwjawawas"}
             style={{
@@ -521,7 +592,7 @@ const ImageIllustation = (props) => {
         }}
       >
         <button
-          onClick={testUpload}
+          onClick={props?.add_hotel_func}
           style={{
             padding: "10px 30px",
             display: "flex",

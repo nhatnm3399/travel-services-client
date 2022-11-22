@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import "./ListHotel.sass"
 
@@ -27,9 +28,9 @@ export const Title= (props)=> {
             {
                 props.is_add_new_hotel=== true &&
                 <div className={"snkdljkasksalsalas"}>
-                    <button onClick={()=> navigate("/manage/hotel/add/new")} style={{padding: 10, outline: "none", border: "none", cursor: "pointer", background: "#d9d9d9"}}>
+                    <Button color={"primary"} onClick={()=> navigate("/manage/hotel/add/new/hotel")} >
                         Thêm mới khách sạn
-                    </button>
+                    </Button>
                 </div>
             }
         </div>

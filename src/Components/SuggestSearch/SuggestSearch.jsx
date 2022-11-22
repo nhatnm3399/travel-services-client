@@ -4,9 +4,10 @@ import "./SuggestSearch.sass"
 
 const SuggestSearch = (props) => {
 
-  const choosePlace= (place)=> {
+  const choosePlace= (place, id)=> {
     props.setValue(()=> place)
     props.setOpen(()=> false)
+    props?.setIdCity(()=> id)
   }
   
   return (
@@ -16,7 +17,7 @@ const SuggestSearch = (props) => {
         </div>
         <div style={{width: '100%', maxHeight: 300, overflow: "auto"}}>
         {
-            props?.dataSuggest?.map((item, key)=> <div key={key} onClick={()=> choosePlace(item?.item?.city_name || item?.city_name)} className={"item-suggest-search"} style={{width: "100%", display: "flex", alignItems: "center", padding: "10px 5px", borderRadius: 5, gap: 10}}>
+            props?.dataSuggest?.map((item, key)=> <div key={key} onClick={()=> choosePlace((item?.item?.city_name || item?.city_name), item?.item?.id)} className={"item-suggest-search"} style={{width: "100%", display: "flex", alignItems: "center", padding: "10px 5px", borderRadius: 5, gap: 10}}>
                 <div className={"fjksldjkalsjafadsas"} style={{display: "flex", justifyContent: 'center', alignItems: "center"}}>
                     <GoLocation style={{width: 26, height: 26, color: "#333"}} />
                 </div>
