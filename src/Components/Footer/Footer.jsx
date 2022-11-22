@@ -8,7 +8,7 @@ const Footer = (props) => {
             
         </div>
         <div className={"footer-main-page"}>
-          <div style={{textAlign: "center", color: "#fff", fontSize: 14}}>Công ty TNHH FTravel Việt Nam. Mã số DN: 0313581779. Tòa nhà An Phú, 117-119 Lý Chính Thắng, P. 7, Q. 3, TPHCM</div>
+          <div style={{textAlign: "center", color: "#fff", fontSize: 14}}>Công ty TNHH FTravel Việt Nam. Mã số DN: 0313581779. 60 Lê Văn Hiến, Ngũ Hành Sơn, Đà Nẵng</div>
           <div style={{textAlign: "center",marginTop: 8, color: "#fff", fontWeight: 600}}>Copyright © 2022 FTravel</div>
         </div>
     </>

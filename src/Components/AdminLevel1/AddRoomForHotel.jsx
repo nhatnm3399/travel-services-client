@@ -1,6 +1,12 @@
 import React from "react";
+import { useState } from "react";
+import { Button } from "react-bootstrap";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { GrAdd } from "react-icons/gr";
+import { uploadImageClient } from "../../firebase/config";
 import InputTemplate from "../Common/InputTemplate";
 import { Title } from "./ListHotel";
+import { Convenient } from "./RegisterHotel";
 
 const AddRoomForHotel = (props) => {
   return (
@@ -12,15 +18,26 @@ const AddRoomForHotel = (props) => {
 };
 
 const MainAddRoom = (props) => {
+  const [listImage, setListImage]= useState([])
+  const isChooseImage= listImage?.length> 0 ? true: false
+  const [roomName, setRoomName]= useState("")
+  const [price, setPrice]= useState()
+  const [numberPeople, setNumberPeople]= useState()
+  const [roomArea, setRoomArea]=  useState()
+  const [hotelId, setHotelId]= useState()
+  const [properties, setProperties]= useState([])
   return (
     <div className={"fkdkalskalrwarae"} style={{ width: "100%", padding: 10 }}>
       <div className={"vkdkskadfdsdssd"} style={{ marginBottom: 20 }}>
         Thông tin chính
       </div>
-      <Tab1 />
+      <Tab1 roomName={roomName} setRoomName={setRoomName} price={price} setPrice={setPrice} numberPeople={numberPeople} setNumberPeople={setNumberPeople} roomArea={roomArea} setRoomArea={setRoomArea} />
       <br />
       <br />
-      <Tab2 />
+      <Convenient convenient={properties} setConvenient={setProperties} />
+      <br /><br />
+      <Image listImage={listImage} setListImage={setListImage} isChooseImage={isChooseImage} />
+      <br />
       <BtnCreate />
     </div>
   );
@@ -225,3 +242,191 @@ const BtnCreate = (props) => {
 };
 
 export default AddRoomForHotel;
+
+const Image= (props)=> {
+  const f = (e) => {
+    Object.values(e.target.files).map((item) =>
+      props?.setListImage((prev) => [
+        ...prev,
+        {
+          img: item,
+          imgPreview: URL.createObjectURL(item),
+          key: item.lastModified,
+        },
+      ])
+    );
+  };
+
+  const a= (e)=> {
+    props?.setListImage(prev=> ([...prev, {img: e.target.files[0], imgPreview: URL.createObjectURL(e.target.files[0]), key: e.target.files[0].lastModified}]))
+  }
+  // eslint-disable-next-line
+  const testUpload = async () => {
+    // listImage.map(item=> )
+    const a = await uploadImageClient(props?.listImage[0].img, props?.setResult);
+    console.log(a);
+  };
+  return (
+    <div className={"fskjakejakwjaklawwa"} style={{ width: "100%" }}>
+      <TitleItem title={"Hình ảnh *"} />
+      <div
+        className={"fjajkjsklajraeweaa"}
+        style={{
+          width: "100%",
+          padding: 20,
+          display: "flex",
+          position: "relative",
+          background: "#d9d9d9",
+          height: 400,
+          flexWrap: "wrap",
+        }}
+      >
+        {props?.isChooseImage === true &&
+          
+          <>
+            <>
+              {props?.listImage.map((item, key) => (
+              <div
+                key={key}
+                className={"dlakjklajwaasas"}
+                style={{
+                  width: 150,
+                  height: 150,
+                  padding: 10,
+                  position: "relative",
+                }}
+              >
+                <img
+                  src={item.imgPreview}
+                  alt="open"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    border: "1px solid #e7e7e7",
+                  }}
+                />
+                <div
+                  title={"Xóa"}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                  }}
+                  onClick={() =>
+                    props?.setListImage(
+                      props?.listImage.filter(
+                        (img) => parseInt(img.key) !== parseInt(item.key)
+                      )
+                    )
+                  }
+                >
+                  <AiFillCloseCircle style={{ color: "#3a3b3c" }} />
+                </div>
+              </div>
+              ))}
+              </>
+              <>
+              {
+                props?.listImage?.length < 5 && <div style={{padding: 10}}><Button color={"primary"} style={{height: 130, width: 130, position: "relative"}}>Thêm
+                  <input
+                    onChange={a}
+                    type="file"
+                    multiple
+                    style={{
+                      position: "absolute",
+                      opacity: 0,
+                      width: "100%",
+                      height: "100%",
+                      zIndex: 9,
+                      cursor: "pointer",
+                      top: 0,
+                      left: 0,
+                    }}
+                  />
+                </Button></div>
+              }
+              </>
+          </>
+          }
+
+        {props?.isChooseImage === false && (
+          <div
+            className={"fkdjksjakwjawawas"}
+            style={{
+              width: 80,
+              height: 80,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              position: "absolute",
+              background: "#fff",
+              cursor: "pointer",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)    ",
+            }}
+          >
+            <div
+              className={"fjdadjkwljeakwawa"}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginBottom: 12,
+              }}
+            >
+              <GrAdd style={{ width: 24, height: 24 }} />
+            </div>
+            <div style={{ textAlign: "center", fontWeight: 600, fontSize: 14 }}>
+              Upload
+            </div>
+            <input
+              onChange={f}
+              type="file"
+              multiple
+              style={{
+                position: "absolute",
+                opacity: 0,
+                width: "100%",
+                height: "100%",
+                zIndex: 9,
+                cursor: "pointer",
+                top: 0,
+                left: 0,
+              }}
+            />
+          </div>
+        )}
+        {/* rule */}
+        <div
+          className={"djkjaksjkajraeaw"}
+          style={{
+            position: "absolute",
+            bottom: 0,
+            textAlign: "center",
+            fontSize: 12,
+            fontWeight: 600,
+            width: "100%",
+          }}
+        >
+          Vui lòng đăng tải 5 hình ảnh
+        </div>
+      </div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 16,
+        }}
+      >
+      </div>
+    </div>
+  )
+}

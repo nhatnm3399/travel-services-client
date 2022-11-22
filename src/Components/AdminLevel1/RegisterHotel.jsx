@@ -267,7 +267,7 @@ const SetRule = (props) => {
   );
 };
 
-const Convenient= (props)=> {
+export const Convenient= (props)=> {
   return (
     <div className={"fdjklfjkdgjhklsdas"} style={{width: '100%'}}>
       <div className={"fkljdfdklsjdkfsdsas"} style={{width: "100%", padding: 10, background: "#fff"}}>
@@ -425,6 +425,7 @@ const ImageIllustation = (props) => {
   const a= (e)=> {
     props?.setListImage(prev=> ([...prev, {img: e.target.files[0], imgPreview: URL.createObjectURL(e.target.files[0]), key: e.target.files[0].lastModified}]))
   }
+  // eslint-disable-next-line
   const testUpload = async () => {
     // listImage.map(item=> )
     const a = await uploadImageClient(props?.listImage[0].img, props?.setResult);

@@ -13,6 +13,7 @@ import manage_list_hotel from "../../api/admin/manage_list_hotel";
 import ListCommentReport from "./ListCommentReport";
 import ManageEvent from "./ManageEvent";
 import AddNewEvent from "./AddNewEvent";
+import { Stats } from "./Stats";
 
 const AdminLevel2 = (props) => {
   return (
@@ -101,6 +102,7 @@ const MainAdminLevel2 = (props) => {
         <Route path={"/reported/comment/manage"} element={<ListCommentReport />} />
         <Route path={"/event/manage"} element={<ManageEvent />} />
         <Route path={"/event/manage/add/new"} element={<AddNewEvent />} />
+        <Route path={"/stats/manage"} element={<Stats />} />
       </Routes>
     </div>
   );
