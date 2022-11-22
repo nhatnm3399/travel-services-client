@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Title } from "../AdminLevel1/ListHotel";
 import { AiOutlineClose } from "react-icons/ai";
 import { GoVerified } from "react-icons/go";
+import get_list_hotel from "../../api/manage/get_list_hotel";
+import get_list_request_by_id_hotel from "../../api/manage/get_list_request_by_id_hotel";
 
 const RequestBookingRoom = (props) => {
+  const [data, setData]= useState([])
+  const [idHotel, setIdHotel]= useState()
+  useEffect(()=> {
+    get_list_hotel(setData)
+  }, [])
   return (
     <div className={"dkaksjakjekeawa"}>
-      <Title title={"Yêu cầu đặt phòng"} />
-      <ListRequest />
+      <Title is_search_by_id_hotel={true} data={data} idHotel={idHotel} setIdHotel={setIdHotel} title={"Yêu cầu đặt phòng"} />
+      <ListRequest idHotel={idHotel} />
     </div>
   );
 };
 
 const ListRequest = (props) => {
+  const [data, setData]= useState([])
+  useEffect(()=> {
+    if(props?.idHotel) {
+      get_list_request_by_id_hotel(setData)
+    }
+  }, [props?.idHotel])
   return (
     <div
       className={"dkaajkrjaerwlwa"}
@@ -20,7 +33,7 @@ const ListRequest = (props) => {
     >
       <table
         className={"fjskljkrlejrkleaw"}
-        style={{ width: "100%" }}
+        style={{ width: "100%" , overflowX: "auto"}}
         cellSpacing={20}
       >
         <thead className={"dksjakjdksawkaww"} style={{ width: "100%" }}>
@@ -34,13 +47,14 @@ const ListRequest = (props) => {
           </tr>
         </thead>
         <tbody className={"fkkejkjaiwjwawwawa"} style={{ width: "100%" }}>
-          <tr className={"jkajksljeklaresas"}>
-            <td style={{ textAlign: "center" }}>Nguyễn Văn A</td>
-            <td style={{ textAlign: "center" }}>03948239232</td>
-            <td style={{ textAlign: "center" }}>Phòng cao cấp</td>
-            <td style={{ textAlign: "center" }}>Tiền mặt</td>
-            <td style={{ textAlign: "center" }}>Chờ duyệt</td>
-            <td style={{ textAlign: "center" }}>
+          {
+            data?.map((item, key)=> <tr key={key} className={"jkajksljeklaresas"}>
+            <td style={{ textAlign: "center" , whiteSpace: "nowrap"}}>{item?.user_booking}</td>
+            <td style={{ textAlign: "center" , whiteSpace: "nowrap"}}>{item?.phone}</td>
+            <td style={{ textAlign: "center" , whiteSpace: "nowrap"}}>{item?.room_name}</td>
+            <td style={{ textAlign: "center" , whiteSpace: "nowrap"}}>Tiền mặt</td>
+            <td style={{ textAlign: "center" , whiteSpace: "nowrap"}}>{item?.booking_status}</td>
+            <td style={{ textAlign: "center" , whiteSpace: "nowrap"}}>
               <div
                 className={"djskjaksjkafaawe"}
                 style={{
@@ -86,60 +100,8 @@ const ListRequest = (props) => {
                 </button>
               </div>
             </td>
-          </tr>
-          <tr className={"jkajksljeklaresas"}>
-            <td style={{ textAlign: "center" }}>Nguyễn Văn A</td>
-            <td style={{ textAlign: "center" }}>03948239232</td>
-            <td style={{ textAlign: "center" }}>Phòng cao cấp</td>
-            <td style={{ textAlign: "center" }}>Tiền mặt</td>
-            <td style={{ textAlign: "center" }}>Chờ duyệt</td>
-            <td style={{ textAlign: "center" }}>
-              <div
-                className={"djskjaksjkafaawe"}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: 20,
-                }}
-              >
-                <button
-                  title={"Chấp nhận"}
-                  className={"fjakajkwawawwawa"}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    cursor: "pointer",
-                    border: "none",
-                    outline: "none",
-                    background: "unset",
-                  }}
-                >
-                  <GoVerified
-                    style={{ width: 24, height: 24, color: "#01b853" }}
-                  />
-                </button>
-                <button
-                  title={"Từ chối"}
-                  className={"fjakajkwawawwawa"}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    cursor: "pointer",
-                    border: "none",
-                    outline: "none",
-                    background: "unset",
-                  }}
-                >
-                  <AiOutlineClose
-                    style={{ width: 24, height: 24, color: "red" }}
-                  />
-                </button>
-              </div>
-            </td>
-          </tr>
+          </tr>)
+          }
         </tbody>
       </table>
     </div>

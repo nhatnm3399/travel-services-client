@@ -32,8 +32,9 @@ const DetailHotel = (props) => {
             <Tab2 data={data} />
             <br />
             <div className={"daskalsklafass"} style={{width: "100%", padding: "0 40px"}}>
+                <div className={"fjklsdjskjsdksa"} style={{width: "100%", position: "sticky", top: 0, zIndex: 999, background: "#d9d9d9", height: 68, borderRadius: 5}}></div>
                 {
-                    data?.room_types?.map((item, key)=> <RoomOfHotel setBookingRoom={setBookingRoom} bookingRoom={bookingRoom} key={key} {...item} />)
+                    data?.room_types?.map((item, key)=> <RoomOfHotel data1={data} data={bookingRoom} setData={setBookingRoom} setBookingRoom={setBookingRoom} bookingRoom={bookingRoom} key={key} {...item} />)
                 }
             </div>
             <Feedback feed_back={data?.feed_back} />
@@ -42,9 +43,9 @@ const DetailHotel = (props) => {
             <ConvenientAndInfracstructure data={data?.hotel_properties} />
             <br />
             <GeneralRules {...data} />
-            {
+            {/* {
                 bookingRoom?.length > 0 && <StatsRoomBooking data1={data} data={bookingRoom} setData={setBookingRoom} />
-            }
+            } */}
         </div>
     </div>
   )

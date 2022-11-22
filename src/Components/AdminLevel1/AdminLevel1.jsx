@@ -185,7 +185,7 @@ const MainElementList= (props)=> {
     return (
         <div className={"jskldjakdjskdalks"} style={{width: "100%", display: "flex", alignItems: 'center', flexWrap: "wrap"}}>
              {props?.data?.filter(item=> item?.status_hotel === props?.type)?.map((item, key)=> <div key={key} className={"jdfljdkalsdasa "} style={{width: "calc(100% / 3)", padding: 10}}>
-                <div className={"jlkdjkasdjkasas"} style={{width: "100%", padding: 10, background: "#d9d9d9"}}>
+                <div className={"jlkdjkasdjkasas"} style={{width: "100%", padding: 10, background: "#d9d9d9", borderRadius: 5}}>
                     <div className={"kssjkajskasaas"} style={{width: "100%", display :"flex" , justifyContent: 'space-between', alignItems: 'center', marginBottom: 16}}>
                         <div className='dhsdljajskljassa'>
                             <div className='sljflkjeklasjas' style={{fontSize: 18, fontWeight: 600, color: "#2e89fff", marginBottom: 12}}>Tên khách sạn: {item?.title}</div>

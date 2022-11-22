@@ -98,6 +98,7 @@ const MainRegister = (props) => {
                   outlineColor: "#2e89ff",
                   background: "#fff",
                   border: "none",
+                  borderRadius: 5,
                 }}
               />
             </div>
@@ -112,6 +113,7 @@ const MainRegister = (props) => {
                   outlineColor: "#2e89ff",
                   background: "#fff",
                   border: "none",
+                  borderRadius: 5,
                 }}
               />
             </div>
@@ -127,6 +129,7 @@ const MainRegister = (props) => {
                 outlineColor: "#2e89ff",
                 background: "#fff",
                 border: "none",
+                borderRadius: 5,
               }}
             />
           </div>
@@ -166,6 +169,7 @@ const MainRegister = (props) => {
             fontSize: 16,
             resize: "none",
             border: "none",
+            borderRadius: 5
           }}
         />
       </div>
@@ -250,7 +254,7 @@ const SetRule = (props) => {
       <TitleItem title={"Quy tắc chung"} />
       <div
         className={"fkajkawakwawaew"}
-        style={{ width: "100%", padding: 20, background: "#fff" }}
+        style={{ width: "100%", padding: 20, background: "#fff",borderRadius: 5 }}
       >
         <Label label={"Thời gian nhận phòng: "} component={<TimePicker onChange={props?.setCheckIn} value={props?.checkIn} />} />
         <Label label={"Thời gian trả phòng: "} component={<TimePicker onChange={props?.setCheckOut} value={props?.checkOut} />} />
@@ -270,7 +274,7 @@ const SetRule = (props) => {
 export const Convenient= (props)=> {
   return (
     <div className={"fdjklfjkdgjhklsdas"} style={{width: '100%'}}>
-      <div className={"fkljdfdklsjdkfsdsas"} style={{width: "100%", padding: 10, background: "#fff"}}>
+      <div className={"fkljdfdklsjdkfsdsas"} style={{width: "100%", padding: 10, background: "#fff", borderRadius: 5}}>
         <div className={"dskdjskfjkdjsaksas"} style={{fontSize: 18, fontWeight: 600, marginBottom: 16}}>
           Tiện nghi và nội quy
         </div>
@@ -445,6 +449,7 @@ const ImageIllustation = (props) => {
           background: "#fff",
           height: 400,
           flexWrap: "wrap",
+          borderRadius: 5
         }}
       >
         {props?.isChooseImage === true &&

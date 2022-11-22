@@ -1,13 +1,20 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
+import get_list_hotel from '../../api/manage/get_list_hotel'
 import "./ListHotel.sass"
 
 const ListHotel = (props) => {
+  const [data, setData]= useState([])
+  useEffect(()=> {
+    get_list_hotel(setData)
+  }, [])
   return (
     <div className={"hjfjhdkjlajsaksa"}>
         <Title title={"Danh sách khách sạn của bạn"} is_add_new_hotel={true} />
-        <Main />
+        <Main data={data} />
     </div>
   )
 }
@@ -33,11 +40,21 @@ export const Title= (props)=> {
                     </Button>
                 </div>
             }
+            {
+                props.is_search_by_id_hotel=== true && 
+                <div className={"fjsdkjkjdksassa"} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <select onChange={(e)=> props?.setIdHotel(e.target.value)} value={props?.idHotel || ""} name="" id="">
+                        {
+                            props?.data?.map((item, key)=> <option key={key} value={item.id}>{item?.id}</option>)
+                        }
+                    </select>
+                </div>
+            }
         </div>
     )
 }
 
-const Main= ()=> {
+const Main= (props)=> {
     return (
         <div className={"fdjakjsaklejawawaw"} style={{width: "100%"}}>
             <table className={"fkjkajkawawaww"} style={{width: "100%"}} cellSpacing={20}>
@@ -49,9 +66,10 @@ const Main= ()=> {
                     </tr>
                 </thead>
                 <tbody className={"fkasajskajskawjakwaw"} style={{width: "100%"}}>
-                    <tr className={"djjaklwjrkjlekawwa"}>
-                        <td>Mường thanh</td>
-                        <td>60 Lê Văn Hiến, Ngũ Hành Sơn, Đà Nẵng</td>
+                    {
+                        props?.data?.map((item ,key)=> <tr key={key} className={"djjaklwjrkjlekawwa"}>
+                        <td>{item?.title}</td>
+                        <td>{item?.address}</td>
                         <td>
                             <div style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10}}>
                                 <button className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#2DB83B"}}>
@@ -62,7 +80,8 @@ const Main= ()=> {
                                 </button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>)
+                    }
                 </tbody>
             </table>
         </div>
