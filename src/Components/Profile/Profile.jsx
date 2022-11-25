@@ -21,6 +21,7 @@ const Profile = (props) => {
   const [phoneNumber, setPhoneNumber]= useState()
   const [birthday, setBirthday]= useState()
   const [address, setAddress]= useState()
+  // eslint-disable-next-line
   const [result, setResult]= useState([])
   const [updateCheck, setUpdateCheck]= useState(false)
   useEffect(()=> {
@@ -44,27 +45,42 @@ const Profile = (props) => {
   return (
     <div className={"profile-user-site"} style={{width: "100%", display: "flex", justifyContent:" center", alignItems:" center"}}>
         <div className={"c-profile-user-site"} style={{width: "100%", maxWidth: 1200, margin: "20px 0", display: "flex", justifyContent: "space-between", gap: 16}}>
-            <div className={"dsjkdajdjaklsjakdas"} style={{width: 350, padding: 10, borderRadius: 5, backgroundColor: "#febb02", height: "max-content"}}>
-                <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <img src={validUrl.isUri(user?.avatar) ? user?.avatar : "https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png"} alt="" style={{width: 60, height: 60, borderRadius: "50%", objectFit: "cover"}} />
-                </div>
-                <div style={{display: "flex", alignItems: "center", marginBottom: 8, justifyContent: "center", fontWeight: 600}}>
-                    {user?.full_name || "Unset"}
+            <div className="fjkldsjkasjkasjdas" style={{marginRight: 16}}> 
+                <div className={"dsjkdajdjaklsjakdas"} style={{width: 350, padding: 10, borderRadius: 5, backgroundColor: "#febb02", height: "max-content"}}>
+                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <img src={validUrl.isUri(user?.avatar) ? user?.avatar : "https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png"} alt="" style={{width: 60, height: 60, borderRadius: "50%", objectFit: "cover"}} />
+                    </div>
+                    <div style={{display: "flex", alignItems: "center", marginBottom: 8, justifyContent: "center", fontWeight: 600}}>
+                        {user?.full_name || "Unset"}
+                    </div>
+                    <br />
+                    <div style={{display: "flex", alignItems: "center", marginBottom: 8, fontWeight: 600}}>
+                        <HiLocationMarker />&nbsp;&nbsp;&nbsp;{user?.address || "Unset"}
+                    </div>
+                    <div style={{display: "flex", alignItems: "center", marginBottom: 8, fontWeight: 600}}>
+                        <AiOutlinePhone />&nbsp;&nbsp;&nbsp;{user?.phone || "Unset"}
+                    </div>
+                    <div style={{display: "flex", alignItems: "center", marginBottom: 8, fontWeight: 600}}>
+                        <FaBirthdayCake />&nbsp;&nbsp;&nbsp;{user?.birthday || "Unset"}
+                    </div>
+                    
                 </div>
                 <br />
-                <div style={{display: "flex", alignItems: "center", marginBottom: 8, fontWeight: 600}}>
-                    <HiLocationMarker />&nbsp;&nbsp;&nbsp;{user?.address || "Unset"}
+                <br />
+                <div className={"fkslDjklsjsdaks"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
+                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
+                        <ButtonTemplate disable={false} onClick={()=> {}} className={"wrap-btn-info-user-i"}>
+                            <Link to={"/change/password"} style={{textDecoration: "none", color: "#000", fontSize: 20}}>
+                                Đổi mật khẩu
+                                </Link>
+                            </ButtonTemplate>
+                        </div>
+                    </div>
                 </div>
-                <div style={{display: "flex", alignItems: "center", marginBottom: 8, fontWeight: 600}}>
-                    <AiOutlinePhone />&nbsp;&nbsp;&nbsp;{user?.phone || "Unset"}
-                </div>
-                <div style={{display: "flex", alignItems: "center", marginBottom: 8, fontWeight: 600}}>
-                    <FaBirthdayCake />&nbsp;&nbsp;&nbsp;{user?.birthday || "Unset"}
-                </div>
-                
             </div>
             <div className={"dksdskafjkjasasfaseda"}>
-                <div className={"c-title-profile-user-site"} style={{fontSize: 32, fontWeight: 500, marginTop: 50, marginBottom: 50}}>
+                <div className={"c-title-profile-user-site"} style={{fontSize: 32, fontWeight: 500, marginBottom: 50}}>
                     Thông tin người dùng
                 </div>
                 <div className={"list-info-user"} style={{maxWidth: 900, width: "100%", display: 'flex', alignItems: "center", flexWrap: "wrap", justifyContent: "space-between"}}>
@@ -90,15 +106,6 @@ const Profile = (props) => {
                         <Title title={"Ngày sinh"} />
                         <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
                             <InputTemplate value={birthday} onChange={(e)=> setBirthday(e.target.value)} className={"wrap-inp-info-user-i"} />
-                        </div>
-                    </div>
-                    <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
-                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
-                            <ButtonTemplate disable={false} onClick={()=> {}} className={"wrap-btn-info-user-i"}>
-                                <Link to={"/change/password"} style={{textDecoration: "none", color: "#000", fontSize: 20}}>
-                                    Đổi mật khẩu
-                                </Link>
-                            </ButtonTemplate>
                         </div>
                     </div>
                 </div>
@@ -135,7 +142,7 @@ const Profile = (props) => {
                 {/*  */}
                 <div className={"save-info-user-wrap"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: 'center', maxWidth: 900}}> 
                     <div className={"save-info-user"} style={{width: 200, height: 80, marginTop: 50}}>
-                        <ButtonTemplate onClick={updateInfoUser} className={"save-info-user-btn"} disable={false} >Lưu</ButtonTemplate>
+                        <ButtonTemplate style={{borderRadius: 5}} onClick={updateInfoUser} className={"save-info-user-btn"}  disable={false} >Lưu</ButtonTemplate>
                     </div>
                 </div>
             </div>

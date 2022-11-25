@@ -80,7 +80,7 @@ const MainLeftSide= (props)=> {
             {/*  */}
             <div className={"w-option-main-left-side-search-result"} style={{width: "100%", marginBottom: 20}}>
                 <Title title={"Lựa chọn"} />
-                <MultiRangeSlider onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)} min={0} max={1000} />
+                <MultiRangeSlider onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)} min={0} max={5000000} />
             </div>
             {/* <div className={"guest-adult-c"} style={{marginBottom: 16}}>
                 <div className={"w-guest-left-side"} style={{width:" 100%", display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>

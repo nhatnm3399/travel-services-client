@@ -14,7 +14,7 @@ const booking_room_hotel= async (check_in, check_out, total_price, user_booking,
         }
     })
     const result= await res.data
-    return setData(result)
+    return result   
 }
 
 export default booking_room_hotel

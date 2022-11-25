@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { BannerHome } from '../Home/Home'
+// import { BannerHome } from '../Home/Home'
 import "./Booking.sass"
 import {BsFillCalendarDateFill} from "react-icons/bs"
 import DatePickerPlugin from '../Plugin/DatePicker'
 import moment from 'moment'
 import OutsideClickHandler from 'react-outside-click-handler'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import _ from 'lodash'
 import booking_room_hotel from '../../api/booking/booking_room_hotel'
 import Cookies from 'js-cookie'
@@ -14,7 +14,7 @@ import { useContext } from 'react'
 import { AppContext } from '../../App'
 import { Button } from 'react-bootstrap'
 
-const Booking = (props) => {
+const Booking = () => {
   const location= useLocation()
   if(location?.state?.state=== true) {
     return (
@@ -60,11 +60,14 @@ export const Tab1= (props)=> {
 }
 
 const Tab2= (props)=> {
+  const navigate= useNavigate()
   const {user }= useContext(AppContext)
   const [checkin, setCheckin]= useState(new Date())
+  // eslint-disable-next-line
   const [checkout, setCheckout]= useState(new Date())
   // const [stay, setStay]= useState(0)
   const [openCalendar, setOpenCalendar]= useState(()=> false)
+  // eslint-disable-next-line
   const [data, setData]= useState()
 
   const [info, setInfo]= useState(()=> ({
@@ -73,11 +76,15 @@ const Tab2= (props)=> {
     email: "",
     other: ""
   }))
+  useEffect(()=> {
+    setInfo(prev=> ({...prev, userName: user?.full_name, phoneNumber: user?.phone, email: user?.email}))
+  }, [user])
 
   const booking = async ()=> {
-      await booking_room_hotel(moment(checkin).format("DD/MM/YYYY"), moment(checkout).format("DD/MM/YYYY"), _.sumBy(props?.data, function(o) {return o.amount}), user?.full_name, info.phoneNumber, info.email, Cookies.get("uid"), _.map(props?.data, 'id'), setData)
-  
-    }
+    const a= await booking_room_hotel(moment(checkin).format("DD/MM/YYYY"), moment(checkout).format("DD/MM/YYYY"), _.sumBy(props?.data, function(o) {return o.amount}), user?.full_name, info.phoneNumber, info.email, Cookies.get("uid"), _.map(props?.data, 'id'), setData)
+    console.log(a)
+    navigate("/booking/payment", {state: {data: props, booking_id: a, checkin, checkout, info}}) 
+  }
   return (
     <div className={"tab-2-detail-room-booking-hotel"} style={{width: "100%", display: "flex", justifyContent: 'center', gap: 40, padding: '0 40px'}}>
       <div className={"sldjhlksdjasas"} style={{width: 400, padding: 20, border: "1px solid #000", height: "max-content"}}>
@@ -116,15 +123,15 @@ const Tab2= (props)=> {
         <div className={"dfjkahduashajksas"} style={{width: "100%"}}>
           <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Họ và tên: </div>
-            <input onChange={(e)=> setInfo(prev=> ({...prev, userName: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
+            <input value={info.userName} onChange={(e)=> setInfo(prev=> ({...prev, userName: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
           </div>
           <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Nhập số điện thoại liên hệ: </div>
-            <input onChange={(e)=> setInfo(prev=> ({...prev, phoneNumber: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
+            <input value={info.phoneNumber} onChange={(e)=> setInfo(prev=> ({...prev, phoneNumber: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
           </div>
           <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Nhập địa chỉ email: </div>
-            <input onChange={(e)=> setInfo(prev=> ({...prev, email: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
+            <input value={info.email} onChange={(e)=> setInfo(prev=> ({...prev, email: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
           </div>
           <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Yêu cầu khác: </div>
