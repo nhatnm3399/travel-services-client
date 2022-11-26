@@ -42,7 +42,7 @@ const MainRegister = (props) => {
   const [listImage, setListImage] = useState([]);
   const [result, setResult] = useState([]);
   const isChooseImage = listImage.length > 0 ? true : false;
-  const [openListCity, setOpenListCity]= useState(false)
+  // const [openListCity, setOpenListCity]= useState(false)
   const [idCity, setIdCity]= useState()
 
   const add_hotel_func= async ()=> {

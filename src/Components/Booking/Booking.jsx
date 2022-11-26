@@ -48,7 +48,7 @@ export const Tab1= (props)=> {
         <div className={"djdklrjioejawa"} style={{fontSize: 24, fontWeight: 600, marginBottom: 16}}>
           {props?.data1?.hotel_name}
         </div>
-        <div className={"sukfdhkjashas"} style={{marginBottom: 40}}>
+        <div className={"sukfdhkjashas"} style={{marginBottom: 16}}>
         {props?.data1?.address}
         </div>
         <div className={"sukfdhkjashas"} style={{marginBottom: 40}}>
@@ -123,22 +123,22 @@ const Tab2= (props)=> {
         <div className={"dfjkahduashajksas"} style={{width: "100%"}}>
           <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Họ và tên: </div>
-            <input value={info.userName} onChange={(e)=> setInfo(prev=> ({...prev, userName: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
+            <input value={info.userName} onChange={(e)=> setInfo(prev=> ({...prev, userName: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10, borderRadius: 80, border: "1px solid #000", outlineColor: "#2e89ff", fontWeight: 600,}} />
           </div>
           <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Nhập số điện thoại liên hệ: </div>
-            <input value={info.phoneNumber} onChange={(e)=> setInfo(prev=> ({...prev, phoneNumber: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
+            <input value={info.phoneNumber} onChange={(e)=> setInfo(prev=> ({...prev, phoneNumber: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10, borderRadius: 80, border: "1px solid #000", outlineColor: "#2e89ff", fontWeight: 600,}} />
           </div>
           <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Nhập địa chỉ email: </div>
-            <input value={info.email} onChange={(e)=> setInfo(prev=> ({...prev, email: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10}} />
+            <input value={info.email} onChange={(e)=> setInfo(prev=> ({...prev, email: e.target.value}))} type="text" className={"sdjskldjakjask"} style={{width: 300, height: 40, background: "#d9d9d9", padding: 10, borderRadius: 80, border: "1px solid #000", outlineColor: "#2e89ff", fontWeight: 600,}} />
           </div>
           <div className={"fjklasjdkasjksjas"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32}}>
             <div className={"sjkldasjkdjawws"} style={{fontSize: 18, fontWeight: 600}}>Yêu cầu khác: </div>
-            <textarea onChange={(e)=> setInfo(prev=> ({...prev, other : e.target.value}))} type="text" className={"sdjskldjakjask"} rows={40} style={{width: 300, height: 200, background: "#d9d9d9", padding: 10, fontSize: 16, resize: "none"}} />
+            <textarea onChange={(e)=> setInfo(prev=> ({...prev, other : e.target.value}))} type="text" className={"sdjskldjakjask"} rows={40} style={{width: 300, height: 200, background: "#d9d9d9", padding: 10, fontSize: 16, resize: "none", borderRadius: 10, outlineColor: "#2e89ff", fontWeight: 600,}} />
           </div>
           <div className={"fjklsajklsjasas"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems :'center', marginBottom: 40}}>
-            <Button onClick={booking} color={"primary"} className={"fjksajsdkass"} style={{width: 200, height: 60,}}>
+            <Button onClick={booking} color={"primary"} className={"fjksajsdkass"} style={{width: 200, height: 60, fontWeight: 600}}>
               Đặt ngay
             </Button>
           </div>

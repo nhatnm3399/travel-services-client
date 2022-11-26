@@ -5,7 +5,7 @@ import GoogleMapPlugin from '../Plugin/GoogleMap'
 import { Title } from '../Profile/Profile'
 import "./DetailHotel.sass"
 
-import RoomOfHotel from './RoomOfHotel'
+import RoomOfHotel, { AmountAll } from './RoomOfHotel'
 import Feedback from './Feedback'
 import AroundHotel from './AroundHotel'
 import ConvenientAndInfracstructure from './ConvenientAndInfracstructure'
@@ -39,6 +39,7 @@ const DetailHotel = (props) => {
                     data?.room_types?.map((item, key)=> <RoomOfHotel data1={data} data={bookingRoom} setData={setBookingRoom} setBookingRoom={setBookingRoom} bookingRoom={bookingRoom} key={key} {...item} />)
                 }
             </div>
+            <AmountAll bookingRoom={bookingRoom} data1={data} data={bookingRoom}/>
             <Feedback feed_back={data?.feed_back} />
             <AddFeedback setChange={setChange} />
             <AroundHotel /> 

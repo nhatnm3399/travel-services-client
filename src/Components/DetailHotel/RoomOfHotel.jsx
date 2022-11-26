@@ -15,9 +15,6 @@ const RoomOfHotel = (props) => {
         <Image {...props} />
         <ParametersRoom {...props} setOpen={setOpenDetail} />
         {
-            props?.bookingRoom?.length > 0 && <AmountAll {...props} />
-        }
-        {
             openDetail=== true &&
             <DetailRoom x={openDetail} setX={setOpenDetail} {...props} room_type_id={props?.room_type_id} openDetail={openDetail} setOpenDetail={setOpenDetail} />
         }
@@ -25,23 +22,25 @@ const RoomOfHotel = (props) => {
   )
 }
 
-const AmountAll= (props)=> {
+export const AmountAll= (props)=> {
     const navigate= useNavigate()
     const toBookingPage= ()=> {
         navigate("/booking/detail", {state: {data: props?.data, data1: props?.data1, state: true}})
     }
 
     return (
-        <div className={"jdksjkdjksdlas"} style={{padding: 10, alignSelf: "flex-start"}}>
-            <div className={"fkjdklsjdskjkasdas"} style={{marginBottom: 12, fontSize: 18}}>
-                <strong>{_.sumBy(props?.bookingRoom, function(e) {return e.count})} phòng cho</strong>
-            </div>
-            <div className={"fkdjksdjskdjksdrwree"} style={{fontSize: 24}}>
-                VND {_.sumBy(props?.bookingRoom, function(e) {return e.amount})}
-            </div>
-            <br />
-            <div className={"djfskjfkdjksdjdas"} style={{marginBottom: 12, textAlign: "center"}}>
-                <Button onClick={toBookingPage} color={"primary"} style={{width: 200}}>Đặt</Button>
+        <div className={"jdksjkdjksdlas"} style={{padding: "0 40px"}}>
+            <div className={"dsjdjhsjdklsjasa"} style={{width: "100%", background:"#d9d9d9", padding: 10, borderRadius: 5}}>
+                <div className={"fkjdklsjdskjkasdas"} style={{marginBottom: 12, fontSize: 18}}>
+                    <strong>{_.sumBy(props?.bookingRoom, function(e) {return e.count})} phòng cho</strong>
+                </div>
+                <div className={"fkdjksdjskdjksdrwree"} style={{fontSize: 24}}>
+                    VND {_.sumBy(props?.bookingRoom, function(e) {return e.amount})}
+                </div>
+                <br />
+                <div className={"djfskjfkdjksdjdas"} style={{marginBottom: 12, textAlign: "center"}}>
+                    <Button onClick={toBookingPage} color={"primary"} style={{width: 200}}>Đặt</Button>
+                </div>
             </div>
         </div>
     )

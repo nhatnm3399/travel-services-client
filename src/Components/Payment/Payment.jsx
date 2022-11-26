@@ -8,13 +8,15 @@ const Payment = (props) => {
   const location= useLocation()
   if(location.state) {
       return (
-          <div className={"payment-site"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: "center"}}>
+          <div className={"fdjskdjkjfdgsasa"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <div className={"payment-site"} style={{width: "100%", maxWidth: 1116, display: "flex", justifyContent: 'center', alignItems: "center", padding: "0 40px", borderRadius: 10}}>
               <div className={"c-payment-site"} style={{width: "100%", padding: 30}}>
                   <div className={"g-payment-site"} style={{width: "100%", background: "#d9d9d9", padding: "50px 30px"}}>
                       <Title title={"Thanh toán"} />
                       <MainDetail data={location.state} />
                   </div>
-              </div>
+                </div>
+            </div>
           </div>
       )
 
@@ -26,7 +28,7 @@ const Payment = (props) => {
 
 const Title= (props)=> {
     return (
-        <div className={"title-payment-site"} style={{fontSize: 24, marginBottom: 24}}>
+        <div className={"title-payment-site"} style={{fontSize: 24, marginBottom: 24, fontWeight: 600}}>
             {props?.title}
         </div>
     )
@@ -45,16 +47,16 @@ const MainDetail= (props)=> {
                     </div>
                     <div className={"main-detail-payment-site-c-1-1"}>
                         <div className={"element-detail-payment-site-c-1-1"} style={{fontSize: 20, marginBottom: 16}}>
-                            Tên khách sạn: {props?.data?.data?.data1?.hotel_name}
+                            Tên khách sạn: <strong style={{fontSize: 20}}>{props?.data?.data?.data1?.hotel_name}</strong>
                         </div>
                         <div className={"element-detail-payment-site-c-1-1"} style={{fontSize: 20, marginBottom: 16}}>
-                            Địa chỉ: {props?.data?.data?.data1?.address}
+                            Địa chỉ: <strong style={{fontSize: 20}}>{props?.data?.data?.data1?.address}</strong>
                         </div>
                         <div className={"element-detail-payment-site-c-1-1"} style={{fontSize: 20, marginBottom: 16}}>
-                            Ngày vào: {moment(props?.data?.checkin).format("DD/MM/YYYY")}
+                            Ngày vào: <strong style={{fontSize: 20}}>{moment(props?.data?.checkin).format("DD/MM/YYYY")}</strong>
                         </div>
                         <div className={"element-detail-payment-site-c-1-1"} style={{fontSize: 20, marginBottom: 16}}>
-                            Ngày ra: {moment(props?.data?.checkout).format("DD/MM/YYYY")}
+                            Ngày ra: <strong style={{fontSize: 20}}>{moment(props?.data?.checkout).format("DD/MM/YYYY")}</strong>
                         </div>
                     </div>
                 </div>
@@ -93,7 +95,7 @@ const MainDetail= (props)=> {
                         <div className={"ele-list-ab-room-1-2"}>Thanh toán bằng tiền mặt</div>
                     </div>
                     <div className={"confirm-pay-x"} style={{width:" 100%", display: "flex", justifyContent:" center", alignItems: "center", marginTop: 30}}>
-                        <button onClick={()=> create_payment(props?.data?.booking_id, "vnpay", _.sumBy(props?.data?.data?.data, function(e) {return e.amount}))} className={"btn-confirm-pay-x"} style={{width: 300, height: 60, border: "none", outline: "none", background: "#fff", color:" #2BC006", cursor: "pointer", fontSize: 18,}}>Xác nhận thanh toán</button>
+                        <button onClick={()=> create_payment(props?.data?.booking_id, "vnpay", _.sumBy(props?.data?.data?.data, function(e) {return e.amount}))} className={"btn-confirm-pay-x"} style={{width: 300, height: 60, border: "none", outline: "none", background: "#fff", color:" #2BC006", cursor: "pointer", fontSize: 18, borderRadius: 5, fontWeight: 600}}>Xác nhận thanh toán</button>
                     </div>
                 </div>
             </div>

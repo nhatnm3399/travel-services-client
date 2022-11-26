@@ -51,7 +51,7 @@ const Feedback = (props) => {
 export default Feedback
 
 const FeedbackComponent= (props)=> {
-    const [seeMore, setSeeMore]= useState(()=> false)
+    // const [seeMore, setSeeMore]= useState(()=> false)
     
     return (
         <div className={"jksjkalsjdasaw"} style={{width: "100%", marginBottom: 50}}>
@@ -82,13 +82,6 @@ const FeedbackComponent= (props)=> {
                 <div className={"ksjaksjkasjrawa"}>
                     <div className={"dsjjaksjaklsjkalrsawa"} style={{marginTop: 30}}>
                         {props?.comment}
-                    </div>
-                    <div className={"djkasjskjakaiwiawwa"} style={{marginTop: 40}}>
-                        {
-                            seeMore=== false && <div onClick={()=> setSeeMore(true)} className={"dkaskaljskassasa"} style={{fontWeight: 600, fontSize: 14, cursor: "pointer"}}>
-                            Xem thêm
-                        </div>
-                        }
                     </div>
                 </div>
             </div>

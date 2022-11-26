@@ -22,7 +22,7 @@ import AddRoomForHotel from './AddRoomForHotel';
 const AdminLevel1 = (props) => {
   return (
     <div className={"djsklsjaksjasa"} style={{width: "100%"}}>
-        <div className={"sdkljdakldjkas"} style={{width :"100%", display: "flex", justifyContent: 'space-between', gap: 20 }}>
+        <div className={"sdkljdakldjkas"} style={{width :"100%", display: "flex", justifyContent: 'space-between'}}>
             <Navigation />
             <Main />
         </div>
@@ -35,45 +35,46 @@ const Navigation = (props) => {
       <div
         className={"jaksjakdslkdass"}
         style={{
-          background: "#d9d9d9",
+          background: "#fff",
           minHeight: "100vh",
           width: 300,
           padding: 20,
         }}
       >
-        <NavigationHeritage
-          textLv1={"Quản lý khách sạn"}
-          textLv2={"Thông tin chung"}
+        {/* <NavigationHeritage
+          text={"Quản lý khách sạn"}
           array_link={[
             { link: "/manage/hotel/general", text: "Danh sách khách sạn" },
             { link: "/manage/hotel/add/new/hotel", text: "Đăng ký thêm khách sạn" },
             { link: "/manage/hotel/manage/edit/hotel", text: "Chỉnh sửa thông tin khách sạn" },
           ]}
           linkLv1={"/manage/hotel/general"}
-        />
-        <NavigationHeritage
-          textLv1={"Yêu cầu đặt phòng"}
-          linkLv1={"/manage/request/booking"}
-        />
+        /> */}
+        <NavigationHeritage text={"Danh sách khách sạn"} link={"/manage/hotel/general"} />
+        <NavigationHeritage text={"Danh sách thêm khách sạn"} link={"/manage/hotel/add/new/hotel"} />
+        <NavigationHeritage text={"Chỉnh sửa thông tin khách sạn"} link={"/manage/hotel/manage/edit/hotel"} />
+        <NavigationHeritage text={"Yêu cầu đặt phòng"} link={"/manage/request/booking"} />
       </div>
     );
   };
 const Main= (props)=> {
     return (
-        <div className={"alksjklrjwkeawsa"} style={{flex: "1 1 0"}}>
-            <Routes>
-                <Route path={"/"} element={<Navigate to={"/manage/hotel/general"} />} />
-                <Route path={"/hotel/general"} element={<ListHotel />} />
-                <Route path={"/hotel/add/new/hotel"} element={<RegisterHotel />} />
-                <Route path={"/hotel/add/new/room"} element={<AddRoomForHotel />} />
-                <Route path={"/hotel/list/disabled/*"} element={<Disable />} />
-                <Route path={"/comment/reports/*"} element={<CommentsReport />} />
-                <Route path={"/events"} element={<ListEvents />} />
-                <Route path={"/events/add/new"} element={<AddNewEvent />} />
-                <Route path={"/request/booking"} element={<RequestBookingRoom />} />
-                <Route path={"/hotel/manage/edit/hotel"} element={<RegisterHotel is_edit={true} />} />
-                <Route path={"/hotel/manage/edit/room"} element={<AddRoomForHotel is_edit={true} />} />
-            </Routes>
+        <div className={"alksjklrjwkeawsa"} style={{flex: "1 1 0", padding: 20, background: "#e4f2fd", display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <div className={"djkcskljcfcaxsa"} style={{width: "100%", borderRadius: 10, background: "#fff", minHeight: "100vh"}}>
+                <Routes>
+                    <Route path={"/"} element={<Navigate to={"/manage/hotel/general"} />} />
+                    <Route path={"/hotel/general"} element={<ListHotel />} />
+                    <Route path={"/hotel/add/new/hotel"} element={<RegisterHotel />} />
+                    <Route path={"/hotel/add/new/room"} element={<AddRoomForHotel />} />
+                    <Route path={"/hotel/list/disabled/*"} element={<Disable />} />
+                    <Route path={"/comment/reports/*"} element={<CommentsReport />} />
+                    <Route path={"/events"} element={<ListEvents />} />
+                    <Route path={"/events/add/new"} element={<AddNewEvent />} />
+                    <Route path={"/request/booking"} element={<RequestBookingRoom />} />
+                    <Route path={"/hotel/manage/edit/hotel"} element={<RegisterHotel is_edit={true} />} />
+                    <Route path={"/hotel/manage/edit/room"} element={<AddRoomForHotel is_edit={true} />} />
+                </Routes>
+            </div>
         </div>
     )
 }
@@ -137,10 +138,10 @@ const Title= (props)=> {
     const navigate= useNavigate()
     return (
         <div className={"dslksjaklsjklsdjas"} style={{ marginBottom: 16, padding: "0 10px", width: "100%"}}>
-            <div className={"jlsjkasjasjksaask"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: 10, marginBottom: 8, borderBottom: "1px solid #000", paddingTop: 10}}>
+            <div className={"jlsjkasjasjksaask"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: 10, marginBottom: 8, borderBottom: "1px solid #e7e7e7", paddingTop: 10}}>
                 <div className={"djkasjaksjasaas"} style={{fontSize: 20, fontWeight: 600}}>{props.title}</div>
                 {
-                    props.is_add_event=== true && <button style={{width: 200, height: 50, background: "#2DB83B", color: "#fff", cursor: "pointer", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", fontSize: 18, fontWeight: 600}} onClick={()=> navigate("/admin/event/manage/add/new")}>Thêm event</button>
+                    props.is_add_event=== true && <button style={{width: 200, height: 50, background: "#2DB83B", color: "#fff", cursor: "pointer", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", fontSize: 18, fontWeight: 600, borderRadius: 10}} onClick={()=> navigate("/admin/event/manage/add/new")}>Thêm event</button>
                 }
             </div>
         </div>
@@ -160,11 +161,11 @@ const MainElementEvent= (props)=> {
                 <th className={"djlasjkjddaksa"} style={{fontSize: 18, fontWeight: 600}}>Hành động</th>
             </thead>
             <tbody style={{width: "100%"}}> 
-                <tr className={"djskldjaksjakass"} style={{width: "100%", padding: "10px 20px", marginBottom: 16}}>
-                    <td className={"djsjaksjaksjska"} style={{fontSize: 16, textAlign: "center"}}>Đà Nẵng</td>
-                    <td className={"djsjaksjaksjska"} style={{fontSize: 16, textAlign: "center"}}>Cầu Rồng Phun Lửa</td>
-                    <td className={"akljkdsjklfdajkd"} style={{fontSize: 16, textAlign: "center"}}>Vào thứ 3, thứ 7 hàng tuần, cầu Rồng phun lửa</td>
-                    <td className={"dsjkdjkasjaskassa"} style={{textAlign: "center"}}>
+                <tr className={"djskldjaksjakass"} style={{width: "100%", padding: "10px 20px", marginBottom: 16, height: "max-content"}}>
+                    <td className={"djsjaksjaksjska"} style={{fontSize: 16, textAlign: "center", height: "max-content"}}>Đà Nẵng</td>
+                    <td className={"djsjaksjaksjska"} style={{fontSize: 16, textAlign: "center", height: "max-content"}}>Cầu Rồng Phun Lửa</td>
+                    <td className={"akljkdsjklfdajkd"} style={{fontSize: 16, textAlign: "center", height: "max-content"}}>Vào thứ 3, thứ 7 hàng tuần, cầu Rồng phun lửa</td>
+                    <td className={"dsjkdjkasjaskassa"} style={{textAlign: "center", height: "max-content"}}>
                         <p className={"djkasjaksjasksa"} style={{width: "100%", height: "auto", aspectRatio: 8 / 5, background: "#d9d9d9"}} role={"img"}></p>
                     </td>
                     <td className={"jdksdjaksjkasasas"} style={{textAlign: "center", verticalAlign: "middle"}}>
@@ -262,25 +263,33 @@ const MainListCommentReport= (props)=> {
 const MainAddEvent= (props)=> {
     const [place, setPlace]= useState("")
     const [title, setTitle]= useState("")
-    const [img, setImg]= useState()
+    const [img, setImg]= useState([])
     const [description, setDescription]= useState("")
     const [startDate, setStartDate]= useState(new Date())
     const [endDate, setEndDate]= useState(new Date())
     const [open, setOpen]= useState(false)
+    // eslint-disable-next-line
     const [data, setData]= useState([])
-    const checkImg= img ? true : false
+    // eslint-disable-next-line
+    const [listImg, setListImg]= useState([])
+    const checkImg= img.length >0 ? true : false
+    const handleImg= (e)=> {
+        Object.values(e.target.files).map(item=> setImg(prev=> ([...prev, {img: item, previewImg: URL.createObjectURL(item), key: item.lastModified}])))
+    }
     const add_event= async ()=> {
-        const imgUrl= await uploadImageClient(img.img, setData)
-        add_new_event(place, title, imgUrl, startDate, endDate, description, setData)
+        const list_img_final_unresolve= img?.map(item=> uploadImageClient(item.img, setListImg))
+        const result= await Promise.all(list_img_final_unresolve)
+        add_new_event(place, title, result[0],result[1], result[2], startDate, endDate, description, setData)
     }
     return (
-        <div className={"fsjkdjksdjsdkaas"} style={{width: "100%", padding: "30px"}}>
+        <div className={"fsjkdjksdjsdkaas"} style={{width: "100%", padding: "30px", display: "flex", justifyContent: "center"}}>
+            <div className={"fdjskldjksfjksaasds"}>
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
                 <div className={"dskjdaksjaskasjksa"} style={{fontSize: 24, fontWeight: 600}}>
                     Địa điểm
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <input onChange={e=> setPlace(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none"}} />
+                    <input onChange={e=> setPlace(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
                 </div>
             </div>
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
@@ -288,7 +297,7 @@ const MainAddEvent= (props)=> {
                     Tên sự kiện
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <input onChange={e=> setTitle(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none"}} />
+                    <input onChange={e=> setTitle(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
                 </div>
             </div>
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20, position: "relative"}}>
@@ -296,7 +305,7 @@ const MainAddEvent= (props)=> {
                     Thời gian diễn ra sự kiện
                 </div>
                 <div onChange={()=> {}} onClick={()=> setOpen(prev=> !prev)} className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <input value={`${moment(startDate).format("DD/MM/YYYY")} - ${moment(endDate).format("DD/MM/YYYY")}`} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none"}} />
+                    <input value={`${moment(startDate).format("DD/MM/YYYY")} - ${moment(endDate).format("DD/MM/YYYY")}`} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
                 </div>
                 {open=== true && <OutsideClickHandler onOutsideClick={()=> setOpen(false)}>
                     <div className={"jfksdskjsjsdasa"} style={{position: "absolute", bottom: 0, left: 0}}>
@@ -310,7 +319,7 @@ const MainAddEvent= (props)=> {
                     Nội dung
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <input onChange={e=> setDescription(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none"}} />
+                    <input onChange={e=> setDescription(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
                 </div>
             </div>
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
@@ -318,17 +327,20 @@ const MainAddEvent= (props)=> {
                     Hình ảnh
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <div className={"fioeujioasujsd"} style={{width: 400, height: 250, background: "#d9d9d9", display: "flex", justifyContent: 'center', alignItems :"center", position: "relative"}}>
+                    <div className={"fioeujioasujsd"} style={{width: 400, height: 250, background: "#d9d9d9", display: "flex", justifyContent: 'center', alignItems :"center", position: "relative", borderRadius: 5, fontWeight: 600}}>
                         {
                             checkImg=== false && <>
-                            <button style={{width: 150, height: 50, padding: 10, background: "#C311E0", border: "none", color: "#000", fontWeight: 600, display: "flex", justifyContent: 'center', alignItems:"center", cursor: "pointer"}}>Thêm ảnh</button>
-                            <input onChange={e=> setImg({img: e.target.files[0], preview: URL.createObjectURL(e.target.files[0]), key: e.target.files[0].lastModified})} type="file" style={{width :'100%', height: "100%", position: "absolute", top: 0, left: 0, opacity: 0, zIndex: 13, cursor: "pointer"}} />
+                            <button style={{width: 150, height: 50, padding: 10, background: "#C311E0", border: "none", color: "#fff", fontWeight: 600, display: "flex", justifyContent: 'center', alignItems:"center", cursor: "pointer", borderRadius: 5}}>Thêm ảnh</button>
+                            <input onChange={handleImg} multiple type="file" style={{width :'100%', height: "100%", position: "absolute", top: 0, left: 0, opacity: 0, zIndex: 13, cursor: "pointer"}} />
                         </>
                         }
                         {
                             checkImg=== true && <div>
                                 <div>
-                                    <img src={img.preview} alt="" style={{width: 120, height: "calc(120px * 9 /16)", objectFit: "cover", borderRadius: 4}} />
+                                {
+                                    img.map((item, key)=> <img key={key} src={item.previewImg} alt="" style={{width: 120, height: "calc(120px * 9 /16)", objectFit: "cover", borderRadius: 4, marginRight: 5}} />)
+                                }
+                                    
                                 </div>
                                 <br />
                                 <div style={{display: "flex", justifyContent: "center", alignItems: "center"}} className={""}>
@@ -343,9 +355,10 @@ const MainAddEvent= (props)=> {
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginTop: 20, flexDirection: "row-reverse"}}>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
                     <div className={"fioeujioasujsd"} style={{width: 400, display: "flex", justifyContent: 'center', alignItems :"center"}}>
-                        <button onClick={add_event} style={{width: 200, height: 60, padding: 10, background: "#2DB83B", border: "none", color: "#000", fontWeight: 600, display: "flex", justifyContent: 'center', alignItems:"center", cursor: "pointer", fontSize: 18}}>Lưu </button>
+                        <button onClick={add_event} style={{width: 200, height: 60, padding: 10, background: "#2DB83B", border: "none", color: "#fff", fontWeight: 600, display: "flex", justifyContent: 'center', alignItems:"center", cursor: "pointer", fontSize: 18, borderRadius: 5}}>Lưu </button>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     )

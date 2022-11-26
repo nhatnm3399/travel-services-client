@@ -23,7 +23,7 @@ export const Title= (props)=> {
     const navigate= useNavigate()
 
     return (
-        <div className={"aksdkjasksalasas"} style={{width: "100%", padding: "20px", borderBottom: "1px solid #000", marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: "center"}}>
+        <div className={"aksdkjasksalasas"} style={{width: "100%", padding: "20px", borderBottom: "1px solid #e7e7e7", marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: "center"}}>
             <div className={"fkdjfkljhklsdjkasas"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 20}}>
                 <NavLink className={({ isActive }) => isActive ? "jdahjahwuiheuwawawa" : "dskljakjakjeakwjawa"} to={props?.is_edit=== true ? "/manage/hotel/manage/edit/hotel" : "/manage/hotel/add/new/hotel"} style={{fontSize: 20, fontWeight: 600,textDecoration: "none"}}>
                     {props.title}
@@ -59,9 +59,9 @@ export const Title= (props)=> {
 
 const Main= (props)=> {
     return (
-        <div className={"fdjakjsaklejawawaw"} style={{width: "100%"}}>
+        <div className={"fdjakjsaklejawawaw"} style={{width: "100%", padding: 10}}>
             <table className={"fkjkajkawawaww"} style={{width: "100%"}} cellSpacing={20}>
-                <thead className={"fjjaklsjkafjakljedas"} style={{width: '100%', borderBottom: "1px solid #000"}}>
+                <thead className={"fjjaklsjkafjakljedas"} style={{width: '100%', borderBottom: "1px solid #e7e7e7"}}>
                     <tr className={"fkdjkasjkasjkledaw"}>
                         <th>Tên khách sạn</th>
                         <th>Địa chỉ</th>
