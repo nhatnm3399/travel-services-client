@@ -5,10 +5,10 @@ import { Tab2 } from '../DetailSubRoom/DetailSubRoom'
 const DetailPopupRoom = (props) => {
   const [show, setShow] = useState(false);
   const [numberRoom, setNumberRoom]= useState()
-  const handleClose = () => {
+  const handleClose = async () => {
+    props?.setOpenDetail(()=> false)
+    await props?.setX(()=> false)
     props?.setBookingRoom(prev=> [...prev, {id: props?.room_type_id, count: numberRoom, amount: parseInt(numberRoom) * parseInt(props?.price), name_hotel: props?.type_room_name}])
-    setShow(false)
-    props?.setOpenDetail(false)
   };
   const handleShow = () => setShow(true);
 
@@ -29,14 +29,14 @@ const DetailPopupRoom = (props) => {
                 <Modal.Body>Nhập số lượng phòng cần đặt</Modal.Body>
                 <br />
                 <div>
-                  <input onChange={(e)=> setNumberRoom(parseInt(e.target.value))} type="text" placeholder={"Nhập số lượng phòng cần đặt"} />
+                  <input style={{width: "100%"}} onChange={(e)=> setNumberRoom(parseInt(e.target.value))} type="text" placeholder={"Nhập số lượng phòng cần đặt"} />
                 </div>
                 <br />
                 <Modal.Footer className={"flexCenterItem"} style={{gap: 10}}>
                   <Button variant="secondary" onClick={handleClose}>
                     Đóng
                   </Button>
-                  <Button variant="primary" onClick={handleClose}>
+                  <Button variant="primary" onClick={()=> {handleClose(); props?.setX(false)}}>
                     Xác nhận
                   </Button>
                 </Modal.Footer>

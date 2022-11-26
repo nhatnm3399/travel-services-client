@@ -14,7 +14,8 @@ import {RiImageAddLine} from "react-icons/ri"
 import { Button } from 'react-bootstrap';
 import { uploadImageClient } from '../../firebase/config';
 import update_info_user from '../../api/auth/user/update_info_user';
-
+import {FaUserAlt, FaAddressBook} from "react-icons/fa"
+import {AiFillPhone} from "react-icons/ai"
 const Profile = (props) => {
   const {user, setChange}= useContext(AppContext)
   const [username, setUsername]= useState(()=> "")
@@ -45,8 +46,8 @@ const Profile = (props) => {
   return (
     <div className={"profile-user-site"} style={{width: "100%", display: "flex", justifyContent:" center", alignItems:" center"}}>
         <div className={"c-profile-user-site"} style={{width: "100%", maxWidth: 1200, margin: "20px 0", display: "flex", justifyContent: "space-between", gap: 16}}>
-            <div className="fjkldsjkasjkasjdas" style={{marginRight: 16}}> 
-                <div className={"dsjkdajdjaklsjakdas"} style={{width: 350, padding: 10, borderRadius: 5, backgroundColor: "#febb02", height: "max-content"}}>
+            <div className="fjkldsjkasjkasjdas" style={{marginRight: 16, display: "flex", justifyContent: "space-between", alignItems: 'center', flexDirection: "column"}}> 
+                <div className={"dsjkdajdjaklsjakdas"} style={{width: 350, padding: "60px 10px", borderRadius: 5, backgroundColor: "#febb02", height: "max-content"}}>
                     <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                         <img src={validUrl.isUri(user?.avatar) ? user?.avatar : "https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png"} alt="" style={{width: 60, height: 60, borderRadius: "50%", objectFit: "cover"}} />
                     </div>
@@ -68,8 +69,8 @@ const Profile = (props) => {
                 <br />
                 <br />
                 <div className={"fkslDjklsjsdaks"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
-                    <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
+                <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", alignItems: "center"}}>
+                    <div className={"wrap-inp-info-user"} style={{width: 300, height: 60}}>
                         <ButtonTemplate disable={false} onClick={()=> {}} className={"wrap-btn-info-user-i"}>
                             <Link to={"/change/password"} style={{textDecoration: "none", color: "#000", fontSize: 20}}>
                                 Đổi mật khẩu
@@ -79,33 +80,33 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-            <div className={"dksdskafjkjasasfaseda"}>
-                <div className={"c-title-profile-user-site"} style={{fontSize: 32, fontWeight: 500, marginBottom: 50}}>
+            <div className={"dksdskafjkjasasfaseda"} style={{background: "#d9d9d9", padding: 10, borderRadius: 10}}>
+                <div className={"c-title-profile-user-site"} style={{fontSize: 32, fontWeight: 500, marginBottom: 16}}>
                     Thông tin người dùng
                 </div>
                 <div className={"list-info-user"} style={{maxWidth: 900, width: "100%", display: 'flex', alignItems: "center", flexWrap: "wrap", justifyContent: "space-between"}}>
-                    <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
-                        <Title title={"Tên đầy đủ"} />
+                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
+                        <Title title={<div><FaUserAlt /> Tên đầy đủ</div>} />
                         <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
-                            <InputTemplate value={username} onChange={(e)=> setUsername(e.target.value)} className={"wrap-inp-info-user-i"} />
+                            <InputTemplate value={username} onChange={(e)=> setUsername(e.target.value)} className={"wrap-inp-info-user-i"} style={{borderRadius: 5}} />
                         </div>
                     </div>
-                    <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
-                        <Title title={"Số điện thoại"} />
+                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
+                        <Title title={<div><AiFillPhone /> Số điện thoại</div>} />
                         <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
-                            <InputTemplate value={phoneNumber} onChange={(e)=> setPhoneNumber(e.target.value)} className={"wrap-inp-info-user-i"} />
+                            <InputTemplate value={phoneNumber} onChange={(e)=> setPhoneNumber(e.target.value)} className={"wrap-inp-info-user-i"} style={{borderRadius: 5}} />
                         </div>
                     </div>
-                    <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
-                        <Title title={"Địa chỉ"} />
+                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
+                        <Title title={<div><FaAddressBook /> Địa chỉ</div>} />
                         <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
-                            <InputTemplate value={address} onChange={(e)=> setAddress(e.target.value)} className={"wrap-inp-info-user-i"} />
+                            <InputTemplate value={address} onChange={(e)=> setAddress(e.target.value)} className={"wrap-inp-info-user-i"} style={{borderRadius: 5}} />
                         </div>
                     </div>
-                    <div className={"wrap-list-info-user"} style={{display:" flex", justifyContent: "space-between", gap: 20, width: "40%", marginBottom: 40, alignItems: "center"}}>
-                        <Title title={"Ngày sinh"} />
+                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
+                        <Title title={<div><FaBirthdayCake /> Ngày sinh</div>} />
                         <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
-                            <InputTemplate value={birthday} onChange={(e)=> setBirthday(e.target.value)} className={"wrap-inp-info-user-i"} />
+                            <InputTemplate value={birthday} onChange={(e)=> setBirthday(e.target.value)} className={"wrap-inp-info-user-i"} style={{borderRadius: 5}} />
                         </div>
                     </div>
                 </div>
@@ -141,7 +142,7 @@ const Profile = (props) => {
                 {updateCheck && <div style={{fontSize: 14, fontWeight: 600, margin: "10px 0"}}>Cập nhật thông tin tài khoản thành công</div>}
                 {/*  */}
                 <div className={"save-info-user-wrap"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: 'center', maxWidth: 900}}> 
-                    <div className={"save-info-user"} style={{width: 200, height: 80, marginTop: 50}}>
+                    <div className={"save-info-user"} style={{width: 200, height: 80, marginTop: 16}}>
                         <ButtonTemplate style={{borderRadius: 5}} onClick={updateInfoUser} className={"save-info-user-btn"}  disable={false} >Lưu</ButtonTemplate>
                     </div>
                 </div>

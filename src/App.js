@@ -60,7 +60,14 @@ function App() {
           />
         )}
         <Routes>
+            
           <Route path={"/"} element={<Home />} />
+            {
+              user?.role?.[0]=== "ROLE_ADMIN" && <Route path="/" element={<Navigate to={"/admin"} />} />
+            }
+            {
+              user?.role?.[0]=== "ROLE_MODERATOR" && <Route path="/" element={<Navigate to={"/manage"} />} />
+            }
           {auth === true && (
             <>
               {/* done */}

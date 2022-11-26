@@ -48,7 +48,7 @@ export const BannerHome = () => {
 const FeaturePhoto= ()=> {
   return (
     <div className={"feature-photo-site-home"} style={{width: "100%", height: 628, background: "#D9D9D9", backgroundImage: "url(https://globalgrasshopper.com/wp-content/uploads/2011/11/Top-10-of-the-most-beautiful-places-to-visit-in-Vietnam.jpg)", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
-      <div className={"fjkldfjskldjskd"} style={{position: "relative", top: 100, left: 45, width: 580, fontSize: 64, color: "#fff", fontWeight: 700, textShadow: "1px 1px 1px #000  "}}>Du lịch Việt Nam hơn bao giờ hết</div>
+      <div className={"fjkldfjskldjskd"} style={{position: "relative", top: 100, left: 45, width: 580, fontSize: 64, color: "#fff", fontWeight: 700, textShadow: "1px 1px 1px #000  "}}>Du Lịch Việt Nam Dễ Dàng Hơn Bao Giờ hết</div>
     </div>
   )
 }

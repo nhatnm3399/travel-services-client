@@ -33,8 +33,7 @@ export default Header
 const LeftHeader= (props)=> {
     return (
         <div className={"left-header-fixed"}>
-            <NavLink className={({isActive})=> isActive ? "active-link-header link-left-header-fixed" : "link-left-header-fixed"} to={"/"}>F Travel</NavLink>&nbsp;&nbsp;&nbsp;
-            <NavLink className={({isActive})=> isActive ? "active-link-header link-left-header-fixed" : "link-left-header-fixed"} to={"/"}>Khách sạn</NavLink>&nbsp;&nbsp;&nbsp;
+            <NavLink className={({isActive})=> isActive ? "active-link-header link-left-header-fixed" : "link-left-header-fixed"} to={"/"} style={{fontSize: 32}}>F Travel</NavLink>&nbsp;&nbsp;&nbsp;
             <NavLink className={({isActive})=> isActive ? "active-link-header link-left-header-fixed" : "link-left-header-fixed"} to={"/manage"}>Chủ khách sạn</NavLink>&nbsp;&nbsp;&nbsp;
         </div>
     )

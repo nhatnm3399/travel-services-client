@@ -11,15 +11,15 @@ import { useNavigate } from 'react-router-dom';
 const RoomOfHotel = (props) => {
   const [openDetail, setOpenDetail]= useState(()=> false)
   return (
-    <div onClick={()=> setOpenDetail(()=> true)} className={"dkslklsaklasa"} style={{width: "100%", marginBottom: 20, display: "flex", justifyContent: 'space-between', alignItems: "center", border: '1px solid #e7e7e7', borderRadius: 8, overflow: "hidden"}}>
+    <div className={"dkslklsaklasa"} style={{width: "100%", marginBottom: 20, display: "flex", justifyContent: 'space-between', alignItems: "center", border: '1px solid #e7e7e7', borderRadius: 8, overflow: "hidden"}}>
         <Image {...props} />
-        <ParametersRoom {...props} />
+        <ParametersRoom {...props} setOpen={setOpenDetail} />
         {
             props?.bookingRoom?.length > 0 && <AmountAll {...props} />
         }
         {
             openDetail=== true &&
-            <DetailRoom {...props} room_type_id={props?.room_type_id} openDetail={openDetail} setOpenDetail={setOpenDetail} />
+            <DetailRoom x={openDetail} setX={setOpenDetail} {...props} room_type_id={props?.room_type_id} openDetail={openDetail} setOpenDetail={setOpenDetail} />
         }
     </div>
   )
@@ -83,7 +83,7 @@ const ParametersRoom= (props)=> {
                     <div className={"jrjawjalwlkeawa chkhsjfhjkdfhfsd"} style={{direction: "rtl",height: 30, margin: "8px 0"}}><strong>{props?.price}</strong> VND</div>
                     <div className={"jrjawjalwlkeawa gfyjetyuiaehgksajdas"} style={{direction: "rtl", height: 30, margin: "8px 0"}}>1 / phòng 1 / đêm</div>
                     <div className={"jrjawjalwlkeawa fsyjetyasdjgashjkas"} style={{direction: "rtl", height: 30, margin: "8px 0"}}>
-                        <button className={"cksdsjkasjakeaw"} style={{padding:  "10px 25px", background: "#2e89ff", color: "#fff", borderRadius: 80, fontWeight: 600, fontSize: 20, border: "none", outline: "none", cursor: "pointer"}}>
+                        <button onClick={()=> props?.setOpen(true)} className={"cksdsjkasjakeaw"} style={{padding:  "10px 25px", background: "#2e89ff", color: "#fff", borderRadius: 80, fontWeight: 600, fontSize: 20, border: "none", outline: "none", cursor: "pointer"}}>
                             Đặt ngay
                         </button>
                     </div>
@@ -114,10 +114,8 @@ const DetailRoom= (props)=> {
     return (
         <div className={"djasjakljakejaklwwa"} style={{position: "fixed", width: "100%", height: "100%", top: 0, left: 0, background: "rgba(0,0,0,0.3)", display: "flex", justifyContent: "center", zIndex: 9999, overflow: "auto"}}>
             <div className={"dkakawjkajwrwweaw"} style={{opacity: transition=== false ? 0 : 1, transition: "all .25s linear", width: "98%", maxWidth: 1200, background: "#fff", borderRadius: 5, padding: 10}}>
-                <OutsideClickHandler onOutsideClick={()=> props.setOpenDetail(()=> false)}>
-                    <DetailPopupRoom {...props} {...data} />
-                </OutsideClickHandler>
-            </div>
+                <DetailPopupRoom {...data} {...props} setX={props?.setX} x={props?.x} />
+            </div>  
         </div>
     )
 }

@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
 import InputTemplate from '../Common/InputTemplate'
 import GoogleMapPlugin from '../Plugin/GoogleMap'
 import { Title } from '../Profile/Profile'
 import "./DetailHotel.sass"
-import { GoLocation } from "react-icons/go"
+
 import RoomOfHotel from './RoomOfHotel'
 import Feedback from './Feedback'
 import AroundHotel from './AroundHotel'
@@ -25,14 +25,16 @@ const DetailHotel = (props) => {
   useEffect(()=> {
     detail_hotel(idHotel, setData)
   }, [idHotel, change])
+  const myRef = useRef(null)
+   const executeScroll = () => myRef.current.scrollIntoView()    
   return (
     <div className={"fjsdhjkshfjkdhajksas"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
         <div className={"detail-hotel"} style={{width: "100%", maxWidth: 1116}}>
-            <MainHotel data={data} />
+            <MainHotel data={data} executeScroll={executeScroll} />
             <Tab2 data={data} />
             <br />
             <div className={"daskalsklafass"} style={{width: "100%", padding: "0 40px"}}>
-                <div className={"fjklsdjskjsdksa"} style={{width: "100%", position: "sticky", top: 0, zIndex: 999, background: "#d9d9d9", height: 68, borderRadius: 5}}></div>
+                <div ref={myRef} className={"fjklsdjskjsdksa"} style={{width: "100%", position: "sticky", top: 0, zIndex: 999, background: "#d9d9d9", height: 68, borderRadius: 5}}></div>
                 {
                     data?.room_types?.map((item, key)=> <RoomOfHotel data1={data} data={bookingRoom} setData={setBookingRoom} setBookingRoom={setBookingRoom} bookingRoom={bookingRoom} key={key} {...item} />)
                 }
@@ -55,7 +57,7 @@ const MainHotel= (props)=> {
     return (
         <div className={"main-hotel"} style={{width: "100%", display: "flex", gap: 10, marginTop: 20, padding: "0 40px", marginBottom: 20}}>
             <MainDetailHotel1 data={props.data} />
-            <MainHotel2 data={props.data} />
+            <MainHotel2 data={props.data} executeScroll={props?.executeScroll} />
         </div>
     )
 }
@@ -137,7 +139,7 @@ const MainHotel2= (props)=> {
                     </div>
                 </div>
                 <div className={"main-hotel-2-1-2"} style={{width: 200, height: 60}}>
-                    <ButtonTemplate className={"main-hotel-2-1-2-btn"} onClick={()=> {}}>Đặt ngay</ButtonTemplate>
+                    <ButtonTemplate className={"main-hotel-2-1-2-btn"} onClick={props?.executeScroll}>Đặt ngay</ButtonTemplate>
                 </div>
             </div>
             <div className={"main-hotel-2-2"} style={{width: "100%", marginTop: 16, display: "flex"}}>
@@ -181,7 +183,7 @@ const Tab2= (props)=> {
                     <div style={{fontSize: 18, fontWeight: 600, marginBottom: 12}}>Mô tả khách sạn</div>
                     <div className={"fjkldjdkljkdjkasjas"} style={{marginRight: 10}}>{props?.data?.description}</div>
                 </div>
-                <div className={"tab-2-2"} style={{width: 300, background: "#f2f0f5", padding: 20, display: "flex", flexDirection: "column", justifyContent: 'space-between', gap: 60, boxShadow: "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px", overflow: "hidden", borderRadius: 5}}>
+                {/* <div className={"tab-2-2"} style={{width: 300, background: "#f2f0f5", padding: 20, display: "flex", flexDirection: "column", justifyContent: 'space-between', gap: 60, boxShadow: "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px", overflow: "hidden", borderRadius: 5}}>
                     <div className={"tab-2-2-w-1"}>
                         <div className={"tab-2-2-1"} style={{textAlign: "center", fontSize: 20, fontWeight: 600, marginBottom: 20}}>
                             Địa điểm lý tưởng
@@ -198,7 +200,7 @@ const Tab2= (props)=> {
                             <ButtonTemplate className={"tab-2-2-w-2-2-btn"} onClick={()=> {}} disable={false}>Đặt ngay</ButtonTemplate>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
