@@ -1,5 +1,4 @@
-import React from 'react'
-import { MultilevelMenu } from 'react-multilevel-menu';
+import React, { useContext } from 'react'
 import {  Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import "./AdminLevel1.sass"
 import {MdDelete } from "react-icons/md"
@@ -18,6 +17,9 @@ import ListHotel from './ListHotel';
 import RegisterHotel from './RegisterHotel';
 import RequestBookingRoom from '../AdminLevel2/RequestBookingRoom';
 import AddRoomForHotel from './AddRoomForHotel';
+import StatsManager from './StatsManager';
+import PaginationPage from '../Pagination/Pagination';
+import { AppContext } from '../../App';
 
 const AdminLevel1 = (props) => {
   return (
@@ -51,9 +53,10 @@ const Navigation = (props) => {
           linkLv1={"/manage/hotel/general"}
         /> */}
         <NavigationHeritage text={"Danh sách khách sạn"} link={"/manage/hotel/general"} />
-        <NavigationHeritage text={"Danh sách thêm khách sạn"} link={"/manage/hotel/add/new/hotel"} />
+        <NavigationHeritage text={"Thêm khách sạn"} link={"/manage/hotel/add/new/hotel"} />
         <NavigationHeritage text={"Chỉnh sửa thông tin khách sạn"} link={"/manage/hotel/manage/edit/hotel"} />
         <NavigationHeritage text={"Yêu cầu đặt phòng"} link={"/manage/request/booking"} />
+        <NavigationHeritage text={"Thống kê khách sạn"} link={"/manage/stats/hotel"} />
       </div>
     );
   };
@@ -73,6 +76,7 @@ const Main= (props)=> {
                     <Route path={"/request/booking"} element={<RequestBookingRoom />} />
                     <Route path={"/hotel/manage/edit/hotel"} element={<RegisterHotel is_edit={true} />} />
                     <Route path={"/hotel/manage/edit/room"} element={<AddRoomForHotel is_edit={true} />} />
+                    <Route path={"/stats/hotel"} element={<StatsManager />} />
                 </Routes>
             </div>
         </div>
@@ -84,6 +88,9 @@ export const Verified= (props)=> {
         <>
             <Title title={"Danh sách khách sạn đang hoạt động"} />
             <MainElementList data={props.data} type={"Censored Hotel"} />
+            {
+                <PaginationPage />
+            }
         </>
     )
 }
@@ -93,6 +100,9 @@ export const Pending= (props)=> {
         <>
             <Title title={"Danh sách khách sạn đang chờ duyệt"} />
             <MainElementList data={props?.data} type={"Waiting Approve"} />
+            {
+                <PaginationPage />
+            }
         </>
     )
 }
@@ -102,6 +112,9 @@ export const Disable= (props)=> {
         <>
             <Title title={"Danh sách khách sạn đã bị vô hiệu hóa"} />
             <MainElementList data={props?.data} type={"Deleted Hotel"} />
+            {
+                <PaginationPage />
+            }
         </>
     )
 }
@@ -261,10 +274,15 @@ const MainListCommentReport= (props)=> {
 }
 
 const MainAddEvent= (props)=> {
+    const {user}= useContext(AppContext)
     const [place, setPlace]= useState("")
     const [title, setTitle]= useState("")
     const [img, setImg]= useState([])
     const [description, setDescription]= useState("")
+    // eslint-disable-next-line
+    const [description1, setDescription1]= useState()
+    // eslint-disable-next-line
+    const [description2, setDescription2]= useState()
     const [startDate, setStartDate]= useState(new Date())
     const [endDate, setEndDate]= useState(new Date())
     const [open, setOpen]= useState(false)
@@ -279,7 +297,8 @@ const MainAddEvent= (props)=> {
     const add_event= async ()=> {
         const list_img_final_unresolve= img?.map(item=> uploadImageClient(item.img, setListImg))
         const result= await Promise.all(list_img_final_unresolve)
-        add_new_event(place, title, result[0],result[1], result[2], startDate, endDate, description, setData)
+        add_new_event(place, title, result[0],result[1], result[2], startDate, endDate, description, description1, description2, "100", "100", user?.full_name, setData)
+        
     }
     return (
         <div className={"fsjkdjksdjsdkaas"} style={{width: "100%", padding: "30px", display: "flex", justifyContent: "center"}}>
@@ -324,13 +343,29 @@ const MainAddEvent= (props)=> {
             </div>
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
                 <div className={"dskjdaksjaskasjksa"} style={{fontSize: 24, fontWeight: 600}}>
+                    Miêu tả 1: 
+                </div>
+                <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
+                    <input onChange={e=> setDescription1(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
+                </div>
+            </div>
+            <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
+                <div className={"dskjdaksjaskasjksa"} style={{fontSize: 24, fontWeight: 600}}>
+                    Miêu tả 2: 
+                </div>
+                <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
+                    <input onChange={e=> setDescription2(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
+                </div>
+            </div>
+            <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
+                <div className={"dskjdaksjaskasjksa"} style={{fontSize: 24, fontWeight: 600}}>
                     Hình ảnh
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
                     <div className={"fioeujioasujsd"} style={{width: 400, height: 250, background: "#d9d9d9", display: "flex", justifyContent: 'center', alignItems :"center", position: "relative", borderRadius: 5, fontWeight: 600}}>
                         {
                             checkImg=== false && <>
-                            <button style={{width: 150, height: 50, padding: 10, background: "#C311E0", border: "none", color: "#fff", fontWeight: 600, display: "flex", justifyContent: 'center', alignItems:"center", cursor: "pointer", borderRadius: 5}}>Thêm ảnh</button>
+                            <button style={{width: 200, height: 50, padding: 10, background: "#C311E0", border: "none", color: "#fff", fontWeight: 600, display: "flex", justifyContent: 'center', alignItems:"center", cursor: "pointer", borderRadius: 5, whiteSpace: "nowrap"}}>Thêm ảnh <span style={{fontSize :12}}>&nbsp;(Chọn đúng 3 ảnh)</span> </button>
                             <input onChange={handleImg} multiple type="file" style={{width :'100%', height: "100%", position: "absolute", top: 0, left: 0, opacity: 0, zIndex: 13, cursor: "pointer"}} />
                         </>
                         }

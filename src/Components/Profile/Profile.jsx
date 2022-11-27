@@ -47,7 +47,7 @@ const Profile = (props) => {
     <div className={"profile-user-site"} style={{width: "100%", display: "flex", justifyContent:" center", alignItems:" center"}}>
         <div className={"c-profile-user-site"} style={{width: "100%", maxWidth: 1200, margin: "20px 0", display: "flex", justifyContent: "space-between", gap: 16}}>
             <div className="fjkldsjkasjkasjdas" style={{marginRight: 16, display: "flex", justifyContent: "space-between", alignItems: 'center', flexDirection: "column"}}> 
-                <div className={"dsjkdajdjaklsjakdas"} style={{width: 350, padding: "60px 10px", borderRadius: 5, backgroundColor: "#febb02", height: "max-content"}}>
+                <div className={"dsjkdajdjaklsjakdas"} style={{width: 350, padding: "60px 10px", borderRadius: 5, backgroundColor: "#A5B8C6", height: "max-content", color: "#fff"}}>
                     <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                         <img src={validUrl.isUri(user?.avatar) ? user?.avatar : "https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png"} alt="" style={{width: 60, height: 60, borderRadius: "50%", objectFit: "cover"}} />
                     </div>
@@ -80,39 +80,39 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-            <div className={"dksdskafjkjasasfaseda"} style={{background: "#d9d9d9", padding: 10, borderRadius: 10}}>
+            <div className={"dksdskafjkjasasfaseda"} style={{background: "#fff", padding: 10, borderRadius: 10}}>
                 <div className={"c-title-profile-user-site"} style={{fontSize: 32, fontWeight: 500, marginBottom: 16}}>
                     Thông tin người dùng
                 </div>
                 <div className={"list-info-user"} style={{maxWidth: 900, width: "100%", display: 'flex', alignItems: "center", flexWrap: "wrap", justifyContent: "space-between"}}>
                     <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><FaUserAlt /> Tên đầy đủ</div>} />
-                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
-                            <InputTemplate value={username} onChange={(e)=> setUsername(e.target.value)} className={"wrap-inp-info-user-i"} style={{borderRadius: 5}} />
+                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
+                            <InputTemplate value={username} onChange={(e)=> setUsername(e.target.value)} className={"wrap-inp-info-user-i"} />
                         </div>
                     </div>
                     <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><AiFillPhone /> Số điện thoại</div>} />
-                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
-                            <InputTemplate value={phoneNumber} onChange={(e)=> setPhoneNumber(e.target.value)} className={"wrap-inp-info-user-i"} style={{borderRadius: 5}} />
+                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
+                            <InputTemplate value={phoneNumber} onChange={(e)=> setPhoneNumber(e.target.value)} className={"wrap-inp-info-user-i"} />
                         </div>
                     </div>
                     <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><FaAddressBook /> Địa chỉ</div>} />
-                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
-                            <InputTemplate value={address} onChange={(e)=> setAddress(e.target.value)} className={"wrap-inp-info-user-i"} style={{borderRadius: 5}} />
+                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
+                            <InputTemplate value={address} onChange={(e)=> setAddress(e.target.value)} className={"wrap-inp-info-user-i"} />
                         </div>
                     </div>
                     <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><FaBirthdayCake /> Ngày sinh</div>} />
-                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45}}>
-                            <InputTemplate value={birthday} onChange={(e)=> setBirthday(e.target.value)} className={"wrap-inp-info-user-i"} style={{borderRadius: 5}} />
+                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
+                            <InputTemplate value={birthday} onChange={(e)=> setBirthday(e.target.value)} className={"wrap-inp-info-user-i"} />
                         </div>
                     </div>
                 </div>
                 {/*  */}
                 <div className={"fgdjlkfjgfjkjdklsjd"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <div className={"save-info-user-wrap"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: 'center', maxWidth: 600, height: 300, borderRadius: 5, background: "#fff"}}>
+                    <div className={"save-info-user-wrap"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: 'center', maxWidth: 600, height: 300, borderRadius: 5, background: "#fff", border: "1px solid #e7e7e7"}}>
                         <div className={"dfdkjklgjklfsdadfs"} style={{padding: 10}}>
                             {
                             isChooseImg=== false && <>

@@ -26,7 +26,7 @@ const MainLogin= ()=> {
   }
   
   return (
-    <div className={"main-login-main-page"}>
+    <div className={"main-login-main-page"} style={{minHeight: '100vh'}}>
       <div className={"form-main-login-main-page"}>
       <div className={"title-form-main-login-main-page"}>
         Đăng nhập

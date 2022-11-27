@@ -3,15 +3,22 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate'
 import "./RightSide.sass"
 import validUrl from "valid-url"
+import { useState } from 'react'
+import _ from 'lodash'
+import OutsideClickHandler from 'react-outside-click-handler'
+import {BiDownArrow} from "react-icons/bi"
+import PaginationPage from '../Pagination/Pagination'
 
 const RightSide = (props) => {
+  const [sort, setSort]= useState([''])
   return (
     <div className={"right-side-search"} style={{width: "calc(100% - 300px)"}}>
         <CountResultSearch {...props} />
-        <SortResult {...props} />
+        <SortResult setSort={setSort} {...props} />
         {
-            props?.result?.map((item, key)=> <ListResultSearch key={key} {...item} />)
+            _.orderBy(props?.result, ['price'], sort)?.map((item, key)=> <ListResultSearch key={key} {...item} />)
         }
+        <PaginationPage count={5} activePagination={2} />
     </div>
   )
 }
@@ -27,9 +34,18 @@ const CountResultSearch= (props)=> {
 }
 
 const SortResult= (props)=> {
+    const [open, setOpen]= useState(false)
     return (
-        <div className={"sort-result-search-booking"} style={{width: 100, height: 30, borderRadius: 80, display: "flex", alignItems:" center", marginBottom: 16}}>
-            Sắp xếp theo
+        <div className={"sort-result-search-booking"} style={{width: 100, height: 30, borderRadius: 80, display: "flex", alignItems:" center", marginBottom: 16, position: "relative"}}>
+            <div onClick={()=> setOpen(prev=> !prev)} style={{height: "100%", display: "flex", alignItems: "center", whiteSpace: "nowrap", cursor: "pointer"}}>Sắp xếp theo <BiDownArrow /></div>
+            {open=== true && <OutsideClickHandler onOutsideClick={()=> setOpen(false)}>
+                <div className={"dkdjfkjdksjddsas"} style={{position: "absolute", top: 0, left: "100%", marginTop: 20, background: "#fff", borderRadius: 5, border: "1px solid #e7e7e7"}}>
+                <div onClick={()=> {props?.setSort(['asc']);setOpen(false)}} className={"dszjkkdsjdkjdasasa"} style={{padding: 10, cursor: "pointer", whiteSpace: "nowrap"}}>Giá tăng dần</div>
+                <div onClick={()=> {props?.setSort(['desc']);setOpen(false)}} className={"sdjsldjksdasafddsa"} style={{padding: 10, cursor: "pointer", whiteSpace: "nowrap"}}>Giá giảm dần</div>
+                <div onClick={()=> {props?.setSort(['']);setOpen(false)}} className={"sdjsldjksdasafddsa"} style={{padding: 10, cursor: "pointer", whiteSpace: "nowrap"}}>Hoàn nguyên</div>
+
+            </div>
+            </OutsideClickHandler>}
         </div>
     )
 }
@@ -52,12 +68,13 @@ const ListResultSearch= (props)=> {
                     <div className={"list-result-search-element-l-wrap-i"} style={{display: "flex", justifyContent: "space-between", flexDirection: "column", height: 350}}>
                         {/*  */}
                         <div className={"list-result-search-element-l-wrap-i-1"}>
-                            <div className={"list-result-search-element-l-wrap-i-1-name-hotel"} style={{fontSize: 21, fontWeight: 700, marginBottom: 30}}>
+                            <div className={"list-result-search-element-l-wrap-i-1-name-hotel"} style={{fontSize: 21, fontWeight: 700}}>
                                 {props.title}
                             </div>
                             <div className={"list-result-search-element-l-wrap-i-1-desc-hotel"} style={{marginBottom: 8, maxWidth: 400}}>
                                 {props.description}
                             </div>
+                            <div className={"list-result-search-element-l-wrap-i-1-desc-hotel"} style={{marginBottom: 8, maxWidth: 400, fontWeight: 600}}>Số điện thoại: <strong>{props?.phone}</strong></div>
                         </div>
                         {/*  */}
                         <div className={"list-reuslt-search-element-l-wrap-i-2"}>

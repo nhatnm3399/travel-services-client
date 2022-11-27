@@ -12,6 +12,7 @@ import { SearchSuggest } from "../Home/Home";
 import suggest_search from "../../api/search/suggest_search";
 import Fuse from "fuse.js"
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const RegisterHotel = (props) => {
   return (
@@ -44,16 +45,17 @@ const MainRegister = (props) => {
   const isChooseImage = listImage.length > 0 ? true : false;
   // const [openListCity, setOpenListCity]= useState(false)
   const [idCity, setIdCity]= useState()
-
+  const navigate= useNavigate()
   const add_hotel_func= async ()=> {
     const list_img_final_unresolve= listImage?.map(item=> uploadImageClient(item.img, setListImageFinal))
     const result= await Promise.all(list_img_final_unresolve)
-    add_hotel(hotelName, description, address, phoneNumber, result[0], result[1], result[2], result[3], result[4], idCity, "100", "100", checkIn, checkOut, isPaymentCard, Cookies.get("uid"), convenient, setPayload)
+    const id_hotel= await add_hotel(hotelName, description, address, phoneNumber, result[0], result[1], result[2], result[3], result[4], idCity, "100", "100", checkIn, checkOut, isPaymentCard, Cookies.get("uid"), convenient, setPayload)
+    navigate("/manage/hotel/add/new/room?idHotel="+ id_hotel)
   }
   return (
     <div
       className={"djksjajerkjawwawa"}
-      style={{ width: "100%", padding: 10, background: "#d9d9d9" }}
+      style={{ width: "100%", padding: 10, background: "#fff" }}
     >
       <div
         className={"fjskdljskdfjeaaawa"}
@@ -97,7 +99,7 @@ const MainRegister = (props) => {
                   padding: 10,
                   outlineColor: "#2e89ff",
                   background: "#fff",
-                  border: "none",
+                  border: "1px solid #e7e7e7",
                   borderRadius: 5,
                 }}
               />
@@ -112,8 +114,9 @@ const MainRegister = (props) => {
                   padding: 10,
                   outlineColor: "#2e89ff",
                   background: "#fff",
-                  border: "none",
+                  border: "1px solid #e7e7e7",
                   borderRadius: 5,
+                  
                 }}
               />
             </div>
@@ -128,7 +131,7 @@ const MainRegister = (props) => {
                 padding: 10,
                 outlineColor: "#2e89ff",
                 background: "#fff",
-                border: "none",
+                border: "1px solid #e7e7e7",
                 borderRadius: 5,
               }}
             />
@@ -168,7 +171,7 @@ const MainRegister = (props) => {
             background: "#fff",
             fontSize: 16,
             resize: "none",
-            border: "none",
+            border: "1px solid #e7e7e7",
             borderRadius: 5
           }}
         />
@@ -223,7 +226,6 @@ const ChooseCity= (props)=> {
   }
   return (
     <SearchSuggest
-
       setOpenDestination={setOpenDestination}
       destination={destination}
       search_by_place={search_by_place}
@@ -280,9 +282,9 @@ export const Convenient= (props)=> {
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
           <ComponentConvenient name={"Wifi"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Máy lạnh"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Wc"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Chỗ để xe"} type_id={4} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Máy lạnh"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Wc"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Chỗ để xe"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
         </div>
         <br />
         <br />
@@ -291,10 +293,9 @@ export const Convenient= (props)=> {
           Hướng nhìn
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient name={"Núi"} type_id={4} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Biển"} type_id={5} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-
-          <ComponentConvenient name={"Sông"} type_id={6} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Núi"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Biển"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Sông"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
 
         </div>
         <br />
@@ -304,8 +305,8 @@ export const Convenient= (props)=> {
           Phòng tắm
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient name={"Đồ vệ sinh cá nhân"} type_id={7} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Dép"} type_id={8} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Đồ vệ sinh cá nhân"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient name={"Dép"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
         </div>
         <br />
         <br />
@@ -449,7 +450,8 @@ const ImageIllustation = (props) => {
           background: "#fff",
           height: 400,
           flexWrap: "wrap",
-          borderRadius: 5
+          borderRadius: 5,
+          border: "1px solid #e7e7e7"
         }}
       >
         {props?.isChooseImage === true &&
@@ -605,7 +607,7 @@ const ImageIllustation = (props) => {
             justifyContent: "center",
             alignItems: "center",
             cursor: "pointer",
-            border: "none",
+            border: "1px solid #e7e7e7",
             outline: "none",
             background: "#2e89ff",
             color: "#fff",
