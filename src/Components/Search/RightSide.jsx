@@ -75,8 +75,8 @@ const ListResultSearch= (props)=> {
                             <div className={"list-result-search-element-l-wrap-i-1-name-hotel"} style={{fontSize: 21, fontWeight: 700}}>
                                 {props.title}
                             </div>
-                            <div className={"list-result-search-element-l-wrap-i-1-desc-hotel"} style={{marginBottom: 8, maxWidth: 400}}>
-                                {props.description}
+                            <div className={"list-result-search-element-l-wrap-i-1-desc-hotel"} style={{marginBottom: 8, maxWidth: 700}}>
+                                {props.description} djsdjs djshdjd jd udshdk rsdh sđ iedaj sdusgsdkau d đa hwdsjd wrdudshguda u audsa hsgssdasioa hdeu
                             </div>
                             <div className={"list-result-search-element-l-wrap-i-1-desc-hotel"} style={{marginBottom: 8, maxWidth: 400, fontWeight: 600}}>Số điện thoại: <strong>{props?.phone}</strong></div>
                         </div>

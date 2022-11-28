@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { GrAdd } from "react-icons/gr";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import add_room_hotel from "../../api/auth/manage_hotel/add_room";
 import { uploadImageClient } from "../../firebase/config";
 import InputTemplate from "../Common/InputTemplate";
@@ -33,11 +33,13 @@ const MainAddRoom = (props) => {
   const [data, setData]= useState()
   // eslint-disable-next-line
   const [listUrl, setListUrl]= useState([])
+  const navigate= useNavigate()
   const add_room= async ()=> {
       const list_image_un_resole= listImage?.map(item=> uploadImageClient(item.img, setListUrl))
       const result= await Promise.all(list_image_un_resole)
-      add_room_hotel(roomName, price, numberPeople, roomArea, result[0], result[1], result[2], result[3], result[4], searchParams.get("idHotel"), properties, setData)
-  }
+      await add_room_hotel(roomName, price, numberPeople, roomArea, result[0], result[1], result[2], result[3], result[4], searchParams.get("idHotel"), properties, setData)
+      navigate("/hotel/detail/"+ searchParams.get("idHotel"))
+    }
   return (
     <div className={"fkdkalskalrwarae"} style={{ width: "100%", padding: 10 }}>
       <div className={"vkdkskadfdsdssd"} style={{ marginBottom: 20 }}>

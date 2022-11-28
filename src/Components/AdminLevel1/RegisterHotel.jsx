@@ -27,6 +27,7 @@ const RegisterHotel = (props) => {
 };
 
 const MainRegister = (props) => {
+  
   const [payload, setPayload]= useState()
   // 
   const [hotelName, setHotelName]= useState()
@@ -122,7 +123,7 @@ const MainRegister = (props) => {
             </div>
           </div>
           <div className={"dsjaajwjalkwawwa"} style={{ width: "100%" }}>
-            <TitleItem title={"Địa chỉ *"} />
+            <TitleItem title={<span>Địa chỉ <span style={{color: "red"}}>*</span></span>} />
             <InputTemplate
               onChange={(e) => setAddress(e.target.value)}
               style={{
@@ -137,7 +138,7 @@ const MainRegister = (props) => {
             />
           </div>
           <div className={"dsjaajwjalkwawwa"} style={{ width: "100%", position: "relative"}}>
-            <TitleItem title={"Chọn thành phố *"} />
+            <TitleItem title={<span>Chọn thành phố <span style={{color: "red"}}>*</span></span>} />
         
            {<ChooseCity setIdCity={setIdCity} />}
           </div>
@@ -160,7 +161,7 @@ const MainRegister = (props) => {
         className={"dsjaajwjalkwawwa"}
         style={{ width: "100%", marginBottom: 30 }}
       >
-        <TitleItem title={"Mô tả *"} />
+        <TitleItem title={<span>Mô tả <span style={{color: "red"}}>*</span></span>} />
         <textarea
           onChange={(e) => setDescription(e.target.value)}
           style={{

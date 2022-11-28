@@ -9,6 +9,7 @@ const DatePickerPlugin = ({setOpen, startDate, endDate, setStartDate, setEndDate
   
   const onChange = (dates) => {
     const [start, end] = dates;
+    console.log(dates)
     setStartDate(start);
     setEndDate(end);
     if(end !== null) {

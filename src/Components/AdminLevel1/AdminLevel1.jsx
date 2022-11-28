@@ -18,7 +18,7 @@ import RegisterHotel from './RegisterHotel';
 import RequestBookingRoom from '../AdminLevel2/RequestBookingRoom';
 import AddRoomForHotel from './AddRoomForHotel';
 import StatsManager from './StatsManager';
-import PaginationPage from '../Pagination/Pagination';
+// import PaginationPage from '../Pagination/Pagination';
 import { AppContext } from '../../App';
 
 const AdminLevel1 = (props) => {

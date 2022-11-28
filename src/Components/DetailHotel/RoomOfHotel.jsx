@@ -16,7 +16,7 @@ const RoomOfHotel = (props) => {
         <ParametersRoom {...props} setOpen={setOpenDetail} />
         {
             openDetail=== true &&
-            <DetailRoom x={openDetail} setX={setOpenDetail} {...props} room_type_id={props?.room_type_id} openDetail={openDetail} setOpenDetail={setOpenDetail} />
+            <DetailRoom x={openDetail} setX={setOpenDetail} {...props} room_type_id={props?.properties_type} openDetail={openDetail} setOpenDetail={setOpenDetail} />
         }
     </div>
   )
@@ -108,8 +108,8 @@ const DetailRoom= (props)=> {
         return ()=> clearTimeout(()=> trigger)
     }, [])
     useEffect(()=> {
-        detail_room(props?.room_type_id, setData)
-    }, [props?.room_type_id])
+        detail_room(props?.properties_type, setData)
+    }, [props?.properties_type])
     useEffect(()=> {
         document.body.style.overflow= "hidden"
         return ()=> {

@@ -64,7 +64,7 @@ const Tab2= (props)=> {
   const {user }= useContext(AppContext)
   const [checkin, setCheckin]= useState(new Date())
   // eslint-disable-next-line
-  const [checkout, setCheckout]= useState(new Date())
+  const [checkout, setCheckout]= useState(null)
   // const [stay, setStay]= useState(0)
   const [openCalendar, setOpenCalendar]= useState(()=> false)
   // eslint-disable-next-line
@@ -95,9 +95,9 @@ const Tab2= (props)=> {
           <div className={"djlhjflksjdasdsaas"} style={{marginBottom: 16, fontSize: 16, position: "relative"}}>
             Ngày vào: {moment(checkin).format("DD/MM/YYYY")} <span title={"Chọn ngày"}><BsFillCalendarDateFill onClick={()=> setOpenCalendar(prev=> !prev)} /></span>
             {
-              openCalendar=== true && <div style={{position: "absolute", top: "100%", left: 0}}>
+              openCalendar=== true && <div style={{position: "absolute", top: "100%", left: 0, width: "max-content"}}>
                 <OutsideClickHandler onOutsideClick={()=> setOpenCalendar(()=> false)}>
-                  <DatePickerPlugin setOpen={setOpenCalendar} startDate={checkin} endDate={checkout} setStartDate={setCheckin} setEndDate={setCheckin} />
+                  <DatePickerPlugin setOpen={setOpenCalendar} startDate={checkin} endDate={checkout} setStartDate={setCheckin} setEndDate={setCheckout} />
                 </OutsideClickHandler>
               </div>
             }

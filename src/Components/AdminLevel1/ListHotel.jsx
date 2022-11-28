@@ -58,14 +58,13 @@ export const Title= (props)=> {
 }
 
 const Main= (props)=> {
-    if(props?.data?.length > 0) {
 
         return (
             <div className={"fdjakjsaklejawawaw"} style={{width: "100%", padding: 10}}>
                 <table className={"fkjkajkawawaww"} style={{width: "100%"}} cellSpacing={20}>
                     <thead className={"fjjaklsjkafjakljedas"} style={{width: '100%', borderBottom: "1px solid #e7e7e7"}}>
                         <tr className={"fkdjkasjkasjkledaw"}>
-                            <th style={{textAlign: "left"}}>Tên khách sạn</th>
+                            <th style={{marginLeft: 50}}>Tên khách sạn</th>
                             <th>Địa chỉ</th>
                             <th>Hành động</th>
                         </tr>
@@ -73,12 +72,12 @@ const Main= (props)=> {
                     <tbody className={"fkasajskajskawjakwaw"} style={{width: "100%"}}>
                         {
                             props?.data?.map((item ,key)=> <tr key={key} className={"djjaklwjrkjlekawwa"}>
-                            <td style={{textAlign: "left"}}>{item?.title}</td>
+                            <td style={{marginLeft: 50}}>{item?.title}</td>
                             <td>{item?.address}</td>
                             <td>
                                 <div style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10}}>
                                     <button className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#2DB83B"}}>
-                                        Chỉnh s
+                                        Chỉnh sửa
                                     </button>
                                     <button className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#E0111D"}}>
                                         Xóa
@@ -91,12 +90,7 @@ const Main= (props)=> {
                 </table>
             </div>
         )
-    }
-    else {
-        return (
-            <div style={{textAlign: "center", fontWeight :600, fontSize: 20}}>Bạn không có khách sạn nào !</div>
-        )
-    }
+    
 }
 
 export default ListHotel
