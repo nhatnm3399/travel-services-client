@@ -10,15 +10,19 @@ import {BiDownArrow} from "react-icons/bi"
 import PaginationPage from '../Pagination/Pagination'
 
 const RightSide = (props) => {
+  const [searchParams, setSearchParams]= useSearchParams()
   const [sort, setSort]= useState([''])
+  const [page, setPage]= useState(5)
+  const [offSet, setOffSet]= useState(1)
+  const [currentPage, setCurrentPage]= useState(1)
   return (
     <div className={"right-side-search"} style={{width: "calc(100% - 300px)"}}>
         <CountResultSearch {...props} />
         <SortResult setSort={setSort} {...props} />
         {
-            _.orderBy(props?.result, ['price'], sort)?.map((item, key)=> <ListResultSearch key={key} {...item} />)
+            _.orderBy(props?.result, ['price'], sort)?.slice(parseInt(page) * offSet -5, parseInt(page) * offSet)?.map((item, key)=> <ListResultSearch key={key} {...item} />)
         }
-        <PaginationPage count={5} activePagination={2} />
+        <PaginationPage setOffSet={setOffSet} search={searchParams.get("spec")} setSearchParams={setSearchParams} count={Math.ceil(parseInt(props?.result?.length) / 5)} activePagination={currentPage} setCurrentPage={setCurrentPage} />
     </div>
   )
 }
@@ -97,9 +101,9 @@ const ListResultSearch= (props)=> {
                             <div className={"list-result-search-element-r-1-1-1"} style={{fontSize: 16}}>
                                 Rất tốt
                             </div>
-                            <div className={"list-result-search-element-r-1-1-2"} style={{fontSize: 14}}>
+                            {/* <div className={"list-result-search-element-r-1-1-2"} style={{fontSize: 14}}>
                                 564 đánh giá
-                            </div>
+                            </div> */}
                         </div>
                         {/*  */}
                         <div className={"list-result-search-element-r-1-2"} style={{width: 50, height: 50, display: "flex",justifyContent: 'center', alignItems: "center", background: "#2e89ff", color: "#fff", fontSize: 18, fontWeight: 700}}>

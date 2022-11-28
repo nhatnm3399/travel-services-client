@@ -38,7 +38,7 @@ const MainLogin= ()=> {
         <InputTemplate type={"password"} onChange={(e)=> setPassword(e.target.value)} value={password} placeholder={"Mật khẩu"} className={"inp-tml-password"}  />
       </div>
       {
-        message && <div className={"fksdklkdsasaas"} style={{margin: "8px 0"}}>{message}</div>
+        message && <div className={"fksdklkdsasaas"} style={{margin: "8px 0", width: "90%"}}>{message}</div>
       }
       <div className={"wrap-input-auth-page"}>
         <ButtonTemplate className={"btn-tml-login"} disable={false} onClick={()=> login(email, password, setMessgae) }>Đăng nhập</ButtonTemplate>

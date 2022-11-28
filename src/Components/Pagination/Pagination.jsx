@@ -1,22 +1,21 @@
 import React from 'react'
 import Pagination from 'react-bootstrap/Pagination';
+import * as Scroll from "react-scroll"
 
-const PaginationPage = ({count, activePagination}) => {
+const PaginationPage = ({count, activePagination, setSearchParams, search, setCurrentPage, setOffSet}) => {
+  const scroll= Scroll.animateScroll
   return (
     <div className={"fsjkdfjskfljkdasda"} style={{height: 50, direction: "rtl"}}>
         {
     <Pagination>
-      <Pagination.First />
-      <Pagination.Prev />
-      <Pagination.Item>{7}</Pagination.Item>
-      <Pagination.Item>{6}</Pagination.Item>
-      <Pagination.Item>{5}</Pagination.Item>
-      <Pagination.Item >{4}</Pagination.Item>
-      <Pagination.Item>{3}</Pagination.Item>
-      <Pagination.Item>{2}</Pagination.Item>
-      <Pagination.Item active>{1}</Pagination.Item>
-      <Pagination.Next />
-      <Pagination.Last />
+      {
+        Array.from(Array(parseInt(count)).keys())?.reverse()?.map((item, key)=> <Pagination.Item active={parseInt(activePagination) === parseInt(item) ? true : false } key={key} onClick={()=> {
+          setSearchParams({'spec': search, 'page': parseInt(item)})
+          setCurrentPage(parseInt(item))
+          setOffSet(parseInt(item) +1)
+          scroll.scrollToTop({delay: 0})
+        }}>{item}</Pagination.Item>)
+      }
     </Pagination>
         }
     </div>

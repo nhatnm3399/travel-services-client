@@ -229,7 +229,7 @@ const ContainerSuggestOutstanding= (props)=> {
 
   return (
     <div className={"container-suggest-outstanding"} style={{width: "100%", display:" flex", justifyContent: 'center'}}>
-      <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: 1200, display: "flex", justifyContent: 'center', alignItems: 'center', flexWrap: "wrap", gap: 30, marginTop: 30}}>
+      <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: 1200, display: "flex", justifyContent: 'center', alignItems: 'center', flexWrap: "wrap", gap: 30, marginTop: 30, background :"#fff"}}>
         {/*  */}
         {
           data?.map((item, key)=> <div key={key} onClick={()=> navigate("/booking/search?spec="+ item?.city_name)} className={"element-suggest-outstanding"} style={{height: 450, width: "30%", background: "#fff", padding: 20, borderRadius: 5, boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", color: "#fff", position: "relative", overflow: "hidden", cursor: "pointer"}}>
@@ -252,7 +252,7 @@ const NearlyPlace= (props)=> {
     <div className={"nearly-place-booking-home"} style={{marginTop: 100}}>
       <Title title={"Gợi ý những sự kiện quanh đây"} />
       <div className={"container-suggest-outstanding"} style={{width: "100%", display:" flex", justifyContent: 'center', marginTop: 30}}>
-        <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: "100%", height: 530, padding: "50px 20px", background: "#D9D9D9"}}>
+        <div className={"wrap-1-container-suggest-outstanding"} style={{width: "100%", maxWidth: "100%", height: 530, padding: "50px 20px", background: "#fff"}}>
         <Swiper
             modules={[Navigation]}
             className="list-nearly-place-suggest"
@@ -279,9 +279,9 @@ const NearlyPlace= (props)=> {
           >
             {
               data?.map((item, key)=> <SwiperSlide key={key} style={{background: "#fff"}}>
-                <div onClick={()=> navigate(`/event/detail/${item?.id}`)} className={"fhsjdhjdjas"} style={{width: "100%", height: "100%", position: "relative"}}>
-                  <div className={"fjsdjkfjdkfjdksjdasd"} style={{fontSize: 20, fontWeight: 600, textTransform: "capitalize", padding: 10, position: "relative", zIndex: 222}}>{item?.name_activities}</div>
-                  <img alt={""} src={item?.image} className={"fjlsdhjfjkdldssas"} style={{width: '100%', height: "100%", position: "absolute", top: 0, left: 0, objectFit: "cover"}} />
+                <div onClick={()=> navigate(`/event/detail/${item?.id}`)} className={"fhsjdhjdjas"} style={{width: "100%", height: "100%", position: "relative", borderRadius: 5}}>
+                  <div className={"fjsdjkfjdkfjdksjdasd"} style={{fontSize: 20, fontWeight: 600, textTransform: "capitalize", padding: 10, position: "relative", zIndex: 222, color: "#fff"}}>{item?.name_activities}</div>
+                  <img alt={""} src={item?.image} className={"fjlsdhjfjkdldssas"} style={{width: '100%', height: "100%", position: "absolute", top: 0, left: 0, objectFit: "cover", borderRadius: 5, background: "#d9d9d9" }} />
                 </div>
               </SwiperSlide>)
             }
