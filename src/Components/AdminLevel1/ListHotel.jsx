@@ -65,7 +65,7 @@ const Main= (props)=> {
                 <table className={"fkjkajkawawaww"} style={{width: "100%"}} cellSpacing={20}>
                     <thead className={"fjjaklsjkafjakljedas"} style={{width: '100%', borderBottom: "1px solid #e7e7e7"}}>
                         <tr className={"fkdjkasjkasjkledaw"}>
-                            <th>Tên khách sạn</th>
+                            <th style={{textAlign: "left"}}>Tên khách sạn</th>
                             <th>Địa chỉ</th>
                             <th>Hành động</th>
                         </tr>
@@ -78,7 +78,7 @@ const Main= (props)=> {
                             <td>
                                 <div style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10}}>
                                     <button className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#2DB83B"}}>
-                                        Thêm
+                                        Chỉnh sửa
                                     </button>
                                     <button className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#E0111D"}}>
                                         Xóa
