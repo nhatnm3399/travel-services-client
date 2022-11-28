@@ -73,7 +73,7 @@ const Main= (props)=> {
                     <tbody className={"fkasajskajskawjakwaw"} style={{width: "100%"}}>
                         {
                             props?.data?.map((item ,key)=> <tr key={key} className={"djjaklwjrkjlekawwa"}>
-                            <td>{item?.title}</td>
+                            <td style={{textAlign: "left"}}>{item?.title}</td>
                             <td>{item?.address}</td>
                             <td>
                                 <div style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10}}>
