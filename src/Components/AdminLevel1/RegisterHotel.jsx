@@ -90,7 +90,7 @@ const MainRegister = (props) => {
             }}
           >
             <div className={"dsjaajwjalkwawwa"} style={{ flex: "1 1 0" }}>
-              <TitleItem title={"Tên khách sạn *"} />
+              <TitleItem title={<span>Tên khách sạn <span style={{color: "red"}}>*</span></span>} />
               <InputTemplate
                 onChange={(e) => setHotelName(e.target.value)}
                 style={{
@@ -105,7 +105,7 @@ const MainRegister = (props) => {
               />
             </div>
             <div className={"dsjaajwjalkwawwa"} style={{ flex: "1 1 0" }}>
-              <TitleItem title={"Số điện thoại *"} />
+              <TitleItem title={<span>Số điện thoại <span style={{color: "red"}}>*</span></span>} />
               <InputTemplate
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 style={{

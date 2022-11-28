@@ -49,8 +49,10 @@ export const AmountAll= (props)=> {
 const Image= (props)=> {
     return (
         <div className={"sjjaksjiwjewawa"} style={{display: "flex", justifyContent: 'center', alignItems: "center", background: "#fff", border: "1px solid #e7e7e7"}}>
-            <div role={"img"} className={"fkdkjdfkaskaawaw"} style={{width: 250, height: 250,padding: 10, background: "#d9d9d9"}}>
-                <div style={{width: "100%", height: "100%", background: "#d9d9d9"}}></div>
+            <div role={"img"} className={"fkdkjdfkaskaawaw"} style={{width: 250, height: 250, background: "#d9d9d9"}}>
+                <div style={{width: "100%", height: "100%", background: "#d9d9d9"}}>
+                    <img src={props?.image} alt="" style={{width:" 100%", height: "100%", objectFit: "cover", borderRadius: 5}} />
+                </div>
             </div>
         </div>
     )

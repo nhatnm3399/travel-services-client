@@ -4,7 +4,7 @@ import InputTemplate from '../Common/InputTemplate'
 import GoogleMapPlugin from '../Plugin/GoogleMap'
 import { Title } from '../Profile/Profile'
 import "./DetailHotel.sass"
-
+import {GoLocation}from "react-icons/go"
 import RoomOfHotel, { AmountAll } from './RoomOfHotel'
 import Feedback from './Feedback'
 import AroundHotel from './AroundHotel'
@@ -133,7 +133,7 @@ const MainHotel2= (props)=> {
             <div className={"main-hotel-2-1"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                 <div className={"main-hotel-2-1-1"}>
                     <div className={"main-hotel-2-1-1-1"}style={{fontSize: 24, fontWeight: 700, marginBottom: 16}}>
-                       {props?.data?.hotel_name}
+                       <GoLocation style={{width: 18, height: 18}} /> {props?.data?.hotel_name}
                     </div>
                     <div className={"main-hotel-2-1-1-2"} style={{fontSize: 18}}>
                         {props?.data?.address}

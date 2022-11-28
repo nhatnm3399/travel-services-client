@@ -88,9 +88,9 @@ export const Verified= (props)=> {
         <>
             <Title title={"Danh sách khách sạn đang hoạt động"} />
             <MainElementList data={props.data} type={"Censored Hotel"} />
-            {
+            {/* {
                 <PaginationPage />
-            }
+            } */}
         </>
     )
 }
@@ -100,9 +100,9 @@ export const Pending= (props)=> {
         <>
             <Title title={"Danh sách khách sạn đang chờ duyệt"} />
             <MainElementList data={props?.data} type={"Waiting Approve"} />
-            {
+            {/* {
                 <PaginationPage />
-            }
+            } */}
         </>
     )
 }
@@ -112,9 +112,9 @@ export const Disable= (props)=> {
         <>
             <Title title={"Danh sách khách sạn đã bị vô hiệu hóa"} />
             <MainElementList data={props?.data} type={"Deleted Hotel"} />
-            {
+            {/* {
                 <PaginationPage />
-            }
+            } */}
         </>
     )
 }

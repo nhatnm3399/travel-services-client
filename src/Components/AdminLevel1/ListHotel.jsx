@@ -78,7 +78,7 @@ const Main= (props)=> {
                             <td>
                                 <div style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10}}>
                                     <button className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#2DB83B"}}>
-                                        Chỉnh sửa
+                                        Chỉnh s
                                     </button>
                                     <button className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#E0111D"}}>
                                         Xóa
