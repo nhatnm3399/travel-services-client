@@ -11,7 +11,7 @@ const Payment = (props) => {
           <div className={"fdjskdjkjfdgsasa"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
             <div className={"payment-site"} style={{width: "100%", maxWidth: 1116, display: "flex", justifyContent: 'center', alignItems: "center", padding: "0 40px", borderRadius: 10}}>
               <div className={"c-payment-site"} style={{width: "100%", padding: 30}}>
-                  <div className={"g-payment-site"} style={{width: "100%", background: "#d9d9d9", padding: "50px 30px"}}>
+                  <div className={"g-payment-site"} style={{width: "100%", background: "#e1f0fe", padding: "50px 30px"}}>
                       <Title title={"Thanh toán"} />
                       <MainDetail data={location.state} />
                   </div>
@@ -95,7 +95,7 @@ const MainDetail= (props)=> {
                         <div className={"ele-list-ab-room-1-2"}>Thanh toán bằng tiền mặt</div>
                     </div>
                     <div className={"confirm-pay-x"} style={{width:" 100%", display: "flex", justifyContent:" center", alignItems: "center", marginTop: 30}}>
-                        <button onClick={()=> create_payment(props?.data?.booking_id, "vnpay", _.sumBy(props?.data?.data?.data, function(e) {return e.amount}))} className={"btn-confirm-pay-x"} style={{width: 300, height: 60, border: "none", outline: "none", background: "#fff", color:" #2BC006", cursor: "pointer", fontSize: 18, borderRadius: 5, fontWeight: 600}}>Xác nhận thanh toán</button>
+                        <button onClick={()=> create_payment(props?.data?.booking_id, "vnpay", _.sumBy(props?.data?.data?.data, function(e) {return e.amount}))} className={"btn-confirm-pay-x"} style={{width: 300, height: 60, border: "none", outline: "none", background: "#2BC006", color:" #fff", cursor: "pointer", fontSize: 18, borderRadius: 5, fontWeight: 600}}>Xác nhận thanh toán</button>
                     </div>
                 </div>
             </div>

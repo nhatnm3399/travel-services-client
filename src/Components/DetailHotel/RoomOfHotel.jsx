@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const RoomOfHotel = (props) => {
   const [openDetail, setOpenDetail]= useState(()=> false)
   return (
-    <div className={"dkslklsaklasa"} style={{width: "100%", marginBottom: 20, display: "flex", justifyContent: 'space-between', alignItems: "center", border: '1px solid #e7e7e7', borderRadius: 8, overflow: "hidden"}}>
+    <div className={"dkslklsaklasa"} style={{width: "100%", marginBottom: 20, display: "flex", justifyContent: 'space-between', alignItems: "center", borderRadius: 8, overflow: "hidden", gap: 10}}>
         <Image {...props} />
         <ParametersRoom {...props} setOpen={setOpenDetail} />
         {
@@ -30,7 +30,7 @@ export const AmountAll= (props)=> {
 
     return (
         <div className={"jdksjkdjksdlas"} style={{padding: "0 40px"}}>
-            <div className={"dsjdjhsjdklsjasa"} style={{width: "100%", background:"#d9d9d9", padding: 10, borderRadius: 5}}>
+            <div className={"dsjdjhsjdklsjasa"} style={{width: "100%", background:"#fff", padding: 10, borderRadius: 5, border: "1px solid #e7e7e7"}}>
                 <div className={"fkjdklsjdskjkasdas"} style={{marginBottom: 12, fontSize: 18}}>
                     <strong>{_.sumBy(props?.bookingRoom, function(e) {return e.count})} phòng cho</strong>
                 </div>
@@ -48,9 +48,9 @@ export const AmountAll= (props)=> {
 
 const Image= (props)=> {
     return (
-        <div className={"sjjaksjiwjewawa"} style={{display: "flex", justifyContent: 'center', alignItems: "center", background: "#d9d9d9"}}>
-            <div role={"img"} className={"fkdkjdfkaskaawaw"} style={{width: 250, height: 250,padding: 10}}>
-                <div style={{width: "100%", height: "100%", background: "#fff"}}></div>
+        <div className={"sjjaksjiwjewawa"} style={{display: "flex", justifyContent: 'center', alignItems: "center", background: "#fff", border: "1px solid #e7e7e7"}}>
+            <div role={"img"} className={"fkdkjdfkaskaawaw"} style={{width: 250, height: 250,padding: 10, background: "#d9d9d9"}}>
+                <div style={{width: "100%", height: "100%", background: "#d9d9d9"}}></div>
             </div>
         </div>
     )
@@ -58,7 +58,7 @@ const Image= (props)=> {
 
 const ParametersRoom= (props)=> {
     return (
-        <div className={"fkslkalkrkoawlaw"} style={{flex: 1, padding: 16, backgroundColor: "#d9d9d9", minHeight: 250}}>
+        <div className={"fkslkalkrkoawlaw"} style={{flex: 1, padding: 16, backgroundColor: "#fff", minHeight: 250, border: "4px solid #2e89ff", overflow: "hidden"}}>
             <div className={"ksdaskalsklasasa"} style={{fontSize: 18, fontWeight: 600, marginBottom: 12}}>
                 {props?.type_room_name}
             </div>
@@ -72,9 +72,15 @@ const ParametersRoom= (props)=> {
             <div className={"djksjkjdkasjieawwaw"} style={{width: "100%", display: "flex", justifyContent: 'space-between', alignItems: "center"}}>
                 <div className={"sdksaskasklasas fryeauiwyuifdaAS"}>
                     {props?.hotel_properties?.map((item, key)=> <div key={key} className={"jrjawjalwlkeawa fchjshdjksdsdsd"} style={{height: 30, margin: "8px 0"}}>{item?.properties_name}</div>)}
-                    {/* <div className={"jrjawjalwlkeawa fchjshdjksdsdsd"} style={{height: 30, margin: "8px 0"}}>Miễn phí bữa sáng</div>
+                    <div className={"jrjawjalwlkeawa fchjshdjksdsdsd"} style={{height: 30, margin: "8px 0"}}>Miễn phí bữa sáng</div>
                     <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Wifi miễn phí</div>
-                    <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Không hút thuốc</div> */}
+                    <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Không hút thuốc</div>
+                </div>
+                <div className={"sdksaskasklasas fryeauiwyuifdaAS"}>
+                    {props?.hotel_properties?.map((item, key)=> <div key={key} className={"jrjawjalwlkeawa fchjshdjksdsdsd"} style={{height: 30, margin: "8px 0"}}>{item?.properties_name}</div>)}
+                    <div className={"jrjawjalwlkeawa fchjshdjksdsdsd"} style={{height: 30, margin: "8px 0"}}>Không hoàn tiền</div>
+                    <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Không áp dụng đổi lịch</div>
+                    <div className={"jrjawjalwlkeawa"} style={{height: 30, margin: "8px 0"}}>Có miễn phí đổi phòng</div>
                 </div>
                 {/*  */}
                 {/*  */}

@@ -34,7 +34,7 @@ const DetailHotel = (props) => {
             <Tab2 data={data} />
             <br />
             <div className={"daskalsklafass"} style={{width: "100%", padding: "0 40px"}}>
-                <div ref={myRef} className={"fjklsdjskjsdksa"} style={{width: "100%", position: "sticky", top: 0, zIndex: 999, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, height: 68, borderRadius: 5}}></div>
+                <div ref={myRef} className={"fjklsdjskjsdksa"} style={{width: "100%", position: "sticky", top: 0, zIndex: 999, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, height: 68, marginBottom: 5}}></div>
                 {
                     data?.room_types?.map((item, key)=> <RoomOfHotel data1={data} data={bookingRoom} setData={setBookingRoom} setBookingRoom={setBookingRoom} bookingRoom={bookingRoom} key={key} {...item} />)
                 }
@@ -180,7 +180,7 @@ const Tab2= (props)=> {
     return (
         <div className={"tab-2"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center", marginTop: 20, gap: 20, padding: "0 40px", marginBottom: 20}}>
             <div className="tab-2-ss" style={{width: "100%", display: "flex", justifyContent: "space-between", paddingBottom: 20, borderBottom: "1px solid #d7d7d7"}}>
-                <div className={"tab-2-1"} style={{width: "calc(100% - 300px)"}}>
+                <div className={"tab-2-1"} style={{width: "calc(100%)"}}>
                     <div style={{fontSize: 18, fontWeight: 600, marginBottom: 12}}>Mô tả khách sạn</div>
                     <div className={"fjkldjdkljkdjkasjas"} style={{marginRight: 10}}>{props?.data?.description}</div>
                 </div>
@@ -207,7 +207,7 @@ const Tab2= (props)=> {
     )
 }
 
-const StatsRoomBooking= (props)=> {
+export const StatsRoomBooking= (props)=> {
     const navigate= useNavigate()
     const toBookingPage= ()=> {
         navigate("/booking/detail", {state: {data: props?.data, data1: props?.data1, state: true}})
