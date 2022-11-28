@@ -133,10 +133,10 @@ const MainHotel2= (props)=> {
             <div className={"main-hotel-2-1"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                 <div className={"main-hotel-2-1-1"}>
                     <div className={"main-hotel-2-1-1-1"}style={{fontSize: 24, fontWeight: 700, marginBottom: 16}}>
-                       <GoLocation style={{width: 18, height: 18}} /> {props?.data?.hotel_name}
+                       {props?.data?.hotel_name}
                     </div>
                     <div className={"main-hotel-2-1-1-2"} style={{fontSize: 18}}>
-                        {props?.data?.address}
+                    <GoLocation style={{width: 18, height: 18}} /> {props?.data?.address}
                     </div>
                 </div>
                 <div className={"main-hotel-2-1-2"} style={{width: 200, height: 60}}>
