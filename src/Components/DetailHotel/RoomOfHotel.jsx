@@ -16,7 +16,7 @@ const RoomOfHotel = (props) => {
         <ParametersRoom {...props} setOpen={setOpenDetail} />
         {
             openDetail=== true &&
-            <DetailRoom x={openDetail} setX={setOpenDetail} {...props} room_type_id={props?.properties_type} openDetail={openDetail} setOpenDetail={setOpenDetail} />
+                <DetailRoom x={openDetail} setX={setOpenDetail} {...props} room_type_id={props?.room_type_id} openDetail={openDetail} setOpenDetail={setOpenDetail} />
         }
     </div>
   )
@@ -119,10 +119,12 @@ const DetailRoom= (props)=> {
 
 
     return (
-        <div className={"djasjakljakejaklwwa"} style={{position: "fixed", width: "100%", height: "100%", top: 0, left: 0, background: "rgba(0,0,0,0.3)", display: "flex", justifyContent: "center", zIndex: 9999, overflow: "auto"}}>
-            <div className={"dkakawjkajwrwweaw"} style={{opacity: transition=== false ? 0 : 1, transition: "all .25s linear", width: "98%", maxWidth: 1200, background: "#fff", borderRadius: 5, padding: 10}}>
-                <DetailPopupRoom {...data} {...props} setX={props?.setX} x={props?.x} />
-            </div>  
+        <div className={"djasjakljakejaklwwa"} style={{position: "fixed", width: "100%", height: "100%", top: 0, left: 0, background: "rgba(0,0,0,0.3)", display: "flex", justifyContent: "center", zIndex: 9999, overflow: "auto", "alignItems": "center"}}>
+            <OutsideClickHandler onOutsideClick={()=> props?.setOpenDetail(false)}>
+                <div className={"dkakawjkajwrwweaw"} style={{opacity: transition=== false ? 0 : 1, transition: "all .25s linear", width: "98%", maxWidth: 1200, background: "#fff", borderRadius: 5, padding: 10}}>
+                    <DetailPopupRoom {...data} {...props} setX={props?.setX} x={props?.x} />
+                </div>  
+            </OutsideClickHandler>
         </div>
     )
 }

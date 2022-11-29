@@ -11,7 +11,7 @@ const Payment = (props) => {
           <div className={"fdjskdjkjfdgsasa"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
             <div className={"payment-site"} style={{width: "100%", maxWidth: 1116, display: "flex", justifyContent: 'center', alignItems: "center", padding: "0 40px", borderRadius: 10}}>
               <div className={"c-payment-site"} style={{width: "100%", padding: 30}}>
-                  <div className={"g-payment-site"} style={{width: "100%", background: "#e1f0fe", padding: "50px 30px"}}>
+                  <div className={"g-payment-site"} style={{width: "100%", background: "#e1f0fe", padding: "50px 30px", borderRadius: 5}}>
                       <Title title={"Thanh toán"} />
                       <MainDetail data={location.state} />
                   </div>
@@ -22,7 +22,7 @@ const Payment = (props) => {
 
   }
   else {
-    return <div>Có lỗi xảy ra, Vui lòng thử lại sau</div>
+    return <div style={{minHeight: "100vh"}}>Có lỗi xảy ra, Vui lòng thử lại sau</div>
   }
 }
 
@@ -70,18 +70,18 @@ const MainDetail= (props)=> {
                         <div className={"ele-list-ab-room-1-1"}>Tiền phòng</div>
                         <div className={"ele-list-ab-room-1-2"}>{_.sumBy(props?.data?.data?.data, function(e) {return e.amount})} VND</div>
                     </div>
-                    <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
+                    {/* <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
                         <div className={"ele-list-ab-room-1-1"}>Dịch vụ bổ sung</div>
                         <div className={"ele-list-ab-room-1-2"}>0</div>
                     </div>
                     <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
                         <div className={"ele-list-ab-room-1-1"}>Chi phí khác</div>
                         <div className={"ele-list-ab-room-1-2"}>0đ</div>
-                    </div>
-                    <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
+                    </div> */}
+                    {/* <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
                         <div className={"ele-list-ab-room-1-1"}>Tổng</div>
                         <div className={"ele-list-ab-room-1-2"}>{_.sumBy(props?.data?.data?.data, function(e) {return e.amount})} VND</div>
-                    </div>
+                    </div> */}
                     <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, display: "flex", alignItems: "center", padding: "10px", marginBottom: 12, gap: 30}}>
                         <div className={"ele-list-ab-room-1-1"} style={{width: 24, height: 24, }}>
                             <input type="radio" name="typepay" style={{width: "100%", height: "100%"}} />

@@ -26,7 +26,7 @@ const ListBill = (props) => {
                     </thead>
                     <tbody className={"fkdjsdjkshfjdhajlsas"} style={{width: "100%"}}>
                         {
-                            data?.map((item, key)=> <ItemListBill key={key} x1={item?.id} x2={item?.status_bill} x3={item?.payment_method} x4={props?.total_amount} x5={"Xem hóa đơn"} />)
+                            data?.map((item, key)=> <ItemListBill key={key} x1={item?.id} x2={item?.status_bill} x3={item?.payment_method} x4={item?.total_amount} x5={"Xem hóa đơn"} />)
                         }
                     </tbody>
                 </table>

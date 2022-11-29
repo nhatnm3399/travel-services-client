@@ -6,6 +6,8 @@ import "./ListBooking.sass"
 import { useEffect } from 'react'
 import history_booking from '../../api/auth/user/history_booking'
 import { useState } from 'react'
+import delete_hotel from '../../api/auth/user/delete_hotel'
+import Snackbar from '../Snackbar/Snackbar'
 
 const ListBooking = (props) => {
     const [data, setData]= useState([])
@@ -24,8 +26,8 @@ const ListBooking = (props) => {
         </div>
         <Routes>
             <Route path={"/"} element={<Navigate replace={true} to={"/booking/order/pending"} />} />
-            <Route path={"/pending"} element={<PendingBooking data={data} />} />
-            <Route path={"/success"} element={<SuccessBooking data={data} />} />
+            <Route path={"/pending"} element={<PendingBooking data={data} setData={setData} />} />
+            <Route path={"/success"} element={<SuccessBooking data={data} />} setData={setData} />
         </Routes>
     </div>
   )
@@ -41,13 +43,6 @@ export const IndexComponent= (props)=> {
             <br />
             <div className={"skljdaklsjklasa"} style={{width: "100%"}}>
                 <ElementDetail />
-                <ElementDetail />
-                <ElementDetail />
-                <ElementDetail />
-                <ElementDetail />
-                <ElementDetail />
-                <ElementDetail />
-                <ElementDetail />
             </div>
         </div>
     )
@@ -60,7 +55,7 @@ const PendingBooking= (props)=> {
             <br />
             <div className={"skljdaklsjklasa"} style={{width: "100%"}}>
                 {
-                    props?.data?.filter(item=> item?.bookingStatus === "booking waiting approve")?.map((item, key)=> <ElementDetail key={key} {...item} />)
+                    props?.data?.filter(item=> item?.bookingStatus === "booking waiting approve")?.map((item, key)=> <ElementDetail setData={props?.setData} data={props?.data} key={key} {...item} />)
                 }
             </div>
         </div>
@@ -74,7 +69,7 @@ const SuccessBooking= (props)=> {
             <br />
             <div className={"skljdaklsjklasa"} style={{width: "100%"}}>
             {
-                props?.data?.filter(item=> item?.bookingStatus === "booking approved")?.map((item, key)=> <ElementDetail key={key} {...item} />)
+                props?.data?.filter(item=> item?.bookingStatus === "booking approved")?.map((item, key)=> <ElementDetail data={props?.data} setData={props?.setData} key={key} {...item} />)
             }
             </div>
         </div>
@@ -90,6 +85,15 @@ const Title= (props)=> {
 }
 
 const ElementDetail= (props)=> {
+    const [loading, setLoading]= useState(false)
+    const [data, setData]= useState()
+    const deleteHotel= (id)=> {
+        delete_hotel(id,setData, setLoading)
+        props?.setData(props?.data?.filter(item=> parseInt(item?.id) !== parseInt(id)))
+    }
+    const detailHotel= ()=> {
+
+    }
     return (
         <div className={"fjklsajklsjkalskja"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 40, marginBottom: 30, background: "#fff", borderRadius: 5, padding: 10}}>
             <div className="skjlajaksjkasaasas" style={{display: "flex", justifyContent: 'center', alignItems: "center"}}> 
@@ -119,15 +123,16 @@ const ElementDetail= (props)=> {
                         Chờ duyệt
                     </div>
                     <div className={"djaklsajlksjdklsjdss"} style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10, width: "calc(100% / 3)"}}>
-                        <div className={"dsjlksjaklsjkalsjdsa"} style={{ height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
-                            <TbReportSearch style={{width: 40, height: 40}} width={40} height={40} />
+                        <div title={"Chi tiết"} className={"dsjlksjaklsjkalsjdsa"} style={{ height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
+                            <TbReportSearch style={{width: 40, height: 40, color: "green"}} width={40} height={40} />
                         </div>
-                        <div className={"dsjlksjaklsjkalsjdsa"} style={{width: 40, height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
-                            <RiDeleteBin5Fill style={{width: 40, height: 40}} width={40} height={40} />
+                        <div onClick={()=> deleteHotel(props?.id)} title={"Xóa"} className={"dsjlksjaklsjkalsjdsa"} style={{width: 40, height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
+                            <RiDeleteBin5Fill style={{width: 40, height: 40, color: "red"}} width={40} height={40} />
                         </div>
                     </div>
                 </div>
             </div>
+            <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Đã xóa khách sạn thành công"} />
         </div>
     )
 }

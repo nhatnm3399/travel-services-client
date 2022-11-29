@@ -20,6 +20,9 @@ import AddRoomForHotel from './AddRoomForHotel';
 import StatsManager from './StatsManager';
 // import PaginationPage from '../Pagination/Pagination';
 import { AppContext } from '../../App';
+import { AiOutlineFolderView} from "react-icons/ai"
+import delete_hotel from '../../api/admin/delete_hotel';
+import Snackbar from '../Snackbar/Snackbar';
 
 const AdminLevel1 = (props) => {
   return (
@@ -87,7 +90,7 @@ export const Verified= (props)=> {
     return (
         <>
             <Title title={"Danh sách khách sạn đang hoạt động"} />
-            <MainElementList data={props.data} type={"Censored Hotel"} />
+            <MainElementList data={props.data} setData={props?.setData} type={"Censored Hotel"} />
             {/* {
                 <PaginationPage />
             } */}
@@ -99,7 +102,7 @@ export const Pending= (props)=> {
     return (
         <>
             <Title title={"Danh sách khách sạn đang chờ duyệt"} />
-            <MainElementList data={props?.data} type={"Waiting Approve"} />
+            <MainElementList data={props?.data} setData={props?.setData} type={"Waiting Approve"} />
             {/* {
                 <PaginationPage />
             } */}
@@ -111,7 +114,7 @@ export const Disable= (props)=> {
     return (
         <>
             <Title title={"Danh sách khách sạn đã bị vô hiệu hóa"} />
-            <MainElementList data={props?.data} type={"Deleted Hotel"} />
+            <MainElementList data={props?.data} setData={props?.setData} type={"Deleted Hotel"} />
             {/* {
                 <PaginationPage />
             } */}
@@ -179,7 +182,7 @@ const MainElementEvent= (props)=> {
                     <td className={"djsjaksjaksjska"} style={{fontSize: 16, textAlign: "center", height: "max-content"}}>Cầu Rồng Phun Lửa</td>
                     <td className={"akljkdsjklfdajkd"} style={{fontSize: 16, textAlign: "center", height: "max-content"}}>Vào thứ 3, thứ 7 hàng tuần, cầu Rồng phun lửa</td>
                     <td className={"dsjkdjkasjaskassa"} style={{textAlign: "center", height: "max-content"}}>
-                        <p className={"djkasjaksjasksa"} style={{width: "100%", height: "auto", aspectRatio: 8 / 5, background: "#d9d9d9"}} role={"img"}></p>
+                        <p className={"djkasjaksjasksa"} style={{width: "100%", height: "auto", aspectRatio: 8 / 5, background: "#fff", border: "1px solid #e7e7e7"}} role={"img"}></p>
                     </td>
                     <td className={"jdksdjaksjkasasas"} style={{textAlign: "center", verticalAlign: "middle"}}>
                         <button onClick={()=> navigate(`/admin/event/manage/add/new?edit=${true}&event_id=1`)} className={"jkldjkldsjksakas"} style={{color: "#fff", backgroundColor: "green", width: 60, height: 30, border: "none", outline: "none", cursor: "pointer"}}>
@@ -196,10 +199,16 @@ const MainElementEvent= (props)=> {
 }
 
 const MainElementList= (props)=> {
+    const [data, setData]= useState()
+    const [loading, setLoading]= useState(false)
+    const deleteHotel= async(idHotel)=> {
+        await delete_hotel(idHotel, setData, setLoading)
+        props?.setData(props?.data?.filter(item=> parseInt(item.id) !== parseInt(idHotel)))
+    }
     return (
         <div className={"jskldjakdjskdalks"} style={{width: "100%", display: "flex", alignItems: 'center', flexWrap: "wrap"}}>
              {props?.data?.filter(item=> item?.status_hotel === props?.type)?.map((item, key)=> <div key={key} className={"jdfljdkalsdasa "} style={{width: "calc(100% / 3)", padding: 10}}>
-                <div className={"jlkdjkasdjkasas"} style={{width: "100%", padding: 10, background: "#d9d9d9", borderRadius: 5}}>
+                <div className={"jlkdjkasdjkasas"} style={{width: "100%", padding: 10, background: "#fff", borderRadius: 5, border: "1px solid #e7e7e7"}}>
                     <div className={"kssjkajskasaas"} style={{width: "100%", display :"flex" , justifyContent: 'space-between', alignItems: 'center', marginBottom: 16}}>
                         <div className='dhsdljajskljassa'>
                             <div className='sljflkjeklasjas' style={{fontSize: 18, fontWeight: 600, color: "#2e89fff", marginBottom: 12}}>Tên khách sạn: {item?.title}</div>
@@ -207,9 +216,23 @@ const MainElementList= (props)=> {
                                 Địa chỉ: {item?.address}
                             </div>
                         </div>
-                        <div className={"fjhlksjlkasjassasa"} style={{display: "flex", justifyContent: 'center', alignItems: "center"}}>
-                            <MdDelete style={{width: 36, height: 36}} />
-                        </div>
+                        {
+                            props?.type=== "Waiting Approve" && 
+                            <div title={"Chấp nhận"} className={"fjhlksjlkasjassasa"} style={{display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
+                                <AiOutlineFolderView style={{width: 36, height: 36}} />
+                            </div>
+                        }
+                        {
+                            props?.type=== "Deleted Hotel" && 
+                            <div onClick={()=> deleteHotel(item?.id)} title={"Xóa khách sạn"} className={"fjhlksjlkasjassasa"} style={{display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
+                                <MdDelete style={{width: 36, height: 36}} />
+                            </div>
+                        }{
+                            props?.type=== "Censored Hotel" && 
+                            <div onClick={()=> deleteHotel(item?.id)} title={"Xóa khách sạn"} className={"fjhlksjlkasjassasa"} style={{display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
+                                <MdDelete style={{width: 36, height: 36}} />
+                            </div>
+                        }
                     </div>
                     {/*  */}
                     <div className={"djklsjdaksjkfsad"} style={{width: "100%", display: "flex", justifyContent: 'space-between', alignItems: "center", marginBottom: 16}}>
@@ -227,11 +250,11 @@ const MainElementList= (props)=> {
                     </div>
                     <div className={"djksjklsajklasjklsa"}>
                         <div className={"fklsjaklsjaklsjasa"} style={{fontSize: 18, fontWeight: 600}}>
-                            Giá tiền: 
                         </div>
                     </div>
                 </div>
             </div>)}
+            {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Đã xóa khách sạn thành công"} />}
             {/*  */}
         </div>
     )
@@ -308,7 +331,7 @@ const MainAddEvent= (props)=> {
                     Địa điểm
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <input onChange={e=> setPlace(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
+                    <input onChange={e=> setPlace(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, fontWeight: 600}} />
                 </div>
             </div>
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
@@ -316,7 +339,7 @@ const MainAddEvent= (props)=> {
                     Tên sự kiện
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <input onChange={e=> setTitle(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
+                    <input onChange={e=> setTitle(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, fontWeight: 600}} />
                 </div>
             </div>
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20, position: "relative"}}>
@@ -324,7 +347,7 @@ const MainAddEvent= (props)=> {
                     Thời gian diễn ra sự kiện
                 </div>
                 <div onChange={()=> {}} onClick={()=> setOpen(prev=> !prev)} className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <input value={`${moment(startDate).format("DD/MM/YYYY")} - ${moment(endDate).format("DD/MM/YYYY")}`} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
+                    <input value={`${moment(startDate).format("DD/MM/YYYY")} - ${moment(endDate).format("DD/MM/YYYY")}`} type="text" style={{width: 400, height: 60, padding: 10, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, fontWeight: 600}} />
                 </div>
                 {open=== true && <OutsideClickHandler onOutsideClick={()=> setOpen(false)}>
                     <div className={"jfksdskjsjsdasa"} style={{position: "absolute", bottom: 0, left: 0}}>
@@ -338,7 +361,7 @@ const MainAddEvent= (props)=> {
                     Nội dung
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <input onChange={e=> setDescription(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
+                    <input onChange={e=> setDescription(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, fontWeight: 600}} />
                 </div>
             </div>
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
@@ -346,7 +369,7 @@ const MainAddEvent= (props)=> {
                     Miêu tả 1: 
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <input onChange={e=> setDescription1(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
+                    <input onChange={e=> setDescription1(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, fontWeight: 600}} />
                 </div>
             </div>
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
@@ -354,7 +377,7 @@ const MainAddEvent= (props)=> {
                     Miêu tả 2: 
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <input onChange={e=> setDescription2(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#d9d9d9", border: "none", borderRadius: 5, fontWeight: 600}} />
+                    <input onChange={e=> setDescription2(e.target.value)} type="text" style={{width: 400, height: 60, padding: 10, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, fontWeight: 600}} />
                 </div>
             </div>
             <div className={"djslkdjkasjkaskjas"} style={{display: "flex", justifyContent: 'space-between', alignItems: "center", gap: 30, width: "100%", maxWidth: 600, marginBottom: 20}}>
@@ -362,7 +385,7 @@ const MainAddEvent= (props)=> {
                     Hình ảnh
                 </div>
                 <div className={"jdfskldjakjsakdas"} style={{display: "flex", justifyContent: 'center', alignItems: 'center'}}>
-                    <div className={"fioeujioasujsd"} style={{width: 400, height: 250, background: "#d9d9d9", display: "flex", justifyContent: 'center', alignItems :"center", position: "relative", borderRadius: 5, fontWeight: 600}}>
+                    <div className={"fioeujioasujsd"} style={{width: 400, height: 250, background: "#fff", display: "flex", justifyContent: 'center', alignItems :"center", position: "relative", borderRadius: 5, fontWeight: 600, border: "1px solid #e7e7e7"}}>
                         {
                             checkImg=== false && <>
                             <button style={{width: 200, height: 50, padding: 10, background: "#C311E0", border: "none", color: "#fff", fontWeight: 600, display: "flex", justifyContent: 'center', alignItems:"center", cursor: "pointer", borderRadius: 5, whiteSpace: "nowrap"}}>Thêm ảnh <span style={{fontSize :12}}>&nbsp;(Chọn đúng 3 ảnh)</span> </button>

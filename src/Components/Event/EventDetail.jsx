@@ -28,7 +28,9 @@ const EventDetail = (props) => {
           <SubTitle title={data?.description2} />
           <br />
           <br />
-          <br />
+          <div className={"dfjkldjifjdklssa"} style={{textAlign: "center", fontSize: 24, fontWeight: 600}}>
+            Khách sạn gần đây 
+          </div>
           <br />
           <div className={"dskdjlkfjdkawsasa"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center", gap: 10}}>
             {

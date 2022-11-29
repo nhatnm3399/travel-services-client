@@ -8,7 +8,7 @@ const DetailPopupRoom = (props) => {
   const handleClose = async () => {
     props?.setOpenDetail(()=> false)
     await props?.setX(()=> false)
-    props?.setBookingRoom(prev=> [...prev, {id: props?.properties_type_id, count: numberRoom, amount: parseInt(numberRoom) * parseInt(props?.price), name_hotel: props?.properties_type}])
+    props?.setBookingRoom(prev=> [...prev, {id: props?.room_type_id, count: numberRoom, amount: parseInt(numberRoom) * parseInt(props?.price), name_hotel: props?.type_room_name}])
   };
   const handleShow = () => setShow(true);
 

@@ -3,7 +3,9 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
+import delete_hotel from '../../api/admin/delete_hotel'
 import get_list_hotel from '../../api/manage/get_list_hotel'
+import Snackbar from '../Snackbar/Snackbar'
 import "./ListHotel.sass"
 
 const ListHotel = (props) => {
@@ -14,7 +16,7 @@ const ListHotel = (props) => {
   return (
     <div className={"hjfjhdkjlajsaksa"}>
         <Title title={"Danh sách khách sạn của bạn"} is_add_new_hotel={true} />
-        <Main data={data} />
+        <Main data={data} setData={setData} />
     </div>
   )
 }
@@ -43,11 +45,11 @@ export const Title= (props)=> {
             {
                 props.is_search_by_id_hotel=== true && 
                 <div className={"fjsdkjkjdksassa"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 10}}>
-                    <div>Tìm theo id khách sạn</div>
+                    <div>Tìm theo tên khách sạn</div>
                     <div>
                         <select onChange={(e)=> props?.setIdHotel(e.target.value)} value={props?.idHotel || ""} name="" id="">
                             {
-                                props?.data?.map((item, key)=> <option key={key} value={item.id}>{item?.id}</option>)
+                                props?.data?.map((item, key)=> <option key={key} value={item.hotel_name}>{item?.title}</option>)
                             }
                         </select>
                     </div>
@@ -58,6 +60,17 @@ export const Title= (props)=> {
 }
 
 const Main= (props)=> {
+    const [loading, setLoading]= useState(false)
+  // eslint-disable-next-line
+    const [data, setData]= useState()
+    const navigate= useNavigate()
+    const edit_hotel= (id)=> {
+        navigate("/manage/hotel/manage/edit/hotel?idHotel="+ id, {state: {is_edit: true, idHotel: id}})
+    }
+    const deleteHotel= (id)=> {
+        delete_hotel(id, setData, setLoading)
+        props?.setData(props?.data?.filter(item=> parseInt(item?.id) !== parseInt(id)))
+    }
     if(props?.data?.length > 0) {
 
         return (
@@ -77,10 +90,10 @@ const Main= (props)=> {
                                 <td>{item?.address}</td>
                                 <td>
                                     <div style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10}}>
-                                        <button className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#2DB83B"}}>
+                                        <button onClick={()=> edit_hotel(item?.id)} className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#2DB83B"}}>
                                             Chỉnh sửa
                                         </button>
-                                        <button className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#E0111D"}}>
+                                        <button onClick={()=> deleteHotel(item.id)} className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#E0111D"}}>
                                             Xóa
                                         </button>
                                     </div>
@@ -89,6 +102,7 @@ const Main= (props)=> {
                             }
                         </tbody>
                     </table>
+                    {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Xóa khách sạn thành công !"}/>}
                 </div>
         )
     }

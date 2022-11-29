@@ -193,7 +193,7 @@ export const Tab2 = (props) => {
           }}
         >
           {
-            props?.room_type_properties?.map((item, key)=> <div key={key} className={"jskdsjskljkasas"}>{item}</div>)
+            props?.data1?.hotel_properties?.map((item, key)=> <div key={key} style={{width: "calc(100% / 3)"}} className={"jskdsjskljkasas"}>{item?.properties_name}</div>)
           }
         </div>
         <br />

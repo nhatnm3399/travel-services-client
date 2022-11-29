@@ -12,24 +12,36 @@ import { SearchSuggest } from "../Home/Home";
 import suggest_search from "../../api/search/suggest_search";
 import Fuse from "fuse.js"
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import detail_hotel from "../../api/hotel/detail_hotel";
+import Snackbar from "../Snackbar/Snackbar";
+import update_hotel from "../../api/manage/update_hotel";
 
 const RegisterHotel = (props) => {
+  // eslint-disable-next-line
+  const [searchParams, setSearchParams]= useSearchParams()
+  const [data, setData]= useState()
+  useEffect(()=> {
+    if(props?.is_edit=== true) {
+      detail_hotel(searchParams.get("idHotel"), setData)
+    }
+  }, [props?.is_edit, searchParams])
   return (
     <div
       className={"jsjakljsakjsakeawa"}
       style={{ width: "100%"}}
     >
       <Title is_edit={props?.is_edit} title={props?.is_edit===true ? "Sửa khách sạn" : "Đăng ký khách sạn"} title1={props?.is_edit=== true ? "Sửa phòng" : "Đăng ký phòng"} />
-      <MainRegister />
+      <MainRegister is_edit={props?.is_edit} data={data} />
     </div>
   );
 };
 
 const MainRegister = (props) => {
-  
+  // eslint-disable-next-line
   const [payload, setPayload]= useState()
   // 
+  const [searchParams]= useSearchParams()
   const [hotelName, setHotelName]= useState()
   const [phoneNumber, setPhoneNumber]= useState()
   const [address, setAddress]= useState()
@@ -38,6 +50,7 @@ const MainRegister = (props) => {
   const [checkIn, setCheckIn]= useState()
   const [checkOut, setCheckOut]= useState()
   const [isPaymentCard, setIsPaymentCard]= useState()
+  // eslint-disable-next-line
   const [listImageFinal, setListImageFinal]= useState([])
 
   // 
@@ -46,6 +59,7 @@ const MainRegister = (props) => {
   const isChooseImage = listImage.length > 0 ? true : false;
   // const [openListCity, setOpenListCity]= useState(false)
   const [idCity, setIdCity]= useState()
+  const [loading, setLoading]= useState(false)
   const navigate= useNavigate()
   const add_hotel_func= async ()=> {
     const list_img_final_unresolve= listImage?.map(item=> uploadImageClient(item.img, setListImageFinal))
@@ -53,6 +67,24 @@ const MainRegister = (props) => {
     const id_hotel= await add_hotel(hotelName, description, address, phoneNumber, result[0], result[1], result[2], result[3], result[4], idCity, "100", "100", checkIn, checkOut, isPaymentCard, Cookies.get("uid"), convenient, setPayload)
     navigate("/manage/hotel/add/new/room?idHotel="+ id_hotel)
   }
+  const update_hotel_func= async ()=> {
+    const list_img_final_unresolve= listImage?.map(item=> uploadImageClient(item.img, setListImageFinal))
+    const result= await Promise.all(list_img_final_unresolve)
+    const id_hotel= await update_hotel(hotelName, description, address, phoneNumber, result[0], result[1], result[2], result[3], result[4], idCity, "100", "100", checkIn, checkOut, isPaymentCard, convenient, searchParams.get("idHotel"), setPayload, setLoading)
+    return id_hotel
+  }
+  useEffect(()=> {
+    if(props?.is_edit=== true ) {
+      setHotelName(props?.data?.hotel_name)
+      setPhoneNumber(props?.data?.phone)
+      setAddress(props?.data?.address)
+      setDescription(props?.data?.description)
+      setCheckIn(props?.data?.checkIn)
+      setCheckOut(props?.data?.checkOut)
+      setIsPaymentCard(props?.data?.is_payment_card)
+
+    }
+  }, [props?.is_edit, props?.data])
   return (
     <div
       className={"djksjajerkjawwawa"}
@@ -94,6 +126,7 @@ const MainRegister = (props) => {
               <TitleItem title={<span>Tên khách sạn <span style={{color: "red"}}>*</span></span>} />
               <InputTemplate
                 onChange={(e) => setHotelName(e.target.value)}
+                value={hotelName}
                 style={{
                   width: "100%",
                   height: 40,
@@ -108,6 +141,7 @@ const MainRegister = (props) => {
             <div className={"dsjaajwjalkwawwa"} style={{ flex: "1 1 0" }}>
               <TitleItem title={<span>Số điện thoại <span style={{color: "red"}}>*</span></span>} />
               <InputTemplate
+                value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 style={{
                   width: "100%",
@@ -125,6 +159,7 @@ const MainRegister = (props) => {
           <div className={"dsjaajwjalkwawwa"} style={{ width: "100%" }}>
             <TitleItem title={<span>Địa chỉ <span style={{color: "red"}}>*</span></span>} />
             <InputTemplate
+              value={address}
               onChange={(e) => setAddress(e.target.value)}
               style={{
                 width: "100%",
@@ -163,6 +198,7 @@ const MainRegister = (props) => {
       >
         <TitleItem title={<span>Mô tả <span style={{color: "red"}}>*</span></span>} />
         <textarea
+          value={description}
           onChange={(e) => setDescription(e.target.value)}
           style={{
             width: "100%",
@@ -181,13 +217,15 @@ const MainRegister = (props) => {
       <br />
       <SetRule checkIn={checkIn} setCheckIn={setCheckIn} checkOut={checkOut} setCheckOut={setCheckOut} isPaymentCard={isPaymentCard} setIsPaymentCard={setIsPaymentCard} />
       <br />
-      <ImageIllustation listImage={listImage}
+      <ImageIllustation is_edit={props?.is_edit} listImage={listImage}
         setListImage={setListImage}
         result={result}
         setResult={setResult}
         isChooseImage={isChooseImage}
         add_hotel_func={add_hotel_func}
+        update_hotel_func={update_hotel_func}
       />
+      {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo "} description={"Cập nhật khách sạn thành công !"} />}
     </div>
   );
 };
@@ -200,18 +238,8 @@ const ChooseCity= (props)=> {
 
   const options = {
     isCaseSensitive: false,
-    // includeScore: false,
     shouldSort: true,
     includeMatches: false,
-    // findAllMatches: false,
-    // minMatchCharLength: 1,
-    // location: 0,
-    // threshold: 0.6,
-    // distance: 100,
-    // useExtendedSearch: false,
-    // ignoreLocation: false,
-    // ignoreFieldNorm: false,
-    // fieldNormWeight: 1,
     keys: [
       "city_name",
       "province"
@@ -600,7 +628,8 @@ const ImageIllustation = (props) => {
           marginTop: 16,
         }}
       >
-        <button
+        {
+          props?.is_edit !== true && <button
           onClick={props?.add_hotel_func}
           style={{
             padding: "10px 30px",
@@ -617,6 +646,26 @@ const ImageIllustation = (props) => {
         >
           Đăng tải
         </button>
+        }
+        {
+          props?.is_edit === true && <button
+          onClick={props?.update_hotel_func}
+          style={{
+            padding: "10px 30px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer",
+            border: "1px solid #e7e7e7",
+            outline: "none",
+            background: "#2e89ff",
+            color: "#fff",
+            fontWeight: 600,
+          }}
+        >
+          Cập nhật
+        </button>
+        }
       </div>
     </div>
   );

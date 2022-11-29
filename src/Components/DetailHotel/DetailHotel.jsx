@@ -34,7 +34,7 @@ const DetailHotel = (props) => {
             <Tab2 data={data} />
             <br />
             <div className={"daskalsklafass"} style={{width: "100%", padding: "0 40px"}}>
-                <div ref={myRef} className={"fjklsdjskjsdksa"} style={{width: "100%", position: "sticky", top: 0, zIndex: 999, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, height: 68, marginBottom: 5}}></div>
+                <div ref={myRef} className={"fjklsdjskjsdksa"} style={{width: "100%", position: "sticky", top: 0, zIndex: 999, background: "#fff", border: "1px solid #e7e7e7", borderRadius: 5, height: 0, marginBottom: 5}}></div>
                 {
                     data?.room_types?.map((item, key)=> <RoomOfHotel data1={data} data={bookingRoom} setData={setBookingRoom} setBookingRoom={setBookingRoom} bookingRoom={bookingRoom} key={key} {...item} />)
                 }
