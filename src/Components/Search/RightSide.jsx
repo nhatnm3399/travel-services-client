@@ -8,10 +8,12 @@ import _ from 'lodash'
 import OutsideClickHandler from 'react-outside-click-handler'
 import {BiDownArrow} from "react-icons/bi"
 import PaginationPage from '../Pagination/Pagination'
+import { NumericFormat } from 'react-number-format';
 
 const RightSide = (props) => {
   const [searchParams, setSearchParams]= useSearchParams()
   const [sort, setSort]= useState([''])
+  // eslint-disable-next-line
   const [page, setPage]= useState(5)
   const [offSet, setOffSet]= useState(1)
   const [currentPage, setCurrentPage]= useState(1)
@@ -113,7 +115,7 @@ const ListResultSearch= (props)=> {
                     {/*  */}
                     <div className={"list-result-search-element-r-2"}>
                         <div className={"list-result-search-element-r-2-1"} style={{fontSize: 14, marginBottom: 20, direction: "rtl"}}>
-                            VND {props?.price}
+                            VND <NumericFormat value= {props?.price} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} />
                         </div>
                         <div className={"list-result-search-element-r-2-2"}>
                             <div className={"wrap-button-list-reuslt-search-element-r-2-1"} style={{width: 200, height: 60, background: "#fff", color: "#fff"}}>

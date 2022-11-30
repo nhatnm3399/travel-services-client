@@ -23,11 +23,12 @@ const RequestBookingRoom = (props) => {
 
 const ListRequest = (props) => {
   const [data, setData]= useState([])
+  // eslint-disable-next-line
   const [result, setResult]= useState()
   const [loading, setLoading]= useState(false)
   useEffect(()=> {
     if(props?.idHotel) {
-      get_list_request_by_id_hotel(setData)
+      get_list_request_by_id_hotel(props?.idHotel, setData)
     }
   }, [props?.idHotel])
   const approveHotel= ()=> {

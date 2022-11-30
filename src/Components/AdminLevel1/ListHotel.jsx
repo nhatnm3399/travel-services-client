@@ -49,7 +49,7 @@ export const Title= (props)=> {
                     <div>
                         <select onChange={(e)=> props?.setIdHotel(e.target.value)} value={props?.idHotel || ""} name="" id="">
                             {
-                                props?.data?.map((item, key)=> <option key={key} value={item.hotel_name}>{item?.title}</option>)
+                                props?.data?.map((item, key)=> <option key={key} value={item.id}>{item?.title}</option>)
                             }
                         </select>
                     </div>

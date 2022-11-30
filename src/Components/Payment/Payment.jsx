@@ -96,7 +96,7 @@ const MainDetail= (props)=> {
                         <div className={"ele-list-ab-room-1-2"}>Thanh toán bằng tiền mặt</div>
                     </div>
                     <div className={"confirm-pay-x"} style={{width:" 100%", display: "flex", justifyContent:" center", alignItems: "center", marginTop: 30}}>
-                        <button onClick={()=> create_payment(props?.data?.booking_id, "vnpay", _.sumBy(props?.data?.data?.data, function(e) {return e.amount}))} className={"btn-confirm-pay-x"} style={{width: 300, height: 60, border: "none", outline: "none", background: "#2BC006", color:" #fff", cursor: "pointer", fontSize: 18, borderRadius: 5, fontWeight: 600}}>Xác nhận thanh toán</button>
+                        <button onClick={()=> create_payment(props?.data?.booking_id, "vnpay", parseInt(props?.data?.total_price))} className={"btn-confirm-pay-x"} style={{width: 300, height: 60, border: "none", outline: "none", background: "#2BC006", color:" #fff", cursor: "pointer", fontSize: 18, borderRadius: 5, fontWeight: 600}}>Xác nhận thanh toán</button>
                     </div>
                 </div>
             </div>

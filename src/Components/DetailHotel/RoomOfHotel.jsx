@@ -6,7 +6,7 @@ import detail_room from '../../api/hotel/detail_room';
 import _ from 'lodash';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-
+import { NumericFormat } from 'react-number-format';
 
 const RoomOfHotel = (props) => {
   const [openDetail, setOpenDetail]= useState(()=> false)
@@ -87,7 +87,7 @@ const ParametersRoom= (props)=> {
                 {/*  */}
                 {/*  */}
                 <div className={"sdksaskasklasas"}>
-                    <div className={"jrjawjalwlkeawa chkhsjfhjkdfhfsd"} style={{direction: "rtl",height: 30, margin: "8px 0"}}><strong>{props?.price}</strong> VND</div>
+                    <div className={"jrjawjalwlkeawa chkhsjfhjkdfhfsd"} style={{direction: "rtl",height: 30, margin: "8px 0"}}><strong><NumericFormat value= {props?.price} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} /></strong> VND</div>
                     <div className={"jrjawjalwlkeawa gfyjetyuiaehgksajdas"} style={{direction: "rtl", height: 30, margin: "8px 0"}}>1 / phòng 1 / đêm</div>
                     <div className={"jrjawjalwlkeawa fsyjetyasdjgashjkas"} style={{direction: "rtl", height: 30, margin: "8px 0"}}>
                         <button onClick={()=> props?.setOpen(true)} className={"cksdsjkasjakeaw"} style={{padding:  "10px 25px", background: "#2e89ff", color: "#fff", borderRadius: 80, fontWeight: 600, fontSize: 20, border: "none", outline: "none", cursor: "pointer"}}>
