@@ -108,8 +108,8 @@ const DetailRoom= (props)=> {
         return ()=> clearTimeout(()=> trigger)
     }, [])
     useEffect(()=> {
-        detail_room(props?.properties_type, setData)
-    }, [props?.properties_type])
+        detail_room(props?.room_type_id, setData)
+    }, [props?.room_type_id])
     useEffect(()=> {
         document.body.style.overflow= "hidden"
         return ()=> {

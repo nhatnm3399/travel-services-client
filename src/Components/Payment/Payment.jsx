@@ -1,8 +1,9 @@
 import _ from 'lodash'
 import moment from 'moment'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useLocation } from 'react-router-dom'
 import create_payment from '../../api/auth/user/create_payment'
+import { NumericFormat } from 'react-number-format';
 
 const Payment = (props) => {
   const location= useLocation()
@@ -64,11 +65,11 @@ const MainDetail= (props)=> {
                 <div className={"list-ab-room-1"} style={{width: "100%"}}>
                     <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
                         <div className={"ele-list-ab-room-1-1"}>Loại phòng</div>
-                        <div className={"ele-list-ab-room-1-2"}>{props?.data?.data?.data?.map((item, key)=> <>{item.name_hotel}</>)},</div>
+                        <div className={"ele-list-ab-room-1-2"}>{props?.data?.data?.data?.map((item, key)=> <Fragment key={key}>{item.name_hotel}</Fragment>)},</div>
                     </div>
                     <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
                         <div className={"ele-list-ab-room-1-1"}>Tiền phòng</div>
-                        <div className={"ele-list-ab-room-1-2"}>{_.sumBy(props?.data?.data?.data, function(e) {return e.amount})} VND</div>
+                        <div className={"ele-list-ab-room-1-2"}><NumericFormat value= {props?.data?.total_price} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} /> VND</div>
                     </div>
                     {/* <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
                         <div className={"ele-list-ab-room-1-1"}>Dịch vụ bổ sung</div>
