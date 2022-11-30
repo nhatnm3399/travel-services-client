@@ -32,7 +32,7 @@ export const AmountAll= (props)=> {
         <div className={"jdksjkdjksdlas"} style={{padding: "0 40px"}}>
             <div className={"dsjdjhsjdklsjasa"} style={{width: "100%", background:"#fff", padding: 10, borderRadius: 5, border: "1px solid #e7e7e7"}}>
                 <div className={"fkjdklsjdskjkasdas"} style={{marginBottom: 12, fontSize: 18}}>
-                    <strong>{_.sumBy(props?.bookingRoom, function(e) {return e.count})} phòng cho</strong>
+                    <strong>{_.sumBy(props?.bookingRoom, function(e) {return e.count})} phòng đã đặt</strong>
                 </div>
                 <div className={"fkdjksdjskdjksdrwree"} style={{fontSize: 24}}>
                     VND {_.sumBy(props?.bookingRoom, function(e) {return e.amount})}
