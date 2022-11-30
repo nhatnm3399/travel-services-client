@@ -132,7 +132,7 @@ const ElementDetail= (props)=> {
                     </div>
                 </div>
             </div>
-            <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Đã xóa khách sạn thành công"} />
+            {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Đã xóa khách sạn thành công"} />}
         </div>
     )
 }
