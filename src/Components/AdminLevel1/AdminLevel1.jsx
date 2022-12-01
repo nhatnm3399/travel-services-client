@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./AdminLevel1.sass";
 import { MdDelete } from "react-icons/md";
 // import { TiArrowBackOutline} from "react-icons/ti"
@@ -156,6 +156,7 @@ export const Pending = (props) => {
     <>
       <Title title={"Danh sách khách sạn đang chờ duyệt"} />
       <MainElementList
+        pending={true}
         data={props?.data}
         setData={props?.setData}
         type={"Waiting Approve"}
@@ -405,6 +406,7 @@ const MainElementEvent = (props) => {
 };
 
 const MainElementList = (props) => {
+  // eslint-disable-next-line
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const deleteHotel = async (idHotel) => {
@@ -452,17 +454,34 @@ const MainElementList = (props) => {
                 }}
               >
                 <div className="dhsdljajskljassa">
-                  <div
-                    className="sljflkjeklasjas"
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 600,
-                      color: "#2e89fff",
-                      marginBottom: 12,
-                    }}
-                  >
-                    Tên khách sạn: {item?.title}
-                  </div>
+                  {
+                    props?.pending=== true && <Link to={"/check/hotel/"+ item?.id}>
+                      <div
+                          className="sljflkjeklasjas"
+                          style={{
+                            fontSize: 18,
+                            fontWeight: 600,
+                            color: "#2e89fff",
+                            marginBottom: 12,
+                          }}
+                        >
+                          Tên khách sạn: {item?.title}
+                        </div>
+                    </Link>
+                  }
+                  {
+                    props?.pending !== true && <div
+                          className="sljflkjeklasjas"
+                          style={{
+                            fontSize: 18,
+                            fontWeight: 600,
+                            color: "#2e89fff",
+                            marginBottom: 12,
+                          }}
+                        >
+                          Tên khách sạn: {item?.title}
+                        </div>
+                  }
                   <div
                     className="djasjklasjklasjas"
                     style={{ color: "#2e89ff", fontSize: 14 }}

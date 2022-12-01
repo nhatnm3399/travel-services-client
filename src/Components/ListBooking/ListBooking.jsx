@@ -123,7 +123,7 @@ const ElementDetail= (props)=> {
                         Chờ duyệt
                     </div>
                     <div className={"djaklsajlksjdklsjdss"} style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10, width: "calc(100% / 3)"}}>
-                        <div title={"Chi tiết"} className={"dsjlksjaklsjkalsjdsa"} style={{ height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
+                        <div title={"Chi tiết"} className={"FJSIDHJASDHAxjdsd"} style={{ height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
                             <TbReportSearch style={{width: 40, height: 40, color: "green"}} width={40} height={40} />
                         </div>
                         <div onClick={()=> deleteHotel(props?.id)} title={"Xóa"} className={"dsjlksjaklsjkalsjdsa"} style={{width: 40, height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>

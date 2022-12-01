@@ -12,32 +12,42 @@ import { SearchSuggest } from "../Home/Home";
 import suggest_search from "../../api/search/suggest_search";
 import Fuse from "fuse.js"
 import Cookies from "js-cookie";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import detail_hotel from "../../api/hotel/detail_hotel";
 import Snackbar from "../Snackbar/Snackbar";
 import update_hotel from "../../api/manage/update_hotel";
 
-const RegisterHotel = (props) => {
+export const RegisterHotel = (props) => {
+  // eslint-disable-next-line
+  const {idHotel}= useParams()
   // eslint-disable-next-line
   const [searchParams, setSearchParams]= useSearchParams()
   const [data, setData]= useState()
   useEffect(()=> {
+    if(props?.is_detail=== true ) {
+      detail_hotel(idHotel, setData)
+    }
     if(props?.is_edit=== true) {
       detail_hotel(searchParams.get("idHotel"), setData)
     }
-  }, [props?.is_edit, searchParams])
+  }, [props?.is_edit, searchParams, props?.is_detail, idHotel])
   return (
     <div
       className={"jsjakljsakjsakeawa"}
       style={{ width: "100%"}}
     >
-      <Title is_edit={props?.is_edit} title={props?.is_edit===true ? "Sửa khách sạn" : "Đăng ký khách sạn"} title1={props?.is_edit=== true ? "Sửa phòng" : "Đăng ký phòng"} />
-      <MainRegister is_edit={props?.is_edit} data={data} />
+      {
+        !props?.is_detail=== true &&
+        <Title is_edit={props?.is_edit} title={props?.is_edit===true ? "Sửa khách sạn" : "Đăng ký khách sạn"} title1={props?.is_edit=== true ? "Sửa phòng" : "Đăng ký phòng"} />
+      }
+      <MainRegister is_detail={props?.is_detail} is_edit={props?.is_edit} data={data} />
     </div>
   );
 };
 
 const MainRegister = (props) => {
+  // eslint-disable-next-line
+  const [imgX, setImgX]= useState([])
   // eslint-disable-next-line
   const [payload, setPayload]= useState()
   // 
@@ -74,7 +84,7 @@ const MainRegister = (props) => {
     return id_hotel
   }
   useEffect(()=> {
-    if(props?.is_edit=== true ) {
+    if(props?.is_edit=== true || props?.is_detail ) {
       setHotelName(props?.data?.hotel_name)
       setPhoneNumber(props?.data?.phone)
       setAddress(props?.data?.address)
@@ -82,9 +92,9 @@ const MainRegister = (props) => {
       setCheckIn(props?.data?.checkIn)
       setCheckOut(props?.data?.checkOut)
       setIsPaymentCard(props?.data?.is_payment_card)
-
+      setImgX(prev=> ([props?.data?.image, props?.data?.image1, props?.data?.image2, props?.data?.image3, props?.data?.image4]))
     }
-  }, [props?.is_edit, props?.data])
+  }, [props?.is_edit, props?.data, props?.is_detail])
   return (
     <div
       className={"djksjajerkjawwawa"}
@@ -217,7 +227,7 @@ const MainRegister = (props) => {
       <br />
       <SetRule checkIn={checkIn} setCheckIn={setCheckIn} checkOut={checkOut} setCheckOut={setCheckOut} isPaymentCard={isPaymentCard} setIsPaymentCard={setIsPaymentCard} />
       <br />
-      <ImageIllustation is_edit={props?.is_edit} listImage={listImage}
+      <ImageIllustation imgX={imgX} is_detail={props?.is_detail} is_edit={props?.is_edit} listImage={listImage}
         setListImage={setListImage}
         result={result}
         setResult={setResult}
@@ -482,10 +492,57 @@ const ImageIllustation = (props) => {
           borderRadius: 5,
           border: "1px solid #e7e7e7"
         }}
+        
       >
+      {
+            props?.is_detail=== true && props?.imgX.map((item, key) => (
+              <div
+                key={key}
+                className={"dlakjklajwaasas"}
+                style={{
+                  width: 150,
+                  height: 150,
+                  padding: 10,
+                  position: "relative",
+                }}
+              >
+                <img
+                  src={item}
+                  alt="open"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    border: "1px solid #e7e7e7",
+                  }}
+                />
+                {/* <div
+                  title={"Xóa"}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                  }}
+                  onClick={() =>
+                    props?.setListImage(
+                      props?.listImage.filter(
+                        (img) => parseInt(img.key) !== parseInt(item.key)
+                      )
+                    )
+                  }
+                >
+                  <AiFillCloseCircle style={{ color: "#3a3b3c" }} />
+                </div> */}
+              </div>
+              ))}
+              {/*  */}
         {props?.isChooseImage === true &&
           
           <>
+          
             <>
               {props?.listImage.map((item, key) => (
               <div
@@ -555,7 +612,7 @@ const ImageIllustation = (props) => {
           </>
           }
 
-        {props?.isChooseImage === false && (
+        {(props?.isChooseImage === false || !props?.is_detail=== true) && (
           <div
             className={"fkdjksjakwjawawas"}
             style={{
@@ -616,7 +673,10 @@ const ImageIllustation = (props) => {
             width: "100%",
           }}
         >
-          Vui lòng đăng tải 5 hình ảnh
+        {
+          props?.is_detail=== true && 
+          "Vui lòng đăng tải 5 hình ảnh"
+        }
         </div>
       </div>
       <div
@@ -627,7 +687,10 @@ const ImageIllustation = (props) => {
           alignItems: "center",
           marginTop: 16,
         }}
-      >
+      > 
+      {
+        !props?.is_detail === true &&
+        <>
         {
           props?.is_edit !== true && <button
           onClick={props?.add_hotel_func}
@@ -666,6 +729,8 @@ const ImageIllustation = (props) => {
           Cập nhật
         </button>
         }
+        </>
+      }
       </div>
     </div>
   );

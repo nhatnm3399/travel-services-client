@@ -65,7 +65,7 @@ const MainDetail= (props)=> {
                 <div className={"list-ab-room-1"} style={{width: "100%"}}>
                     <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
                         <div className={"ele-list-ab-room-1-1"}>Loại phòng</div>
-                        <div className={"ele-list-ab-room-1-2"}>{props?.data?.data?.data?.map((item, key)=> <Fragment key={key}>{item.name_hotel}</Fragment>)},</div>
+                        <div className={"ele-list-ab-room-1-2"}>{_.uniqBy(props?.data?.data?.data, function(e) {return e.name_hotel})?.map((item, key)=> <div style={{direction: "rtl"}} key={key}>{item.name_hotel}</div>)},</div>
                     </div>
                     <div className={"ele-list-ab-room-1"} style={{width: "100%", height: 50, borderBottom: "1px solid #000", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", marginBottom: 12}}>
                         <div className={"ele-list-ab-room-1-1"}>Tiền phòng</div>

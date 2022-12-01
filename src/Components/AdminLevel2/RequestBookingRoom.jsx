@@ -6,6 +6,9 @@ import get_list_hotel from "../../api/manage/get_list_hotel";
 import get_list_request_by_id_hotel from "../../api/manage/get_list_request_by_id_hotel";
 import approve_hotel from "../../api/admin/approve_hotel";
 import Snackbar from "../Snackbar/Snackbar";
+import PopupConfirm from "../PopupConfirm/PopupConfirm";
+import PopupSnackBar from "../PopupConfirm/PopupSnackBar";
+import reject_hotel from "../../api/manage/reject_hotel";
 
 const RequestBookingRoom = (props) => {
   const [data, setData]= useState([])
@@ -26,17 +29,24 @@ const ListRequest = (props) => {
   // eslint-disable-next-line
   const [result, setResult]= useState()
   const [loading, setLoading]= useState(false)
+  const [openConfirm, setOpenConfirm]= useState(false)
+  const [openConfirm2, setOpenConfirm2]= useState(false)
+  const [openSnackbar, setOpenSnackbar]= useState(false)
+  const [messageSnackbar, setMessageSnackbar]= useState("")
+  const [bookingId, setBookingId]= useState("")
   useEffect(()=> {
     if(props?.idHotel) {
       get_list_request_by_id_hotel(props?.idHotel, setData)
     }
   }, [props?.idHotel])
-  const approveHotel= ()=> {
-    approve_hotel(props?.idHotel, setResult, setLoading)
+  const approveBooking= (bookingId)=> {
+    setBookingId(bookingId)
+    setOpenConfirm2(true)
+   
   }
-
-  const deleteHotel= ()=> {
-    
+  const rejectBooking= (bookingId)=> {
+    setBookingId(bookingId)
+    setOpenConfirm(true)
   }
   if(data?.length > 0) {
 
@@ -57,6 +67,8 @@ const ListRequest = (props) => {
               <th style={{ fontWeight: 600 }}>Loại phòng</th>
               <th style={{ fontWeight: 600 }}>Hình thức thanh toán</th>
               <th style={{ fontWeight: 600 }}>Trạng thái</th>
+              <th style={{ fontWeight: 600 }}>Check in</th>
+              <th style={{ fontWeight: 600 }}>Check out</th>
               <th style={{ fontWeight: 600 }}>Hành động</th>
             </tr>
           </thead>
@@ -68,6 +80,8 @@ const ListRequest = (props) => {
               <td style={{ textAlign: "center" , whiteSpace: "nowrap", height: 100}}>{item?.room_name}</td>
               <td style={{ textAlign: "center" , whiteSpace: "nowrap", height: 100}}>Tiền mặt</td>
               <td style={{ textAlign: "center" , whiteSpace: "nowrap", height: 100}}>{item?.booking_status}</td>
+              <td style={{ textAlign: "center" , whiteSpace: "nowrap", height: 100}}>{item?.check_in}</td>
+              <td style={{ textAlign: "center" , whiteSpace: "nowrap", height: 100}}>{item?.check_out}</td>
               <td style={{ textAlign: "center" , whiteSpace: "nowrap", height: 100}}>
                 <div
                   className={"djskjaksjkafaawe"}
@@ -75,11 +89,11 @@ const ListRequest = (props) => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    gap: 20,
+                    gap: 10,
                   }}
                 >
                   <button
-                    onClick={approveHotel}
+                    onClick={()=> approveBooking(item?.id)}
                     title={"Chấp nhận"}
                     className={"fjakajkwawawwawa"}
                     style={{
@@ -90,14 +104,16 @@ const ListRequest = (props) => {
                       border: "none",
                       outline: "none",
                       borderRadius: "50%",
-                      aspectRatio: 1 / 1
+                      width: 40, height: 40,
+
                     }}
                   >
                     <GoVerified
-                      style={{ width: 24, height: 24, color: "#01b853" }}
+                      style={{ minWidth: 20, height: 20, color: "#01b853" }}
                     />
                   </button>
                   <button
+                    onClick={()=> rejectBooking(item?.id)}
                     title={"Từ chối"}
                     className={"fjakajkwawawwawa"}
                     style={{
@@ -109,11 +125,11 @@ const ListRequest = (props) => {
                       outline: "none",
                       backgroundColor: "red",
                       borderRadius: "50%",
-                      aspectRatio: 1 / 1
+                      width: 40, height: 40,
                     }}
                   >
                     <AiOutlineClose
-                      style={{ width: 24, height: 24, color: "red" }}
+                      style={{ minWidth: 20, height: 20, color: "red" }}
                     />
                   </button>
                 </div>
@@ -123,7 +139,13 @@ const ListRequest = (props) => {
           </tbody>
         </table>
         {
-          loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Thực hiện hành động thành công"} />
+          openConfirm=== true && <PopupConfirm setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> approve_hotel(props?.idHotel, setResult, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận sẽ thêm khách sạn này ?"} />
+        }
+        {
+          openConfirm2=== true && <PopupConfirm setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> reject_hotel(props?.idHotel, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận sẽ thêm khách sạn này ?"} />
+        }
+        {
+          openSnackbar=== true && <PopupSnackBar open={openSnackbar} setOpen={setOpenSnackbar} alert={messageSnackbar} />
         }
       </div>
     );
