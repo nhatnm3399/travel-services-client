@@ -5,6 +5,8 @@ import { Button } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import delete_hotel from '../../api/admin/delete_hotel'
 import get_list_hotel from '../../api/manage/get_list_hotel'
+import PopupConfirm from '../PopupConfirm/PopupConfirm'
+import PopupSnackBar from '../PopupConfirm/PopupSnackBar'
 import Snackbar from '../Snackbar/Snackbar'
 import "./ListHotel.sass"
 
@@ -60,6 +62,7 @@ export const Title= (props)=> {
 }
 
 const Main= (props)=> {
+    // eslint-disable-next-line
     const [loading, setLoading]= useState(false)
   // eslint-disable-next-line
     const [data, setData]= useState()
@@ -71,6 +74,21 @@ const Main= (props)=> {
         delete_hotel(id, setData, setLoading)
         props?.setData(props?.data?.filter(item=> parseInt(item?.id) !== parseInt(id)))
     }
+    const [openConfirm, setOpenConfirm]= useState(false)
+    const [openConfirm2, setOpenConfirm2]= useState(false)
+    const [openSnackbar, setOpenSnackbar]= useState(false)
+    // const [openSnackbar2, setOpenSnackbar2]= useState(false)
+    const [messageSnackbar, setMessageSnackbar]= useState("")
+    const approveBooking= (bookingId)=> {
+        setBookingId(bookingId)
+        setOpenConfirm(true)
+       
+      }
+      const rejectBooking= (bookingId)=> {
+        setBookingId(bookingId)
+        setOpenConfirm2(true)
+      }
+    const [bookingId, setBookingId]= useState("")
     if(props?.data?.length > 0) {
 
         return (
@@ -90,10 +108,10 @@ const Main= (props)=> {
                                 <td>{item?.address}</td>
                                 <td>
                                     <div style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10}}>
-                                        <button onClick={()=> edit_hotel(item?.id)} className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#2DB83B"}}>
+                                        <button onClick={()=> approveBooking(item?.id)} className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#2DB83B", borderRadius: 5}}>
                                             Chỉnh sửa
                                         </button>
-                                        <button onClick={()=> deleteHotel(item.id)} className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#E0111D"}}>
+                                        <button onClick={()=> rejectBooking(item.id)} className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#E0111D", borderRadius: 5}}>
                                             Xóa
                                         </button>
                                     </div>
@@ -102,7 +120,16 @@ const Main= (props)=> {
                             }
                         </tbody>
                     </table>
-                    {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Xóa khách sạn thành công !"}/>}
+                    {/* {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Xóa khách sạn thành công !"}/>} */}
+                    {
+                        openConfirm=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> edit_hotel(bookingId, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận sẽ thêm khách sạn này ?"} />
+                    }
+                    {
+                        openConfirm2=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> deleteHotel(bookingId)} open={openConfirm2} setOpen={setOpenConfirm2} title={"Thông báo"} content={"Bạn xác nhận sẽ từ chối khách sạn này ?"} />
+                    }
+                    {
+                        openSnackbar=== true && <PopupSnackBar open={openSnackbar} setOpen={setOpenSnackbar} alert={messageSnackbar} />
+                    } 
                 </div>
         )
     }

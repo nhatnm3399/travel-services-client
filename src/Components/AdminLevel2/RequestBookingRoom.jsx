@@ -5,7 +5,7 @@ import { GoVerified } from "react-icons/go";
 import get_list_hotel from "../../api/manage/get_list_hotel";
 import get_list_request_by_id_hotel from "../../api/manage/get_list_request_by_id_hotel";
 import approve_hotel from "../../api/admin/approve_hotel";
-import Snackbar from "../Snackbar/Snackbar";
+// import Snackbar from "../Snackbar/Snackbar";
 import PopupConfirm from "../PopupConfirm/PopupConfirm";
 import PopupSnackBar from "../PopupConfirm/PopupSnackBar";
 import reject_hotel from "../../api/manage/reject_hotel";
@@ -28,11 +28,14 @@ const ListRequest = (props) => {
   const [data, setData]= useState([])
   // eslint-disable-next-line
   const [result, setResult]= useState()
+  // eslint-disable-next-line
   const [loading, setLoading]= useState(false)
   const [openConfirm, setOpenConfirm]= useState(false)
   const [openConfirm2, setOpenConfirm2]= useState(false)
   const [openSnackbar, setOpenSnackbar]= useState(false)
+  // const [openSnackbar2, setOpenSnackbar2]= useState(false)
   const [messageSnackbar, setMessageSnackbar]= useState("")
+
   const [bookingId, setBookingId]= useState("")
   useEffect(()=> {
     if(props?.idHotel) {
@@ -41,12 +44,12 @@ const ListRequest = (props) => {
   }, [props?.idHotel])
   const approveBooking= (bookingId)=> {
     setBookingId(bookingId)
-    setOpenConfirm2(true)
+    setOpenConfirm(true)
    
   }
   const rejectBooking= (bookingId)=> {
     setBookingId(bookingId)
-    setOpenConfirm(true)
+    setOpenConfirm2(true)
   }
   if(data?.length > 0) {
 
@@ -139,14 +142,14 @@ const ListRequest = (props) => {
           </tbody>
         </table>
         {
-          openConfirm=== true && <PopupConfirm setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> approve_hotel(props?.idHotel, setResult, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận sẽ thêm khách sạn này ?"} />
+          openConfirm=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> approve_hotel(bookingId, setResult, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận chấp nhận yêu cầu này ?"} />
         }
         {
-          openConfirm2=== true && <PopupConfirm setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> reject_hotel(props?.idHotel, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận sẽ thêm khách sạn này ?"} />
+          openConfirm2=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> reject_hotel(bookingId, setResult)} open={openConfirm2} setOpen={setOpenConfirm2} title={"Thông báo"} content={"Bạn xác nhận sẽ từ chối yên cầu này ?"} />
         }
         {
           openSnackbar=== true && <PopupSnackBar open={openSnackbar} setOpen={setOpenSnackbar} alert={messageSnackbar} />
-        }
+        } 
       </div>
     );
   }

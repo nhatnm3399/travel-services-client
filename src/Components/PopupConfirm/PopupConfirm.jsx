@@ -11,7 +11,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PopupConfirm({open, setOpen, title, content, func, setOpenSnackbar, setMessageSnackbar}) {
+export default function PopupConfirm({open, setOpen, title, content, func, setOpenSnackbar, setMessageSnackbar, bookingId}) {
   const handleClose = () => {
     setOpen(false);
   };
@@ -41,7 +41,7 @@ export default function PopupConfirm({open, setOpen, title, content, func, setOp
           <Button onClick={()=> {
             handleClose()
             setOpenSnackbar(()=> true)
-            setMessageSnackbar(()=> "Đã thêm thành công khách sạn")
+            setMessageSnackbar(()=> "Đã từ chối duyệt khách sạn")
           }}>Từ chối</Button>
         </DialogActions>
       </Dialog>

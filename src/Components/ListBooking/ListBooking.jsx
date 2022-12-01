@@ -97,11 +97,11 @@ const ElementDetail= (props)=> {
     return (
         <div className={"fjklsajklsjkalskja"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 40, marginBottom: 30, background: "#fff", borderRadius: 5, padding: 10}}>
             <div className="skjlajaksjkasaasas" style={{display: "flex", justifyContent: 'center', alignItems: "center"}}> 
-                <div className={"aklsjaklsjskldas"} style={{width: 400, height: 350, background: "#fff"}}>
+                <div className={"aklsjaklsjskldas"} style={{width: 400, height: 250, background: "#fff"}}>
                     <img className={"fjksjdksdjdassdas"} src={props?.image} alt="" style={{width: '100%', height: "100%", objectFit: "cover"}} />
                 </div>
             </div>
-            <div className={"djklsjakljsklasja"} style={{width: "calc(100% - 400px)", minHeight: 250, height: 350, padding: 10, border: "1px solid #e7e7e7", }}>
+            <div className={"djklsjakljsklasja"} style={{width: "calc(100% - 400px)", height: 250, padding: 10, border: "1px solid #e7e7e7", }}>
                 <div className={"dkokaskadassad"} style={{width: "100%", justifyContent: "space-between", alignItems: "center", display: "flex", padding: 10}}>
                     <div className={"dkslaskladasadsk"} style={{fontSize: 16, fontWeight: 600, marginBottom: 16, width: "calc(100% / 3)",textAlign: "center"}}>
                         Miêu tả
@@ -113,7 +113,7 @@ const ElementDetail= (props)=> {
                         Hành động
                     </div>
                 </div>
-                <div className={"sdajslkajsklsjdass"} style={{width: "100%",height: 250, minHeight: 250, background: "#fff", display: "flex", justifyContent: 'space-between', alignItems: "center", padding: 10}}>
+                <div className={"sdajslkajsklsjdass"} style={{width: "100%", background: "#fff", display: "flex", justifyContent: 'space-between', alignItems: "center", padding: 10}}>
                     <div className={"safdjkdjkldjakssa"} style={{height: "100%", width: "calc(100% / 3)"}}>
                         <div className={"djklsjkasasdas"} style={{fontWeight: 600, marginBottom: 8}}>Tên khách sạn: {props?.hotel_name}</div>
                         <div className={"aklsjkasjkflddsas"} style={{marginBottom: 20}}>Địa chỉ: {props?.address}</div>

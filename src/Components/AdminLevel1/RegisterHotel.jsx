@@ -96,9 +96,10 @@ const MainRegister = (props) => {
     }
   }, [props?.is_edit, props?.data, props?.is_detail])
   return (
-    <div
+    <div className="sdjdjsjkjwasw" style={{width: "100%", background: "#e4f2fd", padding: 20}}>
+      <div
       className={"djksjajerkjawwawa"}
-      style={{ width: "100%", padding: 10, background: "#fff" }}
+      style={{ width: "100%", padding: 10, background: "#fff", borderRadius: 10 }}
     >
       <div
         className={"fjskdljskdfjeaaawa"}
@@ -189,7 +190,8 @@ const MainRegister = (props) => {
           </div>
         </div>
         {/* intergrate map */}
-        <div
+        {
+          !props?.is_detail=== true && <div
           className={"fksedkawjrkjakwawwaw"}
           style={{ width: 250, height: 250 }}
         >
@@ -200,6 +202,7 @@ const MainRegister = (props) => {
             <GoogleMapPlugin />
           </div>
         </div>
+        }
       </div>
       {/*  */}
       <div
@@ -236,6 +239,7 @@ const MainRegister = (props) => {
         update_hotel_func={update_hotel_func}
       />
       {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo "} description={"Cập nhật khách sạn thành công !"} />}
+    </div>
     </div>
   );
 };
@@ -612,55 +616,60 @@ const ImageIllustation = (props) => {
           </>
           }
 
-        {(props?.isChooseImage === false || !props?.is_detail=== true) && (
-          <div
-            className={"fkdjksjakwjawawas"}
-            style={{
-              width: 80,
-              height: 80,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              position: "absolute",
-              background: "#d9d9d9",
-              cursor: "pointer",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)    ",
-            }}
-          >
+        { !props?.is_detail=== true &&
+          <>
+          
+          {(props?.isChooseImage === false) && (
             <div
-              className={"fjdadjkwljeakwawa"}
+              className={"fkdjksjakwjawawas"}
               style={{
+                width: 80,
+                height: 80,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                marginBottom: 12,
+                flexDirection: "column",
+                position: "absolute",
+                background: "#d9d9d9",
+                cursor: "pointer",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)    ",
               }}
             >
-              <GrAdd style={{ width: 24, height: 24 }} />
+              <div
+                className={"fjdadjkwljeakwawa"}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginBottom: 12,
+                }}
+              >
+                <GrAdd style={{ width: 24, height: 24 }} />
+              </div>
+              <div style={{ textAlign: "center", fontWeight: 600, fontSize: 14 }}>
+                Upload
+              </div>
+              <input
+                onChange={f}
+                type="file"
+                multiple
+                style={{
+                  position: "absolute",
+                  opacity: 0,
+                  width: "100%",
+                  height: "100%",
+                  zIndex: 9,
+                  cursor: "pointer",
+                  top: 0,
+                  left: 0,
+                }}
+              />
             </div>
-            <div style={{ textAlign: "center", fontWeight: 600, fontSize: 14 }}>
-              Upload
-            </div>
-            <input
-              onChange={f}
-              type="file"
-              multiple
-              style={{
-                position: "absolute",
-                opacity: 0,
-                width: "100%",
-                height: "100%",
-                zIndex: 9,
-                cursor: "pointer",
-                top: 0,
-                left: 0,
-              }}
-            />
-          </div>
-        )}
+          )}
+        </>
+        }
         {/* rule */}
         <div
           className={"djkjaksjkajraeaw"}
@@ -674,7 +683,7 @@ const ImageIllustation = (props) => {
           }}
         >
         {
-          props?.is_detail=== true && 
+          !props?.is_detail=== true && 
           "Vui lòng đăng tải 5 hình ảnh"
         }
         </div>
