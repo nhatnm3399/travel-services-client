@@ -16,6 +16,9 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import detail_hotel from "../../api/hotel/detail_hotel";
 import Snackbar from "../Snackbar/Snackbar";
 import update_hotel from "../../api/manage/update_hotel";
+import approve_hotel from "../../api/admin/approve_hotel";
+import delete_hotel from "../../api/admin/delete_hotel";
+import Popup from "./Popup";
 
 export const RegisterHotel = (props) => {
   // eslint-disable-next-line
@@ -51,6 +54,7 @@ const MainRegister = (props) => {
   // eslint-disable-next-line
   const [payload, setPayload]= useState()
   // 
+  const {idHotel}= useParams()
   const [searchParams]= useSearchParams()
   const [hotelName, setHotelName]= useState()
   const [phoneNumber, setPhoneNumber]= useState()
@@ -93,8 +97,17 @@ const MainRegister = (props) => {
       setCheckOut(props?.data?.checkOut)
       setIsPaymentCard(props?.data?.is_payment_card)
       setImgX(prev=> ([props?.data?.image, props?.data?.image1, props?.data?.image2, props?.data?.image3, props?.data?.image4]))
+      setConvenient(props?.hotel_properties)
     }
-  }, [props?.is_edit, props?.data, props?.is_detail])
+  }, [props?.is_edit, props?.data, props?.is_detail, props?.hotel_properties])
+  const [y, setY]= useState()
+  const [loading2, setLoading2]= useState(false)
+  const approveHotel= ()=> {
+    approve_hotel(idHotel)
+  }
+  const rejectHotel= ()=> {
+    delete_hotel(idHotel, setY, setLoading2)
+  }
   return (
     <div className="sdjdjsjkjwasw" style={{width: "100%", background: "#e4f2fd", padding: 20}}>
       <div
@@ -183,11 +196,16 @@ const MainRegister = (props) => {
               }}
             />
           </div>
-          <div className={"dsjaajwjalkwawwa"} style={{ width: "100%", position: "relative"}}>
-            <TitleItem title={<span>Chọn thành phố <span style={{color: "red"}}>*</span></span>} />
-        
-           {<ChooseCity setIdCity={setIdCity} />}
-          </div>
+          <>
+          {
+            !props?.is_detail=== true &&
+            <div className={"dsjaajwjalkwawwa"} style={{ width: "100%", position: "relative"}}>
+              <TitleItem title={<span>Chọn thành phố <span style={{color: "red"}}>*</span></span>} />
+          
+            {<ChooseCity setIdCity={setIdCity} />}
+            </div>
+          }
+          </>
         </div>
         {/* intergrate map */}
         {
@@ -226,11 +244,11 @@ const MainRegister = (props) => {
           }}
         />
       </div>
-      <Convenient setConvenient={setConvenient} convenient={convenient} />
+      <Convenient is_detail={props?.is_detail} setConvenient={setConvenient} convenient={convenient} />
       <br />
       <SetRule checkIn={checkIn} setCheckIn={setCheckIn} checkOut={checkOut} setCheckOut={setCheckOut} isPaymentCard={isPaymentCard} setIsPaymentCard={setIsPaymentCard} />
       <br />
-      <ImageIllustation imgX={imgX} is_detail={props?.is_detail} is_edit={props?.is_edit} listImage={listImage}
+      <ImageIllustation approveHotel={approveHotel} rejectHotel={rejectHotel} imgX={imgX} is_detail={props?.is_detail} is_edit={props?.is_edit} listImage={listImage}
         setListImage={setListImage}
         result={result}
         setResult={setResult}
@@ -324,10 +342,10 @@ export const Convenient= (props)=> {
           Tiện nghi và nội quy
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient name={"Wifi"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Máy lạnh"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Wc"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Chỗ để xe"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Wifi"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Máy lạnh"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Wc"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Chỗ để xe"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
         </div>
         <br />
         <br />
@@ -336,9 +354,9 @@ export const Convenient= (props)=> {
           Hướng nhìn
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient name={"Núi"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Biển"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Sông"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Núi"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Biển"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Sông"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
 
         </div>
         <br />
@@ -348,8 +366,8 @@ export const Convenient= (props)=> {
           Phòng tắm
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient name={"Đồ vệ sinh cá nhân"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient name={"Dép"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Đồ vệ sinh cá nhân"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          <ComponentConvenient is_detail={props?.is_detail} name={"Dép"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
         </div>
         <br />
         <br />
@@ -372,7 +390,9 @@ const ComponentConvenient= (props)=> {
   return (
     <div className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
       <span className={"fdjslkadjfksdsjfkdsa"}>{props?.name}</span>
-      <input ref={ref} onChange={setValue} type="checkbox" style={{width: 18, height: 18}} />
+      {
+       !props?.is_detail=== true  && <input ref={ref} onChange={setValue} type="checkbox" style={{width: 18, height: 18}} />
+      }
     </div>
   )
 }
@@ -504,8 +524,9 @@ const ImageIllustation = (props) => {
                 key={key}
                 className={"dlakjklajwaasas"}
                 style={{
-                  width: 150,
-                  height: 150,
+                  width: "20%",
+                  height: "auto",
+                  aspectRatio: 1 / 1,
                   padding: 10,
                   position: "relative",
                 }}
@@ -515,7 +536,7 @@ const ImageIllustation = (props) => {
                   alt="open"
                   style={{
                     width: "100%",
-                    height: "100%",
+                    aspectRatio: 1 / 1,
                     objectFit: "cover",
                     border: "1px solid #e7e7e7",
                   }}
@@ -740,6 +761,10 @@ const ImageIllustation = (props) => {
         }
         </>
       }
+      </div>
+      <div className={"dsjdksjskjdkasas"} style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: 16,gap: 20 }}>
+        <Popup title={"Chấp nhận"} func={props?.approveHotel} />
+        <Popup title={"Từ chối"} func={props?.rejectHotel} />
       </div>
     </div>
   );

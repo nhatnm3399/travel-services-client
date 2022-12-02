@@ -25,7 +25,6 @@ const DatePickerPlugin = ({setOpen, startDate, endDate, setStartDate, setEndDate
         inline
         monthsShown={2}
         selectsRange
-        minDate={new Date()}
       >
         <div style={{width: "100%", textAlign: "center"}}>{startDate ? moment(startDate).format("ddd[, ]MMM[ ]D") : "Check in"} - {endDate ? moment(endDate).format("ddd[, ]MMM[ ]D") : "Check out"}</div>
       </DatePicker>

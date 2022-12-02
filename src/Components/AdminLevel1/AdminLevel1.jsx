@@ -23,6 +23,7 @@ import { AppContext } from "../../App";
 import { AiOutlineFolderView } from "react-icons/ai";
 import delete_hotel from "../../api/admin/delete_hotel";
 import Snackbar from "../Snackbar/Snackbar";
+import HistoryBooking from "./HistoryBooking";
 
 const AdminLevel1 = (props) => {
   return (
@@ -82,6 +83,10 @@ const Navigation = (props) => {
         text={"Thống kê khách sạn"}
         link={"/manage/stats/hotel"}
       />
+      <NavigationHeritage 
+        text={"Lịch sử đặt phòng"}
+        link={"/manage/history/booking"}
+      />
     </div>
   );
 };
@@ -120,6 +125,7 @@ const Main = (props) => {
           <Route path={"/events"} element={<ListEvents />} />
           <Route path={"/events/add/new"} element={<AddNewEvent />} />
           <Route path={"/request/booking"} element={<RequestBookingRoom />} />
+          <Route path={"/history/booking"} element={<HistoryBooking />} />
           <Route
             path={"/hotel/manage/edit/hotel"}
             element={<RegisterHotel is_edit={true} />}
