@@ -72,7 +72,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function AlertDialogSlide(props) {
   const [open, setOpen] = React.useState(false);
-
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -100,7 +100,7 @@ function AlertDialogSlide(props) {
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <div className={"djfkjdksfjdsaas"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 20}}>
-            <select placeholder="Chọn 1 khách sạn" name="" id="">
+            <select onChange={e=> props?.setIdHotel(e.target.value)} placeholder="Chọn 1 khách sạn" name="" id="">
                 {
                     <option value="" disabled selected>Chọn 1 khách sạn</option>
                 }

@@ -114,7 +114,7 @@ export default function StatsManager() {
 const ListHotel= (props)=> {
   useEffect(()=> {
     get_list_hotel(props?.setData)
-  }, [])
+  }, [props?.setData])
 
   return (
     <OutsideClickHandler onOutsideClick={()=> props?.setOpen(false)}>

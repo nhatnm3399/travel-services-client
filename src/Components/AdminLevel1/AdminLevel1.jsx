@@ -72,7 +72,7 @@ const Navigation = (props) => {
         link={"/manage/hotel/add/new/hotel"}
       />
       <NavigationHeritage
-        text={"Chỉnh sửa thông tin khách sạn"}
+        text={"Chỉnh sửa khách sạn"}
         link={"/manage/hotel/manage/edit/hotel"}
       />
       <NavigationHeritage
