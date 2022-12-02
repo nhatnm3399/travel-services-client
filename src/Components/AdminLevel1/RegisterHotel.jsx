@@ -19,6 +19,7 @@ import update_hotel from "../../api/manage/update_hotel";
 import approve_hotel from "../../api/admin/approve_hotel";
 import delete_hotel from "../../api/admin/delete_hotel";
 import Popup from "./Popup";
+import delete_hotel_x from "../../api/manage/delete_hotel_x";
 
 export const RegisterHotel = (props) => {
   // eslint-disable-next-line
@@ -106,7 +107,7 @@ const MainRegister = (props) => {
     approve_hotel(idHotel)
   }
   const rejectHotel= ()=> {
-    delete_hotel(idHotel, setY, setLoading2)
+    delete_hotel_x(idHotel, setY, setLoading2)
   }
   return (
     <div className="sdjdjsjkjwasw" style={{width: "100%", background: "#e4f2fd", padding: 20}}>
