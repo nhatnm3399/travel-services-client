@@ -44,9 +44,10 @@ const Profile = (props) => {
     setChange(prev=> !prev)
   }
   return (
-    <div className={"profile-user-site"} style={{width: "100%", display: "flex", justifyContent:" center", alignItems:" center"}}>
+    <>
+        <div className={"profile-user-site"} style={{width: "100%", display: "flex", justifyContent:" center", alignItems:" center"}}>
         <div className={"c-profile-user-site"} style={{width: "100%", maxWidth: 1200, margin: "20px 0", display: "flex", justifyContent: "space-between", gap: 16}}>
-            <div className="fjkldsjkasjkasjdas" style={{marginRight: 16, display: "flex", justifyContent: "space-between", alignItems: 'center', flexDirection: "column"}}> 
+            <div className="fjkldsjkasjkasjdas" style={{marginRight: 16, display: "flex", justifyContent: "center", alignItems: 'center', flexDirection: "column"}}> 
                 <div className={"dsjkdajdjaklsjakdas"} style={{width: 350, padding: "60px 10px", borderRadius: 5, backgroundColor: "#A5B8C6", height: "max-content", color: "#fff"}}>
                     <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                         <img src={validUrl.isUri(user?.avatar) ? user?.avatar : "https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png"} alt="" style={{width: 60, height: 60, borderRadius: "50%", objectFit: "cover"}} />
@@ -66,47 +67,34 @@ const Profile = (props) => {
                     </div>
                     
                 </div>
-                <br />
-                <br />
-                <div className={"fkslDjklsjsdaks"} style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", alignItems: "center"}}>
-                    <div className={"wrap-inp-info-user"} style={{width: 300, height: 60}}>
-                        <ButtonTemplate disable={false} onClick={()=> {}} className={"wrap-btn-info-user-i"}>
-                            <Link to={"/change/password"} style={{textDecoration: "none", color: "#000", fontSize: 20}}>
-                                Đổi mật khẩu
-                                </Link>
-                            </ButtonTemplate>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div className={"dksdskafjkjasasfaseda"} style={{background: "#fff", padding: 10, borderRadius: 10}}>
                 <div className={"c-title-profile-user-site"} style={{fontSize: 32, fontWeight: 500, marginBottom: 16}}>
                     Thông tin người dùng
                 </div>
-                <div className={"list-info-user"} style={{maxWidth: 900, width: "100%", display: 'flex', alignItems: "center", flexWrap: "wrap", justifyContent: "space-between"}}>
-                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
+                <div className={"list-info-user"} style={{maxWidth: 900, width: "100%", display: 'flex', alignItems: "center", flexWrap: "wrap", justifyContent: "space-between", gap: 10}}>
+                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "48%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><FaUserAlt /> Tên đầy đủ</div>} />
-                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
-                            <InputTemplate value={username} onChange={(e)=> setUsername(e.target.value)} className={"wrap-inp-info-user-i"} />
+                        <div className={"wrap-inp-info-user"} style={{width: "100%", height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
+                            <InputTemplate value={username} onChange={(e)=> setUsername(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000"}} />
                         </div>
                     </div>
-                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
+                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "48%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><AiFillPhone /> Số điện thoại</div>} />
-                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
-                            <InputTemplate value={phoneNumber} onChange={(e)=> setPhoneNumber(e.target.value)} className={"wrap-inp-info-user-i"} />
+                        <div className={"wrap-inp-info-user"} style={{width: "100%", height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
+                            <InputTemplate value={phoneNumber} onChange={(e)=> setPhoneNumber(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000"}} />
                         </div>
                     </div>
-                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
+                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "48%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><FaAddressBook /> Địa chỉ</div>} />
-                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
-                            <InputTemplate value={address} onChange={(e)=> setAddress(e.target.value)} className={"wrap-inp-info-user-i"} />
+                        <div className={"wrap-inp-info-user"} style={{width: "100%", height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
+                            <InputTemplate value={address} onChange={(e)=> setAddress(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000"}} />
                         </div>
                     </div>
-                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "40%", marginBottom: 40, flexDirection: "column"}}>
+                    <div className={"wrap-list-info-user"} style={{display:" flex", width: "48%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><FaBirthdayCake /> Ngày sinh</div>} />
-                        <div className={"wrap-inp-info-user"} style={{width: 200, height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
-                            <InputTemplate value={birthday} onChange={(e)=> setBirthday(e.target.value)} className={"wrap-inp-info-user-i"} />
+                        <div className={"wrap-inp-info-user"} style={{width: "100%", height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
+                            <InputTemplate value={birthday} onChange={(e)=> setBirthday(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000"}} />
                         </div>
                     </div>
                 </div>
@@ -141,15 +129,29 @@ const Profile = (props) => {
                 {/*  */}
                 {updateCheck && <div style={{fontSize: 14, fontWeight: 600, margin: "10px 0"}}>Cập nhật thông tin tài khoản thành công</div>}
                 {/*  */}
-                <div className={"save-info-user-wrap"} style={{width: "100%", display: "flex", justifyContent: 'center', alignItems: 'center', maxWidth: 900}}> 
-                    <div className={"save-info-user"} style={{width: 200, height: 80, marginTop: 16}}>
-                        <ButtonTemplate style={{borderRadius: 5}} onClick={updateInfoUser} className={"save-info-user-btn"}  disable={false} >Lưu</ButtonTemplate>
-                    </div>
-                </div>
             </div>
         </div>
         <Background />
     </div>
+    <div className={"fjdhsjhdasas"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 20, width: "100%"}}>
+        <div className={"fkslDjklsjsdaks"} style={{ display: "flex", justifyContent: "center", alignItems: "center", whiteSpace: "nowrap"}}>
+            <div className={"wrap-list-info-user"} style={{display:" flex", alignItems: "center"}}>
+                <div className={"wrap-inp-info-user"} style={{ height: 60}}>
+                    <ButtonTemplate disable={false} onClick={()=> {}} className={"wrap-btn-info-user-i"}>
+                    <Link to={"/change/password"} style={{textDecoration: "none", color: "#000", fontSize: 20}}>
+                        Đổi mật khẩu
+                        </Link>
+                    </ButtonTemplate>
+                </div>
+            </div>
+        </div>
+        <div className={"save-info-user-wrap"} style={{display: "flex", justifyContent: 'center', alignItems: 'center', maxWidth: 900}}> 
+            <div className={"save-info-user"} style={{ height: 60, borderRadius: 80, padding: "0 18px", overflow: "hidden"}}>
+                <ButtonTemplate style={{borderRadius: 80, textTransform: "capitalize"}} onClick={updateInfoUser} className={"save-info-user-btn"}  disable={false} >Lưu</ButtonTemplate>
+            </div>
+        </div>
+    </div>
+    </>
   )
 }
 

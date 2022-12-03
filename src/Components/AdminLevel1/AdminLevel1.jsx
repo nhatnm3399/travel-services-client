@@ -64,7 +64,7 @@ const Navigation = (props) => {
           linkLv1={"/manage/hotel/general"}
         /> */}
       <NavigationHeritage
-        text={"Danh sách khách sạn"}
+        text={"Danh sáchkhách sạn"}
         link={"/manage/hotel/general"}
       />
       <NavigationHeritage
