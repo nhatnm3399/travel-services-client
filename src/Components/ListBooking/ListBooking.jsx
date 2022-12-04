@@ -8,6 +8,8 @@ import history_booking from '../../api/auth/user/history_booking'
 import { useState } from 'react'
 import delete_hotel from '../../api/auth/user/delete_hotel'
 import Snackbar from '../Snackbar/Snackbar'
+import PopupConfirm from '../PopupConfirm/PopupConfirm'
+import PopupSnackBar from '../PopupConfirm/PopupSnackBar'
 
 const ListBooking = (props) => {
     const [data, setData]= useState([])
@@ -87,8 +89,13 @@ const Title= (props)=> {
 const ElementDetail= (props)=> {
     const [loading, setLoading]= useState(false)
     const [data, setData]= useState()
+    const [open1, setOpen1]= useState(false)
+    const [openSnackbar1,setOpenSnackbar1]= useState(false)
+    const [messageSnackbar, setMessageSnackbar]= useState("")
+    const [idHotel, setIdHotel]= useState()
     const deleteHotel= (id)=> {
-        delete_hotel(id,setData, setLoading)
+        setOpen1(()=> true)
+        setIdHotel(id)
         props?.setData(props?.data?.filter(item=> parseInt(item?.id) !== parseInt(id)))
     }
     const detailHotel= ()=> {
@@ -98,7 +105,7 @@ const ElementDetail= (props)=> {
         <div className={"fjklsajklsjkalskja"} style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 40, marginBottom: 30, background: "#fff", borderRadius: 5, padding: 10}}>
             <div className="skjlajaksjkasaasas" style={{display: "flex", justifyContent: 'center', alignItems: "center"}}> 
                 <div className={"aklsjaklsjskldas"} style={{width: 400, height: 250, background: "#fff"}}>
-                    <img className={"fjksjdksdjdassdas"} src={props?.image} alt="" style={{width: '100%', height: "100%", objectFit: "cover"}} />
+                    <img className={"fjksjdksdjdassdas"} src={props?.image} alt="" style={{width: '100%', height: "100%", objectFit: "cover", borderRadius: 5}} />
                 </div>
             </div>
             <div className={"djklsjakljsklasja"} style={{width: "calc(100% - 400px)", height: 250, padding: 10, border: "1px solid #e7e7e7", }}>
@@ -132,7 +139,13 @@ const ElementDetail= (props)=> {
                     </div>
                 </div>
             </div>
-            {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Đã xóa khách sạn thành công"} />}
+            {/* {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Đã xóa khách sạn thành công"} />} */}
+            {
+                open1=== true && <PopupConfirm setOpenSnackbar={setOpenSnackbar1} open={open1} setOpen={setOpen1} title={"Thông báo"} content={"Bạn muốn hủy phòng này ?"} func={()=> delete_hotel(idHotel, setData, setLoading)} setMessageSnackbar={setMessageSnackbar} />
+            }
+            {
+                openSnackbar1=== true && <PopupSnackBar open={openSnackbar1} setOpen={setOpenSnackbar1} alert={"Đã hủy khách sạn thành công"} />
+            }
         </div>
     )
 }
