@@ -112,10 +112,10 @@ const MainRegister = (props) => {
     delete_hotel_x(idHotel, setY, setLoading2)
   }
   return (
-    <div className="sdjdjsjkjwasw" style={{width: "100%", background: "#e4f2fd", padding: 20}}>
+    <div className="sdjdjsjkjwasw" style={{width: "100%", background: "#e4f2fd"}}>
       <div
       className={"djksjajerkjawwawa"}
-      style={{ width: "100%", padding: 10, background: "#fff", borderRadius: 10 }}
+      style={{ width: "100%", padding: 10, background: "#fff"}}
     >
       <div
         className={"fjskdljskdfjeaaawa"}

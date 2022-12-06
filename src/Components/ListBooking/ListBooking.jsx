@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
+import { Navigate, NavLink, Route, Routes, useSearchParams } from 'react-router-dom'
 import { TbReportSearch } from "react-icons/tb"
 import {RiDeleteBin5Fill } from "react-icons/ri"
 import "./ListBooking.sass"
@@ -7,15 +7,17 @@ import { useEffect } from 'react'
 import history_booking from '../../api/auth/user/history_booking'
 import { useState } from 'react'
 import delete_hotel from '../../api/auth/user/delete_hotel'
-import Snackbar from '../Snackbar/Snackbar'
+// import Snackbar from '../Snackbar/Snackbar'
 import PopupConfirm from '../PopupConfirm/PopupConfirm'
 import PopupSnackBar from '../PopupConfirm/PopupSnackBar'
+import { Pagination2 } from '../Pagination/Pagination'
 
 const ListBooking = (props) => {
     const [data, setData]= useState([])
     useEffect(()=> {
         history_booking(setData)
     }, [])
+    
   return (
     <div className={"list-booking"} style={{width: "100%"}}>
         <div className={"klsdhjklsjasaas"} style={{display: "flex", alignItems: "center", gap: 50, padding: "0 40px", margin: "20px 0"}}>
@@ -51,29 +53,41 @@ export const IndexComponent= (props)=> {
 }
 
 const PendingBooking= (props)=> {
+    const [page, setPage]= useState(3)
+    const [offSet, setOffSet]= useState(1)
+    const [currentPage, setCurrentPage]= useState(1)
+    const [searchParams, setSearchParams]= useSearchParams()
     return (
         <div className={"sjkdklasjklaska"} style={{padding: "0 40px", minHeight: "100vh"}}>
             <Title title={"Danh sách phòng chờ duyệt"} />
             <br />
             <div className={"skljdaklsjklasa"} style={{width: "100%"}}>
                 {
-                    props?.data?.filter(item=> item?.bookingStatus === "booking waiting approve")?.map((item, key)=> <ElementDetail setData={props?.setData} data={props?.data} key={key} {...item} />)
+                    props?.data?.filter(item=> item?.bookingStatus === "booking waiting approve")?.slice(parseInt(page) * offSet - page, parseInt(page) * offSet)?.map((item, key)=> <ElementDetail setData={props?.setData} data={props?.data} key={key} {...item} />)
                 }
             </div>
+            <br />
+            <Pagination2 setOffSet={setOffSet} search={searchParams.get("spec")} setSearchParams={setSearchParams} count={Math.ceil(parseInt(props?.data?.filter(item=> item?.bookingStatus === "booking waiting approve")?.length) / page)} activePagination={currentPage} setCurrentPage={setCurrentPage} />
         </div>
     )
 }
 
 const SuccessBooking= (props)=> {
+    const [page, setPage]= useState(3)
+    const [offSet, setOffSet]= useState(1)
+    const [currentPage, setCurrentPage]= useState(1)
+    const [searchParams, setSearchParams]= useSearchParams()
     return (
         <div className={"sjkdklasjklaska"} style={{padding: "0 40px", minHeight: "100vh"}}>
             <Title title={"Danh sách phòng đã đặt"} />
             <br />
             <div className={"skljdaklsjklasa"} style={{width: "100%"}}>
             {
-                props?.data?.filter(item=> item?.bookingStatus === "booking approved")?.map((item, key)=> <ElementDetail data={props?.data} setData={props?.setData} key={key} {...item} />)
+                props?.data?.filter(item=> item?.bookingStatus === "booking approved")?.slice(parseInt(page) * offSet - page, parseInt(page) * offSet)?.map((item, key)=> <ElementDetail data={props?.data} setData={props?.setData} key={key} {...item} />)
             }
             </div>
+            <br />
+            <Pagination2 setOffSet={setOffSet} search={searchParams.get("spec")} setSearchParams={setSearchParams} count={Math.ceil(parseInt(props?.data?.filter(item=> item?.bookingStatus === "booking approved")?.length) / page)} activePagination={currentPage} setCurrentPage={setCurrentPage} />
         </div>
     )
 }

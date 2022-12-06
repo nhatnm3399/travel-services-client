@@ -9,6 +9,8 @@ import approve_hotel from "../../api/admin/approve_hotel";
 import PopupConfirm from "../PopupConfirm/PopupConfirm";
 import PopupSnackBar from "../PopupConfirm/PopupSnackBar";
 import reject_hotel from "../../api/manage/reject_hotel";
+import { useSearchParams } from "react-router-dom";
+import { Pagination2 } from "../Pagination/Pagination";
 
 const RequestBookingRoom = (props) => {
   const [data, setData]= useState([])
@@ -51,6 +53,10 @@ const ListRequest = (props) => {
     setBookingId(bookingId)
     setOpenConfirm2(true)
   }
+  const [page, setPage]= useState(5)
+  const [offSet, setOffSet]= useState(1)
+  const [currentPage, setCurrentPage]= useState(1)
+  const [searchParams, setSearchParams]= useSearchParams()
   if(data?.length > 0) {
 
     return (
@@ -77,7 +83,7 @@ const ListRequest = (props) => {
           </thead>
           <tbody className={"fkkejkjaiwjwawwawa"} style={{ width: "100%" }}>
             {
-              data?.map((item, key)=> <tr key={key} className={"jkajksljeklaresas"}>
+              data?.slice(parseInt(page) * offSet -5, parseInt(page) * offSet)?.map((item, key)=> <tr key={key} className={"jkajksljeklaresas"}>
               <td style={{ textAlign: "center" , whiteSpace: "nowrap", height: 100}}>{item?.user_booking}</td>
               <td style={{ textAlign: "center" , whiteSpace: "nowrap", height: 100}}>{item?.phone}</td>
               <td style={{ textAlign: "center" , whiteSpace: "nowrap", height: 100}}>{item?.room_name}</td>
@@ -141,6 +147,8 @@ const ListRequest = (props) => {
             }
           </tbody>
         </table>
+        <br />
+        <Pagination2 setOffSet={setOffSet} search={searchParams.get("spec")} setSearchParams={setSearchParams} count={Math.ceil(parseInt(data?.length) / 5)} activePagination={currentPage} setCurrentPage={setCurrentPage} />
         {
           openConfirm=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> approve_hotel(bookingId, setResult, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận chấp nhận yêu cầu này ?"} />
         }

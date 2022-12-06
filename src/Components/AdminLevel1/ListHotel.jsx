@@ -2,12 +2,13 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom'
 import delete_hotel from '../../api/admin/delete_hotel'
 import get_list_hotel from '../../api/manage/get_list_hotel'
+import { Pagination2 } from '../Pagination/Pagination'
 import PopupConfirm from '../PopupConfirm/PopupConfirm'
 import PopupSnackBar from '../PopupConfirm/PopupSnackBar'
-import Snackbar from '../Snackbar/Snackbar'
+// import Snackbar from '../Snackbar/Snackbar'
 import "./ListHotel.sass"
 
 const ListHotel = (props) => {
@@ -89,6 +90,11 @@ const Main= (props)=> {
         setOpenConfirm2(true)
       }
     const [bookingId, setBookingId]= useState("")
+    const [page, setPage]= useState(5)
+    const [offSet, setOffSet]= useState(1)
+    const [currentPage, setCurrentPage]= useState(1)
+    const [searchParams, setSearchParams]= useSearchParams()
+
     if(props?.data?.length > 0) {
 
         return (
@@ -96,18 +102,18 @@ const Main= (props)=> {
                     <table className={"fkjkajkawawaww"} style={{width: "100%"}} cellSpacing={20}>
                         <thead className={"fjjaklsjkafjakljedas"} style={{width: '100%', borderBottom: "1px solid #e7e7e7"}}>
                             <tr className={"fkdjkasjkasjkledaw"}>
-                                <th style={{marginLeft: 50}}>Tên khách sạn</th>
+                                <th style={{marginLeft: 50, textAlign: "left"}}>Tên khách sạn</th>
                                 <th>Địa chỉ</th>
-                                <th>Hành động</th>
+                                <th style={{textAlign: "right"}}>Hành động</th>
                             </tr>
                         </thead>
                         <tbody className={"fkasajskajskawjakwaw"} style={{width: "100%"}}>
                             {
-                                props?.data?.map((item ,key)=> <tr key={key} className={"djjaklwjrkjlekawwa"}>
-                                <td style={{marginLeft: 50}}>{item?.title}</td>
+                                props?.data?.slice(parseInt(page) * offSet -5, parseInt(page) * offSet)?.map((item ,key)=> <tr key={key} className={"djjaklwjrkjlekawwa"}>
+                                <td style={{marginLeft: 50, textAlign: "left"}}>{item?.title}</td>
                                 <td>{item?.address}</td>
-                                <td>
-                                    <div style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10}}>
+                                <td style={{textAlign: "right"}}>
+                                    <div style={{display: "flex", justifyContent: 'end', alignItems: "center", gap: 10}}>
                                         <button onClick={()=> approveBooking(item?.id)} className={"fjkjsaksjakwaww"} style={{padding: "5px 10px", border: "none", outline: "none", display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer", backgroundColor: "#2DB83B", borderRadius: 5}}>
                                             Chỉnh sửa
                                         </button>
@@ -120,6 +126,8 @@ const Main= (props)=> {
                             }
                         </tbody>
                     </table>
+                    <br />
+                    <Pagination2 setOffSet={setOffSet} search={searchParams.get("spec")} setSearchParams={setSearchParams} count={Math.ceil(parseInt(props?.data?.length) / 5)} activePagination={currentPage} setCurrentPage={setCurrentPage} />
                     {/* {loading=== true && <Snackbar show={loading} setShow={setLoading} title={"Thông báo"} description={"Xóa khách sạn thành công !"}/>} */}
                     {
                         openConfirm=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> edit_hotel(bookingId, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận sẽ thêm khách sạn này ?"} />

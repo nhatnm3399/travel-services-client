@@ -1,8 +1,24 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { SERVER_URL } from "../../config/config";
 import "./style.css";
 
 const PaymentSuccess = () => {
+  const [searchParams]= useSearchParams()
+  useEffect(()=> {
+    (async()=> {
+      axios({
+        url: SERVER_URL+ "/api/bill/update-bill",
+        method: "get",
+        params: {
+          vnp_Amount: searchParams.get("vnp_Amount"),
+          vnp_TransactionNo: searchParams.get("vnp_TransactionNo"),
+          vnp_TxnRef: searchParams.get("vnp_TxnRef")
+        }
+      })
+    })()
+  }, [searchParams])
   const navigate = useNavigate();
 
   return (
@@ -13,7 +29,8 @@ const PaymentSuccess = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "100vh",
+        minHeight: "calc(100vh - 68px - 150px)",
+        padding: 20
       }}
     >
       <div

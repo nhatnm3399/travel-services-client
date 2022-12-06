@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../App';
 import Background from '../Background/Background';
 import ButtonTemplate from '../BannerLoginAndSignup/ButtonTemplate';
@@ -16,6 +16,7 @@ import { uploadImageClient } from '../../firebase/config';
 import update_info_user from '../../api/auth/user/update_info_user';
 import {FaUserAlt, FaAddressBook} from "react-icons/fa"
 import {AiFillPhone} from "react-icons/ai"
+import PopupConfirm2 from '../PopupConfirm/PopupConfirm2';
 const Profile = (props) => {
   const {user, setChange}= useContext(AppContext)
   const [username, setUsername]= useState(()=> "")
@@ -41,14 +42,17 @@ const Profile = (props) => {
     const imgUrl= await uploadImageClient(img.img, setResult)
     update_info_user(username, phoneNumber, address, birthday, imgUrl, setResult)
     setUpdateCheck(()=> true)
+    setOpenConfirm(true)
     setChange(prev=> !prev)
   }
+  const navigate= useNavigate()
+  const [openConfirm, setOpenConfirm]= useState(false)
   return (
     <>
         <div className={"profile-user-site"} style={{width: "100%", display: "flex", justifyContent:" center", alignItems:" center"}}>
         <div className={"c-profile-user-site"} style={{width: "100%", maxWidth: 1200, margin: "20px 0", display: "flex", justifyContent: "space-between", gap: 16}}>
             <div className="fjkldsjkasjkasjdas" style={{marginRight: 16, display: "flex", justifyContent: "center", alignItems: 'center', flexDirection: "column"}}> 
-                <div className={"dsjkdajdjaklsjakdas"} style={{width: 350, padding: "60px 10px", borderRadius: 5, backgroundColor: "#A5B8C6", height: "max-content", color: "#fff"}}>
+                <div className={"dsjkdajdjaklsjakdas"} style={{width: 350, padding: "60px 10px", borderRadius: 5, backgroundColor: "#A5B8C6", height: "100%", color: "#000"}}>
                     <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                         <img src={validUrl.isUri(user?.avatar) ? user?.avatar : "https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png"} alt="" style={{width: 60, height: 60, borderRadius: "50%", objectFit: "cover"}} />
                     </div>
@@ -76,25 +80,25 @@ const Profile = (props) => {
                     <div className={"wrap-list-info-user"} style={{display:" flex", width: "48%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><FaUserAlt /> Tên đầy đủ</div>} />
                         <div className={"wrap-inp-info-user"} style={{width: "100%", height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
-                            <InputTemplate value={username} onChange={(e)=> setUsername(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000"}} />
+                            <InputTemplate value={username} onChange={(e)=> setUsername(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000", borderRadius: 5, outlineColor: "#2e89ff"}} />
                         </div>
                     </div>
                     <div className={"wrap-list-info-user"} style={{display:" flex", width: "48%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><AiFillPhone /> Số điện thoại</div>} />
                         <div className={"wrap-inp-info-user"} style={{width: "100%", height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
-                            <InputTemplate value={phoneNumber} onChange={(e)=> setPhoneNumber(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000"}} />
+                            <InputTemplate value={phoneNumber} onChange={(e)=> setPhoneNumber(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000", borderRadius: 5, outlineColor: "#2e89ff"}} />
                         </div>
                     </div>
                     <div className={"wrap-list-info-user"} style={{display:" flex", width: "48%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><FaAddressBook /> Địa chỉ</div>} />
                         <div className={"wrap-inp-info-user"} style={{width: "100%", height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
-                            <InputTemplate value={address} onChange={(e)=> setAddress(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000"}} />
+                            <InputTemplate value={address} onChange={(e)=> setAddress(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000", borderRadius: 5, outlineColor: "#2e89ff"}} />
                         </div>
                     </div>
                     <div className={"wrap-list-info-user"} style={{display:" flex", width: "48%", marginBottom: 40, flexDirection: "column"}}>
                         <Title title={<div><FaBirthdayCake /> Ngày sinh</div>} />
                         <div className={"wrap-inp-info-user"} style={{width: "100%", height: 45, border: "1px solid #e7e7e7", borderRadius: 5}}>
-                            <InputTemplate value={birthday} onChange={(e)=> setBirthday(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000"}} />
+                            <InputTemplate value={birthday} onChange={(e)=> setBirthday(e.target.value)} className={"wrap-inp-info-user-i"} style={{width: "100%", border: "2px solid #000", borderRadius: 5, outlineColor: "#2e89ff"}} />
                         </div>
                     </div>
                 </div>
@@ -133,12 +137,12 @@ const Profile = (props) => {
         </div>
         <Background />
     </div>
-    <div className={"fjdhsjhdasas"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 20, width: "100%"}}>
+    <div className={"fjdhsjhdasas"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 20, width: "100%", marginBottom: 20}}>
         <div className={"fkslDjklsjsdaks"} style={{ display: "flex", justifyContent: "center", alignItems: "center", whiteSpace: "nowrap"}}>
             <div className={"wrap-list-info-user"} style={{display:" flex", alignItems: "center"}}>
                 <div className={"wrap-inp-info-user"} style={{ height: 60}}>
                     <ButtonTemplate disable={false} onClick={()=> {}} className={"wrap-btn-info-user-i"}>
-                    <Link to={"/change/password"} style={{textDecoration: "none", color: "#000", fontSize: 20}}>
+                    <Link to={"/change/password"} style={{textDecoration: "none", color: "#000", fontSize: 20, padding: "0 18px"}}>
                         Đổi mật khẩu
                         </Link>
                     </ButtonTemplate>
@@ -147,10 +151,13 @@ const Profile = (props) => {
         </div>
         <div className={"save-info-user-wrap"} style={{display: "flex", justifyContent: 'center', alignItems: 'center', maxWidth: 900}}> 
             <div className={"save-info-user"} style={{ height: 60, borderRadius: 80, padding: "0 18px", overflow: "hidden"}}>
-                <ButtonTemplate style={{borderRadius: 80, textTransform: "capitalize"}} onClick={updateInfoUser} className={"save-info-user-btn"}  disable={false} >Lưu</ButtonTemplate>
+                <ButtonTemplate style={{borderRadius: 80, textTransform: "capitalize", padding: "0 18px"}} onClick={updateInfoUser} className={"save-info-user-btn"}  disable={false} >Lưu</ButtonTemplate>
             </div>
         </div>
     </div>
+    {
+        openConfirm=== true && <PopupConfirm2 open={openConfirm} setOpen={setOpenConfirm} func={()=> navigate("/")} title={"Thông báo"} content={"Cập nhật thông tin tài khoản thành công"} />
+    }
     </>
   )
 }
