@@ -119,7 +119,7 @@ const MainDetailHotel1= (props)=> {
                         </div>
                     </div>
                     <div className={"wrap-detail-map-location"} style={{width: "100%", height: 250}}>
-                        <GoogleMapPlugin />
+                        <GoogleMapPlugin {...props} />
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@ import detail_hotel from "../../api/hotel/detail_hotel";
 import Snackbar from "../Snackbar/Snackbar";
 import update_hotel from "../../api/manage/update_hotel";
 import approve_hotel from "../../api/admin/approve_hotel";
-import delete_hotel from "../../api/admin/delete_hotel";
+// import delete_hotel from "../../api/admin/delete_hotel";
 import Popup from "./Popup";
 import delete_hotel_x from "../../api/manage/delete_hotel_x";
 
@@ -94,14 +94,16 @@ const MainRegister = (props) => {
       setPhoneNumber(props?.data?.phone)
       setAddress(props?.data?.address)
       setDescription(props?.data?.description)
-      setCheckIn(props?.data?.checkIn)
-      setCheckOut(props?.data?.checkOut)
+      setCheckIn(props?.data?.check_in_time)
+      setCheckOut(props?.data?.check_out_time)
       setIsPaymentCard(props?.data?.is_payment_card)
       setImgX(prev=> ([props?.data?.image, props?.data?.image1, props?.data?.image2, props?.data?.image3, props?.data?.image4]))
       setConvenient(props?.hotel_properties)
     }
   }, [props?.is_edit, props?.data, props?.is_detail, props?.hotel_properties])
+  // eslint-disable-next-line
   const [y, setY]= useState()
+  // eslint-disable-next-line
   const [loading2, setLoading2]= useState(false)
   const approveHotel= ()=> {
     approve_hotel(idHotel)
@@ -128,7 +130,7 @@ const MainRegister = (props) => {
       >
         {/*  */}
         <div
-          className={"fjkjaklwjkrlawawaw"}
+          className={`fjkjaklwjkrlawawaw ${props?.is_detail=== true ? "sjdkdsjkdjkeawa" : "skldksdlskdlsd"}`}
           style={{
             flex: "1 1 0",
             minHeight: 250,
@@ -247,7 +249,7 @@ const MainRegister = (props) => {
       </div>
       <Convenient is_detail={props?.is_detail} setConvenient={setConvenient} convenient={convenient} />
       <br />
-      <SetRule checkIn={checkIn} setCheckIn={setCheckIn} checkOut={checkOut} setCheckOut={setCheckOut} isPaymentCard={isPaymentCard} setIsPaymentCard={setIsPaymentCard} />
+      <SetRule is_detail={props?.is_detail} checkIn={checkIn} setCheckIn={setCheckIn} checkOut={checkOut} setCheckOut={setCheckOut} isPaymentCard={isPaymentCard} setIsPaymentCard={setIsPaymentCard} />
       <br />
       <ImageIllustation approveHotel={approveHotel} rejectHotel={rejectHotel} imgX={imgX} is_detail={props?.is_detail} is_edit={props?.is_edit} listImage={listImage}
         setListImage={setListImage}
@@ -320,10 +322,12 @@ const SetRule = (props) => {
         className={"fkajkawakwawaew"}
         style={{ width: "100%", padding: 20, background: "#fff",borderRadius: 5 }}
       >
-        <Label label={"Thời gian nhận phòng: "} component={<TimePicker onChange={props?.setCheckIn} value={props?.checkIn} />} />
-        <Label label={"Thời gian trả phòng: "} component={<TimePicker onChange={props?.setCheckOut} value={props?.checkOut} />} />
+        <Label is_detail={props?.is_detail} label={"Thời gian nhận phòng: "} value={props?.checkIn} component={<TimePicker onChange={props?.setCheckIn} value={props?.checkIn} />} />
+        <Label is_detail={props?.is_detail} label={"Thời gian trả phòng: "} value={props?.checkOut} component={<TimePicker onChange={props?.setCheckOut} value={props?.checkOut} />} />
         <Label
-          label={"Hủy đặt phòng / Trả trước"}
+          is_detail={props?.is_detail}
+          label={"Hủy đặt phòng / Trả trước: "}
+          value={props?.isPaymentCard=== true ? "Có": "Không"}
           component={<YesNoOptions setIsPaymentCard={props?.setIsPaymentCard} />}
         />
         {/* <Label label={"Trẻ em và giường"} />
@@ -420,7 +424,8 @@ const Label = (props) => {
           justifyContent: "center",
         }}
       >
-        {props.component}
+        {!props?.is_detail=== true && props.component}
+        {props?.is_detail=== true && props?.value}
       </div>
     </div>
   );
@@ -763,10 +768,13 @@ const ImageIllustation = (props) => {
         </>
       }
       </div>
-      <div className={"dsjdksjskjdkasas"} style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: 16,gap: 20 }}>
-        <Popup title={"Chấp nhận"} func={props?.approveHotel} />
-        <Popup title={"Từ chối"} func={props?.rejectHotel} />
-      </div>
+      {
+        props?.is_detail === true && 
+        <div className={"dsjdksjskjdkasas"} style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: 16,gap: 20 }}>
+          <Popup title={"Chấp nhận"} func={props?.approveHotel} />
+          <Popup title={"Từ chối"} func={props?.rejectHotel} />
+        </div>
+      }
     </div>
   );
 };

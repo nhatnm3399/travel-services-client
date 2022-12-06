@@ -34,7 +34,7 @@ const CountResultSearch= (props)=> {
 
     return (
         <div className={"count-result-search-booking"} style={{marginBottom: 30}}>
-           {searchParams?.get("spec")}: tìm thấy <strong>{props?.result?.length}</strong> chỗ nghỉ
+           <span style={{fontSize: 18, fontWeight: 600,}}>{searchParams?.get("spec")}</span>: tìm thấy <strong>{props?.result?.length}</strong> chỗ nghỉ
         </div>
     )
 }
@@ -78,9 +78,9 @@ const ListResultSearch= (props)=> {
                                 {props.title}
                             </div>
                             <div className={"list-result-search-element-l-wrap-i-1-desc-hotel"} style={{marginBottom: 8, maxWidth: 700}}>
-                                {props.description} djsdjs djshdjd jd udshdk rsdh sđ iedaj sdusgsdkau d đa hwdsjd wrdudshguda u audsa hsgssdasioa hdeu
+                                {props.description}
                             </div>
-                            <div className={"list-result-search-element-l-wrap-i-1-desc-hotel"} style={{marginBottom: 8, maxWidth: 400, fontWeight: 600}}>Số điện thoại: <strong>{props?.phone}</strong></div>
+                            <div className={"list-result-search-element-l-wrap-i-1-desc-hotel"} style={{marginBottom: 8, maxWidth: 400, fontWeight: 600}}>Số điện thoại: 0<strong>{props?.phone}</strong></div>
                         </div>
                         {/*  */}
                         <div className={"list-reuslt-search-element-l-wrap-i-2"}>
@@ -108,14 +108,17 @@ const ListResultSearch= (props)=> {
                             </div> */}
                         </div>
                         {/*  */}
-                        <div className={"list-result-search-element-r-1-2"} style={{width: 50, height: 50, display: "flex",justifyContent: 'center', alignItems: "center", background: "#2e89ff", color: "#fff", fontSize: 18, fontWeight: 700}}>
-                            {parseFloat(props?.start_point)?.toFixed(2) || "Unset"}
-                        </div>
+                        {
+                            props?.start_point && 
+                            <div className={"list-result-search-element-r-1-2"} style={{width: 50, height: 50, display: "flex",justifyContent: 'center', alignItems: "center", background: "#2e89ff", color: "#fff", fontSize: 18, fontWeight: 700}}>
+                                {parseFloat(props?.start_point)?.toFixed(2) || "Unset"}
+                            </div>
+                        }
                     </div>
                     {/*  */}
                     <div className={"list-result-search-element-r-2"}>
-                        <div className={"list-result-search-element-r-2-1"} style={{fontSize: 14, marginBottom: 20, direction: "rtl"}}>
-                            VND <NumericFormat value= {props?.price} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} />
+                        <div className={"list-result-search-element-r-2-1"} style={{ marginBottom: 20, direction: "rtl", fontSize: 20}}>
+                            VND <NumericFormat value= {parseInt(props?.price)} thousandSeparator={","} displayType="text" renderText={(value) => <span style={{fontWeight: 600, fontSize: 20}}>{value.replaceAll(",", ".")}</span>} />
                         </div>
                         <div className={"list-result-search-element-r-2-2"}>
                             <div className={"wrap-button-list-reuslt-search-element-r-2-1"} style={{width: 200, height: 60, background: "#fff", color: "#fff"}}>

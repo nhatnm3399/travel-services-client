@@ -35,7 +35,7 @@ export const AmountAll= (props)=> {
                     <strong>{_.sumBy(props?.bookingRoom, function(e) {return e.count})} phòng đã đặt</strong>
                 </div>
                 <div className={"fkdjksdjskdjksdrwree"} style={{fontSize: 24}}>
-                    VND {_.sumBy(props?.bookingRoom, function(e) {return e.amount})}
+                    VND {<NumericFormat value= {_.sumBy(props?.bookingRoom, function(e) {return e.amount})} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} />}
                 </div>
                 <br />
                 <div className={"djfskjfkdjksdjdas"} style={{marginBottom: 12, textAlign: "center"}}>
@@ -88,7 +88,7 @@ const ParametersRoom= (props)=> {
                 {/*  */}
                 <div className={"sdksaskasklasas"}>
                     <div className={"jrjawjalwlkeawa chkhsjfhjkdfhfsd"} style={{direction: "rtl",height: 30, margin: "8px 0"}}><strong><NumericFormat value= {props?.price} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} /></strong> VND</div>
-                    <div className={"jrjawjalwlkeawa gfyjetyuiaehgksajdas"} style={{direction: "rtl", height: 30, margin: "8px 0"}}>1 / phòng 1 / đêm</div>
+                    <div className={"jrjawjalwlkeawa gfyjetyuiaehgksajdas"} style={{direction: "rtl", height: 30, margin: "8px 0"}}> phòng / đêm</div>
                     <div className={"jrjawjalwlkeawa fsyjetyasdjgashjkas"} style={{direction: "rtl", height: 30, margin: "8px 0"}}>
                         <button onClick={()=> props?.setOpen(true)} className={"cksdsjkasjakeaw"} style={{padding:  "10px 25px", background: "#2e89ff", color: "#fff", borderRadius: 80, fontWeight: 600, fontSize: 20, border: "none", outline: "none", cursor: "pointer"}}>
                             Đặt ngay
