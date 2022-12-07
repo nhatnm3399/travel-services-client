@@ -10,7 +10,7 @@ const PaymentSuccess = () => {
     (async()=> {
       axios({
         url: SERVER_URL+ "/api/bill/update-bill",
-        method: "get",
+        method: "put",
         params: {
           vnp_Amount: searchParams.get("vnp_Amount"),
           vnp_TransactionNo: searchParams.get("vnp_TransactionNo"),
