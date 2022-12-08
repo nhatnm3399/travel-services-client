@@ -198,7 +198,7 @@ const MainRegister = (props) => {
           </div>
           <div className={"dsjaajwjalkwawwa"} style={{ width: "100%" }}>
             <TitleItem title={<span>Địa chỉ {!props?.is_detail=== true && <span style={{color: "red"}}>*</span>}</span>} />
-            <A setLongtitude={setLongtitude} setLatitude={setLatitude} />
+            <A setAddress={setAddress} setLongtitude={setLongtitude} setLatitude={setLatitude} />
                 
           </div>
           <>

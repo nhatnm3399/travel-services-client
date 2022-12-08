@@ -26,6 +26,7 @@ const A = (props) => {
 
   const handleSelect = (val) => {
     setValue(val, false);
+    props?.setAddress(val)
     Geocode.fromAddress(val).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
