@@ -101,10 +101,13 @@ const Title= (props)=> {
 }
 
 const ElementDetail= (props)=> {
+    // eslint-disable-next-line
     const [loading, setLoading]= useState(false)
+    // eslint-disable-next-line
     const [data, setData]= useState()
     const [open1, setOpen1]= useState(false)
     const [openSnackbar1,setOpenSnackbar1]= useState(false)
+    // eslint-disable-next-line
     const [messageSnackbar, setMessageSnackbar]= useState("")
     const [idHotel, setIdHotel]= useState()
     const deleteHotel= (id)=> {
@@ -112,6 +115,7 @@ const ElementDetail= (props)=> {
         setIdHotel(id)
         props?.setData(props?.data?.filter(item=> parseInt(item?.id) !== parseInt(id)))
     }
+    // eslint-disable-next-line
     const detailHotel= ()=> {
 
     }
@@ -144,9 +148,9 @@ const ElementDetail= (props)=> {
                         Chờ duyệt
                     </div>
                     <div className={"djaklsajlksjdklsjdss"} style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10, width: "calc(100% / 3)"}}>
-                        <div title={"Chi tiết"} className={"FJSIDHJASDHAxjdsd"} style={{ height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
+                        {/* <div title={"Chi tiết"} className={"FJSIDHJASDHAxjdsd"} style={{ height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
                             <TbReportSearch style={{width: 40, height: 40, color: "green"}} width={40} height={40} />
-                        </div>
+                        </div> */}
                         <div onClick={()=> deleteHotel(props?.id)} title={"Xóa"} className={"dsjlksjaklsjkalsjdsa"} style={{width: 40, height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>
                             <RiDeleteBin5Fill style={{width: 40, height: 40, color: "red"}} width={40} height={40} />
                         </div>
