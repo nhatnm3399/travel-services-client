@@ -40,7 +40,7 @@ export const Title= (props)=> {
             {
                 props.is_add_new_hotel=== true &&
                 <div className={"snkdljkasksalsalas"}>
-                    <Button color={"primary"} onClick={()=> navigate("/manage/hotel/add/new/hotel")} >
+                    <Button color={"primary"} onClick={()=> navigate("/manage/hotel/add-new")} >
                         Thêm mới khách sạn
                     </Button>
                 </div>
