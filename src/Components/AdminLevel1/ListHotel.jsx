@@ -69,7 +69,7 @@ const Main= (props)=> {
     const [data, setData]= useState()
     const navigate= useNavigate()
     const edit_hotel= (id)=> {
-        navigate("/manage/hotel/manage/edit/hotel?idHotel="+ id, {state: {is_edit: true, idHotel: id}})
+        navigate("/manage/hotel/edit?idHotel="+ id, {state: {is_edit: true, idHotel: id}})
     }
     const deleteHotel= (id)=> {
         delete_hotel(id, setData, setLoading)
