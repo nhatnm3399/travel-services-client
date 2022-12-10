@@ -30,7 +30,7 @@ export const Title= (props)=> {
     return (
         <div className={"aksdkjasksalasas"} style={{width: "100%", padding: "20px", borderBottom: "1px solid #e7e7e7", marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: "center"}}>
             <div className={"fkdjfkljhklsdjkasas"} style={{display: "flex", justifyContent: "center", alignItems: "center", gap: 20}}>
-                <NavLink className={({ isActive }) => isActive ? "jdahjahwuiheuwawawa" : "dskljakjakjeakwjawa"} to={props?.is_edit=== true ? "/manage/hotel/manage/edit/hotel" : "/manage/hotel/add/new/hotel"} style={{fontSize: 20, fontWeight: 600,textDecoration: "none"}}>
+                <NavLink className={({ isActive }) => isActive ? "jdahjahwuiheuwawawa" : "dskljakjakjeakwjawa"} to={props?.is_edit=== true ? "/manage/hotel/edit" : "/manage/hotel/add-new"} style={{fontSize: 20, fontWeight: 600,textDecoration: "none"}}>
                     {props.title}
                 </NavLink>
                 {props?.title1 && <NavLink className={({ isActive }) => isActive ? "jdahjahwuiheuwawawa" : "dskljakjakjeakwjawa"} to={props?.is_edit=== true ? "/manage/hotel/manage/edit/room" : "/manage/hotel/add/new/room"} style={{fontSize: 20, fontWeight: 600,textDecoration: "none"}}>

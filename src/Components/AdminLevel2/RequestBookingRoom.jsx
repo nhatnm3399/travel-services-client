@@ -47,12 +47,23 @@ const ListRequest = (props) => {
   const approveBooking= (bookingId)=> {
     setBookingId(bookingId)
     setOpenConfirm(true)
+    
    
   }
   const rejectBooking= (bookingId)=> {
     setBookingId(bookingId)
     setOpenConfirm2(true)
   }
+  const approveBookingPopup= ()=> {
+    approve_hotel(bookingId, setResult, setLoading)
+    setData(data?.filter(item=> parseInt(item.id) !== parseInt(bookingId)))
+  }
+  const rejectBookingPopup= ()=> {
+    reject_hotel(bookingId, setResult)
+    setData(data?.filter(item=> parseInt(item.id) !== parseInt(bookingId)))
+
+  }
+  // eslint-disable-next-line
   const [page, setPage]= useState(5)
   const [offSet, setOffSet]= useState(1)
   const [currentPage, setCurrentPage]= useState(1)
@@ -150,10 +161,10 @@ const ListRequest = (props) => {
         <br />
         <Pagination2 setOffSet={setOffSet} search={searchParams.get("spec")} setSearchParams={setSearchParams} count={Math.ceil(parseInt(data?.length) / 5)} activePagination={currentPage} setCurrentPage={setCurrentPage} />
         {
-          openConfirm=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> approve_hotel(bookingId, setResult, setLoading)} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận chấp nhận yêu cầu này ?"} />
+          openConfirm=== true && <PopupConfirm messageSnackbar={"Đã chấp nhận booking"} bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> approveBookingPopup()} open={openConfirm} setOpen={setOpenConfirm} title={"Thông báo"} content={"Bạn xác nhận chấp nhận yêu cầu này ?"} />
         }
         {
-          openConfirm2=== true && <PopupConfirm bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> reject_hotel(bookingId, setResult)} open={openConfirm2} setOpen={setOpenConfirm2} title={"Thông báo"} content={"Bạn xác nhận sẽ từ chối yên cầu này ?"} />
+          openConfirm2=== true && <PopupConfirm messageSnackbar={"Đã hủy booking thành công"} bookingId={bookingId} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar} func={()=> rejectBookingPopup()} open={openConfirm2} setOpen={setOpenConfirm2} title={"Thông báo"} content={"Bạn xác nhận sẽ từ chối yên cầu này ?"} />
         }
         {
           openSnackbar=== true && <PopupSnackBar open={openSnackbar} setOpen={setOpenSnackbar} alert={messageSnackbar} />

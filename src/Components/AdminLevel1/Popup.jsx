@@ -43,7 +43,7 @@ export default function Popup(props) {
         <DialogTitle style={{width: 600}}>{"Thông báo"}</DialogTitle>
         <DialogContent style={{width: 600}}>
           <DialogContentText id="alert-dialog-slide-description">
-            Thao tác thành công
+            {props?.desc || "Thao tác thành công"}
           </DialogContentText>
         </DialogContent>
         <DialogActions style={{width: 600, justifyContent: "center", alignItems: "center"}}> 

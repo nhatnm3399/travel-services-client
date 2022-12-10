@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import nearly_place from '../../api/nearly_place'
 import "./AroundHotel.sass"
 
 const AroundHotel = (props) => {
+  useEffect(()=> {
+    if(props?.data1?.longitude && props?.data1?.latitude) {
+        nearly_place(parseFloat(props?.data1?.longitude), parseFloat(props?.data1?.latitude))
+    }
+  }, [props?.data1?.longitude, props?.data1?.latitude])
   return (
     <div className={"ajsjaksjakraew"} style={{width: "100%", padding: "10px 40px"}}>
         <div className={"djksadjkdsjklsaasas"} style={{width: "100%", background: "#fff", borderRadius: 5, padding: 5}}>

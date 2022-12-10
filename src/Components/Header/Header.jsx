@@ -31,10 +31,15 @@ const Header = (prosp) => {
 export default Header
 
 const LeftHeader= (props)=> {
+    const {user}= useContext(AppContext)
+
     return (
         <div className={"left-header-fixed"}>
             <NavLink className={({isActive})=> isActive ? "active-link-header link-left-header-fixed" : "link-left-header-fixed"} to={"/"} style={{fontSize: 32}}>F Travel</NavLink>&nbsp;&nbsp;&nbsp;
-            <NavLink className={({isActive})=> isActive ? "active-link-header link-left-header-fixed" : "link-left-header-fixed"} to={"/manage"}>Chủ khách sạn</NavLink>&nbsp;&nbsp;&nbsp;
+            {
+                user?.role?.[0]=== "ROLE_MODERATOR" &&
+            <NavLink className={({isActive})=> isActive ? "active-link-header link-left-header-fixed" : "link-left-header-fixed"} to={"/manage"}>Chủ khách sạn</NavLink>
+            }   
         </div>
     )
 }

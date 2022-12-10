@@ -73,6 +73,7 @@ const PendingBooking= (props)=> {
 }
 
 const SuccessBooking= (props)=> {
+    // eslint-disable-next-line
     const [page, setPage]= useState(3)
     const [offSet, setOffSet]= useState(1)
     const [currentPage, setCurrentPage]= useState(1)
@@ -128,24 +129,27 @@ const ElementDetail= (props)=> {
             </div>
             <div className={"djklsjakljsklasja"} style={{width: "calc(100% - 400px)", height: 250, padding: 10, border: "1px solid #e7e7e7", }}>
                 <div className={"dkokaskadassad"} style={{width: "100%", justifyContent: "space-between", alignItems: "center", display: "flex", padding: 10}}>
-                    <div className={"dkslaskladasadsk"} style={{fontSize: 16, fontWeight: 600, marginBottom: 16, width: "calc(100% / 3)",textAlign: "center"}}>
+                    <div className={"dkslaskladasadsk"} style={{fontSize: 16, fontWeight: 600, marginBottom: 4, width: "calc(100% / 3)",textAlign: "center"}}>
                         Miêu tả
                     </div>
-                    <div className={"dkslaskladasadsk"} style={{fontSize: 16, fontWeight: 600, marginBottom: 16, width: "calc(100% / 3)",textAlign: "center"}}>
+                    <div className={"dkslaskladasadsk"} style={{fontSize: 16, fontWeight: 600, marginBottom: 4, width: "calc(100% / 3)",textAlign: "center"}}>
                         Trạng thái
                     </div>
-                    <div className={"dkslaskladasadsk"} style={{fontSize: 16, fontWeight: 600, marginBottom: 16, width: "calc(100% / 3)",textAlign: "center"}}>
+                    <div className={"dkslaskladasadsk"} style={{fontSize: 16, fontWeight: 600, marginBottom: 4, width: "calc(100% / 3)",textAlign: "center"}}>
                         Hành động
                     </div>
                 </div>
                 <div className={"sdajslkajsklsjdass"} style={{width: "100%", background: "#fff", display: "flex", justifyContent: 'space-between', alignItems: "center", padding: 10}}>
                     <div className={"safdjkdjkldjakssa"} style={{height: "100%", width: "calc(100% / 3)"}}>
                         <div className={"djklsjkasasdas"} style={{fontWeight: 600, marginBottom: 8}}>Tên khách sạn: {props?.hotel_name}</div>
-                        <div className={"aklsjkasjkflddsas"} style={{marginBottom: 20}}>Địa chỉ: {props?.address}</div>
-                        <div className={"djklsjkasasdas"} style={{fontWeight: 600, marginBottom: 8}}>Phòng tiêu chuẩn</div>
+                        <div className={"aklsjkasjkflddsas"} style={{}}>Địa chỉ: {props?.address}</div>
+                        <div className={"djklsjkasasdas"} style={{fontWeight: 600, marginBottom: 8, maxHeight: 40, overflow: "auto"}}>
+                            {props?.roomBookingHistory?.map((item, key)=> <div key={key}>{item.roomName}</div>)}
+                        </div>
                     </div>
                     <div className={'fjlkjsdalksjkslfdas'} style={{fontWeight: 600, fontSize: 18, height: "100%", display: "flex", justifyContent: 'center', alignItems: "center", width: "calc(100% / 3)"}}>
-                        Chờ duyệt
+                        {props?.bookingStatus=== "booking waiting approve" && "Chờ duyệt"}
+                        {props?.bookingStatus=== "booking approved" && "Đã đặt"}
                     </div>
                     <div className={"djaklsajlksjdklsjdss"} style={{display: "flex", justifyContent: 'center', alignItems: "center", gap: 10, width: "calc(100% / 3)"}}>
                         {/* <div title={"Chi tiết"} className={"FJSIDHJASDHAxjdsd"} style={{ height: 40, display: "flex", justifyContent: 'center', alignItems: "center", cursor: "pointer"}}>

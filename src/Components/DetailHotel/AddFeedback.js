@@ -46,6 +46,11 @@ const RatingStart= (props)=> {
                 <ComponentStar {...props} value={3} />
                 <ComponentStar {...props} value={4} />
                 <ComponentStar {...props} value={5} />
+                <ComponentStar {...props} value={6} />
+                <ComponentStar {...props} value={7} />
+                <ComponentStar {...props} value={8} />
+                <ComponentStar {...props} value={9} />
+                <ComponentStar {...props} value={10} />
             </div>
         </div>
     )

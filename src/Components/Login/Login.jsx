@@ -21,10 +21,30 @@ const MainLogin= ()=> {
   const [email, setEmail]= useState(()=> "")
   const [password, setPassword]= useState(()=> "")
   const [message, setMessgae]= useState()
+  const [validPassword, setValidPassword]= useState(true)
+  const [validEmail, setValidEmail]= useState(true)
   const responseGoogle = (response) => {
     console.log(response);
   }
-  
+  function checkPassword(str)
+    {
+        const re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        if(re.test(str.target.value)=== true) {
+          setValidPassword(true)
+        }
+        else {
+          setValidPassword(false)
+        }
+    }
+  function checkEmail(str) {
+    const re = /^(?:\d{10}|\w+@\w+\.\w{2,3})$/;
+    if(re.test(str.target.value)=== true) {
+      setValidEmail(true)
+    }
+    else {
+      setValidEmail(false)
+    }
+  }
   return (
     <div className={"main-login-main-page"} style={{minHeight: '100vh'}}>
       <div className={"form-main-login-main-page"}>
@@ -32,11 +52,20 @@ const MainLogin= ()=> {
         Đăng nhập
       </div>
       <div className={"wrap-input-auth-page"}>
-        <InputTemplate type={"email"} onChange={(e)=> setEmail(e.target.value)} value={email} placeholder={"Email hoặc sdt"} className={"inp-tml-email"}  />
+        <InputTemplate onBlur={checkEmail} type={"email"} onChange={(e)=> setEmail(e.target.value)} value={email} placeholder={"Email hoặc sdt"} className={"inp-tml-email"}  />
       </div>
+      {
+        validEmail=== false && <div style={{fontSize: 12, width: "90%", color: "red", textAlign: "left"}}>Email hoặc số điện thoại không hợp lệ</div>
+
+      }
       <div className={"wrap-input-auth-page"}>
-        <InputTemplate type={"password"} onChange={(e)=> setPassword(e.target.value)} value={password} placeholder={"Mật khẩu"} className={"inp-tml-password"}  />
+        <InputTemplate onBlur={checkPassword} type={"password"} onChange={(e)=> setPassword(e.target.value)} value={password} placeholder={"Mật khẩu"} className={"inp-tml-password"}  />
       </div>
+      {
+        validPassword=== false && <div style={{fontSize: 12, width: "90%", color: "red"}}>Mật khẩu cần phải tối thiểu 8 chữ cái bao gồm chữ số, chữ cái viết thường, chữ cái viết hoa và một ký tự đặc biệt</div>
+
+      }
+      <br />
       {
         message && <div className={"fksdklkdsasaas"} style={{margin: "8px 0", width: "90%"}}>{message}</div>
       }

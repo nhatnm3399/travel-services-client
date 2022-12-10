@@ -42,7 +42,7 @@ const DetailHotel = (props) => {
             <AmountAll bookingRoom={bookingRoom} data1={data} data={bookingRoom}/>
             <Feedback feed_back={data?.feed_back} />
             <AddFeedback setChange={setChange} />
-            <AroundHotel /> 
+            <AroundHotel data1={data} /> 
             <ConvenientAndInfracstructure data={data?.hotel_properties} />
             <br />
             <GeneralRules {...data} />

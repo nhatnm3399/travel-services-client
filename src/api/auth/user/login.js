@@ -19,6 +19,12 @@ const login= async (account, password, setData)=> {
             setData("Đăng nhập thành công")
             return window.location.href= window.location.origin+ "/admin"
         }
+        else if(result?.roles?.[0]=== "ROLE_MODERATOR") {
+            Cookies.set("accessToken", result.accessToken)
+            Cookies.set("uid", result.id)
+            setData("Đăng nhập thành công")
+            return window.location.href= window.location.origin+ "/manage"
+        }
         else if(result?.accessToken?.length > 0) {
             Cookies.set("accessToken", result.accessToken)
             Cookies.set("uid", result.id)

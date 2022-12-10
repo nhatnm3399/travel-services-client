@@ -22,7 +22,7 @@ const RightSide = (props) => {
         <CountResultSearch {...props} />
         <SortResult setSort={setSort} {...props} />
         {
-            _.orderBy(props?.result, ['price'], sort)?.slice(parseInt(page) * offSet -5, parseInt(page) * offSet)?.map((item, key)=> <ListResultSearch key={key} {...item} />)
+            _.orderBy(props?.result, ['price'], sort)?.filter(item=> parseInt(item.price) >= parseInt(props?.minValue) && parseInt(item.price) <= parseInt(props?.maxValue))?.slice(parseInt(page) * offSet -5, parseInt(page) * offSet)?.map((item, key)=> <ListResultSearch key={key} {...item} />)
         }
         <PaginationPage setOffSet={setOffSet} search={searchParams.get("spec")} setSearchParams={setSearchParams} count={Math.ceil(parseInt(props?.result?.length) / 5)} activePagination={currentPage} setCurrentPage={setCurrentPage} />
     </div>

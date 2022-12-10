@@ -25,7 +25,7 @@ const MainSearch= (props)=> {
     return (
       <div className={"main-search-result"} style={{width: "100%", display: "flex", justifyContent: "space-between", padding: 20, gap: 30}}>
         <LeftSide setMinValue={setMinValue} maxValue={maxValue} setMaxValue={setMaxValue} minValue={minValue} />
-        <RightSide result={result} minValue={minValue} />
+        <RightSide result={result} minValue={minValue} maxValue={maxValue} />
       </div>
     )
 }

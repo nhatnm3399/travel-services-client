@@ -103,7 +103,7 @@ const MainRegister = (props) => {
       setCheckOut(props?.data?.check_out_time)
       setIsPaymentCard(props?.data?.is_payment_card)
       setImgX(prev=> ([props?.data?.image, props?.data?.image1, props?.data?.image2, props?.data?.image3, props?.data?.image4]))
-      setConvenient(props?.hotel_properties || [])
+      setConvenient(props?.data?.hotel_properties || [])
     }
   }, [props?.is_edit, props?.data, props?.is_detail, props?.hotel_properties])
   // eslint-disable-next-line
@@ -118,6 +118,16 @@ const MainRegister = (props) => {
   const rejectHotel= ()=> {
     delete_hotel_x(idHotel, setY, setLoading2)
   }
+  const [validatePhonenumber, setValidPhonenumber]= useState(true)
+  function checkPhonenumber(str) {
+    const re = /^(?:\d{10}|\w+@\w+\.\w{2,3})$/;
+    if(re.test(str.target.value)=== true) {
+      setValidPhonenumber(true)
+    }
+    else {
+      setValidPhonenumber(false)
+    }
+}
   return (
     <div className="sdjdjsjkjwasw" style={{width: "100%", background: "#e4f2fd"}}>
       <div
@@ -180,7 +190,7 @@ const MainRegister = (props) => {
               <TitleItem title={<span>Số điện thoại {!props?.is_detail=== true && <span style={{color: "red"}}>*</span>}</span>} />
               <InputTemplate
                 readOnly={!props?.is_detail=== true ? false : true}
-
+                onBlur={checkPhonenumber}
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 style={{
@@ -194,11 +204,35 @@ const MainRegister = (props) => {
                   
                 }}
               />
+            
+              {
+                validatePhonenumber=== false && <div style={{fontSize: 12, width: "90%", color: "red", textAlign: "left"}}>Số điện thoại không hợp lệ</div>
+              }
             </div>
           </div>
           <div className={"dsjaajwjalkwawwa"} style={{ width: "100%" }}>
             <TitleItem title={<span>Địa chỉ {!props?.is_detail=== true && <span style={{color: "red"}}>*</span>}</span>} />
-            <A setAddress={setAddress} setLongtitude={setLongtitude} setLatitude={setLatitude} />
+            {
+              !props?.is_detail=== true && <A setAddress={setAddress} setLongtitude={setLongtitude} setLatitude={setLatitude} />
+            }
+            {
+              props?.is_detail=== true && <InputTemplate
+                readOnly={!props?.is_detail=== true ? false : true}
+
+                value={address}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                style={{
+                  width: "100%",
+                  height: 40,
+                  padding: 10,
+                  outlineColor: "#2e89ff",
+                  background: "#fff",
+                  border: "1px solid #e7e7e7",
+                  borderRadius: 5,
+                  
+                }}
+              />
+            }
                 
           </div>
           <>
@@ -350,10 +384,21 @@ export const Convenient= (props)=> {
           Tiện nghi và nội quy
         </div>
         <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient is_detail={props?.is_detail} name={"Wifi"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient is_detail={props?.is_detail} name={"Máy lạnh"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient is_detail={props?.is_detail} name={"Wc"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient is_detail={props?.is_detail} name={"Chỗ để xe"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+          {
+            props?.convenient?.filter(item=> item?.properties_name === "Tiện nghi và nội quy")?.map((item, key)=> 
+            <div key={key} className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+              <span className={"fdjslkadjfksdsjfkdsa"}>{item?.properties_type}</span>
+            </div>
+            )
+          }
+          {
+            !props?.is_detail=== true && <>
+              <ComponentConvenient is_detail={props?.is_detail} name={"Wifi"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+              <ComponentConvenient is_detail={props?.is_detail} name={"Máy lạnh"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+              <ComponentConvenient is_detail={props?.is_detail} name={"Wc"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+              <ComponentConvenient is_detail={props?.is_detail} name={"Chỗ để xe"} type_id={1} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+            </>
+          }
         </div>
         <br />
         <br />
@@ -361,22 +406,43 @@ export const Convenient= (props)=> {
         <div className={"dskdjskfjkdjsaksas"} style={{fontSize: 18, fontWeight: 600, marginBottom: 16}}>
           Hướng nhìn
         </div>
-        <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient is_detail={props?.is_detail} name={"Núi"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient is_detail={props?.is_detail} name={"Biển"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient is_detail={props?.is_detail} name={"Sông"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-
-        </div>
+        {
+            props?.convenient?.filter(item=> item?.properties_name === "Hướng nhìn")?.map((item, key)=> 
+            <div key={key} className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+              <span className={"fdjslkadjfksdsjfkdsa"}>{item?.properties_type}</span>
+            </div>
+            )
+          }
+        {
+          !props?.is_detail=== true && <>
+            <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
+              <ComponentConvenient is_detail={props?.is_detail} name={"Núi"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+              <ComponentConvenient is_detail={props?.is_detail} name={"Biển"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+              <ComponentConvenient is_detail={props?.is_detail} name={"Sông"} type_id={2} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+            </div>
+          </>
+        }
         <br />
         <br />
         {/*  */}
         <div className={"dskdjskfjkdjsaksas"} style={{fontSize: 18, fontWeight: 600, marginBottom: 16}}>
           Phòng tắm
         </div>
-        <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
-          <ComponentConvenient is_detail={props?.is_detail} name={"Đồ vệ sinh cá nhân"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-          <ComponentConvenient is_detail={props?.is_detail} name={"Dép"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
-        </div>
+        {
+            props?.convenient?.filter(item=> item?.properties_name === "Phòng tắm")?.map((item, key)=> 
+            <div key={key} className={"fjkslajdfkldsjdafasd"} style={{display: "flex", alignItems: "center", gap: 10}}>
+              <span className={"fdjslkadjfksdsjfkdsa"}>{item?.properties_type}</span>
+            </div>
+            )
+          }
+        {
+          !props?.is_detail=== true && <>
+            <div className={"fsjdjhkldjdsfdadas"} style={{display: "flex", alignItems: "center", gap: 30, }}>
+              <ComponentConvenient is_detail={props?.is_detail} name={"Đồ vệ sinh cá nhân"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+              <ComponentConvenient is_detail={props?.is_detail} name={"Dép"} type_id={3} convenient={props?.convenient} setConvenient={props?.setConvenient} />
+            </div>
+          </>
+        }
         <br />
         <br />
       </div>
@@ -774,8 +840,8 @@ const ImageIllustation = (props) => {
       {
         props?.is_detail === true && 
         <div className={"dsjdksjskjdkasas"} style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: 16,gap: 20 }}>
-          <Popup title={"Chấp nhận"} func={props?.approveHotel} />
-          <Popup title={"Từ chối"} func={props?.rejectHotel} />
+          <Popup desc="Đã chấp nhận khách sạn thành công" title={"Chấp nhận"} func={props?.approveHotel} />
+          <Popup desc="Đã từ chối khách sạn thành công" title={"Từ chối"} func={props?.rejectHotel} />
         </div>
       }
     </div>

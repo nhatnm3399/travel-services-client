@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./AdminLevel1.sass";
 import { MdDelete } from "react-icons/md";
@@ -24,6 +24,10 @@ import { AiOutlineFolderView } from "react-icons/ai";
 import delete_hotel from "../../api/admin/delete_hotel";
 import Snackbar from "../Snackbar/Snackbar";
 import HistoryBooking from "./HistoryBooking";
+import list_activities from "../../api/admin/list_activities";
+import PopupConfirm from "../PopupConfirm/PopupConfirm";
+import delete_event from "../../api/admin/delete_event";
+import PopupSnackBar from "../PopupConfirm/PopupSnackBar";
 
 const AdminLevel1 = (props) => {
   return (
@@ -200,10 +204,15 @@ export const CommentsReport = (props) => {
 };
 
 export const ListEvents = (props) => {
+  // eslint-disable-next-line
+  const [data, setData]= useState([])
+  useEffect(()=> {
+    list_activities(setData)
+  }, [])
   return (
     <>
       <Title title={"List sự kiện"} is_add_event={true} />
-      <MainElementEvent />
+      <MainElementEvent data={data} setData={setData} />
     </>
   );
 };
@@ -272,9 +281,17 @@ const Title = (props) => {
 
 const MainElementEvent = (props) => {
   const navigate = useNavigate();
-
+  const [openPopup, setOpenPopup]= useState(false)
+  const [openSnackbar, setOpenSnackbar]= useState(false)
+  const [messageSnackbar, setMessageSnackbar]= useState("")
+  const [idEvent, setIdEvent]= useState("")
+  const deleteEvent= (idEvent)=> {
+    setIdEvent(idEvent)
+    setOpenPopup(true)
+  }
   return (
-    <table
+   <>
+     <table
       className={"jskldjakdjskdalks"}
       style={{
         width: "100%",
@@ -297,19 +314,19 @@ const MainElementEvent = (props) => {
           className={"djlasjkjddaksa"}
           style={{ fontSize: 18, fontWeight: 600 }}
         >
-          Địa điểm
-        </th>
-        <th
-          className={"djlasjkjddaksa"}
-          style={{ fontSize: 18, fontWeight: 600 }}
-        >
           Tên sự kiện
         </th>
         <th
           className={"djlasjkjddaksa"}
           style={{ fontSize: 18, fontWeight: 600 }}
         >
-          Nội dung
+          Thời gian bắt đầu
+        </th>
+        <th
+          className={"djlasjkjddaksa"}
+          style={{ fontSize: 18, fontWeight: 600 }}
+        >
+          Thời gian kết thúc 
         </th>
         <th
           className={"djlasjkjddaksa"}
@@ -325,7 +342,8 @@ const MainElementEvent = (props) => {
         </th>
       </thead>
       <tbody style={{ width: "100%" }}>
-        <tr
+        {
+          props?.data?.map((item, key)=> <tr key={key}
           className={"djskldjaksjakass"}
           style={{
             width: "100%",
@@ -338,58 +356,43 @@ const MainElementEvent = (props) => {
             className={"djsjaksjaksjska"}
             style={{ fontSize: 16, textAlign: "center", height: "max-content" }}
           >
-            Đà Nẵng
-          </td>
-          <td
-            className={"djsjaksjaksjska"}
-            style={{ fontSize: 16, textAlign: "center", height: "max-content" }}
-          >
-            Cầu Rồng Phun Lửa
+            {item?.name_activities}
           </td>
           <td
             className={"akljkdsjklfdajkd"}
             style={{ fontSize: 16, textAlign: "center", height: "max-content" }}
           >
-            Vào thứ 3, thứ 7 hàng tuần, cầu Rồng phun lửa
+            {moment(item?.start_time, "DDMMYYYY").format("DD-MM-YYYY")}
+          </td>
+          <td
+            className={"akljkdsjklfdajkd"}
+            style={{ fontSize: 16, textAlign: "center", height: "max-content" }}
+          >
+            {moment(item?.end_time, "DDMMYYYY").format("DD-MM-YYYY")}
           </td>
           <td
             className={"dsjkdjkasjaskassa"}
             style={{ textAlign: "center", height: "max-content" }}
           >
-            <p
+            <img
+              alt=""
+              src={item.image}
               className={"djkasjaksjasksa"}
               style={{
                 width: "100%",
+                maxWidth: 130,
                 height: "auto",
                 aspectRatio: 8 / 5,
                 background: "#fff",
                 border: "1px solid #e7e7e7",
               }}
               role={"img"}
-            ></p>
+            ></img>
           </td>
           <td
             className={"jdksdjaksjkasasas"}
             style={{ textAlign: "center", verticalAlign: "middle" }}
           >
-            <button
-              onClick={() =>
-                navigate(`/admin/event/manage/add/new?edit=${true}&event_id=1`)
-              }
-              className={"jkldjkldsjksakas"}
-              style={{
-                color: "#fff",
-                backgroundColor: "green",
-                width: 60,
-                height: 30,
-                border: "none",
-                outline: "none",
-                cursor: "pointer",
-              }}
-            >
-              Sửa
-            </button>
-            &nbsp;&nbsp;
             <button
               className={"jkldjkldsjksakas"}
               style={{
@@ -400,14 +403,21 @@ const MainElementEvent = (props) => {
                 border: "none",
                 outline: "none",
                 cursor: "pointer",
+                borderRadius: 5 
               }}
+              onClick={()=> deleteEvent(item.id)}
             >
               Xóa
             </button>
           </td>
-        </tr>
+        </tr>)
+        }
+        
       </tbody>
     </table>
+    <PopupConfirm func={()=> delete_event(idEvent)} open={openPopup} setOpen={setOpenPopup} title={"Thông báo"} content={"Bạn có chắc muốn xóa sự kiện này không?"} setMessageSnackbar={setMessageSnackbar} setOpenSnackbar={setOpenSnackbar}  />
+    
+   </>
   );
 };
 
@@ -415,12 +425,22 @@ const MainElementList = (props) => {
   // eslint-disable-next-line
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
+  const [openPopup, setOpenPopup]= useState(false)
+  const [openSnackbar, setOpenSnackbar]= useState(false)
+  const [messageSnackbar, setMessageSnackbar]= useState("")
+  const [idHotel, setIdHotel]= useState("")
   const deleteHotel = async (idHotel) => {
+    setIdHotel(idHotel)
+    setOpenPopup(true)
+  };
+
+  const func= async ()=> {
     await delete_hotel(idHotel, setData, setLoading);
+
     props?.setData(
       props?.data?.filter((item) => parseInt(item.id) !== parseInt(idHotel))
     );
-  };
+  }
   return (
     <div
       className={"jskldjakdjskdalks"}
@@ -555,13 +575,12 @@ const MainElementList = (props) => {
                   className={"jlkdsjakjskassaas"}
                   style={{ fontSize: 18, fontWeight: 600 }}
                 >
-                  Số phòng
                 </div>
                 <div
                   className={"jklsjaksjkasaas"}
                   style={{ fontSize: 16, fontWeight: 600 }}
                 >
-                  Số điện thoại: {item?.phone}
+                  Số điện thoại: 0{item?.phone}
                 </div>
               </div>
               <div
@@ -599,14 +618,20 @@ const MainElementList = (props) => {
             </div>
           </div>
         ))}
-      {loading === true && (
+      {/* {loading === true && (
         <Snackbar
           show={loading}
           setShow={setLoading}
           title={"Thông báo"}
           description={"Đã xóa khách sạn thành công"}
-        />
-      )}
+        />F
+      )} */}
+      {
+        openPopup=== true && <PopupConfirm setOpenSnackbar={setOpenSnackbar} open={openPopup} setOpen={setOpenPopup} title={"Thông báo"} content={"Bạn có chắc muốn xóa khách sạn này ?"} messageSnackbar={"Bạn đã xóa khách sạn thành công"} setMessageSnackbar={setMessageSnackbar} func={func} />
+      }
+      {
+        openSnackbar=== true && <PopupSnackBar open={openSnackbar} setOpen={setOpenSnackbar} alert={messageSnackbar} />
+      }
       {/*  */}
     </div>
   );
