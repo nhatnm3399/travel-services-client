@@ -22,7 +22,7 @@ import StatsManager from "./StatsManager";
 import { AppContext } from "../../App";
 import { AiOutlineFolderView } from "react-icons/ai";
 import delete_hotel from "../../api/admin/delete_hotel";
-import Snackbar from "../Snackbar/Snackbar";
+// import Snackbar from "../Snackbar/Snackbar";
 import HistoryBooking from "./HistoryBooking";
 import list_activities from "../../api/admin/list_activities";
 import PopupConfirm from "../PopupConfirm/PopupConfirm";

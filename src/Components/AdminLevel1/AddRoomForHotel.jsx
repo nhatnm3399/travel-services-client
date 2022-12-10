@@ -34,11 +34,13 @@ const MainAddRoom = (props) => {
   // eslint-disable-next-line
   const [listUrl, setListUrl]= useState([])
   const navigate= useNavigate()
+  const [doneRoom, setDoneRoom]= useState(false)
   const add_room= async ()=> {
       const list_image_un_resole= listImage?.map(item=> uploadImageClient(item.img, setListUrl))
       const result= await Promise.all(list_image_un_resole)
       await add_room_hotel(roomName, price, numberPeople, roomArea, result[0], result[1], result[2], result[3], result[4], searchParams.get("idHotel"), properties, setData)
-      navigate("/hotel/detail/"+ searchParams.get("idHotel"))
+      // 
+      setDoneRoom(true)
     }
   return (
     <div className={"fkdkalskalrwarae"} style={{ width: "100%", padding: 10 }}>
@@ -53,6 +55,14 @@ const MainAddRoom = (props) => {
       <Image listImage={listImage} setListImage={setListImage} isChooseImage={isChooseImage} />
       <br />
       <BtnCreate add_room={add_room} />
+      <br />
+      {
+        doneRoom=== true &&
+        <div className={"jzdsflkjdkljsdas"} style={{display: "flex", justifyContent: "center" ,alignItems: "center", gap: 20}}>
+          <Button variant="primary" onClick={()=> window.location.reload()}>Tiếp tục đăng ký phòng</Button>
+          <Button variant={"secondary"} onClick={()=>  navigate("/hotel/detail/"+ searchParams.get("idHotel"))}>Đi tới chi tiết khách sạn</Button>
+        </div>
+      }
     </div> 
   );
 };
