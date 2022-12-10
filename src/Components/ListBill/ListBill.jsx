@@ -2,15 +2,22 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { Button } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import history_bill from '../../api/auth/user/history_bill'
 import { NumericFormat } from 'react-number-format';
+import { Pagination2 } from '../Pagination/Pagination'
 
 const ListBill = (props) => { 
     const [data, setData]= useState([])
-  useEffect(()=> {
-    history_bill(setData)
-  }, [])
+    const [searchParams, setSearchParams]= useSearchParams()
+    // const [sort, setSort]= useState([''])
+    // eslint-disable-next-line
+    const [page, setPage]= useState(10)
+    const [offSet, setOffSet]= useState(1)
+    const [currentPage, setCurrentPage]= useState(1)
+    useEffect(()=> {
+        history_bill(setData)
+    }, [])
   return (
     <div className={"fjsahjdksdjkldadsa"} style={{width: "100%", minHeight: "100vh"}}>
         <div className={"fdjkdjkfjkdass flexCenterItem"} style={{width: "100%", padding: 10}}>
@@ -27,10 +34,11 @@ const ListBill = (props) => {
                     </thead>
                     <tbody className={"fkdjsdjkshfjdhajlsas"} style={{width: "100%"}}>
                         {
-                            data?.map((item, key)=> <ItemListBill key={key} x1={item?.id} x2={item?.status_bill} x3={item?.payment_method} x4={<NumericFormat value= {item?.total_amount} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} />} x5={"Xem hóa đơn"} />)
+                            data?.slice(parseInt(page) * offSet - 10, parseInt(page) * offSet)?.map((item, key)=> <ItemListBill key={key} x1={item?.id} x2={item?.status_bill} x3={item?.payment_method} x4={<NumericFormat value= {item?.total_amount} thousandSeparator={","} displayType="text" renderText={(value) => <>{value.replaceAll(",", ".")}</>} />} x5={"Xem hóa đơn"} />)
                         }
                     </tbody>
                 </table>
+                <Pagination2  setOffSet={setOffSet} search={searchParams.get("spec")} setSearchParams={setSearchParams} count={Math.ceil(parseInt(data?.length) / page)} activePagination={currentPage} setCurrentPage={setCurrentPage} />
             </div>
         </div>
     </div>
