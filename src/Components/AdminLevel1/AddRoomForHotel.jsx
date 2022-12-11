@@ -8,6 +8,14 @@ import add_room_hotel from "../../api/auth/manage_hotel/add_room";
 import { uploadImageClient } from "../../firebase/config";
 import InputTemplate from "../Common/InputTemplate";
 import { Title } from "./ListHotel";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+import CloseIcon from '@mui/icons-material/Close';
+
 import { Convenient } from "./RegisterHotel";
 
 const AddRoomForHotel = (props) => {
@@ -58,10 +66,36 @@ const MainAddRoom = (props) => {
       <br />
       {
         doneRoom=== true &&
-        <div className={"jzdsflkjdkljsdas"} style={{display: "flex", justifyContent: "center" ,alignItems: "center", gap: 20}}>
-          <Button variant="primary" onClick={()=> window.location.reload()}>Tiếp tục đăng ký phòng</Button>
-          <Button variant={"secondary"} onClick={()=>  navigate("/hotel/detail/"+ searchParams.get("idHotel"))}>Đi tới chi tiết khách sạn</Button>
-        </div>
+        <>
+          {
+            <div>
+              <Dialog
+                open={doneRoom}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={()=> setDoneRoom(()=> false)}
+                aria-describedby="alert-dialog-slide-description"
+              >
+                <DialogTitle style={{position: "relative", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                  <span style={{fontSize: 20, fontWeight: 600 }}>{"Thông báo"}</span>
+                  <div onClick={()=> setDoneRoom(()=> false)} style={{display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer"}}><CloseIcon /></div>
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-slide-description">
+                    Đã thêm phòng thành công
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions className={"dsksdlkaslksa"} style={{padding: 0}}>
+                  <div className={"jzdsflkjdkljsdas"} style={{display: "flex", justifyContent: "center" ,alignItems: "center", gap: 20, padding: 10}}>
+                    <Button variant="primary" onClick={()=> window.location.reload()}>Tiếp tục đăng ký phòng</Button>
+                    <Button variant={"secondary"} onClick={()=>  navigate("/manage/hotel/general")}>Đi tới danh sách khách sạn</Button>
+                  </div>
+                </DialogActions>
+              </Dialog>
+            </div>
+          }
+        </>
+
       }
     </div> 
   );
@@ -86,6 +120,51 @@ const Tab1 = (props) => {
     </div>
   );
 };
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+function PopupConfirmXXX({open, setOpen, title, content, func, setOpenSnackbar, setMessageSnackbar, bookingId, messageSnackbar}) {
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle style={{position: "relative", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+          <span style={{fontSize: 20, fontWeight: 600 }}>{title}</span>
+          <div onClick={handleClose} style={{display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer"}}><CloseIcon /></div>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {content}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions className={"dsksdlkaslksa"} style={{padding: 0}}>
+          <Button style={{width: "50%", minWidth: 250, background: "#ff7167", textTransform: "uppercase", height: 60, borderRadius: 0, fontSize: 20, fontWeight: 600, color: "#fff"}} onClick={()=> {
+            func();
+            handleClose()
+            setOpenSnackbar(()=> true)
+            setMessageSnackbar(()=> messageSnackbar || "Đã thêm thành công khách sạn")
+          }}>YES</Button>
+          <Button style={{width: "50%", minWidth: 250, background: "#b6bdcf", textTransform: "uppercase", margin: 0, height: 60, borderRadius: 0, fontSize: 20, fontWeight: 600, color: "#fff"}} onClick={()=> {
+            handleClose()
+            setOpenSnackbar(()=> true)
+            setMessageSnackbar(()=> messageSnackbar|| "Đã từ chối duyệt khách sạn ")
+          }}>No</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
 
 // const Tab2 = (props) => {
 //   return (
